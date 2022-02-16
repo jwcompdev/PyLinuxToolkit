@@ -32,8 +32,8 @@ class OutputData:
     This is a data object that holds all the state and information
     for the most recent run command.
     """
-    def __init__(self, is_remote: bool, process,
-                 line: str | StringValue, command: str):
+
+    def __init__(self, is_remote: bool, process, line: str | StringValue, command: str):
         self._is_remote: bool = is_remote
         self._client: spawn = process
         self._current_line: StringValue = StringValue(line)

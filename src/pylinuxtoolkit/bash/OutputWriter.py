@@ -39,9 +39,12 @@ class OutputWriter:
     be used instead of it in other classes if desired.
     """
 
-    def __init__(self, on_output: Callable[[OutputData], NoReturn],
-                 bash_data: BashData,
-                 on_setting: Callable[[OutputData], NoReturn] = None):
+    def __init__(
+        self,
+        on_output: Callable[[OutputData], NoReturn],
+        bash_data: BashData,
+        on_setting: Callable[[OutputData], NoReturn] = None,
+    ):
         self._on_output: Callable[[OutputData], NoReturn] = on_output
         self._on_setting: Callable[[OutputData], NoReturn] = on_setting
         self.data: BashData = bash_data
@@ -122,7 +125,9 @@ class OutputWriter:
         """
 
         self._last_line.set(current_line)
-        output_data = OutputData(self.data.is_remote, self.data.client, current_line, self.data.command)
+        output_data = OutputData(
+            self.data.is_remote, self.data.client, current_line, self.data.command
+        )
 
         if self.data.threaded_worker_enabled:
             self._qt_worker.run_on_output_function(output_data)
@@ -150,8 +155,9 @@ class OutputWriter:
         user-defined on_output function.
         """
 
-        output_raw = StringValue(self.data.current_line) \
-            .strip_ansi_codes().split("\r\r")
+        output_raw = (
+            StringValue(self.data.current_line).strip_ansi_codes().split("\r\r")
+        )
         output_modified = []
         for line in output_raw:
             line = line.rstrip("\n")
@@ -169,8 +175,7 @@ class OutputWriter:
             # Only seems to happen via local bash
             for line3 in output3:
                 if self.data.prompt in line3:
-                    remaining_text = \
-                        line3.replace(self.data.prompt, "").strip()
+                    remaining_text = line3.replace(self.data.prompt, "").strip()
                     if remaining_text != "":
                         output_modified.append(remaining_text)
                     output_modified.append(self.data.prompt)
@@ -179,20 +184,21 @@ class OutputWriter:
 
         for line in output_modified:
             current_line = line.strip("\n").strip("\r")
-            if current_line != "" \
-                    and current_line != "\r\n" \
-                    and "[PEXPECT]" not in current_line \
-                    and "unset PROMPT_COMMAND" not in current_line \
-                    and "'s password:" not in current_line \
-                    and "exit" != current_line.strip():
+            if (
+                current_line != ""
+                and current_line != "\r\n"
+                and "[PEXPECT]" not in current_line
+                and "unset PROMPT_COMMAND" not in current_line
+                and "'s password:" not in current_line
+                and "exit" != current_line.strip()
+            ):
 
                 # noinspection PyUnresolvedReferences
-                if not self.data.print_command \
-                        and self.data.command == current_line:
+                if not self.data.print_command and self.data.command == current_line:
                     continue
-                elif current_line.strip() \
-                        .startswith(self.data.current_user + "@") \
-                        and current_line.strip().endswith("$"):
+                elif current_line.strip().startswith(
+                    self.data.current_user + "@"
+                ) and current_line.strip().endswith("$"):
                     # print("*< " + self._last_line.strip())
                     # print(">* " + current_line.strip())
                     if self._last_line.strip() == current_line.strip():
@@ -205,15 +211,16 @@ class OutputWriter:
                         continue
                 elif BashChecks.is_not_sudo(current_line):
                     self._emit_output(current_line)
-                    self._kill_raise(BashPermissionError
-                                     ("Command needs to be run as sudo - "
-                                      + current_line))
+                    self._kill_raise(
+                        BashPermissionError(
+                            "Command needs to be run as sudo - " + current_line
+                        )
+                    )
                 elif BashChecks.is_file_locked(current_line):
                     if self.data.raise_error_on_lock_wait:
                         self._emit_output(current_line)
                         self._kill_raise(BashPermissionError(current_line))
-                    elif self.data.wait_for_locks \
-                        and not self._waiting_for_lock:
+                    elif self.data.wait_for_locks and not self._waiting_for_lock:
                         self._waiting_for_lock = True
                         self._emit_output(current_line)
                 elif BashChecks.is_apt_warning(current_line):
@@ -223,14 +230,15 @@ class OutputWriter:
                 elif BashChecks.is_debconf_error(current_line):
                     continue
                 else:
-                    if "Hit:" in current_line \
-                            and "http" in current_line \
-                            or "Get:" in current_line \
-                            and "http" in current_line \
-                            or "Ign:" in current_line \
-                            and "http" in current_line:
-                        current_line = current_line \
-                            .replace("\r", "").strip(" ")
+                    if (
+                        "Hit:" in current_line
+                        and "http" in current_line
+                        or "Get:" in current_line
+                        and "http" in current_line
+                        or "Ign:" in current_line
+                        and "http" in current_line
+                    ):
+                        current_line = current_line.replace("\r", "").strip(" ")
 
                     self._emit_output(current_line)
 

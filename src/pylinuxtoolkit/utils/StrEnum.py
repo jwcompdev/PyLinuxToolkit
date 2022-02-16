@@ -39,9 +39,7 @@ class StrEnum(str, Enum):
         for arg in args:
             if not isinstance(arg, (str, auto)):
                 raise TypeError(
-                    "Values must be strings: {} is a {}".format(
-                        repr(arg), type(arg)
-                    )
+                    "Values must be strings: {} is a {}".format(repr(arg), type(arg))
                 )
         return super().__new__(cls, *args)
 

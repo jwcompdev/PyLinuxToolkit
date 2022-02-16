@@ -25,6 +25,7 @@ from pylinuxtoolkit.utils.StrEnum import StrEnum
 
 class VNCResolutions(StrEnum):
     """A list of all available screen resolutions for the VNC connections"""
+
     NONE = ""
     Size_640x480 = "600x480"
     Size_720x480 = "720x480"

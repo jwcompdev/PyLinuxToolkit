@@ -23,16 +23,23 @@ This file contains exception classes for all bash objects.
 
 class BashError(Exception):
     """Base class for other exceptions"""
+
     pass
+
 
 class BashConnectionError(BashError):
     """Raised when an ssh connection was unable to be opened or closed"""
+
     pass
+
 
 class BashPermissionError(BashError):
     """Raised when user doesn't have permission to run the specified command"""
+
     pass
+
 
 class BashValueError(BashError):
     """Raised when the incorrect value was supplied"""
+
     pass

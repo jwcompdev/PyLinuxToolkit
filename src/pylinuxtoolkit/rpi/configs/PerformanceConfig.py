@@ -24,6 +24,5 @@ from pylinuxtoolkit.rpi.configs import BaseConfig
 
 
 class PerformanceConfig(BaseConfig):
-
     def __init__(self, pi: RaspberryPi):
         super().__init__(pi)

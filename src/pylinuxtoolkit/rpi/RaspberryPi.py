@@ -67,4 +67,3 @@ def on_output(value: str) -> NoReturn:
 
 def on_error(value: str) -> NoReturn:
     pass
-

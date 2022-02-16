@@ -27,7 +27,6 @@ from pylinuxtoolkit.rpi.configs import BaseConfig
 
 @define
 class InterfaceConfig(BaseConfig):
-
     def __init__(self, pi: RaspberryPi):
         super().__init__(pi)
 
