@@ -9,7 +9,7 @@ WARNING: This project is in the very early stages of development and the code ba
 ## Written In Python [![Python](https://badges.aleen42.com/src/python.svg)](https://github.com/jwcompdev/PyLinuxToolkit) [![Generic badge](https://img.shields.io/badge/Python->=3.9-blue.svg)](https://shields.io/) [![PyCharm](https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green)](https://www.jetbrains.com/pycharm/)
 It is currently written in Python 3.9 but want to eventually move to 3.10 once it matures some. I am using PyCharm IDE.
 
-## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/jwcompdev/PyLinuxToolkit/issues)
 Please feel free to help out! This project is open souce for a reason and I want to make it the most useful I can.
 
 ## License [![License](https://img.shields.io/github/license/jwcompdev/PyLinuxToolkit)](https://github.com/jwcompdev/PyLinuxToolkit/blob/main/LICENSE)
