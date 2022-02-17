@@ -178,37 +178,36 @@ class OutputWriter:
         if (current_line != ""
                 and current_line != "\r\n"
                 and not BashChecks.is_pexpect_garbage(current_line)
-                and current_line.strip() != "exit"):
-
-            if ((self.data.command != current_line
-                or self.data.print_command)
-                    and not BashChecks.is_apt_warning(current_line)
-                    and not BashChecks.is_pydev_debugger(current_line)
-                    and not BashChecks.is_debconf_error(current_line)):
-                if BashChecks.is_apt_update(current_line):
-                    current_line = current_line \
-                        .replace("\r", "").strip(" ")
+                and current_line.strip() != "exit"
+                and (self.data.command != current_line
+                     or self.data.print_command)
+                and not BashChecks.is_apt_warning(current_line)
+                and not BashChecks.is_pydev_debugger(current_line)
+                and not BashChecks.is_debconf_error(current_line)):
+            if BashChecks.is_apt_update(current_line):
+                current_line = current_line \
+                    .replace("\r", "").strip(" ")
+                self._emit_output(current_line)
+            elif BashChecks.is_prompt(current_line, self.data.current_user):
+                if (self._last_line.strip() != current_line.strip()
+                        and self._last_line.strip() != self.data.command
+                        and self.data.print_prompt):
+                    self._emit_output(current_line.strip())
+            elif BashChecks.is_not_sudo(current_line):
+                self._emit_output(current_line)
+                self._kill_raise(BashPermissionError
+                                 ("Command needs to be run as sudo - "
+                                  + current_line))
+            elif BashChecks.is_file_locked(current_line):
+                if self.data.raise_error_on_lock_wait:
                     self._emit_output(current_line)
-                elif BashChecks.is_prompt(current_line, self.data.current_user):
-                    if (self._last_line.strip() != current_line.strip()
-                            and self._last_line.strip() != self.data.command
-                            and self.data.print_prompt):
-                        self._emit_output(current_line.strip())
-                elif BashChecks.is_not_sudo(current_line):
+                    self._kill_raise(BashPermissionError(current_line))
+                elif (self.data.wait_for_locks
+                      and not self._waiting_for_lock):
+                    self._waiting_for_lock = True
                     self._emit_output(current_line)
-                    self._kill_raise(BashPermissionError
-                                     ("Command needs to be run as sudo - "
-                                      + current_line))
-                elif BashChecks.is_file_locked(current_line):
-                    if self.data.raise_error_on_lock_wait:
-                        self._emit_output(current_line)
-                        self._kill_raise(BashPermissionError(current_line))
-                    elif (self.data.wait_for_locks
-                            and not self._waiting_for_lock):
-                        self._waiting_for_lock = True
-                        self._emit_output(current_line)
-                else:
-                    self._emit_output(current_line)
+            else:
+                self._emit_output(current_line)
 
     def _is_threaded_worker_enabled(self) -> bool:
         return self.data.threaded_worker_enabled

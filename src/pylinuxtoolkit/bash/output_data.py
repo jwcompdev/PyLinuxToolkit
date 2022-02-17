@@ -44,7 +44,6 @@ class OutputData:
         :param line: the current line of text to be output
         :param command: the last command run
         """
-
         self._is_remote: bool = is_remote
         self._client: spawn = client
         self._current_line: StringValue = StringValue(line)
@@ -57,7 +56,6 @@ class OutputData:
 
         :return: True if the bash is set to run remotely
         """
-
         return self._is_remote
 
     @property
@@ -76,7 +74,6 @@ class OutputData:
         :return: the current line of text that was
         just sent from the bash
         """
-
         return self._current_line
 
     @property
@@ -85,5 +82,4 @@ class OutputData:
         Returns the most recent command run typing the bash.
         :return: the most recent command run typing the bash
         """
-
         return self._current_command

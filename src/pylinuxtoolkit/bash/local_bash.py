@@ -198,9 +198,8 @@ class LocalBash(BashBase):
         """
         if not command:
             raise BashValueError("Command must be specified!")
-        if sudo:
-            if not command.startswith("sudo "):
-                command = "sudo " + command
+        if sudo and not command.startswith("sudo "):
+            command = "sudo " + command
 
         if command.replace("sudo", "").startswith("cd"):
             self._handle_cd_command(command, print_command, print_prompt)
