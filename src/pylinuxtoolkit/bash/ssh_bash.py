@@ -226,6 +226,21 @@ class SSHBash(BashBase):
                               print_ssh_login_success: bool = False,
                               print_ssh_mod: bool = False
                               ) -> NoReturn:
+        """
+        Connects to the ssh client and keeps the connection open.
+
+        NOTE: This method is never ran threaded.
+
+        :param ssh_login_timeout: the timeout to use for ssh login
+        :param print_prompt: if true prints the prompt to the output
+        :param print_ssh_connection_msgs: if true prints a message on
+            ssh connect and disconnect
+        :param print_ssh_login_success: if true prints a message on
+            ssh login success
+        :param print_ssh_mod: if true prints the server's
+            mod(Message of the Day) on login
+        """
+
         if self._ssh_hostname is None or self._ssh_hostname == "":
             raise BashValueError("SSH Hostname was not provided and is required!")
 

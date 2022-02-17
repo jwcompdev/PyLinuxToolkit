@@ -35,6 +35,7 @@ from pylinuxtoolkit.utils.utils import check_argument
 SupportsIntegerFull = Union[str, bytes, bytearray, SupportsInt, SupportsIndex]
 SupportsFloatFull = Union[SupportsIntegerFull, SupportsFloat]
 SupportsStringFull = Union[str, Sequence[str]]
+SupportsAll = Union[int, float, str]
 
 
 class Value(ABC):
@@ -138,8 +139,8 @@ class NumberValue(Value, Number):
         pass
 
     @abstractmethod
-    def __rsub__(self, other: int | float | str
-                              | IntegerValue | FloatValue | StringValue) \
+    def __rsub__(self,
+                 other: SupportsAll | IntegerValue | FloatValue | StringValue) \
             -> IntegerValue | FloatValue | StringValue:
         pass
 
@@ -707,7 +708,7 @@ class IntegerValue(NumberValue):
             return IntegerValue._verify_int(number.__index__())
         else:
             raise TypeError("IntegerValue() argument must be a string, "
-                            f"a bytes-like object or a number,"
+                            "a bytes-like object or a number,"
                             f" not '{type(number).__name__}'")
         return value
 
@@ -853,8 +854,8 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __rsub__(self, other: int | float | str
-                              | IntegerValue | FloatValue | StringValue) \
+    def __rsub__(self,
+                 other: SupportsAll | IntegerValue | FloatValue | StringValue)\
             -> IntegerValue | FloatValue | StringValue:
         if isinstance(other, int):
             return IntegerValue(other - self._value)
@@ -1817,7 +1818,7 @@ class FloatValue(NumberValue):
             return FloatValue._verify_float(number.__int__())
         else:
             raise TypeError("FloatValue() argument must be a string, "
-                            f"a bytes-like object or a number,"
+                            "a bytes-like object or a number,"
                             f" not '{type(number).__name__}'")
         return value
 
@@ -2623,8 +2624,8 @@ class StringValue(Value):
         """Return len(self)."""
         return self._value.__len__()
 
-    def __iadd__(self, other: int | float | str
-                              | IntegerValue | FloatValue | StringValue) \
+    def __iadd__(self,
+                 other: SupportsAll | IntegerValue | FloatValue | StringValue)\
             -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             self._value += str(other)
@@ -2640,8 +2641,8 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __add__(self, other: int | float | str
-                             | IntegerValue | FloatValue | StringValue) \
+    def __add__(self,
+                other: SupportsAll | IntegerValue | FloatValue | StringValue)\
             -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(self._value + str(other))
@@ -2654,8 +2655,8 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __radd__(self, other: int | float | str
-                              | IntegerValue | FloatValue | StringValue) \
+    def __radd__(self,
+                 other: SupportsAll | IntegerValue | FloatValue | StringValue)\
             -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(str(other) + self._value)
@@ -2688,8 +2689,8 @@ class StringValue(Value):
             return NotImplemented
         return self
 
-    def __sub__(self, other: int | str
-                             | IntegerValue | StringValue | re.Pattern) \
+    def __sub__(self,
+                other: int | str | IntegerValue | StringValue | re.Pattern)\
             -> StringValue:
         if isinstance(other, int):
             if other >= 0:
