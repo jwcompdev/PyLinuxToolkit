@@ -40,9 +40,12 @@ class OutputWriter:
     be used instead of it in other classes if desired.
     """
 
-    def __init__(self, on_output: Callable[[OutputData], NoReturn],
-                 bash_data: BashData,
-                 on_setting: Callable[[OutputData], NoReturn] = None):
+    def __init__(
+        self,
+        on_output: Callable[[OutputData], NoReturn],
+        bash_data: BashData,
+        on_setting: Callable[[OutputData], NoReturn] = None,
+    ):
         self._on_output: Callable[[OutputData], NoReturn] = on_output
         self._on_setting: Callable[[OutputData], NoReturn] = on_setting
         self.data: BashData = bash_data
@@ -115,10 +118,9 @@ class OutputWriter:
         :param current_line: the current line to emit
         """
         self._last_line.set(current_line)
-        output_data = OutputData(self.data.is_remote,
-                                 self.data.client,
-                                 current_line,
-                                 self.data.command)
+        output_data = OutputData(
+            self.data.is_remote, self.data.client, current_line, self.data.command
+        )
 
         if self.data.threaded_worker_enabled:
             self._qt_worker.run_on_output_function(output_data)
@@ -144,8 +146,9 @@ class OutputWriter:
         it to the QTWorker emit method that then passes it to the
         user-defined on_output function.
         """
-        output_raw: list[StringValue] = StringValue(self.data.current_line) \
-            .strip_ansi_codes().split("\r\r")
+        output_raw: list[StringValue] = (
+            StringValue(self.data.current_line).strip_ansi_codes().split("\r\r")
+        )
         output_modified: list[StringValue] = []
         for line in output_raw:
             line.rstrip("\n")
@@ -175,35 +178,38 @@ class OutputWriter:
             self._filter_line(line.strip("\n").strip("\r"))
 
     def _filter_line(self, current_line):
-        if (current_line != ""
-                and current_line != "\r\n"
-                and not BashChecks.is_pexpect_garbage(current_line)
-                and current_line.strip() != "exit"
-                and (self.data.command != current_line
-                     or self.data.print_command)
-                and not BashChecks.is_apt_warning(current_line)
-                and not BashChecks.is_pydev_debugger(current_line)
-                and not BashChecks.is_debconf_error(current_line)):
+        if (
+            current_line != ""
+            and current_line != "\r\n"
+            and not BashChecks.is_pexpect_garbage(current_line)
+            and current_line.strip() != "exit"
+            and (self.data.command != current_line or self.data.print_command)
+            and not BashChecks.is_apt_warning(current_line)
+            and not BashChecks.is_pydev_debugger(current_line)
+            and not BashChecks.is_debconf_error(current_line)
+        ):
             if BashChecks.is_apt_update(current_line):
-                current_line = current_line \
-                    .replace("\r", "").strip(" ")
+                current_line = current_line.replace("\r", "").strip(" ")
                 self._emit_output(current_line)
             elif BashChecks.is_prompt(current_line, self.data.current_user):
-                if (self._last_line.strip() != current_line.strip()
-                        and self._last_line.strip() != self.data.command
-                        and self.data.print_prompt):
+                if (
+                    self._last_line.strip() != current_line.strip()
+                    and self._last_line.strip() != self.data.command
+                    and self.data.print_prompt
+                ):
                     self._emit_output(current_line.strip())
             elif BashChecks.is_not_sudo(current_line):
                 self._emit_output(current_line)
-                self._kill_raise(BashPermissionError
-                                 ("Command needs to be run as sudo - "
-                                  + current_line))
+                self._kill_raise(
+                    BashPermissionError(
+                        "Command needs to be run as sudo - " + current_line
+                    )
+                )
             elif BashChecks.is_file_locked(current_line):
                 if self.data.raise_error_on_lock_wait:
                     self._emit_output(current_line)
                     self._kill_raise(BashPermissionError(current_line))
-                elif (self.data.wait_for_locks
-                      and not self._waiting_for_lock):
+                elif self.data.wait_for_locks and not self._waiting_for_lock:
                     self._waiting_for_lock = True
                     self._emit_output(current_line)
             else:
