@@ -30,7 +30,6 @@ class StrEnum(str, Enum):
 
     def __new__(cls, *args):
         """Verifies that all values are of type string."""
-
         for arg in args:
             if not isinstance(arg, (str, auto)):
                 raise TypeError(
@@ -46,7 +45,6 @@ class StrEnum(str, Enum):
 
         :return: the string as the value
         """
-
         return self.value
 
     @classmethod
@@ -57,7 +55,6 @@ class StrEnum(str, Enum):
 
         :return: True if the value is found
         """
-
         return any(val.lower() == value.lower()
                    for _, val in cls.__members__.items())
 
@@ -69,7 +66,6 @@ class StrEnum(str, Enum):
 
         :return: True if the key is found
         """
-
         return any(_key.lower() == key.lower()
                    for _key, _ in cls.__members__.items())
 
@@ -80,7 +76,6 @@ class StrEnum(str, Enum):
 
         :return: the amount of items in the enum
         """
-
         num = 0
         for _, _ in cls.__members__.items():
             num += 1
@@ -94,5 +89,4 @@ class StrEnum(str, Enum):
 
         :return: the amount of items in the enum
         """
-
         return cls.size()

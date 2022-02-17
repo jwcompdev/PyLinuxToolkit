@@ -163,7 +163,6 @@ def cannot_be_none(field_name: str) -> str:
                 "%Parameter% cannot be None!"
     :raises IllegalArgumentError: if field_name is None or empty
     """
-
     check_argument_not_none(field_name, "FieldName cannot be None or empty!")
     if field_name.lower() == "value":
         return VALUE_CANNOT_BE_NONE
@@ -187,7 +186,6 @@ def cannot_be_none_or_empty(field_name: str) -> str:
                 "%Parameter% cannot be None or empty!"
     :raises IllegalArgumentError: if field_name is None or empty
     """
-
     check_argument_not_none(field_name, "FieldName cannot be None or empty!")
     if field_name.lower() == "value":
         return VALUE_CANNOT_BE_NONE

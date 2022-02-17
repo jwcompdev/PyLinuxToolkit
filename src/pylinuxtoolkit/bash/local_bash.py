@@ -67,7 +67,6 @@ class LocalBash(BashBase):
         :param print_prompt: prints the prompt after the command output
             prints
         """
-
         super().__init__(directory=directory, output_function=output_function,
                          use_threaded_worker=use_threaded_worker,
                          wait_for_locks=wait_for_locks,
@@ -84,14 +83,12 @@ class LocalBash(BashBase):
 
     def __enter__(self) -> LocalBash:
         """Sets the _is_context_manager variable to True."""
-
         self._is_context_manager = True
         return self
 
     # noinspection SpellCheckingInspection
     def __exit__(self, etype, value, traceback) -> NoReturn:
         """Runs the close method."""
-
         self.close()
 
     def change_dir(self, directory: str) -> bool:
@@ -101,7 +98,6 @@ class LocalBash(BashBase):
         :param directory: the directory to set
         :return: False if the directory doesn't exist
         """
-
         try:
             self._new_dir = directory.replace('~', str(Path.home()))
 
@@ -118,7 +114,6 @@ class LocalBash(BashBase):
 
         :return: the current working directory
         """
-
         return str(Path.cwd())
 
     @property
@@ -128,7 +123,6 @@ class LocalBash(BashBase):
 
         :return: the current user's home directory
         """
-
         return str(Path.home())
 
     @property
@@ -138,7 +132,6 @@ class LocalBash(BashBase):
 
         :return: the current system hostname
         """
-
         return socket.gethostname()
 
     @property
@@ -148,7 +141,6 @@ class LocalBash(BashBase):
 
         :return: the username of the current user
         """
-
         return pwd.getpwuid(os.getuid()).pw_name
 
     @staticmethod
@@ -204,7 +196,6 @@ class LocalBash(BashBase):
             new line
         :return: the result of the command
         """
-
         if not command:
             raise BashValueError("Command must be specified!")
         if sudo:

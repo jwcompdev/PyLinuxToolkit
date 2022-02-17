@@ -58,7 +58,6 @@ class OutputWriter:
 
         :param text: the text to write to the output
         """
-
         self.data.current_line = StringValue(text).strip_ansi_codes()
         self._process_output()
 
@@ -69,7 +68,6 @@ class OutputWriter:
 
         :param text: the text to write to the output
         """
-
         self.data.current_line = StringValue(text).strip_ansi_codes()
         self._emit_output(text)
 
@@ -86,7 +84,6 @@ class OutputWriter:
 
         :return: the last line printed to the output
         """
-
         return self._last_line
 
     def get_on_output(self) -> Callable[[OutputData], NoReturn]:
@@ -95,7 +92,6 @@ class OutputWriter:
 
         :return: the function that handles the output
         """
-
         return self._on_output
 
     def set_on_output(self, func: Callable[[OutputData], NoReturn]):
@@ -106,7 +102,6 @@ class OutputWriter:
         :param func: the function to set
         :return: this instance to allow for method chaining
         """
-
         self._on_output = func
 
     def _emit_output(self, current_line: StringValue) -> NoReturn:
@@ -119,7 +114,6 @@ class OutputWriter:
 
         :param current_line: the current line to emit
         """
-
         self._last_line.set(current_line)
         output_data = OutputData(self.data.is_remote,
                                  self.data.client,
@@ -138,7 +132,6 @@ class OutputWriter:
 
         :param exception: the exception to be raised
         """
-
         if not self.data.is_remote:
             self.data.client.kill(1)
 
@@ -151,7 +144,6 @@ class OutputWriter:
         it to the QTWorker emit method that then passes it to the
         user-defined on_output function.
         """
-
         output_raw: list[StringValue] = StringValue(self.data.current_line) \
             .strip_ansi_codes().split("\r\r")
         output_modified: list[StringValue] = []

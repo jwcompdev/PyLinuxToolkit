@@ -73,7 +73,6 @@ class TaskPool(metaclass=Final):
             the pool_name argument is found in the class but is
             not an instance of the type TaskPool
         """
-
         # noinspection PyMissingOrEmptyDocstring
         def pass_name(func) -> NoReturn:
             # noinspection PyMissingOrEmptyDocstring
@@ -120,7 +119,6 @@ class TaskPool(metaclass=Final):
         :param pool_name: the string name of the task pool instance
         :return: the new decorated class method
         """
-
         # noinspection PyMissingOrEmptyDocstring
         def pass_name(func) -> NoReturn:
             # noinspection PyMissingOrEmptyDocstring
@@ -149,7 +147,6 @@ class TaskPool(metaclass=Final):
         :param pool_name: the string name of the task pool instance
         :return: the new decorated class method
         """
-
         # noinspection PyMissingOrEmptyDocstring
         def pass_name(func) -> NoReturn:
             # noinspection PyMissingOrEmptyDocstring
@@ -177,7 +174,6 @@ class TaskPool(metaclass=Final):
         :param func: the function that is decorated
         :return: the new decorated function
         """
-
         # noinspection PyMissingOrEmptyDocstring
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> NoReturn:
@@ -196,7 +192,6 @@ class TaskPool(metaclass=Final):
         :param func: the function that is decorated
         :return: the new decorated function
         """
-
         # noinspection PyMissingOrEmptyDocstring
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> NoReturn:
@@ -219,7 +214,6 @@ class TaskPool(metaclass=Final):
             otherwise it is run non-threaded
         :return: the new decorated function
         """
-
         # noinspection PyMissingOrEmptyDocstring
         def validate(func) -> NoReturn:
             # noinspection PyMissingOrEmptyDocstring

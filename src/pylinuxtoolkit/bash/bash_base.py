@@ -69,7 +69,6 @@ class BashBase(ABC, SupportsWithClose):
             prints
 
         """
-
         self._new_dir: str = directory
         self._running_dir = os.path.dirname(os.path.abspath(__file__))
         self._timeout: int = timeout
@@ -98,7 +97,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: True if the bash is set to run remotely
         """
-
         return self._bash_data.is_remote
 
     def get_output_writer(self) -> OutputWriter:
@@ -107,7 +105,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: the current output writer instance
         """
-
         return self._output_writer
 
     def get_on_output(self) -> Callable[[OutputData], NoReturn]:
@@ -116,7 +113,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: the function that handles the output
         """
-
         return self._output_writer.get_on_output()
 
     def set_on_output(self, func: Callable[[OutputData], NoReturn]):
@@ -127,7 +123,6 @@ class BashBase(ABC, SupportsWithClose):
         :param func: the function to set
         :return: this instance to allow for method chaining
         """
-
         self._output_writer.set_on_output(func)
         return self
 
@@ -137,7 +132,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: True if threaded worker is enabled
         """
-
         return self._bash_data.threaded_worker_enabled
 
     def enable_threaded_worker(self):
@@ -146,7 +140,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.threaded_worker_enabled = True
         return self
 
@@ -156,7 +149,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.threaded_worker_enabled = False
         return self
 
@@ -166,7 +158,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: True if print prompt is enabled
         """
-
         return self._bash_data.print_prompt
 
     def enable_print_prompt(self):
@@ -175,7 +166,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.print_prompt = True
         return self
 
@@ -185,7 +175,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.print_prompt = False
         return self
 
@@ -195,7 +184,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: True if print command is enabled
         """
-
         return self._bash_data.print_command
 
     def enable_print_command(self):
@@ -204,7 +192,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.print_command = True
         return self
 
@@ -214,7 +201,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.print_command = False
         return self
 
@@ -224,7 +210,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: True if wait for locks is enabled
         """
-
         return self._bash_data.wait_for_locks
 
     def enable_wait_for_locks(self):
@@ -233,7 +218,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.wait_for_locks = True
         return self
 
@@ -243,7 +227,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.wait_for_locks = False
         return self
 
@@ -255,7 +238,6 @@ class BashBase(ABC, SupportsWithClose):
         :return: True if the program is set to raise an error if a
             command is waiting on a lock
         """
-
         return self._bash_data.raise_error_on_lock_wait
 
     def enable_raise_error_on_lock_wait(self):
@@ -264,7 +246,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.raise_error_on_lock_wait = True
         return self
 
@@ -274,7 +255,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._bash_data.raise_error_on_lock_wait = False
         return self
 
@@ -284,7 +264,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: the global timeout
         """
-
         return self._timeout
 
     def set_global_timeout(self, timeout: int):
@@ -294,7 +273,6 @@ class BashBase(ABC, SupportsWithClose):
         :param: timeout the timeout to set
         :return: this instance to allow for method chaining
         """
-
         self._timeout = timeout
         return self
 
@@ -304,7 +282,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: this instance to allow for method chaining
         """
-
         self._timeout = 30
         return self
 
@@ -314,7 +291,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: the directory of the current running program
         """
-
         return self._running_dir
 
     @abstractmethod
@@ -370,7 +346,6 @@ class BashBase(ABC, SupportsWithClose):
         This uses the current user, hostname, current working
         directory and if root, uses '#' instead of '$'.
         """
-
         self._output_writer.write_bypass(self.get_prompt())
 
     def get_prompt(self) -> str:

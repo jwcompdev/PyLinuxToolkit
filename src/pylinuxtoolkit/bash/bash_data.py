@@ -42,7 +42,6 @@ class BashData:
 
         :param is_remote: if True the bash is not being run remotely.
         """
-
         self._is_remote: bool = False
         # noinspection PyTypeChecker
         self.client: spawn = None
@@ -66,7 +65,6 @@ class BashData:
 
         :return: True if the bash is set to run remotely
         """
-
         return self._is_remote
 
     @property
