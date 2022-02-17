@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# LocalBash.py
+# local_bash.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the LocalBash class, a bash terminal emulator that
 allows running commands locally.
@@ -31,12 +32,12 @@ from typing import NoReturn, Callable
 import pexpect
 from pexpect import spawn
 
-from pylinuxtoolkit.bash.BashBase import BashBase
-from pylinuxtoolkit.bash.Exceptions import BashValueError
-from pylinuxtoolkit.bash.OutputData import OutputData
-from pylinuxtoolkit.utils import Lambdas
-from pylinuxtoolkit.utils.TaskPool import TaskPool
-from pylinuxtoolkit.utils.Values import StringValue
+from pylinuxtoolkit.bash.bash_base import BashBase
+from pylinuxtoolkit.bash.bash_exceptions import BashValueError
+from pylinuxtoolkit.bash.output_data import OutputData
+from pylinuxtoolkit.utils.lambdas import Lambdas
+from pylinuxtoolkit.utils.task_pool import TaskPool
+from pylinuxtoolkit.utils.values import StringValue
 
 
 class LocalBash(BashBase):
@@ -75,6 +76,8 @@ class LocalBash(BashBase):
                          remote_ssh=False,
                          timeout=timeout, print_command=print_command,
                          print_prompt=print_prompt)
+
+        self._is_context_manager = False
 
         self.change_dir(directory)
 
@@ -154,17 +157,14 @@ class LocalBash(BashBase):
 
         return pwd.getpwuid(os.getuid()).pw_name
 
-    # noinspection PyMethodMayBeStatic
-    def _internal_run_local_command_string(self, command: str, client: spawn) -> str:
+    @staticmethod
+    def _internal_run_local_command_string(command: str, client: spawn) -> str:
         client.sendline(command)
         client.expect("[$]")
         return client.before.replace(command, "").strip("\r\n")
 
     def close(self) -> NoReturn:
-        """
-        Currently does nothing.
-        """
-        pass
+        """Currently does nothing."""
 
     def _handle_cd_command(self, command: str, print_command: bool = None,
                            print_prompt: bool = None) -> NoReturn:
@@ -183,7 +183,8 @@ class LocalBash(BashBase):
             self._output_writer.write_bypass(StringValue(command))
 
         if not result:
-            self._output_writer.write_bypass(StringValue(f"bash: cd: {new_dir}: No such file or directory"))
+            self._output_writer.write_bypass(
+                StringValue(f"bash: cd: {new_dir}: No such file or directory"))
 
         if print_prompt:
             self._output_writer.write_bypass(StringValue(self.get_prompt()))
@@ -221,7 +222,10 @@ class LocalBash(BashBase):
             if timeout == 30:
                 timeout = self._timeout
 
-            with pexpect.spawn(command="bash", encoding='utf-8', timeout=timeout, echo=False) as client:
+            with pexpect.spawn(command="bash",
+                               encoding='utf-8',
+                               timeout=timeout,
+                               echo=False) as client:
                 # Assign values to the BashData object for access in on_output function
                 self._bash_data.command = command
                 self._bash_data.client = client

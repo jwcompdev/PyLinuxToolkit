@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# OutputData.py
+# output_data.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the OutputData class, a data object that holds all
 the state and information for the most recent run command.
@@ -24,7 +25,7 @@ from __future__ import annotations
 
 from pexpect import spawn
 
-from pylinuxtoolkit.utils.Values import StringValue
+from pylinuxtoolkit.utils.values import StringValue
 
 
 class OutputData:
@@ -32,10 +33,19 @@ class OutputData:
     This is a data object that holds all the state and information
     for the most recent run command.
     """
-    def __init__(self, is_remote: bool, process,
+    def __init__(self, is_remote: bool, client,
                  line: str | StringValue, command: str):
+        """
+        Initializes the data object.
+
+        :param is_remote: if True the client is running over ssh
+        :param client: the bash client
+        :param line: the current line of text to be output
+        :param command: the last command run
+        """
+
         self._is_remote: bool = is_remote
-        self._client: spawn = process
+        self._client: spawn = client
         self._current_line: StringValue = StringValue(line)
         self._current_command: str = command
 

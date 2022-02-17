@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# InterfaceConfig.py
+# bash_exceptions.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,20 +16,25 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-"""
-This file contains the InterfaceConfig class.
-"""
-from attr import define
 
-from pylinuxtoolkit.rpi import RaspberryPi
-from pylinuxtoolkit.rpi.configs import BaseConfig
+"""This file contains exception classes for all bash objects."""
 
 
-@define
-class InterfaceConfig(BaseConfig):
+class BashError(Exception):
 
-    def __init__(self, pi: RaspberryPi):
-        super().__init__(pi)
+    """Base class for other exceptions"""
 
-    def test(self):
-        print(super()._run_int_command("ls"))
+
+class BashConnectionError(BashError):
+
+    """Raised when an ssh connection was unable to be opened or closed"""
+
+
+class BashPermissionError(BashError):
+
+    """Raised when user doesn't have permission to run the specified command"""
+
+
+class BashValueError(BashError):
+
+    """Raised when the incorrect value was supplied"""

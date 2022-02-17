@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# BaseBash.py
+# bash_base.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the BashBase class, the base class for all bash
 terminal emulator classes.
@@ -26,12 +27,12 @@ import os
 from abc import ABC, abstractmethod
 from typing import NoReturn, Callable
 
-from pylinuxtoolkit.bash.BashData import BashData
-from pylinuxtoolkit.bash.OutputData import OutputData
-from pylinuxtoolkit.bash.OutputWriter import OutputWriter
-from pylinuxtoolkit.utils import Lambdas
-from pylinuxtoolkit.utils.Protocols import SupportsWithClose
-from pylinuxtoolkit.utils.TaskPool import TaskPool
+from pylinuxtoolkit.bash.bash_data import BashData
+from pylinuxtoolkit.bash.output_data import OutputData
+from pylinuxtoolkit.bash.output_writer import OutputWriter
+from pylinuxtoolkit.utils.lambdas import Lambdas
+from pylinuxtoolkit.utils.protocols import SupportsWithClose
+from pylinuxtoolkit.utils.task_pool import TaskPool
 
 
 class BashBase(ABC, SupportsWithClose):
@@ -71,7 +72,6 @@ class BashBase(ABC, SupportsWithClose):
 
         self._new_dir: str = directory
         self._running_dir = os.path.dirname(os.path.abspath(__file__))
-        self._waiting_for_lock: bool = False
         self._timeout: int = timeout
         self._task_pool: TaskPool = TaskPool()
         self._is_context_manager = False
@@ -324,8 +324,7 @@ class BashBase(ABC, SupportsWithClose):
         :param: directory the directory to set
         """
 
-        pass
-
+    @property
     @abstractmethod
     def current_dir(self) -> str:
         """
@@ -336,6 +335,7 @@ class BashBase(ABC, SupportsWithClose):
 
         pass
 
+    @property
     @abstractmethod
     def home_dir(self) -> str:
         """
@@ -346,6 +346,7 @@ class BashBase(ABC, SupportsWithClose):
 
         pass
 
+    @property
     @abstractmethod
     def hostname(self) -> str:
         """
@@ -356,6 +357,7 @@ class BashBase(ABC, SupportsWithClose):
 
         pass
 
+    @property
     @abstractmethod
     def current_user(self) -> str:
         """

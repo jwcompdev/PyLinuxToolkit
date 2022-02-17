@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# LocalizationConfig.py
+# types.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,14 +16,23 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
-This file contains the LocalizationConfig class.
+This file contains some general type classes that can be inherited from.
 """
-from pylinuxtoolkit.rpi import RaspberryPi
-from pylinuxtoolkit.rpi.configs import BaseConfig
 
 
-class LocalizationConfig(BaseConfig):
+class Final(type):
+    """
+    A metaclass that can be assigned to a class to completely prevent
+    that class from being subclassed.
 
-    def __init__(self, pi: RaspberryPi):
-        super().__init__(pi)
+    >>> class newclass(metaclass=Final)
+    """
+
+    # noinspection PyMethodParameters
+    def __new__(cls, name, bases, classdict):
+        for base in bases:
+            if isinstance(base, Final):
+                raise TypeError(f"type '{base.__name__}' is not an acceptable base type")
+        return type.__new__(cls, name, bases, dict(classdict))

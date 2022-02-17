@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# StrEnum.py
+# str_enum.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the StrEnum class, a subclass of Enum that allows
 strings as values.
@@ -39,9 +40,8 @@ class StrEnum(str, Enum):
         for arg in args:
             if not isinstance(arg, (str, auto)):
                 raise TypeError(
-                    "Values must be strings: {} is a {}".format(
-                        repr(arg), type(arg)
-                    )
+                    f"Values must be strings: "
+                    f"{repr(arg)} is a {type(arg)}"
                 )
         return super().__new__(cls, *args)
 
@@ -64,8 +64,8 @@ class StrEnum(str, Enum):
         :return: True if the value is found
         """
 
-        for k, v in cls.__members__.items():
-            if v.lower() == value.lower():
+        for _, _val in cls.__members__.items():
+            if _val.lower() == value.lower():
                 return True
 
         return False
@@ -79,8 +79,8 @@ class StrEnum(str, Enum):
         :return: True if the key is found
         """
 
-        for k, v in cls.__members__.items():
-            if k.lower() == key.lower():
+        for _key, _ in cls.__members__.items():
+            if _key.lower() == key.lower():
                 return True
 
         return False

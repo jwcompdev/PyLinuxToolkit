@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# Main.py
+# main.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,23 +16,27 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the Window class and the main entrypoint of the GUI program.
 """
 import atexit
 import sys
+from typing import NoReturn
 
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QMessageBox, QAbstractItemView
 )
 
-from pylinuxtoolkit.Main_Window import Ui_MainWindow
-from pylinuxtoolkit.bash.LinuxBash import LinuxBash
-from pylinuxtoolkit.bash.OutputData import OutputData
+from pylinuxtoolkit.main_window import Ui_MainWindow
+from pylinuxtoolkit.bash.linux_bash import LinuxBash
+from pylinuxtoolkit.bash.output_data import OutputData
 
 
-def main():
+def main() -> NoReturn:
+    """This is the main entry point for this program."""
+
     app = QApplication(sys.argv)
     win = Window()
     win.show()
@@ -41,7 +45,15 @@ def main():
 
 # noinspection PyPep8Naming
 class Window(QMainWindow, Ui_MainWindow):
+    """This is the main GUI window class for this application."""
+
     def __init__(self, parent=None):
+        """
+        Initializes the window object.
+
+        :param parent: the QWidget parent object
+        """
+
         super().__init__(parent)
         self.setupUi(self)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -50,7 +62,7 @@ class Window(QMainWindow, Ui_MainWindow):
         self.lstOutput.setModel(self.lstOutput_model)
 
         self.bash = LinuxBash(directory="~", output_function=self.on_output,
-                              remote_ssh=True, print_ssh_connection_msgs=True, print_prompt=True)
+                              remote_ssh=False, print_ssh_connection_msgs=True, print_prompt=True)
         self.bash.set_ssh_login_info(
             hostname="raspberrypi.local",
             username="pi",
@@ -68,29 +80,52 @@ class Window(QMainWindow, Ui_MainWindow):
         elif self.bash.is_print_prompt_enabled():
             self.bash.print_prompt()
 
-    def connect_signal_slots(self):
+    def connect_signal_slots(self) -> NoReturn:
+        """
+        This method connects all the GUI items to their signal triggers.
+        """
+
         self.mnuQuit.triggered.connect(self.close)
-        self.mnuAbout.triggered.connect(self.about)
+        self.mnuAbout.triggered.connect(self.mnuAbout_clicked)
         self.btnSubmit.clicked.connect(self.btnSubmit_clicked)
         self.txtCommand.returnPressed.connect(self.txtCommand_return_pressed)
 
-    def about(self):
+    def mnuAbout_clicked(self) -> NoReturn:
+        """
+        Opens the 'about' dialog.
+        """
         QMessageBox.about(
             self,
             "About Ultimate Linux Toolkit",
-            "A program to make tasks in linux easier.",
+            "A program to make tasks in linux administration easier.",
         )
 
-    def print_to_lst(self, text: str):
+    def print_to_lst(self, text: str) -> NoReturn:
+        """
+        Prints the specified text to the GUI terminal and stdout.
+
+        :param text: the text to print
+        """
+
         self.lstOutput_model.appendRow(QtGui.QStandardItem(text))
         # Scrolls the listview to the bottom
         index = self.lstOutput_model.index(self.lstOutput_model.rowCount() - 1, 0)
         self.lstOutput.scrollTo(index, QAbstractItemView.PositionAtBottom)
 
-    def exit_handler(self):
+    def exit_handler(self) -> NoReturn:
+        """
+        This runs when the program exits.
+        """
+
         self.bash.ssh_close()
 
-    def on_output(self, output_data: OutputData):
+    def on_output(self, output_data: OutputData) -> NoReturn:
+        """
+        This function is run each time the output writer is written to.
+
+        :param output_data: the output data
+        """
+
         try:
             line = output_data.current_line
 
@@ -102,13 +137,22 @@ class Window(QMainWindow, Ui_MainWindow):
                         or "apt-get upgrade" in output_data.current_command:
                     output_data.client.sendline("n")
                     print(">> Canceled upgrade!")
-        except Exception as e:
-            raise e
+        except Exception as ex:
+            raise ex
 
-    def txtCommand_return_pressed(self):
+    def txtCommand_return_pressed(self) -> NoReturn:
+        """
+        This runs when the enter key is pressed inside the
+        txtCommand text box.
+        """
+
         self.btnSubmit_clicked()
 
-    def btnSubmit_clicked(self):
+    def btnSubmit_clicked(self) -> NoReturn:
+        """
+        This runs when the btnSubmit button is clicked.
+        """
+
         if self.txtCommand.text() != "":
             command = self.txtCommand.text().strip()
             self.txtCommand.setText("")

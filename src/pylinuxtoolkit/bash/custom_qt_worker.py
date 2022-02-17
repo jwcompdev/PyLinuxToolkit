@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# CustomQTWorker.py
+# custom_qt_worker.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the CustomQTWorker class, a handler that safely
 updates the GUI from another thread.
@@ -24,7 +25,7 @@ from typing import NoReturn
 
 from PyQt5 import QtCore
 
-from pylinuxtoolkit.bash.OutputData import OutputData
+from pylinuxtoolkit.bash.output_data import OutputData
 
 
 class CustomQTWorker(QtCore.QObject):
@@ -33,9 +34,6 @@ class CustomQTWorker(QtCore.QObject):
     """
 
     _on_output_signal = QtCore.pyqtSignal(OutputData, name="on_output")
-
-    def __init__(self):
-        super().__init__()
 
     def set_on_output_function(self, function) -> NoReturn:
         """

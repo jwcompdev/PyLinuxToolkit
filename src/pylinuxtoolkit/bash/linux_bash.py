@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# LinuxBash.py
+# linux_bash.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the LinuxBash class, a bash terminal emulator that
 allows running commands locally or over ssh.
@@ -25,11 +26,11 @@ from __future__ import annotations
 import os
 from typing import NoReturn, Union, Callable
 
-from pylinuxtoolkit.bash.LocalBash import LocalBash
-from pylinuxtoolkit.bash.OutputData import OutputData
-from pylinuxtoolkit.bash.OutputWriter import OutputWriter
-from pylinuxtoolkit.bash.SSHBash import SSHBash
-from pylinuxtoolkit.utils import Lambdas
+from pylinuxtoolkit.bash.local_bash import LocalBash
+from pylinuxtoolkit.bash.output_data import OutputData
+from pylinuxtoolkit.bash.output_writer import OutputWriter
+from pylinuxtoolkit.bash.ssh_bash import SSHBash
+from pylinuxtoolkit.utils.lambdas import Lambdas
 
 StrOrBytesPath = Union[str, bytes, os.PathLike[str], os.PathLike[bytes]]
 
@@ -330,6 +331,7 @@ class LinuxBash:
         self._bash.set_global_timeout_default()
         return self
 
+    @property
     def running_dir(self) -> str:
         """
         Returns the directory of the current running program.
@@ -348,6 +350,7 @@ class LinuxBash:
 
         self._bash.change_dir(directory)
 
+    @property
     def current_dir(self) -> str:
         """
         Returns the current working directory.
@@ -357,6 +360,7 @@ class LinuxBash:
 
         return self._bash.current_dir
 
+    @property
     def home_dir(self) -> str:
         """
         Returns the current user's home directory.
@@ -366,6 +370,7 @@ class LinuxBash:
 
         return self._bash.home_dir
 
+    @property
     def hostname(self) -> str:
         """
         Returns the current system hostname.
@@ -375,6 +380,7 @@ class LinuxBash:
 
         return self._bash.hostname
 
+    @property
     def current_user(self) -> str:
         """
         Returns the username of the current user.

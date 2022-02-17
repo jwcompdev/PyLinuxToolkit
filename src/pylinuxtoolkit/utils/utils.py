@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# Utils.py
+# utils.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains some basic utilities.
 """
@@ -25,8 +26,8 @@ import datetime
 import math
 from typing import Any, NoReturn
 
-from pylinuxtoolkit.utils.Exceptions import IllegalArgumentError
-from pylinuxtoolkit.utils.RegEx import Patterns
+from pylinuxtoolkit.utils.exceptions import IllegalArgumentError
+from pylinuxtoolkit.utils.regex import Patterns
 
 
 ########################################
@@ -98,26 +99,8 @@ def is_boolean(value: str) -> bool:
 
     val = value.lower().strip()
 
-    if val == "true" \
-            or val == "t" \
-            or val == "yes" \
-            or val == "y" \
-            or val == "1" \
-            or val == "succeeded" \
-            or val == "succeed" \
-            or val == "enabled" \
-            or val == "false" \
-            or val == "f" \
-            or val == "no" \
-            or val == "n" \
-            or val == "0" \
-            or val == "-1" \
-            or val == "failed" \
-            or val == "fail" \
-            or val == "disabled":
-        return True
-    else:
-        return False
+    return val in ("true", "t", "yes", "y", "1", "succeeded", "succeed", "enabled",
+                   "false", "f", "no", "n", "0", "failed", "fail", "disabled")
 
 
 def to_boolean(value: str) -> bool | None:
@@ -136,32 +119,19 @@ def to_boolean(value: str) -> bool | None:
                 None is returned if a match is not found
     """
 
-    if not value or value is None:
-        return None
+    if value and value is not None:
+        val = value.lower().strip()
 
-    val = value.lower().strip()
+        is_true = val in ("true", "t", "yes", "y", "1", "succeeded", "succeed", "enabled")
 
-    if val == "true" \
-            or val == "t" \
-            or val == "yes" \
-            or val == "y" \
-            or val == "1" \
-            or val == "succeeded" \
-            or val == "succeed" \
-            or val == "enabled":
-        return True
-    elif val == "false" \
-            or val == "f" \
-            or val == "no" \
-            or val == "n" \
-            or val == "0" \
-            or val == "-1" \
-            or val == "failed" \
-            or val == "fail" \
-            or val == "disabled":
-        return False
-    else:
-        return None
+        is_false = val in ("false", "f", "no", "n", "0", "failed", "fail", "disabled")
+
+        if is_true:
+            return True
+        if is_false:
+            return False
+
+    return None
 
 
 def parse_int_or_default(value: str, default: int) -> int:
@@ -236,10 +206,11 @@ def unwrap(value: str, wrap_char: str) -> str:
                 quoted properly with the wrap character
     """
 
-    if not str or not wrap_char:
-        return value
-    elif value[0] == wrap_char and value[-1] == wrap_char:
-        return value[1:-1]
+    if str and wrap_char:
+        if value[0] == wrap_char and value[-1] == wrap_char:
+            return value[1:-1]
+
+    return value
 
 
 ########################################
@@ -285,13 +256,13 @@ def convert_bytes_to_string(number: int) -> str:
 # Other Utils                          #
 ########################################
 
-def timesince(dt: datetime.datetime | datetime.timedelta,
+def timesince(d_t: datetime.datetime | datetime.timedelta,
               default: str = 'just now') -> str:
     """
     Returns string representing 'time since' e.g.
     3 days ago, 5 hours ago etc.
 
-    >>> now = datetime.datetime.now()
+    >>> time_now = datetime.datetime.now()
     >>> timesince(now)
     'just now'
     >>> timesince(now - datetime.timedelta(seconds=1))
@@ -329,11 +300,12 @@ def timesince(dt: datetime.datetime | datetime.timedelta,
     >>> timesince(datetime.timedelta(seconds=3721))
     '1 hour and 2 minutes ago'
     """
-    if isinstance(dt, datetime.timedelta):
-        diff = dt
+
+    if isinstance(d_t, datetime.timedelta):
+        diff = d_t
     else:
         now = datetime.datetime.now()
-        diff = abs(now - dt)
+        diff = abs(now - d_t)
 
     periods = (
         (diff.days / 365, 'year', 'years'),
@@ -349,11 +321,11 @@ def timesince(dt: datetime.datetime | datetime.timedelta,
     for period, singular, plural in periods:
         if int(period):
             if int(period) == 1:
-                output.append('%d %s' % (period, singular))
+                output.append(f'{period} {singular}')
             else:
-                output.append('%d %s' % (period, plural))
+                output.append(f'{period} {plural}')
 
     if output:
-        return '%s ago' % ' and '.join(output[:2])
+        return f"{' and '.join(output[:2])} ago"
 
     return default

@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# TaskPool.py
+# task_pool.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the TaskPool class, a pool of any combination of
 threaded or un-threaded tasks that run in the order they are created.
@@ -27,8 +28,8 @@ from threading import Thread
 from time import sleep
 from typing import final, NoReturn
 
-from pylinuxtoolkit.utils.Types import Final
-from pylinuxtoolkit.utils.Values import BooleanValue, StringValue
+from pylinuxtoolkit.utils.types import Final
+from pylinuxtoolkit.utils.values import BooleanValue, StringValue
 
 
 @final
@@ -77,20 +78,17 @@ class TaskPool(metaclass=Final):
             # noinspection PyMissingOrEmptyDocstring
             @functools.wraps(func)
             def wrapper(self, *args, **kwargs) -> NoReturn:
-                if isinstance(threaded, str) \
-                        or isinstance(threaded, StringValue):
+                if isinstance(threaded, (str, StringValue)):
                     threaded_name = str(threaded)
                     try:
                         threaded_func = getattr(self, threaded_name.lstrip("self."))
-                    except AttributeError as e:
-                        if "object has no attribute '" + threaded_name + "'" in str(e):
-                            e.args = ("Function by the name '" + threaded_name
-                                      + "' specified to return the threaded"
-                                      + " value not found in the '"
-                                      + type(threaded_name).__name__ + "' class!",)
-                            raise
-                        else:
-                            raise
+                    except AttributeError as ex:
+                        if "object has no attribute '" + threaded_name + "'" in str(ex):
+                            ex.args = ("Function by the name '" + threaded_name
+                                       + "' specified to return the threaded"
+                                       + " value not found in the '"
+                                       + type(threaded_name).__name__ + "' class!",)
+                        raise
                     if callable(threaded_func):
                         final_condition = bool(threaded_func())
                     else:
@@ -127,7 +125,12 @@ class TaskPool(metaclass=Final):
             # noinspection PyMissingOrEmptyDocstring
             @functools.wraps(func)
             def wrapper(self, *args, **kwargs) -> NoReturn:
-                TaskPool._internal_class_method_wrapper(self, pool_name, True, func, *args, **kwargs)
+                TaskPool._internal_class_method_wrapper(self,
+                                                        pool_name,
+                                                        True,
+                                                        func,
+                                                        *args,
+                                                        **kwargs)
 
             return wrapper
 
@@ -151,7 +154,12 @@ class TaskPool(metaclass=Final):
             # noinspection PyMissingOrEmptyDocstring
             @functools.wraps(func)
             def wrapper(self, *args, **kwargs) -> NoReturn:
-                TaskPool._internal_class_method_wrapper(self, pool_name, False, func, *args, **kwargs)
+                TaskPool._internal_class_method_wrapper(self,
+                                                        pool_name,
+                                                        False,
+                                                        func,
+                                                        *args,
+                                                        **kwargs)
 
             return wrapper
 
@@ -257,7 +265,12 @@ class TaskPool(metaclass=Final):
         self.running_thread += 1
 
     @staticmethod
-    def _internal_class_method_wrapper(local_self, pool_name: str, threaded: bool, func, *args, **kwargs) -> NoReturn:
+    def _internal_class_method_wrapper(local_self,
+                                       pool_name: str,
+                                       threaded: bool,
+                                       func,
+                                       *args,
+                                       **kwargs) -> NoReturn:
         if isinstance(pool_name, str):
             try:
                 pool: TaskPool = getattr(local_self, pool_name.lstrip("self."))
@@ -270,11 +283,11 @@ class TaskPool(metaclass=Final):
                     raise ValueError("Specified variable by the name '" + pool_name
                                      + "' is not a TaskPool object!")
                 return dec_func(func)(local_self, *args, **kwargs)
-            except AttributeError as e:
-                if "object has no attribute '" + pool_name + "'" in str(e):
-                    e.args = ("TaskPool instance variable by the name '" + pool_name
-                              + "' not found in the '"
-                              + type(local_self).__name__ + "' class!",)
+            except AttributeError as ex:
+                if "object has no attribute '" + pool_name + "'" in str(ex):
+                    ex.args = ("TaskPool instance variable by the name '" + pool_name
+                               + "' not found in the '"
+                               + type(local_self).__name__ + "' class!",)
                 raise
         else:
             raise ValueError("pool_name must be a string!")

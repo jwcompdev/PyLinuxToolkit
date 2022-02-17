@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# Protocols.py
+# protocols.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains simple protocol classes to be used in isinstance
 checks.
@@ -34,7 +35,7 @@ class SupportsClose(Protocol):
     # noinspection PyMissingOrEmptyDocstring
     @abstractmethod
     def close(self) -> NoReturn:
-        pass
+        raise NotImplementedError
 
 
 @runtime_checkable
@@ -44,11 +45,11 @@ class SupportsWith(Protocol):
 
     @abstractmethod
     def __enter__(self):
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def __exit__(self, exc_type, exc_val, exc_tb) -> NoReturn:
-        pass
+        raise NotImplementedError
 
 
 @runtime_checkable
@@ -58,13 +59,13 @@ class SupportsWithClose(Protocol):
 
     @abstractmethod
     def __enter__(self):
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def __exit__(self, exc_type, exc_val, exc_tb) -> NoReturn:
-        pass
+        raise NotImplementedError
 
     # noinspection PyMissingOrEmptyDocstring
     @abstractmethod
     def close(self) -> NoReturn:
-        pass
+        raise NotImplementedError

@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# BashData.py
+# bash_data.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
 This file contains the BashData class, a data object that stores all
 state and settings for the current bash instance.
@@ -24,9 +25,9 @@ from typing import Callable, NoReturn
 
 from pexpect import spawn
 
-from pylinuxtoolkit.utils import Lambdas
-from pylinuxtoolkit.utils.Literals import EMPTY
-from pylinuxtoolkit.utils.Values import StringValue
+from pylinuxtoolkit.utils.lambdas import Lambdas
+from pylinuxtoolkit.utils.literals import EMPTY
+from pylinuxtoolkit.utils.values import StringValue
 
 
 class BashData:
@@ -36,6 +37,12 @@ class BashData:
     """
 
     def __init__(self, is_remote: bool):
+        """
+        Initializes the data object.
+
+        :param is_remote: if True the bash is not being run remotely.
+        """
+
         self._is_remote: bool = False
         # noinspection PyTypeChecker
         self.client: spawn = None

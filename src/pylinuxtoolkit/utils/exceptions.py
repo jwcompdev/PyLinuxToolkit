@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# SystemConfig.py
+# exceptions.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,14 +16,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 """
-This file contains the SystemConfig class.
+This file contains custom utility exceptions for general use.
 """
-from pylinuxtoolkit.rpi import RaspberryPi
-from pylinuxtoolkit.rpi.configs import BaseConfig
 
 
-class SystemConfig(BaseConfig):
-
-    def __init__(self, pi: RaspberryPi):
-        super().__init__(pi)
+class IllegalArgumentError(Exception):
+    """
+    This exception is raised when a required argument was not found
+    when a method was called.
+    """
+    pass

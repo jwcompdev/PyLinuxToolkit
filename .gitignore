@@ -21,6 +21,6 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-/src/pylinuxtoolkit/Demo.py
-/src/pylinuxtoolkit/Hello_World.py
+/src/pylinuxtoolkit/demo.py
+/src/pylinuxtoolkit/hello_world.py
 /src/ui/
