@@ -162,6 +162,8 @@ class BaseConfig(ABC):
 
     def _run_int_command(self, command: str) -> int:
         pass
+
+
 # protected final RaspberryPi pi;
 #     protected final String commandBase = "sudo raspi-config nonint ";
 #
