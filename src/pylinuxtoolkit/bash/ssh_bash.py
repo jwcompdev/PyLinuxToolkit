@@ -194,7 +194,8 @@ class SSHBash(BashBase):
         return self._ssh_client.closed
 
     # noinspection PyTypeChecker
-    @TaskPool.decide_class_task(pool_name="_task_pool", threaded="is_threaded_worker_enabled")
+    @TaskPool.decide_class_task(pool_name="_task_pool",
+                                threaded="is_threaded_worker_enabled")
     def ssh_connect_and_wait(self, ssh_login_timeout: int = 10,
                              print_prompt: bool = None,
                              print_ssh_connection_msgs: bool = False,
@@ -235,9 +236,11 @@ class SSHBash(BashBase):
             if ssh_login_timeout == 10:
                 ssh_login_timeout = self.ssh_login_timeout
 
-            print_ssh_connection_msgs = print_ssh_connection_msgs if print_ssh_connection_msgs \
+            print_ssh_connection_msgs = print_ssh_connection_msgs \
+                if print_ssh_connection_msgs \
                 else self.print_ssh_connection_msgs
-            print_ssh_login_success = print_ssh_login_success if print_ssh_login_success \
+            print_ssh_login_success = print_ssh_login_success \
+                if print_ssh_login_success \
                 else self.print_ssh_login_success
 
             self._bash_data.command = ""
@@ -305,7 +308,8 @@ class SSHBash(BashBase):
         if self._bash_data.print_prompt:
             self._output_writer.write(self.get_prompt())
 
-    @TaskPool.decide_class_task(pool_name="_task_pool", threaded="is_threaded_worker_enabled")
+    @TaskPool.decide_class_task(pool_name="_task_pool",
+                                threaded="is_threaded_worker_enabled")
     def ssh_close(self, print_ssh_connection_msgs: bool = False) -> NoReturn:
         """
         Closes the ssh connection if still open.
@@ -315,7 +319,8 @@ class SSHBash(BashBase):
         """
 
         if not self._ssh_client.closed:
-            print_ssh_connection_msgs = print_ssh_connection_msgs if print_ssh_connection_msgs \
+            print_ssh_connection_msgs = print_ssh_connection_msgs \
+                if print_ssh_connection_msgs \
                 else self.print_ssh_connection_msgs
 
             self._bash_data.command = ""
@@ -389,7 +394,8 @@ class SSHBash(BashBase):
 
         self.ssh_close()
 
-    @TaskPool.decide_class_task(pool_name="_task_pool", threaded="is_threaded_worker_enabled")
+    @TaskPool.decide_class_task(pool_name="_task_pool",
+                                threaded="is_threaded_worker_enabled")
     def run_terminal_command(self, command: str,
                              sudo: bool = False,
                              timeout: int | None = 30,
@@ -432,7 +438,7 @@ class SSHBash(BashBase):
             raise BashValueError("Command must be specified!")
 
         if sudo and not command.startswith("sudo "):
-                command = "sudo " + command
+            command = "sudo " + command
 
         if timeout == 30:
             timeout = self._timeout
@@ -440,9 +446,12 @@ class SSHBash(BashBase):
         if ssh_login_timeout == 10:
             ssh_login_timeout = self.ssh_login_timeout
 
-        print_ssh_connection_msgs = print_ssh_connection_msgs if print_ssh_connection_msgs \
+        print_ssh_connection_msgs = print_ssh_connection_msgs \
+            if print_ssh_connection_msgs \
             else self.print_ssh_connection_msgs
-        print_ssh_login_success = print_ssh_login_success if print_ssh_login_success \
+
+        print_ssh_login_success = print_ssh_login_success \
+            if print_ssh_login_success \
             else self.print_ssh_login_success
 
         bypass_connect = False

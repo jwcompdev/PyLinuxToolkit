@@ -45,7 +45,8 @@ class TaskPool(metaclass=Final):
 
     # noinspection PyMethodParameters
     def decide_class_task(pool_name: str = "task_pool",
-                          threaded: bool | BooleanValue | str | StringValue = True) -> NoReturn:
+                          threaded: bool | BooleanValue | str | StringValue = True) \
+            -> NoReturn:
         """
         Decorator that creates a task each time
         the decorated function is called.

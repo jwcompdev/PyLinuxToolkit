@@ -32,7 +32,8 @@ from pylinuxtoolkit.utils.regex import Patterns
 # Check Value Utils                    #
 ########################################
 
-def check_argument(expression: bool, error_message="Invalid argument specified!") -> NoReturn:
+def check_argument(expression: bool,
+                   error_message="Invalid argument specified!") -> NoReturn:
     """Ensures the truth of an expression involving one or
     more parameters to the calling method.
 
@@ -97,8 +98,10 @@ def is_boolean(value: str) -> bool:
 
     val = value.lower().strip()
 
-    return val in ("true", "t", "yes", "y", "1", "succeeded", "succeed", "enabled",
-                   "false", "f", "no", "n", "0", "failed", "fail", "disabled")
+    return val in ("true", "t", "yes", "y", "1",
+                   "succeeded", "succeed", "enabled",
+                   "false", "f", "no", "n", "0",
+                   "failed", "fail", "disabled")
 
 
 def to_boolean(value: str) -> bool | None:
@@ -120,9 +123,11 @@ def to_boolean(value: str) -> bool | None:
     if value and value is not None:
         val = value.lower().strip()
 
-        is_true = val in ("true", "t", "yes", "y", "1", "succeeded", "succeed", "enabled")
+        is_true = val in ("true", "t", "yes", "y", "1",
+                          "succeeded", "succeed", "enabled")
 
-        is_false = val in ("false", "f", "no", "n", "0", "failed", "fail", "disabled")
+        is_false = val in ("false", "f", "no", "n", "0",
+                           "failed", "fail", "disabled")
 
         if is_true:
             return True
@@ -204,10 +209,10 @@ def unwrap(value: str, wrap_char: str) -> str:
                 quoted properly with the wrap character
     """
 
-    if str and wrap_char \
-            and value[0] == wrap_char \
-            and value[-1] == wrap_char:
-            return value[1:-1]
+    if str and wrap_char and \
+            value[0] == wrap_char and \
+            value[-1] == wrap_char:
+        return value[1:-1]
 
     return value
 

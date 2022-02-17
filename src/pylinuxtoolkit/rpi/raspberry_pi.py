@@ -30,9 +30,7 @@ from pylinuxtoolkit.bash.linux_bash import LinuxBash
 
 
 class RaspberryPi:
-    """
-    This is the main raspberry pi data class.
-    """
+    """This is the main raspberry pi data class."""
 
     def __init__(self, remote: bool = False) -> NoReturn:
         self._remote: bool = remote
@@ -126,9 +124,7 @@ class RaspberryPi:
 
 
 class BaseConfig(ABC):
-    """
-    This is the base class for all RPI Config objects
-    """
+    """This is the base class for all RPI Config objects."""
 
     def __init__(self, rpi: RaspberryPi):
         """
@@ -249,31 +245,36 @@ class BaseConfig(ABC):
 
 class InterfaceConfig(BaseConfig):
     """
-    This config object contains all the interface related settings.
+    This config object contains all the interface
+    related settings.
     """
 
 
 class LocalizationConfig(BaseConfig):
     """
-    This config object contains all the localization related settings.
+    This config object contains all the localization
+    related settings.
     """
 
 
 class PerformanceConfig(BaseConfig):
     """
-    This config object contains all the performance related settings.
+    This config object contains all the performance
+    related settings.
     """
 
 
 class SSHConfig(BaseConfig):
     """
-    This config object contains all the ssh related settings.
+    This config object contains all the ssh
+    related settings.
     """
 
 
 class SystemConfig(BaseConfig):
     """
-    This config object contains all the system related settings.
+    This config object contains all the system
+    related settings.
     """
 
 

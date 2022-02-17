@@ -29,9 +29,7 @@ from pylinuxtoolkit.bash.output_data import OutputData
 
 
 class CustomQTWorker(QtCore.QObject):
-    """
-    Handles safely updating the GUI from another thread.
-    """
+    """Handles safely updating the GUI from another thread."""
 
     _on_output_signal = QtCore.pyqtSignal(OutputData, name="on_output")
 

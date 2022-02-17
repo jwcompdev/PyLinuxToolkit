@@ -130,8 +130,6 @@ class Lambdas:
         :return: NoReturn
         """
 
-        pass
-
     @staticmethod
     # noinspection PyUnusedLocal
     def two_args_no_return(arg1: Any, arg2: Any) -> NoReturn:
@@ -144,8 +142,6 @@ class Lambdas:
         :return: NoReturn
         """
 
-        pass
-
     @staticmethod
     # noinspection PyUnusedLocal
     def three_args_no_return(arg1: Any, arg2: Any) -> NoReturn:
@@ -157,5 +153,3 @@ class Lambdas:
 
         :return: NoReturn
         """
-
-        pass

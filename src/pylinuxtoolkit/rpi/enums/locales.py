@@ -17,14 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""
-Contains the Locales class, an enum of Locale values.
-"""
+"""Contains the Locales class, an enum of Locale values."""
 from pylinuxtoolkit.utils.str_enum import StrEnum
 
 
 class Locales(StrEnum):
     """A list of all available locales"""
+
     NONE = ""
     ARABIC_EGYPT = "ar-EG.UTF-8"
     BENGALI_INDIA = "bn-IN.UTF-8"

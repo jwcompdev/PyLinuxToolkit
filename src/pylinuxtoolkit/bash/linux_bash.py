@@ -413,8 +413,11 @@ class LinuxBash:
 
         return self._bash.get_prompt()
 
-    def set_ssh_login_info(self, hostname: str = None, username: str = None, password: str = None,
-                           port: int = 22, ssh_key: StrOrBytesPath = None):
+    def set_ssh_login_info(self, hostname: str = None,
+                           username: str = None,
+                           password: str = None,
+                           port: int = 22,
+                           ssh_key: StrOrBytesPath = None):
         """
         Sets the required login info for the ssh connection.
 
@@ -427,7 +430,8 @@ class LinuxBash:
         """
 
         if self.is_remote:
-            self._ssh_bash.set_ssh_login_info(hostname, username, password, port, ssh_key)
+            self._ssh_bash.set_ssh_login_info(hostname, username,
+                                              password, port, ssh_key)
 
     def ssh_connect(self, ssh_login_timeout: int = 10,
                     print_prompt: bool = False,
@@ -502,7 +506,8 @@ class LinuxBash:
         """
 
         if self.is_remote:
-            self._ssh_bash.run_terminal_command(command, sudo, timeout, ssh_login_timeout,
+            self._ssh_bash.run_terminal_command(command, sudo,
+                                                timeout, ssh_login_timeout,
                                                 print_command, print_prompt,
                                                 print_exit_code,
                                                 print_ssh_connection_msgs,

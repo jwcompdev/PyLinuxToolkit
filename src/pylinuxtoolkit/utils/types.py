@@ -32,5 +32,6 @@ class Final(type):
     def __new__(cls, name, bases, classdict):
         for base in bases:
             if isinstance(base, Final):
-                raise TypeError(f"type '{base.__name__}' is not an acceptable base type")
+                raise TypeError(f"type '{base.__name__}' "
+                                f"is not an acceptable base type")
         return type.__new__(cls, name, bases, dict(classdict))

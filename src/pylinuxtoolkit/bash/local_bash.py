@@ -183,7 +183,8 @@ class LocalBash(BashBase):
         if print_prompt:
             self._output_writer.write_bypass(StringValue(self.get_prompt()))
 
-    @TaskPool.decide_class_task(pool_name="_task_pool", threaded="is_threaded_worker_enabled")
+    @TaskPool.decide_class_task(pool_name="_task_pool",
+                                threaded="is_threaded_worker_enabled")
     def run_terminal_command(self, command: str, sudo: bool = False,
                              timeout: int | None = 30,
                              print_command: bool = None,
@@ -220,7 +221,8 @@ class LocalBash(BashBase):
                                encoding='utf-8',
                                timeout=timeout,
                                echo=False) as client:
-                # Assign values to the BashData object for access in on_output function
+                # Assign values to the BashData object
+                # for access in on_output function
                 self._bash_data.command = command
                 self._bash_data.client = client
 
@@ -230,8 +232,10 @@ class LocalBash(BashBase):
                 if print_prompt is not None:
                     self._bash_data.print_prompt = print_prompt
 
-                if self._bash_data.print_prompt and self._output_writer.get_last_line() == "":
-                    self._output_writer.write_bypass(StringValue(self.get_prompt()))
+                if self._bash_data.print_prompt \
+                        and self._output_writer.get_last_line() == "":
+                    self._output_writer.write_bypass(
+                        StringValue(self.get_prompt()))
 
                 if self._bash_data.print_command:
                     self._output_writer.write_bypass(StringValue(command))
@@ -251,7 +255,8 @@ class LocalBash(BashBase):
                 else:
                     client.sendline(command)
 
-                # This must be here to catch the prompt after the command completes
+                # This must be here to catch the prompt
+                # after the command completes
                 client.expect('[$]')
 
                 # Exits the bash

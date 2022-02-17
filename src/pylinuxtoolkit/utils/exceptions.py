@@ -17,9 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""
-Contains custom utility exceptions for general use.
-"""
+"""Contains custom utility exceptions for general use."""
 
 
 class IllegalArgumentError(Exception):
@@ -27,4 +25,4 @@ class IllegalArgumentError(Exception):
     This exception is raised when a required argument was not found
     when a method was called.
     """
-    pass
+

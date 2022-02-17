@@ -45,7 +45,6 @@ def main() -> NoReturn:
 
 # noinspection PyPep8Naming
 class Window(QMainWindow, Ui_MainWindow):
-
     """This is the main GUI window class for this application."""
 
     def __init__(self, parent=None):
@@ -62,8 +61,11 @@ class Window(QMainWindow, Ui_MainWindow):
         self.lstOutput_model = QtGui.QStandardItemModel()
         self.lstOutput.setModel(self.lstOutput_model)
 
-        self.bash = LinuxBash(directory="~", output_function=self.on_output,
-                              remote_ssh=False, print_ssh_connection_msgs=True, print_prompt=True)
+        self.bash = LinuxBash(directory="~",
+                              output_function=self.on_output,
+                              remote_ssh=False,
+                              print_ssh_connection_msgs=True,
+                              print_prompt=True)
         self.bash.set_ssh_login_info(
             hostname="raspberrypi.local",
             username="pi",

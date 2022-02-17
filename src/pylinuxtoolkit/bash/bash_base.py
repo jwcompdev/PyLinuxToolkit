@@ -86,7 +86,8 @@ class BashBase(ABC, SupportsWithClose):
 
         self._bash_data.prompt_func = self.get_prompt
         self._bash_data.client_close_func = self.close
-        self._output_writer: OutputWriter = OutputWriter(output_function, self._bash_data)
+        self._output_writer: OutputWriter = \
+            OutputWriter(output_function, self._bash_data)
 
     # Do not ever make a setter for this as it will cause sync issues
     # and any open ssh connections may not be closed properly

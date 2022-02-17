@@ -130,5 +130,6 @@ class BashChecks:
         :return: the result
         """
 
-        return line.strip().startswith(current_user + "@") \
-               and line.strip().endswith("$")
+        return line.strip()\
+                   .startswith(current_user + "@") and \
+               line.strip().endswith("$")
