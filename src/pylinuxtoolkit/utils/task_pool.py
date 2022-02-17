@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the TaskPool class, a pool of any combination of
+Contains the TaskPool class, a pool of any combination of
 threaded or un-threaded tasks that run in the order they are created.
 """
 from __future__ import annotations

@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the OutputData class, a data object that holds all
+Contains the OutputData class, a data object that holds all
 the state and information for the most recent run command.
 """
 from __future__ import annotations

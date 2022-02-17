@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the LinuxBash class, a bash terminal emulator that
+Contains the LinuxBash class, a bash terminal emulator that
 allows running commands locally or over ssh.
 """
 from __future__ import annotations
@@ -37,7 +37,8 @@ StrOrBytesPath = Union[str, bytes, os.PathLike[str], os.PathLike[bytes]]
 
 class LinuxBash:
     """
-    A bash terminal emulator that allows running commands locally or over ssh.
+    A bash terminal emulator that allows running commands
+    locally or over ssh.
     """
 
     def __init__(self, directory="~",
@@ -110,18 +111,14 @@ class LinuxBash:
         return self._is_remote
 
     def __enter__(self):
-        """
-        Sets the _is_context_manager variable to True.
-        """
+        """Sets the _is_context_manager variable to True."""
 
         self._is_context_manager = True
         return self
 
     # noinspection SpellCheckingInspection
     def __exit__(self, etype, value, traceback) -> NoReturn:
-        """
-        Runs the close method.
-        """
+        """Runs the close method."""
 
         self._bash.close()
 
@@ -443,9 +440,12 @@ class LinuxBash:
 
         :param ssh_login_timeout: the timeout to use for ssh login
         :param print_prompt: if true prints the prompt to the output
-        :param print_ssh_connection_msgs: if true prints a message on ssh connect and disconnect
-        :param print_ssh_login_success: if true prints a message on ssh login success
-        :param print_ssh_mod: if true prints the server's mod(Message of the Day) on login
+        :param print_ssh_connection_msgs: if true prints a message on
+            ssh connect and disconnect
+        :param print_ssh_login_success: if true prints a message on
+            ssh login success
+        :param print_ssh_mod: if true prints the server's
+            mod(Message of the Day) on login
         """
 
         if self.is_remote:

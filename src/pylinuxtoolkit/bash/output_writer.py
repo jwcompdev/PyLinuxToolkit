@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the OutputWriter class, a handler for the printing
+Contains the OutputWriter class, a handler for the printing
 and filtering of all text to be printed to the output.
 """
 from __future__ import annotations
@@ -55,7 +55,7 @@ class OutputWriter:
         """
         Writes the specified text to the output with
         condition filtering.
-        
+
         :param text: the text to write to the output
         """
 
@@ -66,7 +66,7 @@ class OutputWriter:
         """
         Writes the specified text to the output but bypasses the
         normal condition filtering.
-        
+
         :param text: the text to write to the output
         """
 
@@ -83,7 +83,7 @@ class OutputWriter:
     def get_last_line(self) -> StringValue:
         """
         Returns the last line printed to the output.
-        
+
         :return: the last line printed to the output
         """
 
@@ -116,12 +116,15 @@ class OutputWriter:
         to the user defined on_output function.
         If QTWorker is not being used then the line is
         passed directly to the on_output function.
-        
+
         :param current_line: the current line to emit
         """
 
         self._last_line.set(current_line)
-        output_data = OutputData(self.data.is_remote, self.data.client, current_line, self.data.command)
+        output_data = OutputData(self.data.is_remote,
+                                 self.data.client,
+                                 current_line,
+                                 self.data.command)
 
         if self.data.threaded_worker_enabled:
             self._qt_worker.run_on_output_function(output_data)
@@ -164,8 +167,9 @@ class OutputWriter:
                 if "%" not in line2 and line2 != "":
                     output3.append(line2)
 
-            # Checks if for some reason the last command prints on the same line as the prompt
-            # Only seems to happen via local bash
+            # Checks if for some reason the last command prints on the
+            # same line as the prompt. Only seems to happen via local
+            # bash.
             for line3 in output3:
                 if self.data.prompt in line3:
                     line3.replace(self.data.prompt, "").strip()
@@ -179,24 +183,24 @@ class OutputWriter:
             self._filter_line(line.strip("\n").strip("\r"))
 
     def _filter_line(self, current_line):
-        if current_line != "" \
-                and current_line != "\r\n" \
-                and not BashChecks.is_pexpect_garbage(current_line) \
-                and current_line.strip() != "exit":
+        if (current_line != ""
+                and current_line != "\r\n"
+                and not BashChecks.is_pexpect_garbage(current_line)
+                and current_line.strip() != "exit"):
 
-            if (self.data.command != current_line
-                or self.data.print_command) \
-                    and not BashChecks.is_apt_warning(current_line) \
-                    and not BashChecks.is_pydev_debugger(current_line) \
-                    and not BashChecks.is_debconf_error(current_line):
+            if ((self.data.command != current_line
+                or self.data.print_command)
+                    and not BashChecks.is_apt_warning(current_line)
+                    and not BashChecks.is_pydev_debugger(current_line)
+                    and not BashChecks.is_debconf_error(current_line)):
                 if BashChecks.is_apt_update(current_line):
                     current_line = current_line \
                         .replace("\r", "").strip(" ")
                     self._emit_output(current_line)
                 elif BashChecks.is_prompt(current_line, self.data.current_user):
-                    if self._last_line.strip() != current_line.strip() \
-                            and self._last_line.strip() != self.data.command \
-                            and self.data.print_prompt:
+                    if (self._last_line.strip() != current_line.strip()
+                            and self._last_line.strip() != self.data.command
+                            and self.data.print_prompt):
                         self._emit_output(current_line.strip())
                 elif BashChecks.is_not_sudo(current_line):
                     self._emit_output(current_line)
@@ -207,8 +211,8 @@ class OutputWriter:
                     if self.data.raise_error_on_lock_wait:
                         self._emit_output(current_line)
                         self._kill_raise(BashPermissionError(current_line))
-                    elif self.data.wait_for_locks \
-                            and not self._waiting_for_lock:
+                    elif (self.data.wait_for_locks
+                            and not self._waiting_for_lock):
                         self._waiting_for_lock = True
                         self._emit_output(current_line)
                 else:

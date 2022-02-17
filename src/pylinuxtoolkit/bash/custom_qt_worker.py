@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the CustomQTWorker class, a handler that safely
+Contains the CustomQTWorker class, a handler that safely
 updates the GUI from another thread.
 """
 from typing import NoReturn

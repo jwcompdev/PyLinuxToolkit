@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the Lambda class that contains methods that represent
+Contains the Lambda class that contains methods that represent
 lambda functions to use as defaults for function parameters.
 """
 from typing import NoReturn, Any, Callable
@@ -42,7 +42,6 @@ class Lambdas:
 
         :return: NoReturn
         """
-        pass
 
     @staticmethod
     def return_none() -> None:

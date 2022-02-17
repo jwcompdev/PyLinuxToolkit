@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the BashBase class, the base class for all bash
+Contains the BashBase class, the base class for all bash
 terminal emulator classes.
 """
 from __future__ import annotations
@@ -333,8 +333,6 @@ class BashBase(ABC, SupportsWithClose):
         :return: the current working directory
         """
 
-        pass
-
     @property
     @abstractmethod
     def home_dir(self) -> str:
@@ -343,8 +341,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: the current user's home directory
         """
-
-        pass
 
     @property
     @abstractmethod
@@ -355,8 +351,6 @@ class BashBase(ABC, SupportsWithClose):
         :return: the current system hostname
         """
 
-        pass
-
     @property
     @abstractmethod
     def current_user(self) -> str:
@@ -365,8 +359,6 @@ class BashBase(ABC, SupportsWithClose):
 
         :return: the username of the current user
         """
-
-        pass
 
     def print_prompt(self):
         """

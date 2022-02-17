@@ -17,9 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""
-This file contains the RaspberryPi class.
-"""
+"""Contains the RaspberryPi class."""
 from __future__ import annotations
 
 import os
@@ -253,35 +251,30 @@ class InterfaceConfig(BaseConfig):
     """
     This config object contains all the interface related settings.
     """
-    pass
 
 
 class LocalizationConfig(BaseConfig):
     """
     This config object contains all the localization related settings.
     """
-    pass
 
 
 class PerformanceConfig(BaseConfig):
     """
     This config object contains all the performance related settings.
     """
-    pass
 
 
 class SSHConfig(BaseConfig):
     """
     This config object contains all the ssh related settings.
     """
-    pass
 
 
 class SystemConfig(BaseConfig):
     """
     This config object contains all the system related settings.
     """
-    pass
 
 
 pi = RaspberryPi(False)

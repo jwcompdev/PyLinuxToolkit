@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the Locales class, an enum of Locale values.
+Contains the Locales class, an enum of Locale values.
 """
 from pylinuxtoolkit.utils.str_enum import StrEnum
 
@@ -26,21 +26,21 @@ from pylinuxtoolkit.utils.str_enum import StrEnum
 class Locales(StrEnum):
     """A list of all available locales"""
     NONE = ""
-    Arabic_Egypt = "ar-EG.UTF-8"
-    Bengali_India = "bn-IN.UTF-8"
-    Chinese_Simplified = "zh_CN.UTF-8"
-    Chinese_Traditional = "zh_TW.UTF-8"
-    Danish_Denmark = "da-DK.UTF-8"
-    English_CA = "en_CA.UTF-8"
-    English_UK = "en_GB.UTF-8"
-    English_US = "en_US.UTF-8"
-    French = "fr_FR.UTF-8"
-    German = "de_DE.UTF-8"
-    Hebrew = "he_IL.UTF-8"
-    Italian = "it_IT.UTF-8"
-    Japanese = "ja_JP.UTF-8"
-    Korean = "ko_KR.UTF-8"
-    Portuguese_Brazilian = "pt_BR.UTF-8"
-    Russian = "ru-RU.UTF-8"
-    Spanish_Mexico = "es_MX.UTF-8"
-    Spanish_Spain = "es_ES.UTF-8"
+    ARABIC_EGYPT = "ar-EG.UTF-8"
+    BENGALI_INDIA = "bn-IN.UTF-8"
+    CHINESE_SIMPLIFIED = "zh_CN.UTF-8"
+    CHINESE_TRADITIONAL = "zh_TW.UTF-8"
+    DANISH_DENMARK = "da-DK.UTF-8"
+    ENGLISH_CA = "en_CA.UTF-8"
+    ENGLISH_UK = "en_GB.UTF-8"
+    ENGLISH_US = "en_US.UTF-8"
+    FRENCH = "fr_FR.UTF-8"
+    GERMAN = "de_DE.UTF-8"
+    HEBREW = "he_IL.UTF-8"
+    ITALIAN = "it_IT.UTF-8"
+    JAPANESE = "ja_JP.UTF-8"
+    KOREAN = "ko_KR.UTF-8"
+    PORTUGUESE_BRAZILIAN = "pt_BR.UTF-8"
+    RUSSIAN = "ru-RU.UTF-8"
+    SPANISH_MEXICO = "es_MX.UTF-8"
+    SPANISH_SPAIN = "es_ES.UTF-8"

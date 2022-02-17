@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the SSHBash class, a bash terminal emulator that
+Contains the SSHBash class, a bash terminal emulator that
 allows running commands over ssh.
 """
 from __future__ import annotations
@@ -37,9 +37,7 @@ from pylinuxtoolkit.utils.task_pool import TaskPool
 
 
 class SSHBash(BashBase):
-    """
-    A bash terminal emulator that allows running commands over ssh.
-    """
+    """A bash terminal emulator that allows running commands over ssh."""
 
     def __init__(self, directory="~",
                  output_function: Callable[[OutputData], NoReturn]
@@ -105,18 +103,14 @@ class SSHBash(BashBase):
         self._bash_data.client = self._ssh_client
 
     def __enter__(self) -> SSHBash:
-        """
-        Sets the _is_context_manager variable to True.
-        """
+        """Sets the _is_context_manager variable to True."""
 
         self._is_context_manager = True
         return self
 
     # noinspection SpellCheckingInspection
     def __exit__(self, etype, value, traceback) -> NoReturn:
-        """
-        Runs the close method.
-        """
+        """Runs the close method."""
 
         self.close()
 
@@ -212,9 +206,12 @@ class SSHBash(BashBase):
 
         :param ssh_login_timeout: the timeout to use for ssh login
         :param print_prompt: if true prints the prompt to the output
-        :param print_ssh_connection_msgs: if true prints a message on ssh connect and disconnect
-        :param print_ssh_login_success: if true prints a message on ssh login success
-        :param print_ssh_mod: if true prints the server's mod(Message of the Day) on login
+        :param print_ssh_connection_msgs: if true prints a message on
+            ssh connect and disconnect
+        :param print_ssh_login_success: if true prints a message on
+            ssh login success
+        :param print_ssh_mod: if true prints the server's
+            mod(Message of the Day) on login
         """
 
         self._ssh_connect_and_wait(ssh_login_timeout, print_prompt,
@@ -388,9 +385,7 @@ class SSHBash(BashBase):
             self._output_writer.write(self.get_prompt())
 
     def close(self) -> NoReturn:
-        """
-        Closes the ssh connection if still open.
-        """
+        """Closes the ssh connection if still open."""
 
         self.ssh_close()
 
@@ -435,8 +430,8 @@ class SSHBash(BashBase):
 
         if not command:
             raise BashValueError("Command must be specified!")
-        if sudo:
-            if not command.startswith("sudo "):
+
+        if sudo and not command.startswith("sudo "):
                 command = "sudo " + command
 
         if timeout == 30:

@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains custom utility exceptions for general use.
+Contains custom utility exceptions for general use.
 """
 
 

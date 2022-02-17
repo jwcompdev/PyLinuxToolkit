@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the BashChecks class, which contains functions that
+Contains the BashChecks class, which contains functions that
 check a line from the terminal for a conditional.
 """
 from pylinuxtoolkit.utils.values import StringValue
@@ -26,7 +26,8 @@ from pylinuxtoolkit.utils.values import StringValue
 
 class BashChecks:
     """
-    Static functions that check a line from the terminal for a conditional.
+    Static functions that check a line from the terminal
+    for a conditional.
     """
 
     @staticmethod

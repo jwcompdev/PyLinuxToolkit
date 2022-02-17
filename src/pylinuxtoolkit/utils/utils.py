@@ -17,9 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""
-This file contains some basic utilities.
-"""
+"""Contains some basic utilities."""
 from __future__ import annotations
 
 import datetime
@@ -206,8 +204,9 @@ def unwrap(value: str, wrap_char: str) -> str:
                 quoted properly with the wrap character
     """
 
-    if str and wrap_char:
-        if value[0] == wrap_char and value[-1] == wrap_char:
+    if str and wrap_char \
+            and value[0] == wrap_char \
+            and value[-1] == wrap_char:
             return value[1:-1]
 
     return value

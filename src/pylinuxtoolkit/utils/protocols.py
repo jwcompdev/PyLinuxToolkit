@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains simple protocol classes to be used in isinstance
+Contains simple protocol classes to be used in isinstance
 checks.
 """
 from __future__ import annotations

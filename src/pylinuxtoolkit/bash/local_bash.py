@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the LocalBash class, a bash terminal emulator that
+Contains the LocalBash class, a bash terminal emulator that
 allows running commands locally.
 """
 from __future__ import annotations
@@ -41,9 +41,7 @@ from pylinuxtoolkit.utils.values import StringValue
 
 
 class LocalBash(BashBase):
-    """
-    A bash terminal emulator that allows running commands locally.
-    """
+    """A bash terminal emulator that allows running commands locally."""
 
     def __init__(self, directory="~",
                  output_function: Callable[[OutputData], NoReturn]
@@ -85,18 +83,14 @@ class LocalBash(BashBase):
         self._bash_data.current_user = self.current_user
 
     def __enter__(self) -> LocalBash:
-        """
-        Sets the _is_context_manager variable to True.
-        """
+        """Sets the _is_context_manager variable to True."""
 
         self._is_context_manager = True
         return self
 
     # noinspection SpellCheckingInspection
     def __exit__(self, etype, value, traceback) -> NoReturn:
-        """
-        Runs the close method.
-        """
+        """Runs the close method."""
 
         self.close()
 

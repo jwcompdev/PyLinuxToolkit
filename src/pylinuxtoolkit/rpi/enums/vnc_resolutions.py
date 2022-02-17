@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the VNCResolutions class,
+Contains the VNCResolutions class,
 an enum of VNC resolution sizes.
 """
 from pylinuxtoolkit.utils.str_enum import StrEnum
@@ -27,14 +27,14 @@ from pylinuxtoolkit.utils.str_enum import StrEnum
 class VNCResolutions(StrEnum):
     """A list of all available screen resolutions for the VNC connections"""
     NONE = ""
-    Size_640x480 = "600x480"
-    Size_720x480 = "720x480"
-    Size_800x600 = "800x600"
-    Size_1024x768 = "1024x768"
-    Size_1280x720 = "1280x720"
-    Size_1280x1024 = "1280x1024"
-    Size_1600x1200 = "1600x1200"
-    Size_1920x1080 = "1920x1080"
+    SIZE_640_X_480 = "600x480"
+    SIZE_720_X_480 = "720x480"
+    SIZE_800_X_600 = "800x600"
+    SIZE_1024_X_768 = "1024x768"
+    SIZE_1280_X_720 = "1280x720"
+    SIZE_1280_X_1024 = "1280x1024"
+    SIZE_1600_X_1200 = "1600x1200"
+    SIZE_1920_X_1080 = "1920x1080"
 
 
 # print(VNC_Resolutions.Size_1600x1200)

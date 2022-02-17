@@ -18,29 +18,23 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the StrEnum class, a subclass of Enum that allows
+Contains the StrEnum class, a subclass of Enum that allows
 strings as values.
 """
-
 
 from enum import Enum, auto
 
 
 class StrEnum(str, Enum):
-    """
-    This is a subclass of Enum that allows strings as values.
-    """
+    """This is a subclass of Enum that allows strings as values."""
 
     def __new__(cls, *args):
-        """
-        Verifies that all values are of type string.
-
-        """
+        """Verifies that all values are of type string."""
 
         for arg in args:
             if not isinstance(arg, (str, auto)):
                 raise TypeError(
-                    f"Values must be strings: "
+                    "Values must be strings: "
                     f"{repr(arg)} is a {type(arg)}"
                 )
         return super().__new__(cls, *args)
@@ -64,11 +58,8 @@ class StrEnum(str, Enum):
         :return: True if the value is found
         """
 
-        for _, _val in cls.__members__.items():
-            if _val.lower() == value.lower():
-                return True
-
-        return False
+        return any(val.lower() == value.lower()
+                   for _, val in cls.__members__.items())
 
     @classmethod
     def key_exists(cls, key: str) -> bool:
@@ -79,11 +70,8 @@ class StrEnum(str, Enum):
         :return: True if the key is found
         """
 
-        for _key, _ in cls.__members__.items():
-            if _key.lower() == key.lower():
-                return True
-
-        return False
+        return any(_key.lower() == key.lower()
+                   for _key, _ in cls.__members__.items())
 
     @classmethod
     def size(cls) -> int:

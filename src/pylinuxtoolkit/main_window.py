@@ -18,7 +18,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the Ui_MainWindow class and defines all the GUI base objects.
+Contains the Ui_MainWindow class and defines all the GUI
+base objects.
 """
 # -*- coding: utf-8 -*-
 
@@ -34,9 +35,7 @@ from PyQt5 import QtCore, QtWidgets
 
 
 class Ui_MainWindow:
-    """
-    This class defines all the GUI base objects.
-    """
+    """This class defines all the GUI base objects."""
 
     def setupUi(self, window) -> NoReturn:
         """

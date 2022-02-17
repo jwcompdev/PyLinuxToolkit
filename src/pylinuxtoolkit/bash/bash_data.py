@@ -18,7 +18,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the BashData class, a data object that stores all
+Contains the BashData class, a data object that stores all
 state and settings for the current bash instance.
 """
 from typing import Callable, NoReturn

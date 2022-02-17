@@ -18,7 +18,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-This file contains the Window class and the main entrypoint of the GUI program.
+Contains the Window class and the main entrypoint
+of the GUI program.
 """
 import atexit
 import sys
@@ -36,7 +37,6 @@ from pylinuxtoolkit.bash.output_data import OutputData
 
 def main() -> NoReturn:
     """This is the main entry point for this program."""
-
     app = QApplication(sys.argv)
     win = Window()
     win.show()
@@ -45,6 +45,7 @@ def main() -> NoReturn:
 
 # noinspection PyPep8Naming
 class Window(QMainWindow, Ui_MainWindow):
+
     """This is the main GUI window class for this application."""
 
     def __init__(self, parent=None):
@@ -82,7 +83,8 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def connect_signal_slots(self) -> NoReturn:
         """
-        This method connects all the GUI items to their signal triggers.
+        This method connects all the GUI items to their
+        signal triggers.
         """
 
         self.mnuQuit.triggered.connect(self.close)
@@ -91,9 +93,7 @@ class Window(QMainWindow, Ui_MainWindow):
         self.txtCommand.returnPressed.connect(self.txtCommand_return_pressed)
 
     def mnuAbout_clicked(self) -> NoReturn:
-        """
-        Opens the 'about' dialog.
-        """
+        """Opens the 'about' dialog."""
         QMessageBox.about(
             self,
             "About Ultimate Linux Toolkit",
@@ -113,9 +113,7 @@ class Window(QMainWindow, Ui_MainWindow):
         self.lstOutput.scrollTo(index, QAbstractItemView.PositionAtBottom)
 
     def exit_handler(self) -> NoReturn:
-        """
-        This runs when the program exits.
-        """
+        """This runs when the program exits."""
 
         self.bash.ssh_close()
 
@@ -149,9 +147,7 @@ class Window(QMainWindow, Ui_MainWindow):
         self.btnSubmit_clicked()
 
     def btnSubmit_clicked(self) -> NoReturn:
-        """
-        This runs when the btnSubmit button is clicked.
-        """
+        """This runs when the btnSubmit button is clicked."""
 
         if self.txtCommand.text() != "":
             command = self.txtCommand.text().strip()

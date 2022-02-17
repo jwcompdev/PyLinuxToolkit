@@ -17,9 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""
-This file contains some mutable classes that mimic the built-in types.
-"""
+"""Contains some mutable classes that mimic the built-in types."""
 from __future__ import annotations
 
 import math
@@ -57,8 +55,6 @@ class Value(ABC):
         :param value: the value to set
         :return this instance for use in method chaining
         """
-
-        pass
 
 
 class NumberValue(Value, Number):
@@ -257,8 +253,6 @@ class NumberValue(Value, Number):
         :return the value
         """
 
-        pass
-
     @abstractmethod
     def set(self, number: int | float) -> NumberValue:
         """
@@ -268,8 +262,6 @@ class NumberValue(Value, Number):
         :return this instance for use in method chaining
         """
 
-        pass
-
     @abstractmethod
     def to_int(self) -> int:
         """
@@ -277,8 +269,6 @@ class NumberValue(Value, Number):
 
         :return the value converted to an int
         """
-
-        pass
 
     @abstractmethod
     def to_float(self) -> float:
@@ -288,8 +278,6 @@ class NumberValue(Value, Number):
         :return the value converted to a float
         """
 
-        pass
-
     @abstractmethod
     def increment(self) -> NumberValue:
         """
@@ -297,8 +285,6 @@ class NumberValue(Value, Number):
 
         :return: this instance for use in method chaining
         """
-
-        pass
 
     @abstractmethod
     def increment_and_get(self) -> int | float:
@@ -310,8 +296,6 @@ class NumberValue(Value, Number):
             incremented
         """
 
-        pass
-
     @abstractmethod
     def get_and_increment(self) -> int | float:
         """
@@ -322,8 +306,6 @@ class NumberValue(Value, Number):
             incremented
         """
 
-        pass
-
     @abstractmethod
     def decrement(self) -> NumberValue:
         """
@@ -331,8 +313,6 @@ class NumberValue(Value, Number):
 
         :return: this instance for use in method chaining
         """
-
-        pass
 
     @abstractmethod
     def decrement_and_get(self) -> int | float:
@@ -344,8 +324,6 @@ class NumberValue(Value, Number):
             decremented
         """
 
-        pass
-
     @abstractmethod
     def get_and_decrement(self) -> int | float:
         """
@@ -353,10 +331,8 @@ class NumberValue(Value, Number):
         returns the value associated with the instance.
 
         :return: the value associated with the instance before it was
-        decremented
+            decremented
         """
-
-        pass
 
     @abstractmethod
     def add(self, other: int | float) -> NumberValue:
@@ -367,8 +343,6 @@ class NumberValue(Value, Number):
         :return: this instance for use in method chaining
         """
 
-        pass
-
     @abstractmethod
     def add_and_get(self, other: int | float) -> int | float:
         """
@@ -377,10 +351,9 @@ class NumberValue(Value, Number):
         after the addition operation.
 
         :param other: the quantity to add
-        :return: the value associated with this instance after adding the other
+        :return: the value associated with this instance after
+            adding the other
         """
-
-        pass
 
     @abstractmethod
     def get_and_add(self, other: int | float) -> int | float:
@@ -390,10 +363,9 @@ class NumberValue(Value, Number):
         before to the addition operation.
 
         :param other: the quantity to add
-        :return: the value associated with this instance before adding the other
+        :return: the value associated with this instance before
+            adding the other
         """
-
-        pass
 
     @abstractmethod
     def subtract(self, other: int | float) -> NumberValue:
@@ -404,8 +376,6 @@ class NumberValue(Value, Number):
         :return: this instance for use in method chaining
         """
 
-        pass
-
     @abstractmethod
     def subtract_and_get(self, other: int | float) -> int | float:
         """
@@ -414,10 +384,9 @@ class NumberValue(Value, Number):
         after the subtraction operation.
 
         :param other: the quantity to subtract
-        :return: the value associated with this instance after subtracting the other
+        :return: the value associated with this instance after
+            subtracting the other
         """
-
-        pass
 
     @abstractmethod
     def get_and_subtract(self, other: int | float) -> int | float:
@@ -427,50 +396,49 @@ class NumberValue(Value, Number):
         before to the subtraction operation.
 
         :param other: the quantity to subtract
-        :return: the value associated with this instance before subtracting the other
+        :return: the value associated with this instance before
+            subtracting the other
         """
-
-        pass
 
     @abstractmethod
     def is_positive(self) -> BooleanValue:
         """
-        Returns True if the value is positive, False otherwise.
+        Returns True if the value is positive,
+        False otherwise.
 
-        :return: True if the value is positive, False otherwise
+        :return: True if the value is positive,
+        False otherwise
         """
-
-        pass
 
     @abstractmethod
     def is_negative(self) -> BooleanValue:
         """
-        Returns True if the value is negative, False otherwise.
+        Returns True if the value is negative,
+        False otherwise.
 
-        :return: True if the value is negative, False otherwise
+        :return: True if the value is negative,
+            False otherwise
         """
-
-        pass
 
     @abstractmethod
     def is_zero(self) -> BooleanValue:
         """
-        Returns True if the value is zero, False otherwise.
+        Returns True if the value is zero,
+        False otherwise.
 
-        :return: True if the value is zero, False otherwise
+        :return: True if the value is zero,
+            False otherwise
         """
-
-        pass
 
     @abstractmethod
     def is_not_zero(self) -> BooleanValue:
         """
-        Returns True if the value is not zero, False otherwise.
+        Returns True if the value is not zero,
+        False otherwise.
 
-        :return: True if the value is annotations zero, False otherwise
+        :return: True if the value is annotations zero,
+            False otherwise
         """
-
-        pass
 
     @abstractmethod
     def is_equal_to(self, number: int | float) -> BooleanValue:
@@ -483,8 +451,6 @@ class NumberValue(Value, Number):
             False otherwise.
         """
 
-        pass
-
     @abstractmethod
     def is_not_equal_to(self, number: int | float) -> BooleanValue:
         """
@@ -495,8 +461,6 @@ class NumberValue(Value, Number):
         :return: True if the value is not equal to the specified number,
             False otherwise.
         """
-
-        pass
 
     @abstractmethod
     def is_less_than_or_equal_to(self, number: int | float) -> BooleanValue:
@@ -509,8 +473,6 @@ class NumberValue(Value, Number):
             specified number, False otherwise.
         """
 
-        pass
-
     @abstractmethod
     def is_greater_than_or_equal_to(self, number: int | float) -> BooleanValue:
         """
@@ -521,8 +483,6 @@ class NumberValue(Value, Number):
         :return: True if the value is greater than or equal to the
             specified number, False otherwise.
         """
-
-        pass
 
     @abstractmethod
     def is_less_than(self, number: int | float) -> BooleanValue:
@@ -535,8 +495,6 @@ class NumberValue(Value, Number):
             specified number, False otherwise.
         """
 
-        pass
-
     @abstractmethod
     def is_greater_than(self, number: int | float) -> BooleanValue:
         """
@@ -547,8 +505,6 @@ class NumberValue(Value, Number):
         :return: True if the value is greater than the
             specified number, False otherwise.
         """
-
-        pass
 
 
 class BooleanValue(Value):
@@ -727,18 +683,18 @@ class IntegerValue(NumberValue):
         if isinstance(number, (str, bytes, bytearray)):
             try:
                 value: int = int(number)
-            except ValueError as e:
-                if "invalid literal for int() with base 10:" in str(e):
-                    raise TypeError(str(e).replace("int()", "IntegerValue()"))
+            except ValueError as ex:
+                if "invalid literal for int() with base 10:" in str(ex):
+                    raise TypeError(str(ex).replace("int()", "IntegerValue()"))
 
                 raise
 
         elif isinstance(number, StringValue):
             try:
                 value: int = int(number.get())
-            except ValueError as e:
-                if "invalid literal for int() with base 10:" in str(e):
-                    raise TypeError(str(e).replace("int()", "IntegerValue()"))
+            except ValueError as ex:
+                if "invalid literal for int() with base 10:" in str(ex):
+                    raise TypeError(str(ex).replace("int()", "IntegerValue()"))
 
                 raise
         elif isinstance(number, (int, float)):
@@ -1070,30 +1026,30 @@ class IntegerValue(NumberValue):
                 return FloatValue(self._value ** other.get())
 
             return NotImplemented
-        else:
-            is_other_int = other is int or isinstance(other, IntegerValue)
-            is_other_float = other is float or isinstance(other, FloatValue)
-            is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
-            is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-            if is_mod_int and is_other_int:
-                if isinstance(other, int) and isinstance(modulo, int):
-                    return IntegerValue((self._value ** other) % modulo)
+        is_other_int = other is int or isinstance(other, IntegerValue)
+        is_other_float = other is float or isinstance(other, FloatValue)
+        is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
+        is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-                if isinstance(other, IntegerValue) and isinstance(modulo, int):
-                    return IntegerValue((self._value ** other.get()) % modulo)
+        if is_mod_int and is_other_int:
+            if isinstance(other, int) and isinstance(modulo, int):
+                return IntegerValue((self._value ** other) % modulo)
 
-                if isinstance(other, int) and isinstance(modulo, IntegerValue):
-                    return IntegerValue((self._value ** other) % modulo.get())
+            if isinstance(other, IntegerValue) and isinstance(modulo, int):
+                return IntegerValue((self._value ** other.get()) % modulo)
 
-                if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
-                    return IntegerValue((self._value ** other.get()) % modulo.get())
+            if isinstance(other, int) and isinstance(modulo, IntegerValue):
+                return IntegerValue((self._value ** other) % modulo.get())
 
-            if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
-                raise TypeError("pow() 3rd argument not allowed "
-                                "unless all arguments are integers")
+            if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
+                return IntegerValue((self._value ** other.get()) % modulo.get())
 
-            return NotImplemented
+        if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
+            raise TypeError("pow() 3rd argument not allowed "
+                            "unless all arguments are integers")
+
+        return NotImplemented
 
     def __rpow__(self, other: int | float | IntegerValue | FloatValue,
                  modulo: Optional[int | IntegerValue] = None) \
@@ -1112,30 +1068,30 @@ class IntegerValue(NumberValue):
                 return FloatValue(other.get() ** self._value)
 
             return NotImplemented
-        else:
-            is_other_int = other is int or isinstance(other, IntegerValue)
-            is_other_float = other is float or isinstance(other, FloatValue)
-            is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
-            is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-            if is_mod_int and is_other_int:
-                if isinstance(other, int) and isinstance(modulo, int):
-                    return IntegerValue((other ** self._value) % modulo)
+        is_other_int = other is int or isinstance(other, IntegerValue)
+        is_other_float = other is float or isinstance(other, FloatValue)
+        is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
+        is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-                if isinstance(other, IntegerValue) and isinstance(modulo, int):
-                    return IntegerValue((other.get() ** self._value) % modulo)
+        if is_mod_int and is_other_int:
+            if isinstance(other, int) and isinstance(modulo, int):
+                return IntegerValue((other ** self._value) % modulo)
 
-                if isinstance(other, int) and isinstance(modulo, IntegerValue):
-                    return IntegerValue((other ** self._value) % modulo.get())
+            if isinstance(other, IntegerValue) and isinstance(modulo, int):
+                return IntegerValue((other.get() ** self._value) % modulo)
 
-                if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
-                    return IntegerValue((other.get() ** self._value) % modulo.get())
+            if isinstance(other, int) and isinstance(modulo, IntegerValue):
+                return IntegerValue((other ** self._value) % modulo.get())
 
-            if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
-                raise TypeError("pow() 3rd argument not allowed "
-                                "unless all arguments are integers")
+            if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
+                return IntegerValue((other.get() ** self._value) % modulo.get())
 
-            return NotImplemented
+        if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
+            raise TypeError("pow() 3rd argument not allowed "
+                            "unless all arguments are integers")
+
+        return NotImplemented
 
     def __imod__(self, other) -> IntegerValue:
         if isinstance(other, int):
@@ -1170,8 +1126,8 @@ class IntegerValue(NumberValue):
     def __divmod__(self, other: SupportsIndex) \
             -> Tuple[IntegerValue, IntegerValue]:
         if isinstance(other, SupportsIndex):
-            v1, v2 = self._value.__divmod__(other.__index__())
-            return IntegerValue(v1), IntegerValue(v2)
+            var1, var2 = self._value.__divmod__(other.__index__())
+            return IntegerValue(var1), IntegerValue(var2)
 
         return NotImplemented
 
@@ -1563,8 +1519,8 @@ class IntegerValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value == number.get())
-        else:
-            return BooleanValue(self._value == number)
+
+        return BooleanValue(self._value == number)
 
     def is_not_equal_to(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -1592,8 +1548,8 @@ class IntegerValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value <= number.get())
-        else:
-            return BooleanValue(self._value <= number)
+
+        return BooleanValue(self._value <= number)
 
     def is_greater_than_or_equal_to(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -1608,8 +1564,8 @@ class IntegerValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value >= number.get())
-        else:
-            return BooleanValue(self._value >= number)
+
+        return BooleanValue(self._value >= number)
 
     def is_less_than(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -1624,8 +1580,8 @@ class IntegerValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value < number.get())
-        else:
-            return BooleanValue(self._value < number)
+
+        return BooleanValue(self._value < number)
 
     def is_greater_than(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -1640,8 +1596,8 @@ class IntegerValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value > number.get())
-        else:
-            return BooleanValue(self._value > number)
+
+        return BooleanValue(self._value > number)
 
     ########################################
     # Integer Only Instance Methods        #
@@ -1687,14 +1643,14 @@ class IntegerValue(NumberValue):
         if self._value in (0, 1):
             return BooleanValue(True)
 
-        x = self._value // 2
-        square_x = x ** 2
+        var = self._value // 2
+        square_x = var ** 2
 
         while square_x > self._value:
-            x = (square_x + self._value) // (2 * x)
-            square_x = x ** 2
+            var = (square_x + self._value) // (2 * var)
+            square_x = var ** 2
 
-        return BooleanValue(self._value == x ** 2)
+        return BooleanValue(self._value == var ** 2)
 
     def as_integer_ratio(self) -> tuple[int, Literal[1]]:
         """
@@ -1834,17 +1790,17 @@ class FloatValue(NumberValue):
         if isinstance(number, (str, bytes, bytearray)):
             try:
                 value: float = float(number)
-            except ValueError as e:
-                if "invalid literal for float() with base 10:" in str(e):
-                    raise TypeError(str(e).replace("float()", "FloatValue()"))
+            except ValueError as ex:
+                if "invalid literal for float() with base 10:" in str(ex):
+                    raise TypeError(str(ex).replace("float()", "FloatValue()"))
 
                 raise
         elif isinstance(number, StringValue):
             try:
                 value: float = float(number.get())
-            except ValueError as e:
-                if "invalid literal for float() with base 10:" in str(e):
-                    raise TypeError(str(e).replace("float()", "FloatValue()"))
+            except ValueError as ex:
+                if "invalid literal for float() with base 10:" in str(ex):
+                    raise TypeError(str(ex).replace("float()", "FloatValue()"))
 
                 raise
         elif isinstance(number, (int, float)):
@@ -2100,19 +2056,19 @@ class FloatValue(NumberValue):
                 return FloatValue(self._value ** other.get())
 
             return NotImplemented
-        else:
-            is_other_int = other is int or isinstance(other, IntegerValue)
-            is_other_float = other is float or isinstance(other, FloatValue)
-            is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
-            is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-            if (is_mod_int and is_other_int) \
-                    or (is_mod_int and is_other_float) \
-                    or (is_mod_float and is_other_int):
-                raise TypeError("TypeError: pow() 3rd argument not allowed "
-                                "unless all arguments are integers")
+        is_other_int = other is int or isinstance(other, IntegerValue)
+        is_other_float = other is float or isinstance(other, FloatValue)
+        is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
+        is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-            return NotImplemented
+        if (is_mod_int and is_other_int) \
+                or (is_mod_int and is_other_float) \
+                or (is_mod_float and is_other_int):
+            raise TypeError("TypeError: pow() 3rd argument not allowed "
+                            "unless all arguments are integers")
+
+        return NotImplemented
 
     def __rpow__(self, other: int | float | IntegerValue | FloatValue,
                  modulo: Optional[float | FloatValue] = None) \
@@ -2125,19 +2081,19 @@ class FloatValue(NumberValue):
                 return FloatValue(other.get() ** self._value)
 
             return NotImplemented
-        else:
-            is_other_int = other is int or isinstance(other, IntegerValue)
-            is_other_float = other is float or isinstance(other, FloatValue)
-            is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
-            is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-            if (is_mod_int and is_other_int) \
-                    or (is_mod_int and is_other_float) \
-                    or (is_mod_float and is_other_int):
-                raise TypeError("TypeError: pow() 3rd argument not allowed "
-                                "unless all arguments are integers")
+        is_other_int = other is int or isinstance(other, IntegerValue)
+        is_other_float = other is float or isinstance(other, FloatValue)
+        is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
+        is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-            return NotImplemented
+        if (is_mod_int and is_other_int) \
+                or (is_mod_int and is_other_float) \
+                or (is_mod_float and is_other_int):
+            raise TypeError("TypeError: pow() 3rd argument not allowed "
+                            "unless all arguments are integers")
+
+        return NotImplemented
 
     def __imod__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
@@ -2172,12 +2128,12 @@ class FloatValue(NumberValue):
     def __divmod__(self, other: int | float | IntegerValue | FloatValue) \
             -> Tuple[FloatValue, FloatValue]:
         if isinstance(other, (int, float)):
-            v1, v2 = self._value.__divmod__(other)
-            return FloatValue(v1), FloatValue(v2)
+            var1, var2 = self._value.__divmod__(other)
+            return FloatValue(var1), FloatValue(var2)
 
         if isinstance(other, (IntegerValue, FloatValue)):
-            v1, v2 = self._value.__divmod__(other.get())
-            return FloatValue(v1), FloatValue(v2)
+            var1, var2 = self._value.__divmod__(other.get())
+            return FloatValue(var1), FloatValue(var2)
 
         return NotImplemented
 
@@ -2451,8 +2407,8 @@ class FloatValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value == number.get())
-        else:
-            return BooleanValue(self._value == number)
+
+        return BooleanValue(self._value == number)
 
     def is_not_equal_to(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -2480,8 +2436,8 @@ class FloatValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value <= number.get())
-        else:
-            return BooleanValue(self._value <= number)
+
+        return BooleanValue(self._value <= number)
 
     def is_greater_than_or_equal_to(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -2496,8 +2452,8 @@ class FloatValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value >= number.get())
-        else:
-            return BooleanValue(self._value >= number)
+
+        return BooleanValue(self._value >= number)
 
     def is_less_than(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -2512,8 +2468,8 @@ class FloatValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value < number.get())
-        else:
-            return BooleanValue(self._value < number)
+
+        return BooleanValue(self._value < number)
 
     def is_greater_than(
             self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
@@ -2528,8 +2484,8 @@ class FloatValue(NumberValue):
 
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value > number.get())
-        else:
-            return BooleanValue(self._value > number)
+
+        return BooleanValue(self._value > number)
 
     ########################################
     # Float Only Instance Methods          #
@@ -3249,7 +3205,7 @@ class StringValue(Value):
         self._value = self._value.lstrip(chars)
         return self
 
-    def maketrans(self, x: dict[int] | dict[str] | dict[int | str]) -> dict[int]:
+    def maketrans(self, mapping: dict[int] | dict[str] | dict[int | str]) -> dict[int]:
         """
         Return a translation table usable for str.translate().
 
@@ -3262,11 +3218,11 @@ class StringValue(Value):
         If there is a third argument, it must be a string, whose
         characters will be mapped to None in the result.
 
-        :param x: the dictionary mapping
+        :param mapping: the dictionary mapping
         :return: the created translation table
         """
 
-        return self._value.maketrans(x)
+        return self._value.maketrans(mapping)
 
     def partition(self, sep: str) -> Tuple[str, str, str]:
         """

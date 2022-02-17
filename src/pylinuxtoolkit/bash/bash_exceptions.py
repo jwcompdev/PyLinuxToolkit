@@ -17,24 +17,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""This file contains exception classes for all bash objects."""
+"""Contains exception classes for all bash objects."""
 
 
 class BashError(Exception):
-
     """Base class for other exceptions"""
 
 
 class BashConnectionError(BashError):
-
     """Raised when an ssh connection was unable to be opened or closed"""
 
 
 class BashPermissionError(BashError):
-
     """Raised when user doesn't have permission to run the specified command"""
 
 
 class BashValueError(BashError):
-
     """Raised when the incorrect value was supplied"""
