@@ -179,18 +179,15 @@ class OutputWriter:
 
     def _filter_line(self, current_line):
         if (
-            (
             current_line != ""
             and current_line != "\r\n"
             and not BashChecks.is_pexpect_garbage(current_line)
             and current_line.strip() != "exit"
-        )
-            and (
+        ) and (
             (self.data.command != current_line or self.data.print_command)
             and not BashChecks.is_apt_warning(current_line)
             and not BashChecks.is_pydev_debugger(current_line)
             and not BashChecks.is_debconf_error(current_line)
-        )
         ):
             if BashChecks.is_apt_update(current_line):
                 current_line = current_line.replace("\r", "").strip(" ")
