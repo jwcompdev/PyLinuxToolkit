@@ -25,6 +25,7 @@ from pylinuxtoolkit.utils.str_enum import StrEnum
 
 class Locales(StrEnum):
     """A list of all available locales"""
+
     NONE = ""
     Arabic_Egypt = "ar-EG.UTF-8"
     Bengali_India = "bn-IN.UTF-8"

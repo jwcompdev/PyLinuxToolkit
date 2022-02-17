@@ -30,6 +30,7 @@ from typing import runtime_checkable, Protocol, NoReturn
 @runtime_checkable
 class SupportsClose(Protocol):
     """An ABC with one abstract method close."""
+
     __slots__ = ()
 
     # noinspection PyMissingOrEmptyDocstring
@@ -41,6 +42,7 @@ class SupportsClose(Protocol):
 @runtime_checkable
 class SupportsWith(Protocol):
     """An ABC with one abstract methods __enter__ and __exit__."""
+
     __slots__ = ()
 
     @abstractmethod
@@ -55,6 +57,7 @@ class SupportsWith(Protocol):
 @runtime_checkable
 class SupportsWithClose(Protocol):
     """An ABC with one abstract methods close, __enter__ and __exit__."""
+
     __slots__ = ()
 
     @abstractmethod

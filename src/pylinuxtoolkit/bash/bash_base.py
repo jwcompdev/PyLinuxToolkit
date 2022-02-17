@@ -42,13 +42,17 @@ class BashBase(ABC, SupportsWithClose):
     specifically built for that.
     """
 
-    def __init__(self, directory=os.getcwd(),
-                 output_function: Callable[[OutputData], NoReturn]
-                 = Lambdas.one_arg_no_return,
-                 use_threaded_worker=False, wait_for_locks=True, remote_ssh=False,
-                 timeout: int | None = 30, print_command: bool = False,
-                 print_prompt: bool = False,
-                 ) -> NoReturn:
+    def __init__(
+        self,
+        directory=os.getcwd(),
+        output_function: Callable[[OutputData], NoReturn] = Lambdas.one_arg_no_return,
+        use_threaded_worker=False,
+        wait_for_locks=True,
+        remote_ssh=False,
+        timeout: int | None = 30,
+        print_command: bool = False,
+        print_prompt: bool = False,
+    ) -> NoReturn:
         """
         :param directory: the directory to use as the current working
             directory
@@ -86,7 +90,9 @@ class BashBase(ABC, SupportsWithClose):
 
         self._bash_data.prompt_func = self.get_prompt
         self._bash_data.client_close_func = self.close
-        self._output_writer: OutputWriter = OutputWriter(output_function, self._bash_data)
+        self._output_writer: OutputWriter = OutputWriter(
+            output_function, self._bash_data
+        )
 
     # Do not ever make a setter for this as it will cause sync issues
     # and any open ssh connections may not be closed properly
@@ -392,9 +398,9 @@ class BashBase(ABC, SupportsWithClose):
             like in the current working directory
         """
         current_dir = "~"
-        sudo_char = '$'
+        sudo_char = "$"
         if self.current_user == "root":
-            sudo_char = '#'
+            sudo_char = "#"
         if self.current_dir != self.home_dir:
             current_dir = self.current_dir
 

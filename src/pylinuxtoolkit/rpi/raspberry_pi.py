@@ -168,6 +168,8 @@ class BaseConfig(ABC):
 
     def _run_int_command(self, command: str) -> int:
         pass
+
+
 # protected final RaspberryPi pi;
 #     protected final String commandBase = "sudo raspi-config nonint ";
 #
@@ -253,6 +255,7 @@ class InterfaceConfig(BaseConfig):
     """
     This config object contains all the interface related settings.
     """
+
     pass
 
 
@@ -260,6 +263,7 @@ class LocalizationConfig(BaseConfig):
     """
     This config object contains all the localization related settings.
     """
+
     pass
 
 
@@ -267,6 +271,7 @@ class PerformanceConfig(BaseConfig):
     """
     This config object contains all the performance related settings.
     """
+
     pass
 
 
@@ -274,6 +279,7 @@ class SSHConfig(BaseConfig):
     """
     This config object contains all the ssh related settings.
     """
+
     pass
 
 
@@ -281,6 +287,7 @@ class SystemConfig(BaseConfig):
     """
     This config object contains all the system related settings.
     """
+
     pass
 
 

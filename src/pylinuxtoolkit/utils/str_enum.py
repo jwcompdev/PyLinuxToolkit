@@ -40,8 +40,7 @@ class StrEnum(str, Enum):
         for arg in args:
             if not isinstance(arg, (str, auto)):
                 raise TypeError(
-                    f"Values must be strings: "
-                    f"{repr(arg)} is a {type(arg)}"
+                    f"Values must be strings: " f"{repr(arg)} is a {type(arg)}"
                 )
         return super().__new__(cls, *args)
 

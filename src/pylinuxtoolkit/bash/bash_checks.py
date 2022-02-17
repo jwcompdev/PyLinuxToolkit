@@ -39,8 +39,10 @@ class BashChecks:
         :return: the result
         """
 
-        return "E: Could not open lock file" in line \
-               and "open (13: Permission denied)" in line
+        return (
+            "E: Could not open lock file" in line
+            and "open (13: Permission denied)" in line
+        )
 
     @staticmethod
     def is_file_locked(line: StringValue) -> bool:
@@ -52,8 +54,10 @@ class BashChecks:
         :return: the result
         """
 
-        return "Waiting for cache lock: Could not get lock" in line \
-               and "It is held by process" in line
+        return (
+            "Waiting for cache lock: Could not get lock" in line
+            and "It is held by process" in line
+        )
 
     @staticmethod
     def is_apt_warning(line: StringValue):
@@ -64,8 +68,10 @@ class BashChecks:
         :return: the result
         """
 
-        return "WARNING: apt does not have a stable CLI interface. " \
-               "Use with caution in scripts." in line
+        return (
+            "WARNING: apt does not have a stable CLI interface. "
+            "Use with caution in scripts." in line
+        )
 
     @staticmethod
     def is_pydev_debugger(line: StringValue):
@@ -76,8 +82,10 @@ class BashChecks:
         :return: the result
         """
 
-        return "bytes arguments were passed to a new process creation function. " \
-               "Breakpoints may not work correctly." in line
+        return (
+            "bytes arguments were passed to a new process creation function. "
+            "Breakpoints may not work correctly." in line
+        )
 
     @staticmethod
     def is_debconf_error(line: StringValue):
@@ -89,9 +97,11 @@ class BashChecks:
         :return: the result
         """
 
-        return "debconf: unable to initialize frontend: Dialog" in line \
-               or "debconf: (Dialog frontend will not work on a dumb terminal" in line \
-               or "debconf: falling back to frontend: Readline" in line
+        return (
+            "debconf: unable to initialize frontend: Dialog" in line
+            or "debconf: (Dialog frontend will not work on a dumb terminal" in line
+            or "debconf: falling back to frontend: Readline" in line
+        )
 
     @staticmethod
     def is_pexpect_garbage(line: StringValue):
@@ -102,9 +112,11 @@ class BashChecks:
         :return: the result
         """
 
-        return "[PEXPECT]" in line \
-               or "unset PROMPT_COMMAND" in line \
-               or "'s password:" in line
+        return (
+            "[PEXPECT]" in line
+            or "unset PROMPT_COMMAND" in line
+            or "'s password:" in line
+        )
 
     @staticmethod
     def is_apt_update(line: StringValue):
@@ -115,9 +127,14 @@ class BashChecks:
         :return: the result
         """
 
-        return "Hit:" in line and "http" in line \
-               or "Get:" in line and "http" in line \
-               or "Ign:" in line and "http" in line
+        return (
+            "Hit:" in line
+            and "http" in line
+            or "Get:" in line
+            and "http" in line
+            or "Ign:" in line
+            and "http" in line
+        )
 
     @staticmethod
     def is_prompt(line: StringValue, current_user: str):
@@ -129,5 +146,6 @@ class BashChecks:
         :return: the result
         """
 
-        return line.strip().startswith(current_user + "@") \
-               and line.strip().endswith("$")
+        return line.strip().startswith(current_user + "@") and line.strip().endswith(
+            "$"
+        )

@@ -56,7 +56,7 @@ DOLLARS = "$"
 # A String for a dot or a period character.
 DOT = "."
 # A String for a double quote character.
-DOUBLE_QUOTE = "\""
+DOUBLE_QUOTE = '"'
 # A String for an ellipsis or 3 dots.
 ELLIPSIS = "\u0085"
 # The empty String {@code ""}.
@@ -96,7 +96,7 @@ QUESTION = "?"
 # A String for a semicolon character.
 SEMICOLON = ""
 # A String for a single quote character.
-SINGLE_QUOTE = "\""
+SINGLE_QUOTE = '"'
 # A String for a forward slash character.
 SLASH = "/"
 # A String for a space character.
