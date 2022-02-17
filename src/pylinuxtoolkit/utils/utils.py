@@ -32,8 +32,10 @@ from pylinuxtoolkit.utils.regex import Patterns
 # Check Value Utils                    #
 ########################################
 
-def check_argument(expression: bool,
-                   error_message="Invalid argument specified!") -> NoReturn:
+
+def check_argument(
+    expression: bool, error_message="Invalid argument specified!"
+) -> NoReturn:
     """Ensures the truth of an expression involving one or
     more parameters to the calling method.
 
@@ -77,6 +79,7 @@ def check_argument_not_none_or_empty(reference, error_message) -> Any:
 # String Utils                         #
 ########################################
 
+
 def is_boolean(value: str) -> bool:
     """Checks if a string can be converted to a Boolean.
 
@@ -94,10 +97,24 @@ def is_boolean(value: str) -> bool:
 
     val = value.lower().strip()
 
-    return val in ("true", "t", "yes", "y", "1",
-                   "succeeded", "succeed", "enabled",
-                   "false", "f", "no", "n", "0",
-                   "failed", "fail", "disabled")
+    return val in (
+        "true",
+        "t",
+        "yes",
+        "y",
+        "1",
+        "succeeded",
+        "succeed",
+        "enabled",
+        "false",
+        "f",
+        "no",
+        "n",
+        "0",
+        "failed",
+        "fail",
+        "disabled",
+    )
 
 
 def to_boolean(value: str) -> bool | None:
@@ -118,11 +135,18 @@ def to_boolean(value: str) -> bool | None:
     if value and value is not None:
         val = value.lower().strip()
 
-        is_true = val in ("true", "t", "yes", "y", "1",
-                          "succeeded", "succeed", "enabled")
+        is_true = val in (
+            "true",
+            "t",
+            "yes",
+            "y",
+            "1",
+            "succeeded",
+            "succeed",
+            "enabled",
+        )
 
-        is_false = val in ("false", "f", "no", "n", "0",
-                           "failed", "fail", "disabled")
+        is_false = val in ("false", "f", "no", "n", "0", "failed", "fail", "disabled")
 
         if is_true:
             return True
@@ -140,7 +164,7 @@ def parse_int_or_default(value: str, default: int) -> int:
     :param default: the value to return if parsing fails
     :return: the parsed int, or the default if parsing failed
     """
-    check_argument(isinstance(default, int), "\"default\" must be a int!")
+    check_argument(isinstance(default, int), '"default" must be a int!')
 
     try:
         return int(value)
@@ -156,7 +180,7 @@ def parse_float_or_default(value: str, default: float) -> float:
     :param default: the value to return if parsing fails
     :return: the parsed float, or the default if parsing failed
     """
-    check_argument(isinstance(default, float), "\"default\" must be a float!")
+    check_argument(isinstance(default, float), '"default" must be a float!')
 
     try:
         return float(value)
@@ -170,11 +194,13 @@ def strip_ansi_codes(line) -> str:
     :param line: the line to strip_ansi_codes from
     :return: the modified line
     """
-    return Patterns.ANSI_BASIC_ESCAPE.sub("", line) \
-        .replace("\x1b7", "") \
-        .replace("\x1b7r", "") \
-        .replace("\x1b8", "") \
+    return (
+        Patterns.ANSI_BASIC_ESCAPE.sub("", line)
+        .replace("\x1b7", "")
+        .replace("\x1b7r", "")
+        .replace("\x1b8", "")
         .replace("\x1b8r", "")
+    )
 
 
 def wrap(value: str, wrap_char: str) -> str:
@@ -199,9 +225,7 @@ def unwrap(value: str, wrap_char: str) -> str:
     :return: unwrapped string or the original string if it is not
                 quoted properly with the wrap character
     """
-    if str and wrap_char and \
-            value[0] == wrap_char and \
-            value[-1] == wrap_char:
+    if str and wrap_char and value[0] == wrap_char and value[-1] == wrap_char:
         return value[1:-1]
 
     return value
@@ -210,6 +234,7 @@ def unwrap(value: str, wrap_char: str) -> str:
 ########################################
 # Integer Utils                        #
 ########################################
+
 
 def convert_bytes_to_string(number: int) -> str:
     """Returns the conversion from bytes to the correct
@@ -241,7 +266,7 @@ def convert_bytes_to_string(number: int) -> str:
     else:
         suffix = " Bytes"
 
-    rounding_factor = 10 ** 2
+    rounding_factor = 10**2
     rounded = math.floor(number * rounding_factor) / rounding_factor
     return f"{rounded:.2f}" + suffix
 
@@ -250,8 +275,10 @@ def convert_bytes_to_string(number: int) -> str:
 # Other Utils                          #
 ########################################
 
-def timesince(d_t: datetime.datetime | datetime.timedelta,
-              default: str = 'just now') -> str:
+
+def timesince(
+    d_t: datetime.datetime | datetime.timedelta, default: str = "just now"
+) -> str:
     """
     Returns string representing 'time since' e.g.
     3 days ago, 5 hours ago etc.
@@ -301,22 +328,22 @@ def timesince(d_t: datetime.datetime | datetime.timedelta,
         diff = abs(now - d_t)
 
     periods = (
-        (diff.days / 365, 'year', 'years'),
-        (diff.days % 365 / 30, 'month', 'months'),
-        (diff.days % 30 / 7, 'week', 'weeks'),
-        (diff.days % 7, 'day', 'days'),
-        (diff.seconds / 3600, 'hour', 'hours'),
-        (diff.seconds % 3600 / 60, 'minute', 'minutes'),
-        (diff.seconds % 60, 'second', 'seconds'),
+        (diff.days / 365, "year", "years"),
+        (diff.days % 365 / 30, "month", "months"),
+        (diff.days % 30 / 7, "week", "weeks"),
+        (diff.days % 7, "day", "days"),
+        (diff.seconds / 3600, "hour", "hours"),
+        (diff.seconds % 3600 / 60, "minute", "minutes"),
+        (diff.seconds % 60, "second", "seconds"),
     )
 
     output = []
     for period, singular, plural in periods:
         if int(period):
             if int(period) == 1:
-                output.append(f'{period} {singular}')
+                output.append(f"{period} {singular}")
             else:
-                output.append(f'{period} {plural}')
+                output.append(f"{period} {plural}")
 
     if output:
         return f"{' and '.join(output[:2])} ago"

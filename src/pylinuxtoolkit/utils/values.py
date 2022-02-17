@@ -24,9 +24,20 @@ import math
 import re
 from abc import abstractmethod, ABC
 from numbers import Number
-from typing import Optional, Iterator, Tuple, SupportsInt, SupportsIndex, \
-    SupportsFloat, Literal, Iterable, \
-    SupportsBytes, Mapping, Sequence, Union
+from typing import (
+    Optional,
+    Iterator,
+    Tuple,
+    SupportsInt,
+    SupportsIndex,
+    SupportsFloat,
+    Literal,
+    Iterable,
+    SupportsBytes,
+    Mapping,
+    Sequence,
+    Union,
+)
 
 from pylinuxtoolkit.utils.literals import SPACE
 from pylinuxtoolkit.utils.regex import Patterns
@@ -62,12 +73,10 @@ class Value(ABC):
 class NumberValue(Value, Number):
     """Provides mutable access to a number"""
 
-    def __eq__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __eq__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_equal_to(other)
 
-    def __ne__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ne__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_not_equal_to(other)
 
     @abstractmethod
@@ -114,99 +123,116 @@ class NumberValue(Value, Number):
         pass
 
     @abstractmethod
-    def __iadd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __iadd__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __add__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __add__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __radd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __radd__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __isub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __isub__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __sub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __sub__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __rsub__(self,
-                 other: SupportsAll | IntegerValue | FloatValue | StringValue) \
-            -> IntegerValue | FloatValue | StringValue:
+    def __rsub__(
+        self, other: SupportsAll | IntegerValue | FloatValue | StringValue
+    ) -> IntegerValue | FloatValue | StringValue:
         pass
 
     @abstractmethod
-    def __imul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __imul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __mul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __mul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __rmul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
-        pass
-
-    # noinspection SpellCheckingInspection
-    @abstractmethod
-    def __itruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
-        pass
-
-    @abstractmethod
-    def __truediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
-        pass
-
-    @abstractmethod
-    def __rtruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rmul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     # noinspection SpellCheckingInspection
     @abstractmethod
-    def __ifloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __itruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     @abstractmethod
-    def __floordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __truediv__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         pass
 
     @abstractmethod
-    def __rfloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rtruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     # noinspection SpellCheckingInspection
     @abstractmethod
-    def __ipow__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __ifloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     @abstractmethod
-    def __pow__(self, other: int | float | IntegerValue | FloatValue,
-                modulo: Optional[int | IntegerValue] = None) \
-            -> IntegerValue | FloatValue:
+    def __floordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     @abstractmethod
-    def __rpow__(self, other: int | float | IntegerValue | FloatValue,
-                 modulo: Optional[int | IntegerValue] = None) \
-            -> IntegerValue | FloatValue:
+    def __rfloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
+        pass
+
+    # noinspection SpellCheckingInspection
+    @abstractmethod
+    def __ipow__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
+        pass
+
+    @abstractmethod
+    def __pow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[int | IntegerValue] = None,
+    ) -> IntegerValue | FloatValue:
+        pass
+
+    @abstractmethod
+    def __rpow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[int | IntegerValue] = None,
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
@@ -223,29 +249,23 @@ class NumberValue(Value, Number):
 
     # noinspection SpellCheckingInspection
     @abstractmethod
-    def __divmod__(self, other: SupportsIndex) \
-            -> Tuple[IntegerValue, IntegerValue]:
+    def __divmod__(self, other: SupportsIndex) -> Tuple[IntegerValue, IntegerValue]:
         pass
 
     @abstractmethod
-    def __rdivmod__(self, other: SupportsIndex) \
-            -> Tuple[IntegerValue, IntegerValue]:
+    def __rdivmod__(self, other: SupportsIndex) -> Tuple[IntegerValue, IntegerValue]:
         pass
 
-    def __lt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __lt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than(other)
 
-    def __le__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __le__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than_or_equal_to(other)
 
-    def __gt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __gt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than(other)
 
-    def __ge__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ge__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than_or_equal_to(other)
 
     @abstractmethod
@@ -537,12 +557,10 @@ class BooleanValue(Value):
     def __index__(self) -> int:
         return self._value
 
-    def __eq__(self, other: bool | BooleanValue) \
-            -> BooleanValue:
+    def __eq__(self, other: bool | BooleanValue) -> BooleanValue:
         return self.is_equal_to(other)
 
-    def __ne__(self, other: bool | BooleanValue) \
-            -> BooleanValue:
+    def __ne__(self, other: bool | BooleanValue) -> BooleanValue:
         return self.is_not_equal_to(other)
 
     def get(self) -> bool:
@@ -566,8 +584,7 @@ class BooleanValue(Value):
             self._value = value
         return self
 
-    def is_equal_to(
-            self, value: bool | BooleanValue) -> BooleanValue:
+    def is_equal_to(self, value: bool | BooleanValue) -> BooleanValue:
         """
         Returns True if the value is equal to the specified value,
         False otherwise.
@@ -581,8 +598,7 @@ class BooleanValue(Value):
 
         return BooleanValue(self._value == value)
 
-    def is_not_equal_to(
-            self, value: bool | BooleanValue) -> BooleanValue:
+    def is_not_equal_to(self, value: bool | BooleanValue) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         value, False otherwise.
@@ -666,11 +682,12 @@ class IntegerValue(NumberValue):
         self._value: int = self._verify_int(number)
 
     @staticmethod
-    def _verify_int(number: SupportsIntegerFull | StringValue = 0) \
-            -> int:
+    def _verify_int(number: SupportsIntegerFull | StringValue = 0) -> int:
         if number is None:
-            raise TypeError("IntegerValue() argument must be a string, "
-                            "a bytes-like object or a number, not 'NoneType'")
+            raise TypeError(
+                "IntegerValue() argument must be a string, "
+                "a bytes-like object or a number, not 'NoneType'"
+            )
 
         if isinstance(number, (str, bytes, bytearray)):
             try:
@@ -696,9 +713,11 @@ class IntegerValue(NumberValue):
         elif isinstance(number, SupportsIndex):
             return IntegerValue._verify_int(number.__index__())
         else:
-            raise TypeError("IntegerValue() argument must be a string, "
-                            "a bytes-like object or a number,"
-                            f" not '{type(number).__name__}'")
+            raise TypeError(
+                "IntegerValue() argument must be a string, "
+                "a bytes-like object or a number,"
+                f" not '{type(number).__name__}'"
+            )
         return value
 
     ########################################
@@ -717,12 +736,10 @@ class IntegerValue(NumberValue):
     def __bool__(self) -> bool:
         return self._value != 0
 
-    def __eq__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __eq__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_equal_to(other)
 
-    def __ne__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ne__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_not_equal_to(other)
 
     # Should always return NotImplemented because this class is mutable
@@ -759,8 +776,9 @@ class IntegerValue(NumberValue):
     def __ceil__(self) -> IntegerValue:
         return IntegerValue(self._value.__ceil__())
 
-    def __iadd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __iadd__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             self._value += other
             return self
@@ -777,8 +795,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __add__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __add__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             return IntegerValue(self._value + other)
 
@@ -793,8 +812,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __radd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __radd__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             return FloatValue(other + self._value)
 
@@ -809,8 +829,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __isub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __isub__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             self._value -= other
             return self
@@ -827,8 +848,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __sub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __sub__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             return IntegerValue(self._value - other)
 
@@ -843,9 +865,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __rsub__(self,
-                 other: SupportsAll | IntegerValue | FloatValue | StringValue)\
-            -> IntegerValue | FloatValue | StringValue:
+    def __rsub__(
+        self, other: SupportsAll | IntegerValue | FloatValue | StringValue
+    ) -> IntegerValue | FloatValue | StringValue:
         if isinstance(other, int):
             return IntegerValue(other - self._value)
 
@@ -860,20 +882,21 @@ class IntegerValue(NumberValue):
 
         if isinstance(other, str):
             if self._value >= 0:
-                return StringValue(other[self._value:])
+                return StringValue(other[self._value :])
 
-            return StringValue(other[:self._value])
+            return StringValue(other[: self._value])
 
         if isinstance(other, IntegerValue):
             if self._value >= 0:
-                return StringValue(other.get()[self._value:])
+                return StringValue(other.get()[self._value :])
 
-            return StringValue(other.get()[:self._value])
+            return StringValue(other.get()[: self._value])
 
         return NotImplemented
 
-    def __imul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __imul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             self._value *= other
             return self
@@ -890,8 +913,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __mul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __mul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             return IntegerValue(self._value * other)
 
@@ -906,8 +930,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __rmul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __rmul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             return IntegerValue(other * self._value)
 
@@ -923,8 +948,9 @@ class IntegerValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __itruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __itruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value / other)
 
@@ -933,8 +959,7 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __truediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __truediv__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value / other)
 
@@ -943,8 +968,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __rtruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rtruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(other / self._value)
 
@@ -954,8 +980,9 @@ class IntegerValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __ifloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __ifloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -964,8 +991,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __floordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __floordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -974,8 +1002,9 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __rfloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rfloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -985,14 +1014,15 @@ class IntegerValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __ipow__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __ipow__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, int):
             self._value **= other
             return self
 
         if isinstance(other, float):
-            return FloatValue(self._value ** other)
+            return FloatValue(self._value**other)
 
         if isinstance(other, IntegerValue):
             self._value **= other.get()
@@ -1003,15 +1033,17 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __pow__(self, other: int | float | IntegerValue | FloatValue,
-                modulo: Optional[int | IntegerValue] = None) \
-            -> IntegerValue | FloatValue:
+    def __pow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[int | IntegerValue] = None,
+    ) -> IntegerValue | FloatValue:
         if modulo is None:
             if isinstance(other, int):
-                return IntegerValue(self._value ** other)
+                return IntegerValue(self._value**other)
 
             if isinstance(other, float):
-                return FloatValue(self._value ** other)
+                return FloatValue(self._value**other)
 
             if isinstance(other, IntegerValue):
                 return IntegerValue(self._value ** other.get())
@@ -1028,32 +1060,35 @@ class IntegerValue(NumberValue):
 
         if is_mod_int and is_other_int:
             if isinstance(other, int) and isinstance(modulo, int):
-                return IntegerValue((self._value ** other) % modulo)
+                return IntegerValue((self._value**other) % modulo)
 
             if isinstance(other, IntegerValue) and isinstance(modulo, int):
                 return IntegerValue((self._value ** other.get()) % modulo)
 
             if isinstance(other, int) and isinstance(modulo, IntegerValue):
-                return IntegerValue((self._value ** other) % modulo.get())
+                return IntegerValue((self._value**other) % modulo.get())
 
             if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
                 return IntegerValue((self._value ** other.get()) % modulo.get())
 
         if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
-            raise TypeError("pow() 3rd argument not allowed "
-                            "unless all arguments are integers")
+            raise TypeError(
+                "pow() 3rd argument not allowed " "unless all arguments are integers"
+            )
 
         return NotImplemented
 
-    def __rpow__(self, other: int | float | IntegerValue | FloatValue,
-                 modulo: Optional[int | IntegerValue] = None) \
-            -> IntegerValue | FloatValue:
+    def __rpow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[int | IntegerValue] = None,
+    ) -> IntegerValue | FloatValue:
         if modulo is None:
             if isinstance(other, int):
-                return IntegerValue(other ** self._value)
+                return IntegerValue(other**self._value)
 
             if isinstance(other, float):
-                return FloatValue(other ** self._value)
+                return FloatValue(other**self._value)
 
             if isinstance(other, IntegerValue):
                 return IntegerValue(other.get() ** self._value)
@@ -1070,20 +1105,21 @@ class IntegerValue(NumberValue):
 
         if is_mod_int and is_other_int:
             if isinstance(other, int) and isinstance(modulo, int):
-                return IntegerValue((other ** self._value) % modulo)
+                return IntegerValue((other**self._value) % modulo)
 
             if isinstance(other, IntegerValue) and isinstance(modulo, int):
                 return IntegerValue((other.get() ** self._value) % modulo)
 
             if isinstance(other, int) and isinstance(modulo, IntegerValue):
-                return IntegerValue((other ** self._value) % modulo.get())
+                return IntegerValue((other**self._value) % modulo.get())
 
             if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
                 return IntegerValue((other.get() ** self._value) % modulo.get())
 
         if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
-            raise TypeError("pow() 3rd argument not allowed "
-                            "unless all arguments are integers")
+            raise TypeError(
+                "pow() 3rd argument not allowed " "unless all arguments are integers"
+            )
 
         return NotImplemented
 
@@ -1117,36 +1153,30 @@ class IntegerValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __divmod__(self, other: SupportsIndex) \
-            -> Tuple[IntegerValue, IntegerValue]:
+    def __divmod__(self, other: SupportsIndex) -> Tuple[IntegerValue, IntegerValue]:
         if isinstance(other, SupportsIndex):
             var1, var2 = self._value.__divmod__(other.__index__())
             return IntegerValue(var1), IntegerValue(var2)
 
         return NotImplemented
 
-    def __rdivmod__(self, other: SupportsIndex) \
-            -> Tuple[IntegerValue, IntegerValue]:
+    def __rdivmod__(self, other: SupportsIndex) -> Tuple[IntegerValue, IntegerValue]:
         if isinstance(other, int):
             var1, var2 = other.__index__().__divmod__(self._value)
             return IntegerValue(var1), IntegerValue(var2)
 
         return NotImplemented
 
-    def __lt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __lt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than(other)
 
-    def __le__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __le__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than_or_equal_to(other)
 
-    def __gt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __gt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than(other)
 
-    def __ge__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ge__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than_or_equal_to(other)
 
     ########################################
@@ -1200,67 +1230,58 @@ class IntegerValue(NumberValue):
 
         return NotImplemented
 
-    def __iand__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __iand__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             self._value &= other.__index__()
             return self
 
         return NotImplemented
 
-    def __and__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __and__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             return IntegerValue(self._value & other.__index__())
 
         return NotImplemented
 
-    def __rand__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __rand__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             return IntegerValue(other.__index__() & self._value)
 
         return NotImplemented
 
-    def __ior__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __ior__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             self._value |= other.__index__()
             return self
 
         return NotImplemented
 
-    def __or__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __or__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             return IntegerValue(self._value | other.__index__())
 
         return NotImplemented
 
-    def __ror__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __ror__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             return IntegerValue(other.__index__() | self._value)
 
         return NotImplemented
 
-    def __ixor__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __ixor__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             self._value ^= other.__index__()
             return self
 
         return NotImplemented
 
-    def __xor__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __xor__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             return IntegerValue(self._value ^ other.__index__())
 
         return NotImplemented
 
-    def __rxor__(self, other: SupportsIndex) \
-            -> IntegerValue:
+    def __rxor__(self, other: SupportsIndex) -> IntegerValue:
         if isinstance(other, SupportsIndex):
             return IntegerValue(other.__index__() ^ self._value)
 
@@ -1368,8 +1389,7 @@ class IntegerValue(NumberValue):
         self._value -= 1
         return before
 
-    def add(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue:
+    def add(self, other: int | float | IntegerValue | FloatValue) -> IntegerValue:
         """
         Adds a value to the value of this instance.
 
@@ -1379,8 +1399,7 @@ class IntegerValue(NumberValue):
         self._value += other
         return self
 
-    def add_and_get(self, other: int | float | IntegerValue | FloatValue) \
-            -> int:
+    def add_and_get(self, other: int | float | IntegerValue | FloatValue) -> int:
         """
         Increments this instance's value by 'other', then
         returns the value associated with the instance immediately
@@ -1393,8 +1412,7 @@ class IntegerValue(NumberValue):
         self._value += other
         return self._value
 
-    def get_and_add(self, other: int | float | IntegerValue | FloatValue) \
-            -> int:
+    def get_and_add(self, other: int | float | IntegerValue | FloatValue) -> int:
         """
         Increments this instance's value by 'other', then
         returns the value associated with the instance immediately
@@ -1408,8 +1426,7 @@ class IntegerValue(NumberValue):
         self._value += other
         return before
 
-    def subtract(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue:
+    def subtract(self, other: int | float | IntegerValue | FloatValue) -> IntegerValue:
         """
         Subtracts a value to the value of this instance.
 
@@ -1419,8 +1436,7 @@ class IntegerValue(NumberValue):
         self._value -= other
         return self
 
-    def subtract_and_get(self, other: int | float | IntegerValue | FloatValue) \
-            -> int:
+    def subtract_and_get(self, other: int | float | IntegerValue | FloatValue) -> int:
         """
         Decrements this instance's value by 'other', then
         returns the value associated with the instance immediately
@@ -1433,8 +1449,7 @@ class IntegerValue(NumberValue):
         self._value -= other
         return self._value
 
-    def get_and_subtract(self, other: int | float | IntegerValue | FloatValue) \
-            -> int:
+    def get_and_subtract(self, other: int | float | IntegerValue | FloatValue) -> int:
         """
         Decrements this instance's value by 'other', then
         returns the value associated with the instance immediately
@@ -1481,7 +1496,8 @@ class IntegerValue(NumberValue):
         return BooleanValue(self._value != 0)
 
     def is_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is equal to the specified number,
         False otherwise.
@@ -1496,7 +1512,8 @@ class IntegerValue(NumberValue):
         return BooleanValue(self._value == number)
 
     def is_not_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         number, False otherwise.
@@ -1508,7 +1525,8 @@ class IntegerValue(NumberValue):
         return self.is_equal_to(number).negate()
 
     def is_less_than_or_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is less than or equal to the
         specified number, False otherwise.
@@ -1523,7 +1541,8 @@ class IntegerValue(NumberValue):
         return BooleanValue(self._value <= number)
 
     def is_greater_than_or_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is greater than or equal to the
         specified number, False otherwise.
@@ -1538,7 +1557,8 @@ class IntegerValue(NumberValue):
         return BooleanValue(self._value >= number)
 
     def is_less_than(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is less than the
         specified number, False otherwise.
@@ -1553,7 +1573,8 @@ class IntegerValue(NumberValue):
         return BooleanValue(self._value < number)
 
     def is_greater_than(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is greater than the
         specified number, False otherwise.
@@ -1609,13 +1630,13 @@ class IntegerValue(NumberValue):
             return BooleanValue(True)
 
         var = self._value // 2
-        square_x = var ** 2
+        square_x = var**2
 
         while square_x > self._value:
             var = (square_x + self._value) // (2 * var)
-            square_x = var ** 2
+            square_x = var**2
 
-        return BooleanValue(self._value == var ** 2)
+        return BooleanValue(self._value == var**2)
 
     def as_integer_ratio(self) -> tuple[int, Literal[1]]:
         """
@@ -1649,9 +1670,9 @@ class IntegerValue(NumberValue):
         """
         return self._value.bit_length()
 
-    def to_bytes(self, length: SupportsIndex,
-                 byteorder: Literal["little", "big"],
-                 signed: bool):
+    def to_bytes(
+        self, length: SupportsIndex, byteorder: Literal["little", "big"], signed: bool
+    ):
         """
         Returns an array of bytes representing an integer.
 
@@ -1673,9 +1694,12 @@ class IntegerValue(NumberValue):
 
     # noinspection PyShadowingBuiltins
     @classmethod
-    def from_bytes(cls, bytes: Iterable[SupportsIndex] | SupportsBytes,
-                   byteorder: Literal["little", "big"],
-                   signed: bool):
+    def from_bytes(
+        cls,
+        bytes: Iterable[SupportsIndex] | SupportsBytes,
+        byteorder: Literal["little", "big"],
+        signed: bool,
+    ):
         """
         Returns the integer represented by the given array of bytes.
 
@@ -1730,7 +1754,7 @@ class IntegerValue(NumberValue):
         else:
             suffix = " Bytes"
 
-        rounding_factor = 10 ** 2
+        rounding_factor = 10**2
         rounded = math.floor(number * rounding_factor) / rounding_factor
         return StringValue(f"{rounded:.2f}" + suffix)
 
@@ -1742,11 +1766,12 @@ class FloatValue(NumberValue):
         self._value: float = self._verify_float(number)
 
     @staticmethod
-    def _verify_float(number: SupportsFloatFull | StringValue) \
-            -> float:
+    def _verify_float(number: SupportsFloatFull | StringValue) -> float:
         if number is None:
-            raise TypeError("FloatValue() argument must be a string, "
-                            "a bytes-like object or a number, not 'NoneType'")
+            raise TypeError(
+                "FloatValue() argument must be a string, "
+                "a bytes-like object or a number, not 'NoneType'"
+            )
 
         if isinstance(number, (str, bytes, bytearray)):
             try:
@@ -1773,9 +1798,11 @@ class FloatValue(NumberValue):
         elif isinstance(number, SupportsInt):
             return FloatValue._verify_float(number.__int__())
         else:
-            raise TypeError("FloatValue() argument must be a string, "
-                            "a bytes-like object or a number,"
-                            f" not '{type(number).__name__}'")
+            raise TypeError(
+                "FloatValue() argument must be a string, "
+                "a bytes-like object or a number,"
+                f" not '{type(number).__name__}'"
+            )
         return value
 
     ########################################
@@ -1794,12 +1821,10 @@ class FloatValue(NumberValue):
     def __bool__(self) -> bool:
         return self._value != 0
 
-    def __eq__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __eq__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_equal_to(other)
 
-    def __ne__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ne__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_not_equal_to(other)
 
     # Should always return NotImplemented because this class is mutable
@@ -1836,8 +1861,7 @@ class FloatValue(NumberValue):
     def __ceil__(self) -> IntegerValue:
         return IntegerValue(self._value.__ceil__())
 
-    def __iadd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __iadd__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             self._value += other
             return self
@@ -1848,8 +1872,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __add__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __add__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value + other)
 
@@ -1858,8 +1883,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __radd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __radd__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(other + self._value)
 
@@ -1868,8 +1892,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __isub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __isub__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             self._value -= other
             return self
@@ -1880,8 +1903,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __sub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __sub__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value - other)
 
@@ -1890,8 +1912,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rsub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rsub__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(other - self._value)
 
@@ -1900,8 +1921,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __imul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __imul__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             self._value *= other
             return self
@@ -1912,8 +1932,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __mul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __mul__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value * other)
 
@@ -1922,8 +1941,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rmul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rmul__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(other * self._value)
 
@@ -1933,8 +1951,9 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __itruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __itruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             self._value /= other
             return self
@@ -1945,8 +1964,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __truediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __truediv__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value / other)
 
@@ -1955,8 +1973,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rtruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rtruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(other / self._value)
 
@@ -1966,8 +1985,9 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __ifloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __ifloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -1976,8 +1996,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __floordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __floordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -1986,8 +2007,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rfloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rfloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -1997,22 +2019,23 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __ipow__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __ipow__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         if isinstance(other, (int, float)):
-            return FloatValue(self._value ** other)
+            return FloatValue(self._value**other)
 
         if isinstance(other, (IntegerValue, FloatValue)):
             return FloatValue(self._value ** other.get())
 
         return NotImplemented
 
-    def __pow__(self, other: int | float | IntegerValue | FloatValue,
-                modulo: Optional[float | FloatValue] = None) \
-            -> FloatValue:
+    def __pow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[float | FloatValue] = None,
+    ) -> FloatValue:
         if modulo is None:
             if isinstance(other, (int, float)):
-                return FloatValue(self._value ** other)
+                return FloatValue(self._value**other)
 
             if isinstance(other, (IntegerValue, FloatValue)):
                 return FloatValue(self._value ** other.get())
@@ -2024,20 +2047,26 @@ class FloatValue(NumberValue):
         is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
         is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-        if (is_mod_int and is_other_int) \
-                or (is_mod_int and is_other_float) \
-                or (is_mod_float and is_other_int):
-            raise TypeError("TypeError: pow() 3rd argument not allowed "
-                            "unless all arguments are integers")
+        if (
+            (is_mod_int and is_other_int)
+            or (is_mod_int and is_other_float)
+            or (is_mod_float and is_other_int)
+        ):
+            raise TypeError(
+                "TypeError: pow() 3rd argument not allowed "
+                "unless all arguments are integers"
+            )
 
         return NotImplemented
 
-    def __rpow__(self, other: int | float | IntegerValue | FloatValue,
-                 modulo: Optional[float | FloatValue] = None) \
-            -> FloatValue:
+    def __rpow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[float | FloatValue] = None,
+    ) -> FloatValue:
         if modulo is None:
             if isinstance(other, (int, float)):
-                return FloatValue(other ** self._value)
+                return FloatValue(other**self._value)
 
             if isinstance(other, (IntegerValue, FloatValue)):
                 return FloatValue(other.get() ** self._value)
@@ -2049,11 +2078,15 @@ class FloatValue(NumberValue):
         is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
         is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
-        if (is_mod_int and is_other_int) \
-                or (is_mod_int and is_other_float) \
-                or (is_mod_float and is_other_int):
-            raise TypeError("TypeError: pow() 3rd argument not allowed "
-                            "unless all arguments are integers")
+        if (
+            (is_mod_int and is_other_int)
+            or (is_mod_int and is_other_float)
+            or (is_mod_float and is_other_int)
+        ):
+            raise TypeError(
+                "TypeError: pow() 3rd argument not allowed "
+                "unless all arguments are integers"
+            )
 
         return NotImplemented
 
@@ -2087,8 +2120,9 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __divmod__(self, other: int | float | IntegerValue | FloatValue) \
-            -> Tuple[FloatValue, FloatValue]:
+    def __divmod__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> Tuple[FloatValue, FloatValue]:
         if isinstance(other, (int, float)):
             var1, var2 = self._value.__divmod__(other)
             return FloatValue(var1), FloatValue(var2)
@@ -2099,8 +2133,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rdivmod__(self, other: float | FloatValue) \
-            -> Tuple[FloatValue, FloatValue]:
+    def __rdivmod__(self, other: float | FloatValue) -> Tuple[FloatValue, FloatValue]:
         if isinstance(other, float):
             var1, var2 = other.__divmod__(self._value)
             return FloatValue(var1), FloatValue(var2)
@@ -2111,20 +2144,16 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __lt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __lt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than(other)
 
-    def __le__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __le__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than_or_equal_to(other)
 
-    def __gt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __gt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than(other)
 
-    def __ge__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ge__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than_or_equal_to(other)
 
     ########################################
@@ -2139,8 +2168,7 @@ class FloatValue(NumberValue):
         """
         return self._value
 
-    def set(self, number: SupportsFloatFull | StringValue) \
-            -> FloatValue:
+    def set(self, number: SupportsFloatFull | StringValue) -> FloatValue:
         """
         Sets the value.
 
@@ -2337,7 +2365,8 @@ class FloatValue(NumberValue):
         return self._value != 0.0
 
     def is_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is equal to the specified number,
         False otherwise.
@@ -2352,7 +2381,8 @@ class FloatValue(NumberValue):
         return BooleanValue(self._value == number)
 
     def is_not_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         number, False otherwise.
@@ -2364,7 +2394,8 @@ class FloatValue(NumberValue):
         return self.is_equal_to(number).negate()
 
     def is_less_than_or_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is less than or equal to the
         specified number, False otherwise.
@@ -2379,7 +2410,8 @@ class FloatValue(NumberValue):
         return BooleanValue(self._value <= number)
 
     def is_greater_than_or_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is greater than or equal to the
         specified number, False otherwise.
@@ -2394,7 +2426,8 @@ class FloatValue(NumberValue):
         return BooleanValue(self._value >= number)
 
     def is_less_than(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is less than the
         specified number, False otherwise.
@@ -2409,7 +2442,8 @@ class FloatValue(NumberValue):
         return BooleanValue(self._value < number)
 
     def is_greater_than(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is greater than the
         specified number, False otherwise.
@@ -2524,12 +2558,10 @@ class StringValue(Value):
         """Implement iter(self)."""
         return self._value.__iter__()
 
-    def __eq__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __eq__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         return self.is_equal_to(other)
 
-    def __ne__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __ne__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         return self.is_not_equal_to(other)
 
     def __contains__(self, other: str | StringValue) -> bool:
@@ -2541,8 +2573,10 @@ class StringValue(Value):
             return self._value.__contains__(other)
 
         type_name = type(other).__name__
-        raise TypeError("'in <StringValue>' requires string or "
-                        "StringValue as left operand, not " + type_name)
+        raise TypeError(
+            "'in <StringValue>' requires string or "
+            "StringValue as left operand, not " + type_name
+        )
 
     def __getitem__(self, key: int | slice) -> str:
         """Return self[key]."""
@@ -2552,9 +2586,9 @@ class StringValue(Value):
         """Return len(self)."""
         return self._value.__len__()
 
-    def __iadd__(self,
-                 other: SupportsAll | IntegerValue | FloatValue | StringValue)\
-            -> StringValue:
+    def __iadd__(
+        self, other: SupportsAll | IntegerValue | FloatValue | StringValue
+    ) -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             self._value += str(other)
             return self
@@ -2569,9 +2603,9 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __add__(self,
-                other: SupportsAll | IntegerValue | FloatValue | StringValue)\
-            -> StringValue:
+    def __add__(
+        self, other: SupportsAll | IntegerValue | FloatValue | StringValue
+    ) -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(self._value + str(other))
 
@@ -2583,9 +2617,9 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __radd__(self,
-                 other: SupportsAll | IntegerValue | FloatValue | StringValue)\
-            -> StringValue:
+    def __radd__(
+        self, other: SupportsAll | IntegerValue | FloatValue | StringValue
+    ) -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(str(other) + self._value)
 
@@ -2597,8 +2631,7 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __isub__(self, other: int | str | IntegerValue | StringValue) \
-            -> StringValue:
+    def __isub__(self, other: int | str | IntegerValue | StringValue) -> StringValue:
         if isinstance(other, int):
             if other >= 0:
                 self._value = self._value[other:]
@@ -2606,9 +2639,9 @@ class StringValue(Value):
                 self._value = self._value[:other]
         elif isinstance(other, IntegerValue):
             if other >= 0:
-                self._value = self._value[other.get():]
+                self._value = self._value[other.get() :]
             else:
-                self._value = self._value[:other.get()]
+                self._value = self._value[: other.get()]
         elif isinstance(other, str):
             self._value = self._value.replace(other, "")
         elif isinstance(other, StringValue):
@@ -2617,9 +2650,9 @@ class StringValue(Value):
             return NotImplemented
         return self
 
-    def __sub__(self,
-                other: int | str | IntegerValue | StringValue | re.Pattern)\
-            -> StringValue:
+    def __sub__(
+        self, other: int | str | IntegerValue | StringValue | re.Pattern
+    ) -> StringValue:
         if isinstance(other, int):
             if other >= 0:
                 return StringValue(self._value[other:])
@@ -2628,9 +2661,9 @@ class StringValue(Value):
 
         if isinstance(other, IntegerValue):
             if other >= 0:
-                return StringValue(self._value[other.get():])
+                return StringValue(self._value[other.get() :])
 
-            return StringValue(self._value[:other.get()])
+            return StringValue(self._value[: other.get()])
 
         if isinstance(other, str):
             return StringValue(self._value.replace(other, ""))
@@ -2643,8 +2676,7 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __rsub__(self, other: str | StringValue) \
-            -> StringValue:
+    def __rsub__(self, other: str | StringValue) -> StringValue:
         if isinstance(other, str):
             return StringValue(other.replace(self._value, ""))
 
@@ -2653,8 +2685,7 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __imul__(self, other: SupportsIndex) \
-            -> StringValue:
+    def __imul__(self, other: SupportsIndex) -> StringValue:
         if isinstance(other, int):
             self._value *= other
             return self
@@ -2665,8 +2696,7 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __mul__(self, other: SupportsIndex) \
-            -> StringValue:
+    def __mul__(self, other: SupportsIndex) -> StringValue:
         if isinstance(other, int):
             return StringValue(self._value * other)
 
@@ -2675,8 +2705,7 @@ class StringValue(Value):
 
         return NotImplemented
 
-    def __rmul__(self, other: SupportsIndex) \
-            -> FloatValue:
+    def __rmul__(self, other: SupportsIndex) -> FloatValue:
         if isinstance(other, int):
             return FloatValue(other * self._value)
 
@@ -2707,8 +2736,7 @@ class StringValue(Value):
         self._value = StringValue._verify_string(value)
         return self
 
-    def is_equal_to(
-            self, value: SupportsStringFull | StringValue) -> BooleanValue:
+    def is_equal_to(self, value: SupportsStringFull | StringValue) -> BooleanValue:
         """
         Returns True if the value is equal to the specified value,
         False otherwise.
@@ -2722,8 +2750,7 @@ class StringValue(Value):
 
         return BooleanValue(self._value == value)
 
-    def is_not_equal_to(
-            self, value: SupportsStringFull | StringValue) -> BooleanValue:
+    def is_not_equal_to(self, value: SupportsStringFull | StringValue) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         value, False otherwise.
@@ -2770,9 +2797,12 @@ class StringValue(Value):
         self._value = self._value.center(width, fill_char)
         return self
 
-    def count(self, sub: str,
-              start: SupportsIndex | None = None,
-              end: SupportsIndex | None = None) -> IntegerValue:
+    def count(
+        self,
+        sub: str,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Returns the number of non-overlapping occurrences of substring
         sub in string S[start:end].
@@ -2788,8 +2818,7 @@ class StringValue(Value):
         """
         return IntegerValue(self._value.count(sub, start, end))
 
-    def encode(self, encoding: str = "utf-8", errors: str = "strict") \
-            -> StringValue:
+    def encode(self, encoding: str = "utf-8", errors: str = "strict") -> StringValue:
         """
         Encode the string using the codec registered for encoding.
 
@@ -2806,9 +2835,12 @@ class StringValue(Value):
         self._value = self._value.encode(encoding, errors)
         return self
 
-    def endswith(self, suffix: str | tuple[str],
-                 start: SupportsIndex | None = None,
-                 end: SupportsIndex | None = None) -> BooleanValue:
+    def endswith(
+        self,
+        suffix: str | tuple[str],
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> BooleanValue:
         """
         Return True if the value ends with the specified suffix,
         False otherwise.
@@ -2836,9 +2868,12 @@ class StringValue(Value):
         self._value = self._value.expandtabs(tabsize)
         return self
 
-    def find(self, sub: str,
-             start: SupportsIndex | None = None,
-             end: SupportsIndex | None = None) -> IntegerValue:
+    def find(
+        self,
+        sub: str,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the lowest index in the value where substring sub is
         found, such that sub is contained within S[start:end].
@@ -2880,9 +2915,12 @@ class StringValue(Value):
         self._value = self._value.format_map(mapping)
         return self
 
-    def index(self, sub: str,
-              start: SupportsIndex | None = None,
-              end: SupportsIndex | None = None) -> IntegerValue:
+    def index(
+        self,
+        sub: str,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the lowest index in S where substring sub is found,
         such that sub is contained within S[start:end].  Optional
@@ -3195,9 +3233,12 @@ class StringValue(Value):
         self._value = self._value.replace(old, new, count)
         return self
 
-    def rfind(self, sub: str,
-              start: SupportsIndex | None = None,
-              end: SupportsIndex | None = None) -> IntegerValue:
+    def rfind(
+        self,
+        sub: str,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the highest index in the value where substring sub is
         found, such that sub is contained within S[start:end]. Optional
@@ -3214,9 +3255,12 @@ class StringValue(Value):
         return IntegerValue(self._value.rfind(sub, start, end))
 
     # noinspection SpellCheckingInspection
-    def rindex(self, sub: str,
-               start: SupportsIndex | None = None,
-               end: SupportsIndex | None = None) -> IntegerValue:
+    def rindex(
+        self,
+        sub: str,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the highest index in the value where substring sub is
         found, such that sub is contained within S[start:end]. Optional
@@ -3344,10 +3388,12 @@ class StringValue(Value):
         """
         return self._value.splitlines(keep_ends)
 
-    def startswith(self, prefix: str | tuple[str],
-                   start: SupportsIndex | None = None,
-                   end: SupportsIndex | None = None) \
-            -> BooleanValue:
+    def startswith(
+        self,
+        prefix: str | tuple[str],
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> BooleanValue:
         """
         Return True if S starts with the specified prefix,
         False otherwise.
@@ -3450,11 +3496,13 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-        self._value = Patterns.ANSI_BASIC_ESCAPE.sub("", self._value) \
-            .replace("\x1b7", "") \
-            .replace("\x1b7r", "") \
-            .replace("\x1b8", "") \
+        self._value = (
+            Patterns.ANSI_BASIC_ESCAPE.sub("", self._value)
+            .replace("\x1b7", "")
+            .replace("\x1b7r", "")
+            .replace("\x1b8", "")
             .replace("\x1b8r", "")
+        )
 
         return self
 
@@ -3479,8 +3527,7 @@ class StringValue(Value):
         :return: unwrapped string or the original string if it is not
                     quoted properly with the wrap character
         """
-        if wrap_char and self._value[0] == wrap_char \
-                and self._value[-1] == wrap_char:
+        if wrap_char and self._value[0] == wrap_char and self._value[-1] == wrap_char:
             self._value = self._value[1:-1]
 
         return self
@@ -3502,10 +3549,24 @@ class StringValue(Value):
 
         val = self._value.lower().strip()
 
-        result = val in ("true", "t", "yes", "y", "1",
-                         "succeeded", "succeed", "enabled",
-                         "false", "f", "no", "n", "0",
-                         "failed", "fail", "disabled")
+        result = val in (
+            "true",
+            "t",
+            "yes",
+            "y",
+            "1",
+            "succeeded",
+            "succeed",
+            "enabled",
+            "false",
+            "f",
+            "no",
+            "n",
+            "0",
+            "failed",
+            "fail",
+            "disabled",
+        )
 
         return BooleanValue(result)
 
@@ -3527,11 +3588,27 @@ class StringValue(Value):
         if self._value and self._value is not None:
             val = str(self._value).lower().strip()
 
-            is_true = val in ("true", "t", "yes", "y", "1",
-                              "succeeded", "succeed", "enabled")
+            is_true = val in (
+                "true",
+                "t",
+                "yes",
+                "y",
+                "1",
+                "succeeded",
+                "succeed",
+                "enabled",
+            )
 
-            is_false = val in ("false", "f", "no", "n", "0",
-                               "failed", "fail", "disabled")
+            is_false = val in (
+                "false",
+                "f",
+                "no",
+                "n",
+                "0",
+                "failed",
+                "fail",
+                "disabled",
+            )
 
             if is_true:
                 return BooleanValue(True)
@@ -3548,8 +3625,9 @@ class StringValue(Value):
         :param default: the value to return if parsing fails
         :return: the parsed int, or the default if parsing failed
         """
-        check_argument(isinstance(default, int), "\"default\" must be a"
-                                                 " int or IntegerValue!")
+        check_argument(
+            isinstance(default, int), '"default" must be a' " int or IntegerValue!"
+        )
 
         try:
             return IntegerValue(self._value)
@@ -3564,8 +3642,9 @@ class StringValue(Value):
         :param default: the value to return if parsing fails
         :return: the parsed float, or the default if parsing failed
         """
-        check_argument(isinstance(default, float), "\"default\" must be a"
-                                                   " float or FloatValue!")
+        check_argument(
+            isinstance(default, float), '"default" must be a' " float or FloatValue!"
+        )
 
         try:
             return FloatValue(self._value)
