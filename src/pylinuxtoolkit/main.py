@@ -53,7 +53,6 @@ class Window(QMainWindow, Ui_MainWindow):
 
         :param parent: the QWidget parent object
         """
-
         super().__init__(parent)
         self.setupUi(self)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -88,7 +87,6 @@ class Window(QMainWindow, Ui_MainWindow):
         This method connects all the GUI items to their
         signal triggers.
         """
-
         self.mnuQuit.triggered.connect(self.close)
         self.mnuAbout.triggered.connect(self.mnuAbout_clicked)
         self.btnSubmit.clicked.connect(self.btnSubmit_clicked)
@@ -108,7 +106,6 @@ class Window(QMainWindow, Ui_MainWindow):
 
         :param text: the text to print
         """
-
         self.lstOutput_model.appendRow(QtGui.QStandardItem(text))
         # Scrolls the listview to the bottom
         index = self.lstOutput_model.index(self.lstOutput_model.rowCount() - 1, 0)
@@ -116,7 +113,6 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def exit_handler(self) -> NoReturn:
         """This runs when the program exits."""
-
         self.bash.ssh_close()
 
     def on_output(self, output_data: OutputData) -> NoReturn:
@@ -125,7 +121,6 @@ class Window(QMainWindow, Ui_MainWindow):
 
         :param output_data: the output data
         """
-
         try:
             line = output_data.current_line
 
@@ -145,12 +140,10 @@ class Window(QMainWindow, Ui_MainWindow):
         This runs when the enter key is pressed inside the
         txtCommand text box.
         """
-
         self.btnSubmit_clicked()
 
     def btnSubmit_clicked(self) -> NoReturn:
         """This runs when the btnSubmit button is clicked."""
-
         if self.txtCommand.text() != "":
             command = self.txtCommand.text().strip()
             self.txtCommand.setText("")

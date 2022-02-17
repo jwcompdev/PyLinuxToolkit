@@ -43,7 +43,6 @@ class Ui_MainWindow:
 
         :param window: the main window
         """
-
         window.setObjectName("MainWindow")
         window.resize(758, 600)
         self.centralwidget = QtWidgets.QWidget(window)
@@ -104,7 +103,6 @@ class Ui_MainWindow:
 
         :param MainWindow: the main window
         """
-
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Ultimate Linux Toolkit"))
         self.tabViewMain.setTabText(self.tabViewMain.indexOf(self.tabGeneralInfo),

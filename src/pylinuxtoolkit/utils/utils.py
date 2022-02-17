@@ -42,7 +42,6 @@ def check_argument(expression: bool,
                 check fails; will be converted to a string
     :raises IllegalArgumentError: if expression is False
     """
-
     if not expression:
         raise IllegalArgumentError(str(error_message))
 
@@ -57,7 +56,6 @@ def check_argument_not_none(reference, error_message) -> Any:
     :return: reference, guaranteed to be not None, for convenience
     :raises IllegalArgumentError: if reference is None
     """
-
     check_argument(reference is not None, error_message)
     return reference
 
@@ -71,7 +69,6 @@ def check_argument_not_none_or_empty(reference, error_message) -> Any:
                             check fails; will be converted to a string
     :return: reference, guaranteed to be not None and non-empty, for convenience
     """
-
     check_argument(reference is not None and len(reference) != 0, error_message)
     return reference
 
@@ -92,7 +89,6 @@ def is_boolean(value: str) -> bool:
     :return: true if string matches a boolean,
                 false if it does not match or is None or empty
     """
-
     if not input or input is None:
         return False
 
@@ -119,7 +115,6 @@ def to_boolean(value: str) -> bool | None:
     :return: the converted boolean,
                 None is returned if a match is not found
     """
-
     if value and value is not None:
         val = value.lower().strip()
 
@@ -145,7 +140,6 @@ def parse_int_or_default(value: str, default: int) -> int:
     :param default: the value to return if parsing fails
     :return: the parsed int, or the default if parsing failed
     """
-
     check_argument(isinstance(default, int), "\"default\" must be a int!")
 
     try:
@@ -162,7 +156,6 @@ def parse_float_or_default(value: str, default: float) -> float:
     :param default: the value to return if parsing fails
     :return: the parsed float, or the default if parsing failed
     """
-
     check_argument(isinstance(default, float), "\"default\" must be a float!")
 
     try:
@@ -177,7 +170,6 @@ def strip_ansi_codes(line) -> str:
     :param line: the line to strip_ansi_codes from
     :return: the modified line
     """
-
     return Patterns.ANSI_BASIC_ESCAPE.sub("", line) \
         .replace("\x1b7", "") \
         .replace("\x1b7r", "") \
@@ -193,7 +185,6 @@ def wrap(value: str, wrap_char: str) -> str:
     :return: wrapped string or the original string
                 if wrap_char is empty
     """
-
     if not wrap_char:
         return value
 
@@ -208,7 +199,6 @@ def unwrap(value: str, wrap_char: str) -> str:
     :return: unwrapped string or the original string if it is not
                 quoted properly with the wrap character
     """
-
     if str and wrap_char and \
             value[0] == wrap_char and \
             value[-1] == wrap_char:
@@ -304,7 +294,6 @@ def timesince(d_t: datetime.datetime | datetime.timedelta,
     >>> timesince(datetime.timedelta(seconds=3721))
     '1 hour and 2 minutes ago'
     """
-
     if isinstance(d_t, datetime.timedelta):
         diff = d_t
     else:

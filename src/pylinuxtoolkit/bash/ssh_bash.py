@@ -73,7 +73,6 @@ class SSHBash(BashBase):
             on successful ssh login
 
         """
-
         super().__init__(directory=directory, output_function=output_function,
                          use_threaded_worker=use_threaded_worker,
                          wait_for_locks=wait_for_locks,
@@ -104,14 +103,12 @@ class SSHBash(BashBase):
 
     def __enter__(self) -> SSHBash:
         """Sets the _is_context_manager variable to True."""
-
         self._is_context_manager = True
         return self
 
     # noinspection SpellCheckingInspection
     def __exit__(self, etype, value, traceback) -> NoReturn:
         """Runs the close method."""
-
         self.close()
 
     def set_ssh_login_info(self, hostname: str, username: str,
@@ -127,7 +124,6 @@ class SSHBash(BashBase):
         :param port: the port (Default is 22)
         :param ssh_key: the ssh auth key filename (Optional)
         """
-
         self._ssh_hostname = hostname
         self._ssh_username = username
         self._ssh_password = password
@@ -140,7 +136,6 @@ class SSHBash(BashBase):
 
         :param directory: the directory to set
         """
-
         self._internal_run_ssh_command_string("cd " + directory, self._ssh_client)
         self._ssh_cwd = self._internal_run_ssh_command_string("pwd", self._ssh_client)
 
@@ -151,7 +146,6 @@ class SSHBash(BashBase):
 
         :return: the current working directory
         """
-
         return self._ssh_cwd
 
     @property
@@ -161,7 +155,6 @@ class SSHBash(BashBase):
 
         :return: the current user's home directory
         """
-
         return self._ssh_home
 
     @property
@@ -171,7 +164,6 @@ class SSHBash(BashBase):
 
         :return: the current system hostname
         """
-
         return self._ssh_internal_hostname
 
     @property
@@ -181,7 +173,6 @@ class SSHBash(BashBase):
 
         :return: the username of the current user
         """
-
         return self._ssh_username
 
     def is_ssh_closed(self) -> bool:
@@ -190,7 +181,6 @@ class SSHBash(BashBase):
 
         :return: True if the ssh client is closed
         """
-
         return self._ssh_client.closed
 
     # noinspection PyTypeChecker
@@ -214,7 +204,6 @@ class SSHBash(BashBase):
         :param print_ssh_mod: if true prints the server's
             mod(Message of the Day) on login
         """
-
         self._ssh_connect_and_wait(ssh_login_timeout, print_prompt,
                                    print_ssh_connection_msgs,
                                    print_ssh_login_success,
@@ -240,7 +229,6 @@ class SSHBash(BashBase):
         :param print_ssh_mod: if true prints the server's
             mod(Message of the Day) on login
         """
-
         if self._ssh_hostname is None or self._ssh_hostname == "":
             raise BashValueError("SSH Hostname was not provided and is required!")
 
@@ -332,7 +320,6 @@ class SSHBash(BashBase):
         :param print_ssh_connection_msgs: if true prints a message on
             ssh disconnect
         """
-
         if not self._ssh_client.closed:
             print_ssh_connection_msgs = print_ssh_connection_msgs \
                 if print_ssh_connection_msgs \
@@ -406,7 +393,6 @@ class SSHBash(BashBase):
 
     def close(self) -> NoReturn:
         """Closes the ssh connection if still open."""
-
         self.ssh_close()
 
     @TaskPool.decide_class_task(pool_name="_task_pool",
@@ -448,7 +434,6 @@ class SSHBash(BashBase):
             method completes. NOTE: if "reconnect_ssh_if_closed" is
             True then this parameter is ignored.
         """
-
         if not command:
             raise BashValueError("Command must be specified!")
 

@@ -89,7 +89,6 @@ class Lambdas:
 
         :return: 1
         """
-
         return 1
 
     @staticmethod
@@ -102,7 +101,6 @@ class Lambdas:
 
         :return: True
         """
-
         return True
 
     @staticmethod
@@ -115,7 +113,6 @@ class Lambdas:
 
         :return: False
         """
-
         return False
 
     @staticmethod

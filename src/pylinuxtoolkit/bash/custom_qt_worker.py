@@ -39,7 +39,6 @@ class CustomQTWorker(QtCore.QObject):
 
         :param function: the function to run to update
         """
-
         self._on_output_signal.connect(function)
 
     def run_on_output_function(self, output_data: OutputData) -> NoReturn:
@@ -48,5 +47,4 @@ class CustomQTWorker(QtCore.QObject):
 
         :param output_data: an object containing bash output data
         """
-
         self._on_output_signal.emit(output_data)

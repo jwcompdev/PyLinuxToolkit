@@ -551,7 +551,6 @@ class BooleanValue(Value):
 
         :return: the value
         """
-
         return self._value
 
     def set(self, value: bool | BooleanValue) -> BooleanValue:
@@ -561,7 +560,6 @@ class BooleanValue(Value):
         :param value: the value to set
         :return: this instance for use in method chaining
         """
-
         if isinstance(value, BooleanValue):
             self._value = value.get()
         else:
@@ -578,7 +576,6 @@ class BooleanValue(Value):
         :return: True if the value is equal to the specified value,
             False otherwise.
         """
-
         if isinstance(value, BooleanValue):
             return BooleanValue(self._value == value.get())
 
@@ -594,7 +591,6 @@ class BooleanValue(Value):
         :return: True if the value is not equal to the specified value,
             False otherwise.
         """
-
         return self.is_equal_to(value).negate()
 
     def is_true(self):
@@ -603,7 +599,6 @@ class BooleanValue(Value):
 
         :return: if the value equals true
         """
-
         return self._value
 
     def is_false(self):
@@ -612,7 +607,6 @@ class BooleanValue(Value):
 
         :return: if the value equals false
         """
-
         return not self._value
 
     def set_true(self) -> BooleanValue:
@@ -621,7 +615,6 @@ class BooleanValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = True
         return self
 
@@ -631,7 +624,6 @@ class BooleanValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = False
         return self
 
@@ -642,7 +634,6 @@ class BooleanValue(Value):
         :param function: the runnable to run
         :return: this instance for use in method chaining
         """
-
         if self._value:
             function()
         return self
@@ -654,7 +645,6 @@ class BooleanValue(Value):
         :param function: the runnable to run
         :return: this instance for use in method chaining
         """
-
         if not self._value:
             function()
         return self
@@ -665,7 +655,6 @@ class BooleanValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = not self._value
         return self
 
@@ -1287,7 +1276,6 @@ class IntegerValue(NumberValue):
 
         :return the value
         """
-
         return self._value
 
     def set(self, number: SupportsIntegerFull | StringValue) -> IntegerValue:
@@ -1297,7 +1285,6 @@ class IntegerValue(NumberValue):
         :param number: the value to set
         :return this instance for use in method chaining
         """
-
         self._value = IntegerValue._verify_int(number)
         return self
 
@@ -1307,7 +1294,6 @@ class IntegerValue(NumberValue):
 
         :return the value converted to an int
         """
-
         return int(self._value)
 
     def to_float(self) -> float:
@@ -1316,7 +1302,6 @@ class IntegerValue(NumberValue):
 
         :return the value converted to a float
         """
-
         return float(self._value)
 
     def increment(self) -> IntegerValue:
@@ -1325,7 +1310,6 @@ class IntegerValue(NumberValue):
 
         :return: this instance for use in method chaining
         """
-
         self._value += 1
         return self
 
@@ -1337,7 +1321,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with the instance
             after it was incremented
         """
-
         self._value += 1
         return self._value
 
@@ -1349,7 +1332,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with the instance
             before it was incremented
         """
-
         before = self._value
         self._value += 1
         return before
@@ -1360,7 +1342,6 @@ class IntegerValue(NumberValue):
 
         :return: this instance for use in method chaining
         """
-
         self._value -= 1
         return self
 
@@ -1372,7 +1353,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with the instance
             after it was decremented
         """
-
         self._value -= 1
         return self._value
 
@@ -1384,7 +1364,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with the instance
             before it was decremented
         """
-
         before = self._value
         self._value -= 1
         return before
@@ -1397,7 +1376,6 @@ class IntegerValue(NumberValue):
         :param other: the value to add
         :return: this instance for use in method chaining
         """
-
         self._value += other
         return self
 
@@ -1412,7 +1390,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with this instance
             after adding the other
         """
-
         self._value += other
         return self._value
 
@@ -1427,7 +1404,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with this instance
             before adding the other
         """
-
         before = self._value
         self._value += other
         return before
@@ -1440,7 +1416,6 @@ class IntegerValue(NumberValue):
         :param other: the value to subtract
         :return: this instance for use in method chaining
         """
-
         self._value -= other
         return self
 
@@ -1455,7 +1430,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with this instance
             after subtracting the other
         """
-
         self._value -= other
         return self._value
 
@@ -1470,7 +1444,6 @@ class IntegerValue(NumberValue):
         :return: the value associated with this instance
             before subtracting the other
         """
-
         before = self._value
         self._value -= other
         return before
@@ -1481,7 +1454,6 @@ class IntegerValue(NumberValue):
 
         :return: True if the value is positive, False otherwise
         """
-
         return BooleanValue(self._value > 0)
 
     def is_negative(self) -> BooleanValue:
@@ -1490,7 +1462,6 @@ class IntegerValue(NumberValue):
 
         :return: True if the value is negative, False otherwise
         """
-
         return BooleanValue(self._value < 0)
 
     def is_zero(self) -> BooleanValue:
@@ -1499,7 +1470,6 @@ class IntegerValue(NumberValue):
 
         :return: True if the value is zero, False otherwise
         """
-
         return BooleanValue(self._value == 0)
 
     def is_not_zero(self) -> BooleanValue:
@@ -1508,7 +1478,6 @@ class IntegerValue(NumberValue):
 
         :return: True if the value is annotations zero, False otherwise
         """
-
         return BooleanValue(self._value != 0)
 
     def is_equal_to(
@@ -1521,7 +1490,6 @@ class IntegerValue(NumberValue):
         :return: True if the value is equal to the specified number,
             False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value == number.get())
 
@@ -1537,7 +1505,6 @@ class IntegerValue(NumberValue):
         :return: True if the value is not equal to the specified number,
             False otherwise.
         """
-
         return self.is_equal_to(number).negate()
 
     def is_less_than_or_equal_to(
@@ -1550,7 +1517,6 @@ class IntegerValue(NumberValue):
         :return: True if the value is less than or equal to the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value <= number.get())
 
@@ -1566,7 +1532,6 @@ class IntegerValue(NumberValue):
         :return: True if the value is greater than or equal to the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value >= number.get())
 
@@ -1582,7 +1547,6 @@ class IntegerValue(NumberValue):
         :return: True if the value is less than the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value < number.get())
 
@@ -1598,7 +1562,6 @@ class IntegerValue(NumberValue):
         :return: True if the value is greater than the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value > number.get())
 
@@ -1624,7 +1587,6 @@ class IntegerValue(NumberValue):
 
         :return: True if the value is odd, False otherwise
         """
-
         return BooleanValue((self._value & 1) == 1)
 
     def is_even(self) -> BooleanValue:
@@ -1633,7 +1595,6 @@ class IntegerValue(NumberValue):
 
         :return: True if the value is even, False otherwise
         """
-
         return BooleanValue((self._value & 1) == 0)
 
     def is_perfect_square(self) -> BooleanValue:
@@ -1642,7 +1603,6 @@ class IntegerValue(NumberValue):
 
         :return: True if the value is perfect square, False otherwise
         """
-
         if self._value < 0:
             return BooleanValue(False)
         if self._value in (0, 1):
@@ -1674,7 +1634,6 @@ class IntegerValue(NumberValue):
         :return: a pair of integers, whose ratio is exactly equal to the
             original int and with a positive denominator
         """
-
         return self._value.as_integer_ratio()
 
     def bit_length(self) -> int:
@@ -1688,7 +1647,6 @@ class IntegerValue(NumberValue):
 
         :return: number of bits necessary to represent self in binary
         """
-
         return self._value.bit_length()
 
     def to_bytes(self, length: SupportsIndex,
@@ -1711,7 +1669,6 @@ class IntegerValue(NumberValue):
             integer is given, an OverflowError is raised.
         :return: an array of bytes representing an integer
         """
-
         self._value.to_bytes(length, byteorder, signed=signed)
 
     # noinspection PyShadowingBuiltins
@@ -1749,7 +1706,6 @@ class IntegerValue(NumberValue):
 
         :return: the value converted to a readable string
         """
-
         number = self._value
         factor = 1024
         if number >= factor:
@@ -2181,7 +2137,6 @@ class FloatValue(NumberValue):
 
         :return the value
         """
-
         return self._value
 
     def set(self, number: SupportsFloatFull | StringValue) \
@@ -2192,7 +2147,6 @@ class FloatValue(NumberValue):
         :param number: the value to set
         :return this instance for use in method chaining
         """
-
         self._value = FloatValue._verify_float(number)
         return self
 
@@ -2202,7 +2156,6 @@ class FloatValue(NumberValue):
 
         :return the value converted to an int
         """
-
         return int(self._value)
 
     def to_float(self) -> float:
@@ -2211,7 +2164,6 @@ class FloatValue(NumberValue):
 
         :return the value converted to a float
         """
-
         return float(self._value)
 
     def increment(self) -> FloatValue:
@@ -2220,7 +2172,6 @@ class FloatValue(NumberValue):
 
         :return: this instance for use in method chaining
         """
-
         self._value += 1
         return self
 
@@ -2232,7 +2183,6 @@ class FloatValue(NumberValue):
         :return: the value associated with the instance
             after it was incremented
         """
-
         self._value += 1
         return self._value
 
@@ -2244,7 +2194,6 @@ class FloatValue(NumberValue):
         :return: the value associated with the instance
             before it was incremented
         """
-
         before = self._value
         self._value += 1
         return before
@@ -2255,7 +2204,6 @@ class FloatValue(NumberValue):
 
         :return: this instance for use in method chaining
         """
-
         self._value -= 1
         return self
 
@@ -2267,7 +2215,6 @@ class FloatValue(NumberValue):
         :return: the value associated with the instance
             after it was decremented
         """
-
         self._value -= 1
         return self._value
 
@@ -2279,7 +2226,6 @@ class FloatValue(NumberValue):
         :return: the value associated with the instance
             before it was decremented
         """
-
         before = self._value
         self._value -= 1
         return before
@@ -2291,7 +2237,6 @@ class FloatValue(NumberValue):
         :param other: the value to add
         :return: this instance for use in method chaining
         """
-
         self._value += other
         return self
 
@@ -2305,7 +2250,6 @@ class FloatValue(NumberValue):
         :return: the value associated with this instance
             after adding the other
         """
-
         self._value += other
         return self._value
 
@@ -2319,7 +2263,6 @@ class FloatValue(NumberValue):
         :return: the value associated with this instance
             before adding the other
         """
-
         before = self._value
         self._value += other
         return before
@@ -2331,7 +2274,6 @@ class FloatValue(NumberValue):
         :param other: the value to subtract
         :return: this instance for use in method chaining
         """
-
         self._value -= other
         return self
 
@@ -2345,7 +2287,6 @@ class FloatValue(NumberValue):
         :return: the value associated with this instance
             after subtracting the other
         """
-
         self._value -= other
         return self._value
 
@@ -2359,7 +2300,6 @@ class FloatValue(NumberValue):
         :return: the value associated with this instance
             before subtracting the other
         """
-
         before = self._value
         self._value -= other
         return before
@@ -2370,7 +2310,6 @@ class FloatValue(NumberValue):
 
         :return: True if the value is positive, False otherwise
         """
-
         return self._value > 0.0
 
     def is_negative(self) -> bool:
@@ -2379,7 +2318,6 @@ class FloatValue(NumberValue):
 
         :return: True if the value is negative, False otherwise
         """
-
         return self._value < 0.0
 
     def is_zero(self) -> bool:
@@ -2388,7 +2326,6 @@ class FloatValue(NumberValue):
 
         :return: True if the value is zero, False otherwise
         """
-
         return self._value == 0.0
 
     def is_not_zero(self) -> bool:
@@ -2397,7 +2334,6 @@ class FloatValue(NumberValue):
 
         :return: True if the value is annotations zero, False otherwise
         """
-
         return self._value != 0.0
 
     def is_equal_to(
@@ -2410,7 +2346,6 @@ class FloatValue(NumberValue):
         :return: True if the value is equal to the specified number,
             False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value == number.get())
 
@@ -2426,7 +2361,6 @@ class FloatValue(NumberValue):
         :return: True if the value is not equal to the specified number,
             False otherwise.
         """
-
         return self.is_equal_to(number).negate()
 
     def is_less_than_or_equal_to(
@@ -2439,7 +2373,6 @@ class FloatValue(NumberValue):
         :return: True if the value is less than or equal to the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value <= number.get())
 
@@ -2455,7 +2388,6 @@ class FloatValue(NumberValue):
         :return: True if the value is greater than or equal to the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value >= number.get())
 
@@ -2471,7 +2403,6 @@ class FloatValue(NumberValue):
         :return: True if the value is less than the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value < number.get())
 
@@ -2487,7 +2418,6 @@ class FloatValue(NumberValue):
         :return: True if the value is greater than the
             specified number, False otherwise.
         """
-
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value > number.get())
 
@@ -2519,7 +2449,6 @@ class FloatValue(NumberValue):
             and with a positive denominator
         :raises OverflowError: on infinities and a ValueError on NaNs
         """
-
         return self.as_integer_ratio()
 
     def is_integer(self) -> bool:
@@ -2541,7 +2470,6 @@ class FloatValue(NumberValue):
 
         :return: a hexadecimal representation of the value
         """
-
         return self._value.hex()
 
     # noinspection SpellCheckingInspection
@@ -2767,7 +2695,6 @@ class StringValue(Value):
 
         :return: the value
         """
-
         return self._value
 
     def set(self, value: SupportsStringFull | StringValue) -> StringValue:
@@ -2777,7 +2704,6 @@ class StringValue(Value):
         :param value: the value to set
         :return: this instance for use in method chaining
         """
-
         self._value = StringValue._verify_string(value)
         return self
 
@@ -2791,7 +2717,6 @@ class StringValue(Value):
         :return: True if the value is equal to the specified value,
             False otherwise.
         """
-
         if isinstance(value, StringValue):
             return BooleanValue(self._value == value.get())
 
@@ -2807,7 +2732,6 @@ class StringValue(Value):
         :return: True if the value is not equal to the specified value,
             False otherwise.
         """
-
         return self.is_equal_to(value).negate()
 
     def capitalize(self) -> StringValue:
@@ -2819,7 +2743,6 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.capitalize()
         return self
 
@@ -2830,7 +2753,6 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.casefold()
         return self
 
@@ -2845,7 +2767,6 @@ class StringValue(Value):
         :param fill_char: the character to pad the string with
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.center(width, fill_char)
         return self
 
@@ -2865,7 +2786,6 @@ class StringValue(Value):
         :return: the number of non-overlapping occurrences of substring
             sub in string S[start:end]
         """
-
         return IntegerValue(self._value.count(sub, start, end))
 
     def encode(self, encoding: str = "utf-8", errors: str = "strict") \
@@ -2883,7 +2803,6 @@ class StringValue(Value):
             UnicodeEncodeErrors.
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.encode(encoding, errors)
         return self
 
@@ -2903,7 +2822,6 @@ class StringValue(Value):
         :return: true if the value ends with the specified suffix,
             False otherwise
         """
-
         return BooleanValue(self._value.endswith(suffix, start, end))
 
     def expandtabs(self, tabsize: str | SupportsIndex = "8") -> StringValue:
@@ -2915,7 +2833,6 @@ class StringValue(Value):
         :param tabsize: the number of spaces to expand the tabs to
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.expandtabs(tabsize)
         return self
 
@@ -2936,7 +2853,6 @@ class StringValue(Value):
         :return: the lowest index in the value where the substring is
             found
         """
-
         return IntegerValue(self._value.find(sub, start, end))
 
     def format(self, *args, **kwargs) -> StringValue:
@@ -2949,7 +2865,6 @@ class StringValue(Value):
         :param kwargs: the keyword args
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.format(*args, **kwargs)
         return self
 
@@ -2962,7 +2877,6 @@ class StringValue(Value):
         :param mapping: the mapping of substitutions
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.format_map(mapping)
         return self
 
@@ -2983,7 +2897,6 @@ class StringValue(Value):
             is found
         :raises ValueError: when the substring is not found
         """
-
         return IntegerValue(self._value.index(sub, start, end))
 
     def isalnum(self) -> BooleanValue:
@@ -2997,7 +2910,6 @@ class StringValue(Value):
         :return: True if the string is an alphanumeric string,
             False otherwise
         """
-
         return BooleanValue(self._value.isalnum())
 
     def isalpha(self) -> BooleanValue:
@@ -3011,7 +2923,6 @@ class StringValue(Value):
         :return: True if the string is an alphabetic string,
             False otherwise
         """
-
         return BooleanValue(self._value.isalpha())
 
     def isascii(self) -> BooleanValue:
@@ -3025,7 +2936,6 @@ class StringValue(Value):
         :return: True if all characters in the string are ASCII,
             False otherwise
         """
-
         return BooleanValue(self._value.isascii())
 
     def isdecimal(self) -> BooleanValue:
@@ -3039,7 +2949,6 @@ class StringValue(Value):
         :return: True if the string is a decimal string,
             False otherwise
         """
-
         return BooleanValue(self._value.isdecimal())
 
     def isdigit(self) -> BooleanValue:
@@ -3053,7 +2962,6 @@ class StringValue(Value):
         :return: True if the string is a digit string,
             False otherwise
         """
-
         return BooleanValue(self._value.isdigit())
 
     # noinspection SpellCheckingInspection
@@ -3068,7 +2976,6 @@ class StringValue(Value):
         :return: True if the string is a valid Python identifier,
             False otherwise
         """
-
         return BooleanValue(self._value.isidentifier())
 
     def islower(self) -> BooleanValue:
@@ -3083,7 +2990,6 @@ class StringValue(Value):
         :return: True if the string is a lowercase string,
             False otherwise
         """
-
         return BooleanValue(self._value.islower())
 
     def isnumeric(self) -> BooleanValue:
@@ -3097,7 +3003,6 @@ class StringValue(Value):
         :return: True if the string is a numeric string,
             False otherwise
         """
-
         return BooleanValue(self._value.isnumeric())
 
     # noinspection SpellCheckingInspection
@@ -3111,7 +3016,6 @@ class StringValue(Value):
         :return: True if the string is printable,
             False otherwise
         """
-
         return BooleanValue(self._value.isprintable())
 
     def isspace(self) -> BooleanValue:
@@ -3125,7 +3029,6 @@ class StringValue(Value):
         :return: True if the string is a whitespace string,
             False otherwise
         """
-
         return BooleanValue(self._value.isspace())
 
     def istitle(self) -> BooleanValue:
@@ -3140,7 +3043,6 @@ class StringValue(Value):
         :return: True if the string is a title-cased string,
             False otherwise
         """
-
         return BooleanValue(self._value.istitle())
 
     def isupper(self) -> BooleanValue:
@@ -3155,7 +3057,6 @@ class StringValue(Value):
         :return: True if the string is an uppercase string,
             False otherwise
         """
-
         return BooleanValue(self._value.isupper())
 
     def join(self, *args: Iterable[str]) -> StringValue:
@@ -3170,7 +3071,6 @@ class StringValue(Value):
         :param args: the values to join
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.join(*args)
         return self
 
@@ -3186,7 +3086,6 @@ class StringValue(Value):
         :param fill_char: the character to pad the string with
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.ljust(width, fill_char)
         return self
 
@@ -3196,7 +3095,6 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.lower()
         return self
 
@@ -3211,7 +3109,6 @@ class StringValue(Value):
         :param chars: if not none, remove these characters instead
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.lstrip(chars)
         return self
 
@@ -3231,7 +3128,6 @@ class StringValue(Value):
         :param mapping: the dictionary mapping
         :return: the created translation table
         """
-
         return self._value.maketrans(mapping)
 
     def partition(self, sep: str) -> Tuple[str, str, str]:
@@ -3250,7 +3146,6 @@ class StringValue(Value):
         :param sep: the seperator to partition the string with
         :return: the partitioned string
         """
-
         return self._value.partition(sep)
 
     # noinspection SpellCheckingInspection
@@ -3265,7 +3160,6 @@ class StringValue(Value):
         :param prefix: the prefix to remove
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.removeprefix(prefix)
         return self
 
@@ -3281,7 +3175,6 @@ class StringValue(Value):
         :param suffix: the suffix to remove
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.removesuffix(suffix)
         return self
 
@@ -3299,7 +3192,6 @@ class StringValue(Value):
             -1 (the default value) means replace all occurrences.
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.replace(old, new, count)
         return self
 
@@ -3319,7 +3211,6 @@ class StringValue(Value):
         :return: the highest index in the value where the substring is
             found
         """
-
         return IntegerValue(self._value.rfind(sub, start, end))
 
     # noinspection SpellCheckingInspection
@@ -3340,7 +3231,6 @@ class StringValue(Value):
             found
         :raises ValueError: when the substring is not found
         """
-
         return IntegerValue(self._value.rindex(sub, start, end))
 
     # noinspection SpellCheckingInspection
@@ -3355,7 +3245,6 @@ class StringValue(Value):
         :param fill_char: the character to pad the string with
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.rjust(width, fill_char)
         return self
 
@@ -3375,7 +3264,6 @@ class StringValue(Value):
         :param sep: the seperator to partition the string with
         :return: the partitioned string
         """
-
         return self._value.rpartition(sep)
 
     def rsplit(self, sep: str = None, max_split: int = -1) -> list[StringValue]:
@@ -3396,7 +3284,6 @@ class StringValue(Value):
         :return: a list of the words in the string, using sep as the
             delimiter string
         """
-
         words = self._value.rsplit(sep, max_split)
         new_words: list[StringValue] = []
 
@@ -3416,7 +3303,6 @@ class StringValue(Value):
         :param chars: if not none, remove these characters instead
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.rstrip(chars)
         return self
 
@@ -3435,7 +3321,6 @@ class StringValue(Value):
         :return: a list of the words in the string, using sep as the
             delimiter string
         """
-
         words = self._value.split(sep, max_split)
         new_words: list[StringValue] = []
 
@@ -3457,7 +3342,6 @@ class StringValue(Value):
         :return: a list of the lines in the string, breaking at line
             boundaries
         """
-
         return self._value.splitlines(keep_ends)
 
     def startswith(self, prefix: str | tuple[str],
@@ -3477,7 +3361,6 @@ class StringValue(Value):
         :return: true if the value begins with the specified prefix,
             False otherwise
         """
-
         return BooleanValue(self._value.startswith(prefix, start, end))
 
     def strip(self, chars: str | None = None) -> StringValue:
@@ -3491,7 +3374,6 @@ class StringValue(Value):
         :param chars: if not none, remove these characters instead
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.strip(chars)
         return self
 
@@ -3503,7 +3385,6 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.swapcase()
         return self
 
@@ -3516,7 +3397,6 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.title()
         return self
 
@@ -3535,7 +3415,6 @@ class StringValue(Value):
             ordinals to Unicode ordinals, strings, or None.
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.translate(table)
         return self
 
@@ -3545,7 +3424,6 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.upper()
         return self
 
@@ -3559,7 +3437,6 @@ class StringValue(Value):
         :param width: the with of the new string
         :return: this instance for use in method chaining
         """
-
         self._value = self._value.zfill(width)
         return self
 
@@ -3573,7 +3450,6 @@ class StringValue(Value):
 
         :return: this instance for use in method chaining
         """
-
         self._value = Patterns.ANSI_BASIC_ESCAPE.sub("", self._value) \
             .replace("\x1b7", "") \
             .replace("\x1b7r", "") \
@@ -3590,7 +3466,6 @@ class StringValue(Value):
         :return: wrapped string or the original string
                     if wrap_char is empty
         """
-
         if wrap_char:
             self._value = f"{wrap_char}{self._value}{wrap_char}"
 
@@ -3604,7 +3479,6 @@ class StringValue(Value):
         :return: unwrapped string or the original string if it is not
                     quoted properly with the wrap character
         """
-
         if wrap_char and self._value[0] == wrap_char \
                 and self._value[-1] == wrap_char:
             self._value = self._value[1:-1]
@@ -3623,7 +3497,6 @@ class StringValue(Value):
         :return: true if string matches a boolean,
                     false if it does not match or is None or empty
         """
-
         if not input or input is None:
             return BooleanValue(False)
 
@@ -3651,7 +3524,6 @@ class StringValue(Value):
         :return: the converted boolean,
                     None is returned if a match is not found
         """
-
         if self._value and self._value is not None:
             val = str(self._value).lower().strip()
 
@@ -3676,7 +3548,6 @@ class StringValue(Value):
         :param default: the value to return if parsing fails
         :return: the parsed int, or the default if parsing failed
         """
-
         check_argument(isinstance(default, int), "\"default\" must be a"
                                                  " int or IntegerValue!")
 
@@ -3693,7 +3564,6 @@ class StringValue(Value):
         :param default: the value to return if parsing fails
         :return: the parsed float, or the default if parsing failed
         """
-
         check_argument(isinstance(default, float), "\"default\" must be a"
                                                    " float or FloatValue!")
 

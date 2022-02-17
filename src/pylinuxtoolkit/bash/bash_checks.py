@@ -39,7 +39,6 @@ class BashChecks:
         :param line: the line to check
         :return: the result
         """
-
         return "E: Could not open lock file" in line \
                and "open (13: Permission denied)" in line
 
@@ -52,7 +51,6 @@ class BashChecks:
         :param line: the line to check
         :return: the result
         """
-
         return "Waiting for cache lock: Could not get lock" in line \
                and "It is held by process" in line
 
@@ -64,7 +62,6 @@ class BashChecks:
         :param line: the line to check
         :return: the result
         """
-
         return "WARNING: apt does not have a stable CLI interface. " \
                "Use with caution in scripts." in line
 
@@ -76,7 +73,6 @@ class BashChecks:
         :param line: the line to check
         :return: the result
         """
-
         return "bytes arguments were passed to a new process creation function. " \
                "Breakpoints may not work correctly." in line
 
@@ -89,7 +85,6 @@ class BashChecks:
         :param line: the line to check
         :return: the result
         """
-
         return "debconf: unable to initialize frontend: Dialog" in line \
                or "debconf: (Dialog frontend will not work on a dumb terminal" in line \
                or "debconf: falling back to frontend: Readline" in line
@@ -102,7 +97,6 @@ class BashChecks:
         :param line: the line to check
         :return: the result
         """
-
         return "[PEXPECT]" in line \
                or "unset PROMPT_COMMAND" in line \
                or "'s password:" in line
@@ -115,7 +109,6 @@ class BashChecks:
         :param line: the line to check
         :return: the result
         """
-
         return "Hit:" in line and "http" in line \
                or "Get:" in line and "http" in line \
                or "Ign:" in line and "http" in line
@@ -129,7 +122,6 @@ class BashChecks:
         :param current_user: the current user to check for
         :return: the result
         """
-
         return line.strip()\
                    .startswith(current_user + "@") and \
                line.strip().endswith("$")

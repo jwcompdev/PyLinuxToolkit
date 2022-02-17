@@ -54,7 +54,6 @@ class RaspberryPi:
 
         :return: the current system hostname
         """
-
         return socket.gethostname()
 
     @property
@@ -64,7 +63,6 @@ class RaspberryPi:
 
         :return: the username of the current user
         """
-
         return pwd.getpwuid(os.getuid()).pw_name
 
     @property
@@ -74,7 +72,6 @@ class RaspberryPi:
 
         :return: the linux bash instance
         """
-
         return self._bash
 
     @property
@@ -132,7 +129,6 @@ class BaseConfig(ABC):
 
         :param rpi: the root raspberry pi_obj object
         """
-
         self._command_base: str = "sudo raspi-config nonint "
         self.__pi: RaspberryPi = rpi
 

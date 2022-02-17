@@ -72,7 +72,6 @@ class LinuxBash:
             prints
 
         """
-
         self._is_context_manager: bool = False
         self._is_remote: bool = remote_ssh
 
@@ -107,19 +106,16 @@ class LinuxBash:
 
         :return: True if the bash is set to run remotely
         """
-
         return self._is_remote
 
     def __enter__(self):
         """Sets the _is_context_manager variable to True."""
-
         self._is_context_manager = True
         return self
 
     # noinspection SpellCheckingInspection
     def __exit__(self, etype, value, traceback) -> NoReturn:
         """Runs the close method."""
-
         self._bash.close()
 
     def get_output_writer(self) -> OutputWriter:
@@ -128,7 +124,6 @@ class LinuxBash:
 
         :return: the current output writer instance
         """
-
         return self._bash.get_output_writer()
 
     def get_on_output(self):
@@ -137,7 +132,6 @@ class LinuxBash:
 
         :return: the function that handles the output
         """
-
         return self._bash.get_on_output()
 
     def is_threaded_worker_enabled(self) -> bool:
@@ -146,7 +140,6 @@ class LinuxBash:
 
         :return: True if threaded worker is enabled
         """
-
         return self._bash.is_threaded_worker_enabled()
 
     def enable_threaded_worker(self):
@@ -155,7 +148,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.enable_threaded_worker()
         return self
 
@@ -165,7 +157,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.disable_threaded_worker()
         return self
 
@@ -175,7 +166,6 @@ class LinuxBash:
 
         :return: True if print prompt is enabled
         """
-
         return self._bash.is_print_prompt_enabled()
 
     def enable_print_prompt(self):
@@ -184,7 +174,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.enable_print_prompt()
         return self
 
@@ -194,7 +183,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.disable_print_prompt()
         return self
 
@@ -204,7 +192,6 @@ class LinuxBash:
 
         :return: True if print command is enabled
         """
-
         return self._bash.is_print_command_enabled()
 
     def enable_print_command(self):
@@ -213,7 +200,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.enable_print_command()
         return self
 
@@ -223,7 +209,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.disable_print_command()
         return self
 
@@ -233,7 +218,6 @@ class LinuxBash:
 
         :return: True if wait for locks is enabled
         """
-
         return self._bash.is_wait_for_locks_enabled()
 
     def enable_wait_for_locks(self):
@@ -242,7 +226,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.enable_wait_for_locks()
         return self
 
@@ -252,7 +235,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.disable_wait_for_locks()
         return self
 
@@ -264,7 +246,6 @@ class LinuxBash:
         :return: True if the program is set to raise an error if a
             command is waiting on a lock
         """
-
         return self._bash.is_raise_error_on_lock_wait_enabled()
 
     def enable_raise_error_on_lock_wait(self):
@@ -273,7 +254,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.enable_raise_error_on_lock_wait()
         return self
 
@@ -283,7 +263,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.disable_raise_error_on_lock_wait()
         return self
 
@@ -294,7 +273,6 @@ class LinuxBash:
         :param func: the function to set
         :return: this instance to allow for method chaining
         """
-
         self._bash.set_on_output(func)
         return self
 
@@ -304,7 +282,6 @@ class LinuxBash:
 
         :return: the global timeout
         """
-
         return self._bash.get_global_timeout()
 
     def set_global_timeout(self, timeout: int):
@@ -314,7 +291,6 @@ class LinuxBash:
         :param: timeout the timeout to set
         :return: this instance to allow for method chaining
         """
-
         self._bash.set_global_timeout(timeout)
         return self
 
@@ -324,7 +300,6 @@ class LinuxBash:
 
         :return: this instance to allow for method chaining
         """
-
         self._bash.set_global_timeout_default()
         return self
 
@@ -335,7 +310,6 @@ class LinuxBash:
 
         :return: the directory of the current running program
         """
-
         return self._bash.running_dir()
 
     def change_dir(self, directory: str) -> NoReturn:
@@ -344,7 +318,6 @@ class LinuxBash:
 
         :param: directory the directory to set
         """
-
         self._bash.change_dir(directory)
 
     @property
@@ -354,7 +327,6 @@ class LinuxBash:
 
         :return: the current working directory
         """
-
         return self._bash.current_dir
 
     @property
@@ -364,7 +336,6 @@ class LinuxBash:
 
         :return: the current user's home directory
         """
-
         return self._bash.home_dir
 
     @property
@@ -374,7 +345,6 @@ class LinuxBash:
 
         :return: the current system hostname
         """
-
         return self._bash.hostname
 
     @property
@@ -384,7 +354,6 @@ class LinuxBash:
 
         :return: the username of the current user
         """
-
         return self._bash.current_user
 
     def print_prompt(self):
@@ -396,7 +365,6 @@ class LinuxBash:
         This uses the current user, hostname, current working
         directory and if root, uses '#' instead of '$'.
         """
-
         self._bash.print_prompt()
 
     def get_prompt(self) -> str:
@@ -410,7 +378,6 @@ class LinuxBash:
         :return: a representation of what the terminal prompt would look
             like in the current working directory
         """
-
         return self._bash.get_prompt()
 
     def set_ssh_login_info(self, hostname: str = None,
@@ -428,7 +395,6 @@ class LinuxBash:
         :param port: the port (Default is 22)
         :param ssh_key: the ssh auth key filename (Optional)
         """
-
         if self.is_remote:
             self._ssh_bash.set_ssh_login_info(hostname, username,
                                               password, port, ssh_key)
@@ -451,7 +417,6 @@ class LinuxBash:
         :param print_ssh_mod: if true prints the server's
             mod(Message of the Day) on login
         """
-
         if self.is_remote:
             self._ssh_bash.ssh_connect_and_wait(ssh_login_timeout, print_prompt,
                                                 print_ssh_connection_msgs,
@@ -465,7 +430,6 @@ class LinuxBash:
         :param print_ssh_connection_msgs: if true prints a message on
             ssh disconnect
         """
-
         if self.is_remote:
             self._ssh_bash.ssh_close(print_ssh_connection_msgs)
 
@@ -504,7 +468,6 @@ class LinuxBash:
             method completes. NOTE: if "reconnect_ssh_if_closed" is
             True then this parameter is ignored.
         """
-
         if self.is_remote:
             self._ssh_bash.run_terminal_command(command, sudo,
                                                 timeout, ssh_login_timeout,
