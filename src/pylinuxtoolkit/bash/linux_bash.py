@@ -41,17 +41,20 @@ class LinuxBash:
     locally or over ssh.
     """
 
-    def __init__(self, directory="~",
-                 output_function: Callable[[OutputData], NoReturn]
-                 = Lambdas.one_arg_no_return,
-                 use_threaded_worker=False, wait_for_locks=True,
-                 remote_ssh=False, timeout: int | None = 30,
-                 ssh_login_timeout: int | None = 10,
-                 print_command: bool = False,
-                 print_prompt: bool = False,
-                 print_ssh_connection_msgs: bool = False,
-                 print_ssh_login_success: bool = False
-                 ) -> NoReturn:
+    def __init__(
+        self,
+        directory="~",
+        output_function: Callable[[OutputData], NoReturn] = Lambdas.one_arg_no_return,
+        use_threaded_worker=False,
+        wait_for_locks=True,
+        remote_ssh=False,
+        timeout: int | None = 30,
+        ssh_login_timeout: int | None = 10,
+        print_command: bool = False,
+        print_prompt: bool = False,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+    ) -> NoReturn:
         """
         :param directory: the directory to use as the current working
             directory
@@ -76,24 +79,28 @@ class LinuxBash:
         self._is_context_manager: bool = False
         self._is_remote: bool = remote_ssh
 
-        self._ssh_bash = SSHBash(directory=directory,
-                                 output_function=output_function,
-                                 use_threaded_worker=use_threaded_worker,
-                                 wait_for_locks=wait_for_locks,
-                                 timeout=timeout,
-                                 ssh_login_timeout=ssh_login_timeout,
-                                 print_command=print_command,
-                                 print_prompt=print_prompt,
-                                 print_ssh_connection_msgs=print_ssh_connection_msgs,
-                                 print_ssh_login_success=print_ssh_login_success)
+        self._ssh_bash = SSHBash(
+            directory=directory,
+            output_function=output_function,
+            use_threaded_worker=use_threaded_worker,
+            wait_for_locks=wait_for_locks,
+            timeout=timeout,
+            ssh_login_timeout=ssh_login_timeout,
+            print_command=print_command,
+            print_prompt=print_prompt,
+            print_ssh_connection_msgs=print_ssh_connection_msgs,
+            print_ssh_login_success=print_ssh_login_success,
+        )
 
-        self._local_bash = LocalBash(directory=directory,
-                                     output_function=output_function,
-                                     use_threaded_worker=use_threaded_worker,
-                                     wait_for_locks=wait_for_locks,
-                                     timeout=timeout,
-                                     print_command=print_command,
-                                     print_prompt=print_prompt)
+        self._local_bash = LocalBash(
+            directory=directory,
+            output_function=output_function,
+            use_threaded_worker=use_threaded_worker,
+            wait_for_locks=wait_for_locks,
+            timeout=timeout,
+            print_command=print_command,
+            print_prompt=print_prompt,
+        )
 
         # Set the default bash based on if remote_ssh is True or not
         self._bash = self._ssh_bash if remote_ssh else self._local_bash
@@ -413,8 +420,14 @@ class LinuxBash:
 
         return self._bash.get_prompt()
 
-    def set_ssh_login_info(self, hostname: str = None, username: str = None, password: str = None,
-                           port: int = 22, ssh_key: StrOrBytesPath = None):
+    def set_ssh_login_info(
+        self,
+        hostname: str = None,
+        username: str = None,
+        password: str = None,
+        port: int = 22,
+        ssh_key: StrOrBytesPath = None,
+    ):
         """
         Sets the required login info for the ssh connection.
 
@@ -427,14 +440,18 @@ class LinuxBash:
         """
 
         if self.is_remote:
-            self._ssh_bash.set_ssh_login_info(hostname, username, password, port, ssh_key)
+            self._ssh_bash.set_ssh_login_info(
+                hostname, username, password, port, ssh_key
+            )
 
-    def ssh_connect(self, ssh_login_timeout: int = 10,
-                    print_prompt: bool = False,
-                    print_ssh_connection_msgs: bool = False,
-                    print_ssh_login_success: bool = False,
-                    print_ssh_mod: bool = False
-                    ):
+    def ssh_connect(
+        self,
+        ssh_login_timeout: int = 10,
+        print_prompt: bool = False,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+        print_ssh_mod: bool = False,
+    ):
         """
         Connects to the ssh client and keeps the connection open.
 
@@ -449,10 +466,13 @@ class LinuxBash:
         """
 
         if self.is_remote:
-            self._ssh_bash.ssh_connect_and_wait(ssh_login_timeout, print_prompt,
-                                                print_ssh_connection_msgs,
-                                                print_ssh_login_success,
-                                                print_ssh_mod)
+            self._ssh_bash.ssh_connect_and_wait(
+                ssh_login_timeout,
+                print_prompt,
+                print_ssh_connection_msgs,
+                print_ssh_login_success,
+                print_ssh_mod,
+            )
 
     def ssh_close(self, print_ssh_connection_msgs: bool = False):
         """
@@ -465,16 +485,20 @@ class LinuxBash:
         if self.is_remote:
             self._ssh_bash.ssh_close(print_ssh_connection_msgs)
 
-    def run_terminal_command(self, command: str, sudo: bool = False,
-                             timeout: int | None = 30, ssh_login_timeout: int = 10,
-                             print_command: bool = False,
-                             print_prompt: bool = False,
-                             print_exit_code: bool = False,
-                             print_ssh_connection_msgs: bool = False,
-                             print_ssh_login_success: bool = False,
-                             reconnect_ssh_if_closed: bool = False,
-                             create_temp_connection_if_closed: bool = True
-                             ):
+    def run_terminal_command(
+        self,
+        command: str,
+        sudo: bool = False,
+        timeout: int | None = 30,
+        ssh_login_timeout: int = 10,
+        print_command: bool = False,
+        print_prompt: bool = False,
+        print_exit_code: bool = False,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+        reconnect_ssh_if_closed: bool = False,
+        create_temp_connection_if_closed: bool = True,
+    ):
         """
         Runs the specified terminal command and passes output to
         specified on_output function.
@@ -502,14 +526,20 @@ class LinuxBash:
         """
 
         if self.is_remote:
-            self._ssh_bash.run_terminal_command(command, sudo, timeout, ssh_login_timeout,
-                                                print_command, print_prompt,
-                                                print_exit_code,
-                                                print_ssh_connection_msgs,
-                                                print_ssh_login_success,
-                                                reconnect_ssh_if_closed,
-                                                create_temp_connection_if_closed)
+            self._ssh_bash.run_terminal_command(
+                command,
+                sudo,
+                timeout,
+                ssh_login_timeout,
+                print_command,
+                print_prompt,
+                print_exit_code,
+                print_ssh_connection_msgs,
+                print_ssh_login_success,
+                reconnect_ssh_if_closed,
+                create_temp_connection_if_closed,
+            )
         else:
-            self._local_bash.run_terminal_command(command, sudo, timeout,
-                                                  print_command, print_prompt,
-                                                  print_exit_code)
+            self._local_bash.run_terminal_command(
+                command, sudo, timeout, print_command, print_prompt, print_exit_code
+            )

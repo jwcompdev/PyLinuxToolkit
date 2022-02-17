@@ -27,4 +27,5 @@ class IllegalArgumentError(Exception):
     This exception is raised when a required argument was not found
     when a method was called.
     """
+
     pass

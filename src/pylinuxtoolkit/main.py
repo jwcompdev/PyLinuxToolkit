@@ -26,9 +26,7 @@ import sys
 from typing import NoReturn
 
 from PyQt5 import QtGui, QtCore
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QMessageBox, QAbstractItemView
-)
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QAbstractItemView
 
 from pylinuxtoolkit.main_window import Ui_MainWindow
 from pylinuxtoolkit.bash.linux_bash import LinuxBash
@@ -62,13 +60,15 @@ class Window(QMainWindow, Ui_MainWindow):
         self.lstOutput_model = QtGui.QStandardItemModel()
         self.lstOutput.setModel(self.lstOutput_model)
 
-        self.bash = LinuxBash(directory="~", output_function=self.on_output,
-                              remote_ssh=False, print_ssh_connection_msgs=True, print_prompt=True)
+        self.bash = LinuxBash(
+            directory="~",
+            output_function=self.on_output,
+            remote_ssh=False,
+            print_ssh_connection_msgs=True,
+            print_prompt=True,
+        )
         self.bash.set_ssh_login_info(
-            hostname="raspberrypi.local",
-            username="pi",
-            password="jwcompdev",
-            port=22
+            hostname="raspberrypi.local", username="pi", password="jwcompdev", port=22
         )
         self.bash.enable_threaded_worker()
         self.bash.enable_wait_for_locks()
@@ -131,8 +131,10 @@ class Window(QMainWindow, Ui_MainWindow):
             print(">> " + repr(line))
 
             if "[Y/n]" in line:
-                if "apt upgrade" in output_data.current_command\
-                        or "apt-get upgrade" in output_data.current_command:
+                if (
+                    "apt upgrade" in output_data.current_command
+                    or "apt-get upgrade" in output_data.current_command
+                ):
                     output_data.client.sendline("n")
                     print(">> Canceled upgrade!")
         except Exception as ex:
@@ -156,12 +158,13 @@ class Window(QMainWindow, Ui_MainWindow):
             if command.lower() == "exit":
                 self.bash.ssh_close()
             else:
-                self.bash.run_terminal_command(command=command,
-                                               print_prompt=True,
-                                               print_command=True,
-                                               print_exit_code=False,
-                                               timeout=None
-                                               )
+                self.bash.run_terminal_command(
+                    command=command,
+                    print_prompt=True,
+                    print_command=True,
+                    print_exit_code=False,
+                    timeout=None,
+                )
 
                 # bash.run_terminal_command(command="sudo apt upgrade",
                 #                           print_prompt=True,

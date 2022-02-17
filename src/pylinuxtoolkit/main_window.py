@@ -107,11 +107,15 @@ class Ui_MainWindow:
 
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Ultimate Linux Toolkit"))
-        self.tabViewMain.setTabText(self.tabViewMain.indexOf(self.tabGeneralInfo),
-                                    _translate("MainWindow", "General Info"))
+        self.tabViewMain.setTabText(
+            self.tabViewMain.indexOf(self.tabGeneralInfo),
+            _translate("MainWindow", "General Info"),
+        )
         self.btnSubmit.setText(_translate("MainWindow", "Submit"))
-        self.tabViewMain.setTabText(self.tabViewMain.indexOf(self.tabTerminal),
-                                    _translate("MainWindow", "Terminal"))
+        self.tabViewMain.setTabText(
+            self.tabViewMain.indexOf(self.tabTerminal),
+            _translate("MainWindow", "Terminal"),
+        )
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
         self.mnuQuit.setText(_translate("MainWindow", "Quit"))
