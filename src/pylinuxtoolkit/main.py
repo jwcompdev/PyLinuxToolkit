@@ -124,13 +124,15 @@ class Window(QMainWindow, Ui_MainWindow):
             self.print_to_lst(line.get())
             print(">> " + repr(line))
 
-            if "[Y/n]" in line:
-                if (
-                    "apt upgrade" in output_data.current_command
-                    or "apt-get upgrade" in output_data.current_command
-                ):
-                    output_data.client.sendline("n")
-                    print(">> Canceled upgrade!")
+            if (
+                "[Y/n]" in line
+                and (
+                "apt upgrade" in output_data.current_command
+                or "apt-get upgrade" in output_data.current_command
+            )
+            ):
+                output_data.client.sendline("n")
+                print(">> Canceled upgrade!")
         except Exception as ex:
             raise ex
 
