@@ -23,7 +23,9 @@ and some basic typing utils.
 """
 import builtins
 import typing
-from collections import deque, defaultdict, OrderedDict, UserDict, ChainMap, Counter, UserList
+from collections import (
+    deque, defaultdict, OrderedDict, UserDict, ChainMap, Counter, UserList
+)
 
 import introspection
 from introspection.typing import (
@@ -51,9 +53,9 @@ class Final(type):
 def _get_subtypes(cls):
     subtypes = cls.__args__
 
-    if get_generic_base_class(cls) is typing.Callable:
-        if len(subtypes) != 2 or subtypes[0] is not ...:
-            subtypes = (subtypes[:-1], subtypes[-1])
+    if get_generic_base_class(cls) is typing.Callable \
+            and len(subtypes) != 2 or subtypes[0] is not ...:
+        subtypes = (subtypes[:-1], subtypes[-1])
 
     return subtypes
 
@@ -140,7 +142,7 @@ def _is_origin_type(base, value, type_):
                    and is_instance(val, value_type)
                    for key, val in view)
 
-    if base is typing.Tuple or base == tuple:
+    if base in (typing.Tuple, tuple):
         type_args = _get_subtypes(type_)
         if len(value) != len(type_args):
             return False
@@ -152,12 +154,14 @@ def _is_origin_type(base, value, type_):
 
 
 def _is_special_instance(base, value, type_):
-    if base == typing.Union or base == typing.Optional:
+    if base in (typing.Union, typing.Optional):
         types = _get_subtypes(type_)
         return any(is_instance(value, typ) for typ in types)
-    elif base == typing.Callable:
+
+    if base == typing.Callable:
         return _is_callable(value, type_)
-    elif base == typing.Type:
+
+    if base == typing.Type:
         # if it's not a class, return False
         if not isinstance(value, type):
             return False
@@ -172,7 +176,8 @@ def _is_special_instance(base, value, type_):
 
         # noinspection PyTypeChecker
         return is_subclass(value, type_args[0])
-    elif base == typing.Any:
+
+    if base is typing.Any:
         return True
 
     return False
@@ -184,7 +189,7 @@ def to_python_type(annotation):
     corresponding python class.
 
     Examples:
-        
+
     >>> to_python_type(typing.Dict)
     <class 'dict'>
     >>> to_python_type(dict[int, int])
@@ -193,7 +198,7 @@ def to_python_type(annotation):
     <class 'list'>
     >>> to_python_type(int)
     <class 'int'>
-    
+
     :param annotation: the annotation to check
     :return: the corresponding python class
     """
@@ -208,12 +213,14 @@ def to_python_type(annotation):
 
     if typing.Type in mro:
         return annotation.python_type
-    elif annotation.__module__ == 'typing':
+
+    if annotation.__module__ == 'typing':
         return annotation.__origin__
-    elif '[' in str(annotation) and ']' in str(annotation):
+
+    if '[' in str(annotation) and ']' in str(annotation):
         return get_type_from_name(annotation.__name__)
-    else:
-        return annotation
+
+    return annotation
 
 
 def get_type_from_name(name: str):

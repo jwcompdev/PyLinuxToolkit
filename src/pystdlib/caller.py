@@ -37,18 +37,16 @@ class Caller:
     """
 
     def __init__(self):
-        """
-        Initializes the CallerWrapper instance.
-        """
+        """Initializes the CallerWrapper instance."""
         frame = inspect.stack()[2][0]
 
-        self._name = self.get_method_name_from_frame(frame)
-        self._cls = self.get_class_from_frame(frame)
-        self._cls_instance = self.get_class_instance_from_frame(frame)
-        self._module = self.get_module_from_frame(frame)
+        self._name = self._get_method_name_from_frame(frame)
+        self._cls = self._get_class_from_frame(frame)
+        self._cls_instance = self._get_class_instance_from_frame(frame)
+        self._module = self._get_module_from_frame(frame)
 
     @staticmethod
-    def get_method_name_from_frame(frame) -> str:
+    def _get_method_name_from_frame(frame) -> str:
         """
         Retrieves the method name from the specified frame.
 
@@ -58,7 +56,7 @@ class Caller:
         return frame.f_code.co_name
 
     @staticmethod
-    def get_class_from_frame(frame):
+    def _get_class_from_frame(frame):
         """
         Retrieves the class from the specified frame.
 
@@ -78,7 +76,7 @@ class Caller:
         return None
 
     @staticmethod
-    def get_class_instance_from_frame(frame):
+    def _get_class_instance_from_frame(frame):
         """
         Retrieves the class instance from the specified frame.
 
@@ -88,7 +86,7 @@ class Caller:
         return frame.f_locals.get('self', None)
 
     @staticmethod
-    def get_module_from_frame(frame):
+    def _get_module_from_frame(frame):
         """
         Retrieves the class object from the specified frame.
 

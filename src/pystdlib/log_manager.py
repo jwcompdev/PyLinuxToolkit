@@ -31,7 +31,8 @@ from pystdlib.decorators import classproperty
 
 class LogManager:
     """
-    Contains basic tools for logging related to the current project.
+    Contains basic tools for logging related
+    to the current project.
     """
 
     c_handler: logging.Handler = logging.StreamHandler(sys.stdout)
@@ -54,7 +55,8 @@ class LogManager:
     @classmethod
     def disable_logging(cls):
         """
-        Disables the logging handler that prints to the console.
+        Disables the logging handler that
+        prints to the console.
         """
         logging.getLogger().removeHandler(LogManager.c_handler)
 

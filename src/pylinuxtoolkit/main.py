@@ -136,13 +136,12 @@ class Window(QMainWindow, Ui_MainWindow):
             line = output_data.current_line
 
             self.print_to_lst(line.get())
-            # print(">> " + repr(line))
 
-            if "[Y/n]" in line:
-                if "apt upgrade" in output_data.current_command \
-                        or "apt-get upgrade" in output_data.current_command:
-                    output_data.client.sendline("n")
-                    print(">> Canceled upgrade!")
+            if "[Y/n]" in line \
+                    and ("apt upgrade" in output_data.current_command
+                         or "apt-get upgrade" in output_data.current_command):
+                output_data.client.sendline("n")
+                print(">> Canceled upgrade!")
         except Exception as ex:
             raise ex
 
@@ -162,8 +161,7 @@ class Window(QMainWindow, Ui_MainWindow):
             if command.lower() == "exit":
                 self.bash.ssh_close()
             elif command.lower().startswith("mon "):
-                if command.lower() == "mon -print" \
-                        or command.lower() == "mon -p":
+                if command.lower() in ("mon -print", "mon -p"):
                     if command.lower() == "mon -p":
                         self.bash.get_output_writer() \
                             .write_bypass("mon -p")
@@ -191,8 +189,7 @@ class Window(QMainWindow, Ui_MainWindow):
                         .write_bypass("Monitoring Stopped!")
                     self.bash.get_output_writer() \
                         .write_bypass(self.bash.get_prompt())
-                elif command.lower() == "mon -restart" \
-                        or command.lower() == "mon -r":
+                elif command.lower() in ("mon -restart", "mon -r"):
                     if command.lower() == "mon -r":
                         self.bash.get_output_writer() \
                             .write_bypass("mon -r")
@@ -241,7 +238,7 @@ class Window(QMainWindow, Ui_MainWindow):
                         .write_bypass("\n")
                     self.bash.get_output_writer() \
                         .write_bypass("This MON has Super Cow Powers.")
-                    self.bash.get_output_writer()\
+                    self.bash.get_output_writer() \
                         .write_bypass(self.bash.get_prompt())
 
                     # """
@@ -260,7 +257,7 @@ class Window(QMainWindow, Ui_MainWindow):
                     # """
                 else:
                     self.bash.get_output_writer() \
-                        .write_bypass(f"mon: invalid option "
+                        .write_bypass("mon: invalid option "
                                       f"-- '{command.lower().removeprefix('mon -')}'")
                     self.bash.get_output_writer() \
                         .write_bypass("Try 'mon -help' for more information.")

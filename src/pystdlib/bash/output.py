@@ -235,6 +235,7 @@ class OutputWriter(QtCore.QObject):
             self._filter_line(line.strip("\n").strip("\r"))
 
     def _filter_line(self, current_line):
+        # TODO: replace with less conditions
         if (current_line != ""
                 and current_line != "\r\n"
                 and not BashChecks.is_pexpect_garbage(current_line)

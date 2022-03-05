@@ -58,8 +58,9 @@ class VNCResolutions(StrEnum):
     SIZE_1600_X_1200 = "1600x1200"
     SIZE_1920_X_1080 = "1920x1080"
 
-# print(VNC_Resolutions.Size_1600x1200)
-# print(VNC_Resolutions.value_exists("1920x1080"))
-# print(VNC_Resolutions.key_exists("Size_1920x1080"))
-# print(VNC_Resolutions.Size_1920x1080 == "1920x1080")
-# print(VNC_Resolutions.get_value(VNC_Resolutions.Size_1920x1080))
+
+if __name__ == "__main__":
+    print(VNCResolutions.SIZE_1600_X_1200)
+    print(VNCResolutions.value_exists("1920x1080"))
+    print(VNCResolutions.key_exists("Size_1920x1080"))
+    print(VNCResolutions.SIZE_1920_X_1080 == "1920x1080")

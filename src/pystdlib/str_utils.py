@@ -194,8 +194,8 @@ def uuid(as_hex: bool = False) -> str:
 
 def random_string(size: int) -> str:
     """
-    Returns a string of the specified size containing random characters (uppercase/lowercase ascii letters and digits).
-    *Example:*
+    Returns a string of the specified size containing random characters
+    (uppercase/lowercase ascii letters and digits).
 
     >>> random_string(9) # possible output: "J1Mna4oY6"
 
@@ -215,10 +215,11 @@ def random_string(size: int) -> str:
 
 def secure_random_hex(byte_count: int) -> str:
     """
-    Generates a random string using secure low level random generator (os.urandom).
-    **Bear in mind**: due to hex conversion, the returned string will have a size that is exactly\
-    the double of the given `byte_count`.
-    *Example:*
+    Generates a random string using secure low level random generator
+    (os.urandom).
+
+    **Bear in mind**: due to hex conversion, the returned string will
+    have a size that is exactly the double of the given `byte_count`.
 
     >>> secure_random_hex(9) # possible output: 'aac4cf1d1d87bd5036'
 

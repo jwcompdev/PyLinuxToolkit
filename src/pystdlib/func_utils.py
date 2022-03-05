@@ -305,8 +305,8 @@ class Signature(inspect.Signature, Logged):
     def _parse_name_for_error(value) -> str:
         if str(value).startswith("<class"):
             return value.__name__
-        else:
-            return str(value)
+
+        return str(value)
 
     @classmethod
     def from_function(cls, func):
@@ -320,18 +320,16 @@ class Signature(inspect.Signature, Logged):
 
     @classmethod
     def from_callable(cls, obj, *, follow_wrapped=True, **kwargs):
-        """Constructs Signature for the given callable object.
-        """
+        """Constructs Signature for the given callable object."""
         sig = inspect.Signature.from_callable(obj, follow_wrapped=follow_wrapped)
         return Signature(_signature=sig)
 
     @staticmethod
-    def _validate_type(value, tp):
-        if tp == Parameter.empty:
+    def _validate_type(value, type_):
+        if type_ == Parameter.empty:
             return True
-        else:
-            return is_instance(value, tp) \
-                   or is_subclass(type(value), tp)
+
+        return is_instance(value, type_) or is_subclass(type(value), type_)
 
     def __init__(self, _func=None, *, _return_type=None,
                  _signature: inspect.Signature = None,
@@ -339,7 +337,7 @@ class Signature(inspect.Signature, Logged):
                  **kwargs: type | Parameter):
         """
         Initializes the Signature object.
-        
+
         NOTE: all parameter names start with an '_' to prevent the
         signature names from clashing if the signature needs to
         use the same names.
@@ -370,16 +368,16 @@ class Signature(inspect.Signature, Logged):
 
                 if type_valid:
                     if _make_keyword_only:
-                        for name, tp in kwargs.items():
+                        for name, type_ in kwargs.items():
                             _new_signature[name] = Parameter(
                                 name, Parameter.KEYWORD_ONLY,
-                                annotation=tp
+                                annotation=type_
                             )
                     else:
-                        for name, tp in kwargs.items():
+                        for name, type_ in kwargs.items():
                             _new_signature[name] = Parameter(
                                 name, Parameter.POSITIONAL_OR_KEYWORD,
-                                annotation=tp
+                                annotation=type_
                             )
                 elif param_valid:
                     for name, param in kwargs.items():
@@ -391,7 +389,7 @@ class Signature(inspect.Signature, Logged):
                 values = list(_new_signature.values())
                 for index in range(len(values)):
                     param = values[index]
-                    if type(param.annotation) == str:
+                    if type(param.annotation) is str:
                         name = param.name
                         annotation = get_type_from_name(param.annotation)
                         kind = param.kind
@@ -402,7 +400,7 @@ class Signature(inspect.Signature, Logged):
                         )
 
                 super().__init__(
-                    list(values),
+                    values,
                     return_annotation=_return_type,
                     __validate_parameters__=False
                 )
@@ -412,7 +410,7 @@ class Signature(inspect.Signature, Logged):
             values = list(sig.parameters.values())
             for index in range(len(values)):
                 param = values[index]
-                if type(param.annotation) == str:
+                if type(param.annotation) is str:
                     name = param.name
                     annotation = get_type_from_name(param.annotation)
                     kind = param.kind
@@ -442,18 +440,18 @@ class Signature(inspect.Signature, Logged):
             raise FuncSignatureError(func_error % "typing.NoReturn")
 
         # Check for 'Final' type
-        if any("typing.Final" in str(tp) for tp in _types):
+        if any("typing.Final" in str(type_) for type_ in _types):
             raise FuncSignatureError(func_error % "typing.Final")
 
-        for tp in _types:
+        for type_ in _types:
             # Check if the type is actually a type or a type hint
-            if tp is not Parameter.empty:
-                if tp.__class__ != type \
-                        and not str(typing.get_origin(tp)).startswith("typing.") \
-                        and not str(tp).startswith("typing."):
-                    raise FuncSignatureError(
-                        "Function signature parameters must be a valid type!"
-                    )
+            if type_ is not Parameter.empty \
+                    and type != type_.__class__ \
+                    and not str(typing.get_origin(type_)).startswith("typing.") \
+                    and not str(type_).startswith("typing."):
+                raise FuncSignatureError(
+                    "Function signature parameters must be a valid type!"
+                )
 
     def __contains__(self, item):
         """
@@ -470,10 +468,11 @@ class Signature(inspect.Signature, Logged):
         """
         if isinstance(item, str):
             return item in self.parameters.items()
-        elif isinstance(item, Parameter):
+
+        if isinstance(item, Parameter):
             return item in self.parameters.items()
-        else:
-            return False
+
+        return False
 
     def __len__(self):
         """
@@ -579,8 +578,8 @@ class Signature(inspect.Signature, Logged):
                     or param.kind == param.KEYWORD_ONLY \
                     or param.default != param.empty:
                 break
-            else:
-                num_args += 1
+
+            num_args += 1
 
         return num_args
 
@@ -625,7 +624,7 @@ class Signature(inspect.Signature, Logged):
             - VAR_KEYWORD - any **kwargs
 
         More info can be found here:
-https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python
+        https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python
 
         :param name: the key to match
         :return: the parameter kind matching the specified name
@@ -638,25 +637,25 @@ https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python
 
         is_valid = True
 
-        if not self.expected_arg_count == actual_arg_count:
-            if self.expected_arg_count <= actual_kwarg_count:
-                has_positional_only = False
+        if not self.expected_arg_count == actual_arg_count \
+                and self.expected_arg_count <= actual_kwarg_count:
+            has_positional_only = False
 
-                for param in self.parameters.values():
-                    if param.kind == Parameter.POSITIONAL_ONLY:
-                        has_positional_only = True
-                        break
+            for param in self.parameters.values():
+                if param.kind == Parameter.POSITIONAL_ONLY:
+                    has_positional_only = True
+                    break
 
-                if has_positional_only:
-                    is_valid = False
+            if has_positional_only:
+                is_valid = False
 
         if not is_valid:
             _length = len(self.parameters)
 
             if _length == 1:
-                arg_error_text = f"'args' must have at least 1 argument:"
+                arg_error_text = "'args' must have at least 1 argument:"
             else:
-                arg_error_text = f"'args' must have at least " \
+                arg_error_text = "'args' must have at least " \
                                  f"{_length} arguments:"
 
             if actual_arg_count == 1 and actual_kwarg_count == 1:
@@ -670,7 +669,7 @@ https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python
             elif actual_arg_count == 1 and actual_kwarg_count > 1:
                 arg_text = "and instead has " \
                            f"{actual_arg_count} arguments " \
-                           f"and has 1 kwarg."
+                           "and has 1 kwarg."
             else:
                 arg_text = "and instead has " \
                            f"{actual_arg_count} arguments " \
@@ -714,6 +713,8 @@ https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python
         """
         self._check_args_length(*args, **kwargs)
 
-        [self._check_arg(name, arg) for name, arg in zip(list(self.parameters.keys()), args)]
+        for name, arg in zip(list(self.parameters.keys()), args):
+            self._check_arg(name, arg)
 
-        [self._check_arg(name, kwarg) for name, kwarg in kwargs.items()]
+        for name, kwarg in kwargs.items():
+            self._check_arg(name, kwarg)

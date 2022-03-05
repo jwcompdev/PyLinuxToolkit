@@ -51,7 +51,7 @@ class Logged:
         cls.__logger = logging.getLogger(
             cls.__get_name(cls.__module__, cls.__name__))
 
-        return super(Logged, cls).__new__(cls)
+        return super().__new__(cls)
 
     @classmethod
     def __get_name(cls, *name_parts: str) -> str:

@@ -18,6 +18,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """Contains common use decorator functions."""
+from __future__ import annotations
+
 import cProfile
 import functools
 import inspect
@@ -85,7 +87,7 @@ class ClassPropertyContainer:
             _type = obj
         return self.prop_set.__get__(obj, _type)(value)
 
-    def setter(self, func: Callable) -> 'ClassPropertyContainer':
+    def setter(self, func: Callable) -> ClassPropertyContainer:
         """
         Allows creating setter in a property like way.
         :param func: Getter function.
@@ -98,9 +100,7 @@ class ClassPropertyContainer:
 
 
 class ClassPropertyMetaClass(type):
-    """
-    Metaclass that allows creating a standard setter.
-    """
+    """Metaclass that allows creating a standard setter."""
 
     def __setattr__(cls, key, value):
         """Overloads setter for class"""
@@ -111,8 +111,7 @@ class ClassPropertyMetaClass(type):
         if obj and isinstance(obj, ClassPropertyContainer):
             return obj.__set__(cls, value)
 
-        return super(ClassPropertyMetaClass,
-                     cls).__setattr__(key, value)
+        return super().__setattr__(key, value)
 
 
 class ClassPropertiesMixin(metaclass=ClassPropertyMetaClass):
@@ -143,22 +142,23 @@ class ConfigClassMeta(type):
             if callable(attr_value):
                 # Test standard (instance) methods
                 raise RuntimeError(
-                    f"no 'standard' methods (instance-level methods) are "
-                    f"allowed in the config class. Only classmethods and "
-                    f"staticmethods are allowed "
+                    "no 'standard' methods (instance-level methods) are "
+                    "allowed in the config class. Only classmethods and "
+                    "staticmethods are allowed "
                     f"('{attr_name}' is a 'standard' method).")
             if not attr_name.startswith("_") \
-                    and not isinstance(attr_value, (classmethod, staticmethod)):
-                if attr_name != attr_name.upper():
-                    raise RuntimeError(
-                        f"all class variable names in class {name} "
-                        f"must be upper case ('{attr_name}' value is not)")
+                    and not isinstance(attr_value, (classmethod, staticmethod)) \
+                    and attr_name != attr_name.upper():
+                raise RuntimeError(
+                    f"all class variable names in class {name} "
+                    f"must be upper case ('{attr_name}' value is not)")
         # Create the new type
         new_config_class: type = type.__new__(mcs, name, bases, attrs)
 
         # Disable class constructor (raises an error if called)
         def _raise_runtime_error(*_, **__):
             raise RuntimeError("configuration class cannot be instantiated")
+
         new_config_class.__init__ = _raise_runtime_error
 
         return new_config_class
@@ -177,7 +177,8 @@ class ConfigClassMixin(metaclass=ConfigClassMeta):
 
 def _fix(args, kwargs, sig):
     """
-    Fix args and kwargs to be consistent with the signature
+    Fix args and kwargs to be consistent
+    with the signature
     """
     bound_args = sig.bind(*args, **kwargs)
     bound_args.apply_defaults()  # needed for test_dan_schult
@@ -371,7 +372,7 @@ def warn_slow(func, timelimit=60, *args, **kwargs):
     :param timelimit: the time limit before warning
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :return: the decorated function
+    :return: the function return value
     """
     start = time.perf_counter()
     result = func(*args, **kwargs)
@@ -406,16 +407,15 @@ def show_cputime(func, *args, **kwargs):
     :param func: the decorated function
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :return: the decorated function
+    :return: the function return value
     """
-
     print(f"CPU time for {FuncInfo(func).full_name}:")
 
-    t = cProfile.Profile()
-    r = t.runcall(func, *args, **kwargs)
-    t.print_stats()
+    timer = cProfile.Profile()
+    result = timer.runcall(func, *args, **kwargs)
+    timer.print_stats()
 
-    return r
+    return result
 
 
 @decorator
@@ -435,9 +435,8 @@ def show_docs(func, *args, **kwargs):
     :param func: the decorated function
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :return: the decorated function
+    :return: the function return value
     """
-
     func = FuncInfo(func)
 
     print(f"Documentation for {func.full_name}:")
@@ -466,55 +465,52 @@ def show_time(func=None, *, timer=time.perf_counter, handler=None):
     __main__.some_function executed in
     0.000688076019287 seconds
     >>>
-
-    :param func: the decorated function
+    :param func: the function, if None decorator
+        usage is assumed
     :param timer: the timer object
     :param handler: a change_function that will be called
         when func is done execution
-    :return: the decorated function
+    :return: the function return value
     """
-
-    # noinspection PyShadowingNames
     @decorator
-    def _decorator_timeit(func, *args, **kwargs):
-        func = FuncInfo(func)
+    def _wrapper(_func, *args, **kwargs):
+        _func = FuncInfo(_func)
 
         start = timer()
-        result = func(*args, **kwargs)
+        result = _func(*args, **kwargs)
         end = timer()
 
         run_time = end - start
         if handler:
-            handler(func.full_name, run_time)
-        logging_logger.debug(f"{func.full_name}"
+            handler(_func.full_name, run_time)
+        logging_logger.debug(f"{_func.full_name}"
                              f" executed in {run_time} seconds")
 
         return result
 
-    return _decorator_timeit if func is None else _decorator_timeit(func)
+    return _wrapper if func is None else _wrapper(func)
 
 
 @decorator
 def show_trace(func, *args, **kwargs):
     # noinspection PyShadowingNames
     """
-        Display epic argument and context call information of given function.
+    Display epic argument and context call information of given function.
 
-        >>> @show_trace
-        >>> def complex_function(a, b, c, **kwargs):
-        ...
-        >>> complex_function('alpha', 'beta', False, debug=True)
-        calling haystack.submodule.complex_function with
-        args: ({'a': 'alpha', 'b': 'beta', 'c': False},)
-        kwargs: {'debug': True}
-        >>>
+    >>> @show_trace
+    >>> def complex_function(a, b, c, **kwargs):
+    ...
+    >>> complex_function('alpha', 'beta', False, debug=True)
+    calling haystack.submodule.complex_function with
+    args: ({'a': 'alpha', 'b': 'beta', 'c': False},)
+    kwargs: {'debug': True}
+    >>>
 
-        :param func: the decorated function
-        :param args: the positional args of the function
-        :param kwargs: the keyword args of the function
-        :return: the decorated function
-        """
-
+    :param func: the decorated function
+    :param args: the positional args of the function
+    :param kwargs: the keyword args of the function
+    :return: the function return value
+    """
     func = FuncInfo(func)
 
     print(f"Calling {func.full_name} with: \n   "
@@ -529,9 +525,8 @@ def show_num_calls(func):
     Count the number of calls to a function.
 
     :param func: the decorated function
-    :return: the decorated function
+    :return: the function return value
     """
-
     @functools.wraps(func)
     def _wrapper(*args, **kwargs):
         _wrapper.num_calls += 1
@@ -549,7 +544,7 @@ def auto_args(func):
     A decorator for automatically copying constructor arguments to `self`.
 
     :param func: the decorated function
-    :return: the decorated function
+    :return: the function return value
     """
     # Get a signature object for the target method:
     sig = inspect.signature(func)
@@ -559,9 +554,9 @@ def auto_args(func):
         # Parse the provided arguments using the target's signature:
         bound_args = sig.bind(self, *args, **kwargs)
         # Save away the arguments on `self`:
-        for k, v in bound_args.arguments.items():
-            if k != "self":
-                setattr(self, k, v)
+        for key, value in bound_args.arguments.items():
+            if key != "self":
+                setattr(self, key, value)
         # Call the actual constructor for anything else:
         return func(self, *args, **kwargs)
 
@@ -573,9 +568,8 @@ def singleton(cls):
     Makes the decorated class a singleton.
 
     :param cls: the decorated class
-    :return: the decorated class
+    :return: the singleton class instance
     """
-
     @functools.wraps(cls)
     def _wrapper(*args, **kwargs):
         if _wrapper.instance is None:
@@ -599,7 +593,7 @@ def sleep_after(func, duration: int = 0, *args, **kwargs):
     :param duration: the number of seconds to sleep
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :return: the decorated function
+    :return: the function return value
     """
     result = func(*args, **kwargs)
     time.sleep(duration)
@@ -616,7 +610,7 @@ def sleep_before(func, duration: int = 0, *args, **kwargs):
     :param duration: the number of seconds to sleep
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :return: the decorated function
+    :return: the function return value
     """
     time.sleep(duration)
     return func(*args, **kwargs)
@@ -632,9 +626,9 @@ def todo(func, message="This function is not yet implemented.", *args, **kwargs)
     :param message: the error message to display
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :returns: the decorated function
+    :returns: No Value
     """
-    raise ValueError(message)
+    raise NotImplementedError(message)
 
 
 # noinspection SpellCheckingInspection
@@ -663,33 +657,32 @@ def trycatch(func=None, *, exception=None, handler=None, silent=False):
     >>> function()
     >>>
 
-    :param func: the decorated function
+    :param func: the function, if None decorator usage is
+        assumed
     :param exception: the exception, list or tuple of
         exceptions to check
     :param handler: a function that will be called when an
         exception occurs
     :param silent: if True ignores any exception that occurs
-    :return: the decorated function
+    :return: the function return value
     """
-
     if not exception:
         exception = Exception
-    elif type(exception) == list:
+    elif type(exception) is list:
         exception = tuple(exception)
 
-    # noinspection PyShadowingNames
     @decorator
-    def _wrapper(func, *args, **kwargs):
+    def _wrapper(_func, *args, **kwargs):
         try:
-            return func(*args, **kwargs)
-        except exception as e:
+            return _func(*args, **kwargs)
+        except exception as exc:
             if not silent:
                 if not handler:
                     logging.exception("Exception occurred during execution"
-                                      f"of {func.__name__}: [{e}]")
+                                      f"of {_func.__name__}: [{exc}]")
                     traceback.print_exc()
                 else:
-                    handler(e)
+                    handler(exc)
 
     return _wrapper if func is None else _wrapper(func)
 
@@ -709,10 +702,11 @@ def silent_trycatch(func=None, *, exception=None):
     >>> function()
     >>>
 
-    :param func: the decorated function
+    :param func: the decorated function, if None decorator usage
+        is assumed
     :param exception: the exception, list or tuple of exceptions
         to check. If empty all exceptions will be caught
-    :return: the decorated function
+    :return: the function return value
     """
     return trycatch(func=func, exception=exception, silent=True)
 
@@ -720,32 +714,31 @@ def silent_trycatch(func=None, *, exception=None):
 def throttle(func=None, *, limit=1, every=1):
     # noinspection GrazieInspection
     """
-        Throttle the rate the function can be invoked.
+    Throttle the rate the function can be invoked.
 
-        The rate is `limit` over `every`, where limit is the number of
-        invocation allowed every `every` seconds.
-        "throttle(4, 60)" creates a decorator that limits the function calls
-        to 4 per minute. If not specified, "every" defaults to 1 second.
+    The rate is `limit` over `every`, where limit is the number of
+    invocation allowed every `every` seconds.
+    "throttle(4, 60)" creates a decorator that limits the function calls
+    to 4 per minute. If not specified, "every" defaults to 1 second.
 
-        :param func: the decorated function
-        :param limit: the limit
-        :param every: the number of seconds frequency
-        :return: the decorated function
-        """
+    :param func: the function, if None decorator
+        usage is assumed
+    :param limit: the limit
+    :param every: the number of seconds frequency
+    :return: the function return value
+    """
     semaphore = threading.Semaphore(limit)
 
-    # noinspection PyShadowingNames
     @decorator
-    def _wrapper(func, *args, **kwargs):
-        semaphore.acquire()
+    def _wrapper(_func, *args, **kwargs):
+        with semaphore.acquire():
+            try:
+                return _func(*args, **kwargs)
 
-        try:
-            return func(*args, **kwargs)
-
-        finally:  # ensure semaphore release
-            timer = threading.Timer(every, semaphore.release)
-            timer.setDaemon(True)  # allows the timer to be canceled on exit
-            timer.start()
+            finally:  # ensure semaphore release
+                timer = threading.Timer(every, semaphore.release)
+                timer.daemon = True  # allows the timer to be canceled on exit
+                timer.start()
 
     return _wrapper if func is None else _wrapper(func)
 
@@ -758,25 +751,25 @@ def require_root(func, *args, **kwargs):
     :param func: the decorated function
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :return: the decorated function
+    :return: the function return value
     """
     if os.getuid() == 0:
         result = func(*args, **kwargs)
         return result
-    else:
-        logging_logger.critical(f"[PERMISSION REQUIRED!] You need to be a root user "
-                                f"to execute function [{func.__name__}()]")
-        sys.exit(0)
+
+    logging_logger.critical("[PERMISSION REQUIRED!] You need to be a root user "
+                            f"to execute function [{func.__name__}()]")
+    sys.exit(0)
 
 
 ########################################
 # Validation Decorators                #
 ########################################
-def _validate_types(value, t):
-    return isinstance(value, t) or issubclass(type(value), t)
+def _validate_types(value, type_):
+    return isinstance(value, type_) or issubclass(type(value), type_)
 
 
-def accepts(**signature):
+def accepts(func=None, **signature):
     """
     Verifies that the specified signature matches the arguments
     when the function is called.
@@ -784,37 +777,43 @@ def accepts(**signature):
     If the signature is None then the type hints on the function
     are checked instead.
 
+    :param func: the function to check, if None decorator usage is
+        assumed
     :param signature: the signature to check, if empty the type
         hints on the function decorate checked instead
-    :return:
+    :return: The result of the function if verification didn't fail
     """
     @decorator
-    def _wrapped(func, *args, **kwargs):
+    def _wrapped(_func, *args, **kwargs):
         if signature is not None:
             sig = Signature(signature)
         else:
-            func = FuncInfo(func)
+            _func = FuncInfo(_func)
             sig = func.signature
 
         sig.verify_args(*args, **kwargs)
 
-        return func(*args, **kwargs)
+        return _func(*args, **kwargs)
 
-    return _wrapped
+    return _wrapped if func is None else _wrapped(func)
 
 
-def returns(return_type):
+def returns(func=None, return_type=None):
     """
     Verifies that the specified type is returned by the function
 
+    :param func: the change_function to check, if
+        None decorator usage is assumed
     :param return_type: the expected return type
-    :return: True if the type matches
+    :return: the function return value if the type matches
     """
     @decorator
-    def _wrapped(func, *args, **kwargs):
-        result = func(*args, **kwargs)
+    def _wrapped(_func, *args, **kwargs):
+        result = _func(*args, **kwargs)
         _validate_types(result, return_type)
         return result
+
+    return _wrapped if func is None else _wrapped(func)
 
 
 ########################################
@@ -824,34 +823,34 @@ def returns(return_type):
 def threaded(func, *args, **kwargs):
     # noinspection GrazieInspection,PyShadowingNames
     """
-        Runs the function in a thread.
+    Runs the function in a thread.
 
-        Description:
-            - Using standard threading.Thread for creating thread
-            - Can pass args and kwargs to the function
-            - Will start a thread but will give no control over it
+    Description:
+        - Using standard threading.Thread for creating thread
+        - Can pass args and kwargs to the function
+        - Will start a thread but will give no control over it
 
-        >>> @threaded
-        >>> def display(name, *args, **kwargs):
-        >>>     for i in range(5):
-        >>>             print('Printing {} from thread'.format(name))
-        ...
-        >>> display('Siddhesh')
-        Printing ('Siddhesh',) from thread
-        Thread started for function <function display at 0x7f1d60f7cb90>
-        Printing ('Siddhesh',) from thread
-        Printing ('Siddhesh',) from thread
-        Printing ('Siddhesh',) from thread
-        Printing ('Siddhesh',) from thread
-        >>>
+    >>> @threaded
+    >>> def display(name, *args, **kwargs):
+    >>>     for i in range(5):
+    >>>             print('Printing {} from thread'.format(name))
+    ...
+    >>> display('Siddhesh')
+    Printing ('Siddhesh',) from thread
+    Thread started for function <function display at 0x7f1d60f7cb90>
+    Printing ('Siddhesh',) from thread
+    Printing ('Siddhesh',) from thread
+    Printing ('Siddhesh',) from thread
+    Printing ('Siddhesh',) from thread
+    >>>
 
-        :param func: the decorated function
-        :param args: the positional args of the function
-        :param kwargs: the keyword args of the function
-        :return: the decorated function
-        """
+    :param func: the decorated function
+    :param args: the positional args of the function
+    :param kwargs: the keyword args of the function
+    :return: No Return
+    """
     threading.Thread(target=func, args=(args, kwargs)).start()
-    logging_logger.debug('Thread started for function {}'.format(func))
+    logging_logger.debug(f'Thread started for function {func}')
 
 
 @decorator
@@ -898,32 +897,31 @@ def thread_pool(func, executor: ThreadPoolExecutor = None,
 def create_threads(func, thread_count=1, *args, **kwargs):
     # noinspection PyShadowingNames
     """
-        Creates multiple threads of a single function.
+    Creates multiple threads of a single function.
 
-        Description:
-            - Using standard threading.Thread for thread creation
-            - Can pass args and kwargs to the function
-            - Will start number of threads based on the count specified while decorating
+    Description:
+        - Using standard threading.Thread for thread creation
+        - Can pass args and kwargs to the function
+        - Will start number of threads based on the count specified while decorating
 
-        >>> @create_threads(thread_count=2)
-        >>> def p(*args, **kwargs):
-        >>>     pass
-        >>>
-        >>> p()
-        Thread started for function <function p at 0x7f6725ecccf8>
-        Thread started for function <function p at 0x7f6725ecccf8>
-        >>>
+    >>> @create_threads(thread_count=2)
+    >>> def p(*args, **kwargs):
+    >>>     pass
+    >>>
+    >>> p()
+    Thread started for function <function p at 0x7f6725ecccf8>
+    Thread started for function <function p at 0x7f6725ecccf8>
+    >>>
 
-        :param func: the decorated function
-        :param thread_count: the number of threads to create
-        :param args: the positional args of the function
-        :param kwargs: the keyword args of the function
-        :return: the decorated function
-        """
-    import threading
-    for i in range(thread_count):
+    :param func: the decorated function
+    :param thread_count: the number of threads to create
+    :param args: the positional args of the function
+    :param kwargs: the keyword args of the function
+    :return: No Return
+    """
+    for _ in range(thread_count):
         threading.Thread(target=func, args=(args, kwargs)).start()
-        logging.info('Thread started for function {}'.format(func))
+        logging.info(f'Thread started for function {func}')
 
 
 ########################################
@@ -933,16 +931,16 @@ def change_args(func=None, *args, **kwargs):
     """
     Injects the specified arguments into the function.
 
-    :param func: the decorated function
+    :param func: the function to run, if None
+        decorator usage is assumed
     :param args: the positional arguments to inject
     :param kwargs: run_in_thread keyword arguments to inject
-    :return: the decorated function
+    :return: the function return value
     """
-
-    # noinspection PyUnusedLocal,PyShadowingNames
+    # noinspection PyUnusedLocal
     @decorator
-    def _wrapper(func, *unneeded_args, **unneeded_kwargs):
-        return func(*args, **kwargs)
+    def _wrapper(_func, *unneeded_args, **unneeded_kwargs):
+        return _func(*args, **kwargs)
 
     return _wrapper if func is None else _wrapper(func)
 
@@ -951,10 +949,10 @@ def change_function(func=None):
     """
     Hijacks the function call and runs the specified function instead.
 
-    :param func: the function to run
-    :return: the decorated function
+    :param func: the function to run, if None
+        decorator usage is assumed
+    :return: the function return value
     """
-
     # noinspection PyUnusedLocal
     @decorator
     def _wrapper(unneeded_func, *args, **kwargs):
@@ -986,7 +984,8 @@ def repeat(func, num: int = 1, *args, **kwargs):
     :param num: the number of times to run the function
     :param args: the positional args of the function
     :param kwargs: the keyword args of the function
-    :return: the decorated function
+    :return: the function return value of the last time the
+        function was run
     """
     result = None
     for _ in range(num):
@@ -1011,19 +1010,19 @@ def __retry_internal(func, exceptions=Exception, tries=-1, delay=0,
         (fixed if a number, random if a range tuple (min, max))
     :param logger: logger.warning(fmt, error, delay) will be called on
         failed attempts. If None, logging is disabled.
-    :returns: the result of the function.
+    :returns: the function return value
     """
     _tries, _delay = tries, delay
     while _tries:
         try:
             return func()
-        except exceptions as e:
+        except exceptions as exc:
             _tries -= 1
             if not _tries:
                 raise
 
             if logger is not None:
-                logger.warning(f"{e}, retrying in {_delay} seconds...")
+                logger.warning(f"{exc}, retrying in {_delay} seconds...")
 
             time.sleep(_delay)
             _delay *= backoff
@@ -1037,11 +1036,12 @@ def __retry_internal(func, exceptions=Exception, tries=-1, delay=0,
                 _delay = min(_delay, max_delay)
 
 
-def retry(exceptions=Exception, tries=-1, delay=0, max_delay=None,
+def retry(func=None, exceptions=Exception, tries=-1, delay=0, max_delay=None,
           backoff=1, jitter=0, logger=logging_logger):
     """
     Returns a retry decorator.
 
+    :param func: the function, if None decorator usage is assumed
     :param exceptions: catch all exceptions, a specific exception,
         or an iterable of exceptions.
     :param tries: the maximum number of attempts.
@@ -1053,17 +1053,16 @@ def retry(exceptions=Exception, tries=-1, delay=0, max_delay=None,
         (fixed if a number, random if a range tuple (min, max))
     :param logger: logger.warning(fmt, error, delay) will be called on
         failed attempts. If None, logging is disabled.
-    :returns: a retry decorator.
+    :returns: the function return value
     """
-
     @decorator
-    def _wrapper(func, *args, **kwargs):
-        _args = args if args else list()
-        _kwargs = kwargs if kwargs else dict()
-        return __retry_internal(partial(func, *_args, **_kwargs), exceptions, tries,
+    def _wrapper(_func, *args, **kwargs):
+        _args = args if args else []
+        _kwargs = kwargs if kwargs else {}
+        return __retry_internal(partial(_func, *_args, **_kwargs), exceptions, tries,
                                 delay, max_delay, backoff, jitter, logger)
 
-    return _wrapper
+    return _wrapper if func is None else _wrapper(func)
 
 
 def retry_call(func, args=None, kwargs=None, exceptions=Exception, tries=-1,
@@ -1085,9 +1084,9 @@ def retry_call(func, args=None, kwargs=None, exceptions=Exception, tries=-1,
         (fixed if a number, random if a range tuple (min, max))
     :param logger: logger.warning(fmt, error, delay) will be called on
         failed attempts. If None, logging is disabled.
-    :returns: the result of the f function.
+    :returns: the function return value
     """
-    _args = args if args else list()
-    _kwargs = kwargs if kwargs else dict()
+    _args = args if args else []
+    _kwargs = kwargs if kwargs else {}
     return __retry_internal(partial(func, *_args, **_kwargs), exceptions, tries,
                             delay, max_delay, backoff, jitter, logger)

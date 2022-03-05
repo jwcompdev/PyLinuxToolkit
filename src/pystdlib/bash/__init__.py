@@ -46,4 +46,3 @@ class BashPermissionError(BashError):
 
 class BashValueError(BashError):
     """Raised when the incorrect value was supplied"""
-    

@@ -146,7 +146,9 @@ class LocalBash(BashBase, Logged):
         """
         return pwd.getpwuid(os.getuid()).pw_name
 
-    def _internal_run_local_command_string(self, command: str, client: spawn) -> StringValue:
+    def _internal_run_local_command_string(self, command: str,
+                                           client: spawn) \
+            -> StringValue:
         client.sendline(command)
         client.expect_exact(self.get_prompt())
         before = client.before.replace(command, "").strip("\r\n")
@@ -272,7 +274,10 @@ class LocalBash(BashBase, Logged):
                     .replace("\n", "").replace("\r", "").strip()
 
                 self._debug(f"Saving output of '{command}' to BashCommands...")
-                command_obj = BashCommand(command, self.current_dir, result, exit_code.to_int())
+                command_obj = BashCommand(command,
+                                          self.current_dir,
+                                          result,
+                                          exit_code.to_int())
                 self._commands.add_command(command_obj)
                 self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
                 self._debug(f"Output was:\n{self._commands.get_last().output}")

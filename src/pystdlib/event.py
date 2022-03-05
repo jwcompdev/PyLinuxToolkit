@@ -65,8 +65,8 @@ class Namespace:
         else:
             if isinstance(name, StringValue):
                 raise ValueError(f"'event' type is invalid! ({type(name.get())})")
-            else:
-                raise ValueError(f"'event' type is invalid! ({type(name)})")
+
+            raise ValueError(f"'event' type is invalid! ({type(name)})")
 
         # Split the namespace into it's individual parts
         # Convert to string is done to get value if
@@ -119,196 +119,6 @@ class Namespace:
         :return: the name of the namespace
         """
         return self._name
-
-
-# class Signature():
-#     """Represents a function parameter signature."""
-#
-#     _type_origins = ("Any", "Final", "Literal", "Optional", "Union")
-#
-#     _type_hints = ("Hashable", "Awaitable", "Coroutine",
-#                    "AsyncIterable", "AsyncIterator", "Iterable",
-#                    "Iterator", "Reversible", "Sized", "Container",
-#                    "Collection", "Callable", "AbstractSet",
-#                    "MutableSet", "Mapping", "MutableMapping",
-#                    "Sequence", "MutableSequence", "ByteString",
-#                    "Tuple", "List", "Deque", "Set", "FrozenSet",
-#                    "MappingView", "KeysView", "ItemsView",
-#                    "ValuesView", "ContextManager",
-#                    "AsyncContextManager",
-#                    "Dict", "DefaultDict", "OrderedDict",
-#                    "Counter", "ChainMap", "Generator",
-#                    "AsyncGenerator", "Type")
-#
-#     def __init__(self, **kwargs: type):
-#         """
-#         Initializes the Signature object.
-#
-#         :param kwargs: the keyword signature to set
-#         """
-#         self._signature = kwargs
-#
-#         self._length: int = len(self._signature)
-#         self._names: list[str] = list(self._signature.keys())
-#         self._types: list[type] = list(self._signature.values())
-#
-#         func_error = "Event signature parameters cannot be of type '%s'!"
-#
-#         # noinspection PyTypeChecker
-#         if self._types.count(None) > 0:
-#             raise EventSignatureError(func_error % "None")
-#
-#         from typing import NoReturn
-#         if self._types.count(NoReturn) > 0:
-#             raise EventSignatureError(func_error % "typing.NoReturn")
-#
-#         from typing import ClassVar
-#         # noinspection PyTypeChecker
-#         if self._types.count(ClassVar) > 0:
-#             raise EventSignatureError(func_error % "typing.ClassVar")
-#
-#         from typing import get_origin
-#         for value in self._types:
-#             if value.__class__ != type \
-#                     and str(get_origin(value)).lstrip("typing.") not in self._type_origins \
-#                     and str(value).lstrip("typing.") not in self._type_hints:
-#                 raise EventSignatureError(
-#                     "Event signature parameters must be a valid type!"
-#                 )
-#
-#     def __contains__(self, item):
-#         """
-#         Returns True if the item is in the signature.
-#
-#         :param item: the item to check
-#         :return: True if the item is in the signature
-#         """
-#         return item in self._signature
-#
-#     def __str__(self):
-#         """
-#         Returns a string representation of the signature.
-#
-#         :return: a string representation of the signature
-#         """
-#         if self._length == 0:
-#             return "NONE"
-#
-#         return ", ".join(k + "=" + v.__name__
-#                          if str(v).startswith("<class")
-#                          else k + "=" + str(v)
-#                          for k, v in self._signature.items())
-#
-#     def __repr__(self):
-#         """
-#         Returns a code representation of this signature.
-#
-#         :return: a code representation of this signature
-#         """
-#         return f"Signature({self})"
-#
-#     def __eq__(self, other):
-#         """
-#         Returns True if 'other' equals this signature.
-#
-#         :param other: the object to check
-#         :return: True if 'other' equals this signature
-#         """
-#         if isinstance(other, Signature):
-#             return self._names == other._names and self._types == other._types
-#
-#         return False
-#
-#     @property
-#     def length(self) -> int:
-#         """
-#         Returns the signature length.
-#
-#         :return: the signature length
-#         """
-#         return self._length
-#
-#     @property
-#     def names(self) -> list[str]:
-#         """
-#         Returns a surface copy list of all parameter names.
-#
-#         :return: a surface copy list of all parameter names
-#         """
-#         return list(self._names)
-#
-#     @property
-#     def types(self) -> list[type]:
-#         """
-#         Returns a surface copy list of all parameter types.
-#
-#         :return: a surface copy list of all parameter types
-#         """
-#         return list(self._types)
-#
-#     def get_type(self, key) -> type:
-#         """
-#         Returns the type matching the specified key.
-#
-#         :param key: the key to match
-#         :return: the type matching the specified key
-#         """
-#         return self._signature[key]
-#
-#     def verify_kwargs(self, **kwargs):
-#         """
-#         Verifies if the specified kwargs matches the signature.
-#
-#         :param kwargs: the kwargs to verify
-#         :raises EventFireMismatchError: if the kwargs doesn't match
-#         """
-#         self._check_length(kwargs, "'kwargs'", "argument", EventFireMismatchError)
-#
-#         for key, value in kwargs.items():
-#             arg_error_text = "Signature Mismatch " \
-#                              f"({self}) " \
-#                              f"[Parameter '{key}']: "
-#
-#             # Checks if the parameter is in the signature
-#             if key in self._signature:
-#                 p_value = self._signature[key]
-#
-#                 # Converts the name for error messages
-#                 if str(p_value).startswith("<class"):
-#                     p_value_name = p_value.__name__
-#                 else:
-#                     p_value_name = str(p_value)
-#
-#                 # Checks if the parameter type is one of the built-in type hints
-#                 if str(get_origin(p_value)) in (
-#                         'typing.Union', 'typing.Optional', 'typing.Final'
-#                 ):
-#                     params = get_args(p_value)
-#                     # if it is a type hint, expands the hint parameters
-#                     # and checks parameter type against them
-#                     if type(value) not in params:
-#                         raise EventFireMismatchError(arg_error_text +
-#                                                      f"Type should be '{p_value_name}'")
-#                 # Checks if the parameter type is the Literal type hint
-#                 elif str(get_origin(p_value)) == "typing.Literal":
-#                     params = get_args(p_value)
-#                     # if it is a Literal, expands the Literal literals
-#                     # and checks value against them
-#                     if value not in params:
-#                         raise EventFireMismatchError(arg_error_text +
-#                                                      f"Literal should be one of '{params}'")
-#                 elif p_value == Callable:
-#                     if not callable(value):
-#                         raise EventFireMismatchError(arg_error_text +
-#                                                      f"Type should be 'typing.Callable'")
-#
-#                 # Checks if the parameter type is the Any type hint,
-#                 # otherwise checks if type matches the actual signature type
-#                 elif p_value != Any and type(value) is not p_value:
-#                     raise EventFireMismatchError(arg_error_text +
-#                                                  f"Type should be '{p_value_name}'")
-#             else:
-#                 raise EventFireMismatchError(arg_error_text + "Not Found")
 
 
 class _Handler:
@@ -453,7 +263,8 @@ class Branch(Logged):
 
         :param handler: the function to remove as handler
         """
-        indexes = [index for index, hdr in enumerate(self._handlers) if hdr.func == handler]
+        indexes = [index for index, hdr in enumerate(self._handlers)
+                   if hdr.func == handler]
 
         for i in indexes[::-1]:
             self._handlers.pop(i)
@@ -648,9 +459,11 @@ class Event(Logged):
         self._max_handlers = _max_handlers
 
         if _signature is None:
-            self._signature = Signature(_make_keyword_only=_make_keyword_only, **kwargs)
+            self._signature = Signature(_make_keyword_only=_make_keyword_only,
+                                        **kwargs)
         elif isinstance(_signature, dict):
-            self._signature = Signature(_make_keyword_only=_make_keyword_only, **{**_signature, **kwargs})
+            self._signature = Signature(_make_keyword_only=_make_keyword_only,
+                                        **{**_signature, **kwargs})
         elif isinstance(_signature, Signature):
             self._signature = _signature
         else:
@@ -837,11 +650,14 @@ class Event(Logged):
         """
         self._max_handlers = max_handlers
 
-    def _check_handler_length(self, obj, requirement_name: str, value_name: str, exception, signature: Signature):
+    def _check_handler_length(self, obj, requirement_name: str,
+                              value_name: str, exception,
+                              signature: Signature):
         # Checks to see if there is fewer parameters than what is required
         if len(obj) < signature.length:
             if signature.length == 1:
-                arg_error_text = f"{requirement_name} must have at least 1 {value_name}:"
+                arg_error_text = f"{requirement_name} must have at least " \
+                                 f"1 {value_name}:"
             else:
                 arg_error_text = f"{requirement_name} must have at least " \
                                  f"{signature.length} {value_name}s:"
@@ -872,7 +688,8 @@ class Event(Logged):
         if not (len(params) == 1
                 and list(params.values())[0].kind == inspect.Parameter.VAR_KEYWORD):
 
-            self._check_handler_length(params, "Handler", "parameter", EventHandlerMismatchError, signature)
+            self._check_handler_length(params, "Handler", "parameter",
+                                       EventHandlerMismatchError, signature)
 
             index_offset = 0
 
@@ -912,9 +729,9 @@ class Event(Logged):
                     if param.default is param.empty:
                         raise EventHandlerMismatchError(
                             arg_error_text + "No Default Value!")
-                    else:
-                        self._warning(arg_error_text +
-                                      f"Default Value - '{param.default}'")
+
+                    self._warning(arg_error_text +
+                                  f"Default Value - '{param.default}'")
 
                 # Checks if this parameter has the correct name
                 elif param.name != signature.names[mod_index]:
@@ -988,7 +805,7 @@ class Event(Logged):
                               f"'{FuncInfo(func).full_name}' "
                               f"as handler to '{str(event)}' event, "
                               f"Max handlers ({self._max_handlers}) "
-                              f"has been exceeded!")
+                              "has been exceeded!")
                 return func
 
             # Create a new handler and append it to the list
@@ -1109,7 +926,7 @@ class Event(Logged):
                 self._warning("Cannot remove "
                               f"'{FuncInfo(func).full_name}' "
                               f"handler from '{str(event)}' event, "
-                              f"Event doesn't exist!")
+                              "Event doesn't exist!")
                 return func
 
             branch.remove_handler(func)
@@ -1137,19 +954,17 @@ class Event(Logged):
             """
             self._root.remove_handler(func)
 
-            self._debug(f"Removed all 'on_any' event handlers!")
+            self._debug("Removed all 'on_any' event handlers!")
 
             return func
 
         return off_any(handler) if handler else off_any
 
     def off_all(self) -> NoReturn:
-        """
-        Removes all registered functions.
-        """
+        """Removes all registered functions."""
         self._root = Branch("ROOT")
 
-        self._debug(f"Removed all event handlers!")
+        self._debug("Removed all event handlers!")
 
     def handlers(self,
                  event: str | StringValue | Namespace = "") \

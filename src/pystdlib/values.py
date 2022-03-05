@@ -60,7 +60,7 @@ class Value(ABC):
         """
 
 
-class NumberValue(Value, Number):
+class NumberValue(Value, Number, SupportsInt, SupportsFloat):
     """Provides mutable access to a number"""
 
     def __eq__(self, other: int | float | IntegerValue | FloatValue) \
@@ -258,11 +258,11 @@ class NumberValue(Value, Number):
         """
 
     @abstractmethod
-    def set(self, number: int | float) -> NumberValue:
+    def set(self, value: int | float) -> NumberValue:
         """
         Sets the value.
 
-        :param number: the value to set
+        :param value: the value to set
         :return this instance for use in method chaining
         """
 
@@ -587,7 +587,7 @@ class IntegerValue(NumberValue):
             False otherwise.
         """
         if isinstance(other, (IntegerValue, FloatValue)):
-            return BooleanValue(self._value == other._value)
+            return BooleanValue(self._value == other.get())
 
         return BooleanValue(self._value == other)
 
@@ -651,7 +651,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value + other)
 
         if isinstance(other, IntegerValue):
-            self._value += other._value
+            self._value += other.get()
             return self
 
         if isinstance(other, FloatValue):
@@ -668,7 +668,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value + other)
 
         if isinstance(other, IntegerValue):
-            return IntegerValue(self._value + other._value)
+            return IntegerValue(self._value + other.get())
 
         if isinstance(other, FloatValue):
             return FloatValue(self._value + other.get())
@@ -684,7 +684,7 @@ class IntegerValue(NumberValue):
             return FloatValue(other + self._value)
 
         if isinstance(other, IntegerValue):
-            return FloatValue(other._value + self._value)
+            return FloatValue(other.get() + self._value)
 
         if isinstance(other, FloatValue):
             return FloatValue(other.get() + self._value)
@@ -701,7 +701,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value - other)
 
         if isinstance(other, IntegerValue):
-            self._value -= other._value
+            self._value -= other.get()
             return self
 
         if isinstance(other, FloatValue):
@@ -718,7 +718,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value - other)
 
         if isinstance(other, IntegerValue):
-            return IntegerValue(self._value - other._value)
+            return IntegerValue(self._value - other.get())
 
         if isinstance(other, FloatValue):
             return FloatValue(self._value - other.get())
@@ -726,7 +726,7 @@ class IntegerValue(NumberValue):
         return NotImplemented
 
     def __rsub__(self,
-                 other: SupportsIntFloatStr | IntegerValue | FloatValue | StringValue)\
+                 other: SupportsIntFloatStr | IntegerValue | FloatValue | StringValue) \
             -> IntegerValue | FloatValue | StringValue:
         if isinstance(other, int):
             return IntegerValue(other - self._value)
@@ -735,7 +735,7 @@ class IntegerValue(NumberValue):
             return FloatValue(other - self._value)
 
         if isinstance(other, IntegerValue):
-            return IntegerValue(other._value - self._value)
+            return IntegerValue(other.get() - self._value)
 
         if isinstance(other, FloatValue):
             return FloatValue(other.get() - self._value)
@@ -748,9 +748,9 @@ class IntegerValue(NumberValue):
 
         if isinstance(other, IntegerValue):
             if self._value >= 0:
-                return StringValue(other._value[self._value:])
+                return StringValue(other.get()[self._value:])
 
-            return StringValue(other._value[:self._value])
+            return StringValue(other.get()[:self._value])
 
         return NotImplemented
 
@@ -764,7 +764,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value * other)
 
         if isinstance(other, IntegerValue):
-            self._value *= other._value
+            self._value *= other.get()
             return self
 
         if isinstance(other, FloatValue):
@@ -781,7 +781,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value * other)
 
         if isinstance(other, IntegerValue):
-            return IntegerValue(self._value * other._value)
+            return IntegerValue(self._value * other.get())
 
         if isinstance(other, FloatValue):
             return FloatValue(self._value * other.get())
@@ -797,7 +797,7 @@ class IntegerValue(NumberValue):
             return FloatValue(other * self._value)
 
         if isinstance(other, IntegerValue):
-            return IntegerValue(other._value * self._value)
+            return IntegerValue(other.get() * self._value)
 
         if isinstance(other, FloatValue):
             return FloatValue(other.get() * self._value)
@@ -811,7 +811,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value / other)
 
         if isinstance(other, (IntegerValue, FloatValue)):
-            return FloatValue(self._value / other._value)
+            return FloatValue(self._value / other.get())
 
         return NotImplemented
 
@@ -821,7 +821,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value / other)
 
         if isinstance(other, (IntegerValue, FloatValue)):
-            return FloatValue(self._value / other._value)
+            return FloatValue(self._value / other.get())
 
         return NotImplemented
 
@@ -831,7 +831,7 @@ class IntegerValue(NumberValue):
             return FloatValue(other / self._value)
 
         if isinstance(other, (IntegerValue, FloatValue)):
-            return FloatValue(other._value / self._value)
+            return FloatValue(other.get() / self._value)
 
         return NotImplemented
 
@@ -842,7 +842,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value // other)
 
         if isinstance(other, (IntegerValue, FloatValue)):
-            return FloatValue(self._value // other._value)
+            return FloatValue(self._value // other.get())
 
         return NotImplemented
 
@@ -852,7 +852,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value // other)
 
         if isinstance(other, (IntegerValue, FloatValue)):
-            return FloatValue(self._value // other._value)
+            return FloatValue(self._value // other.get())
 
         return NotImplemented
 
@@ -862,7 +862,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value // other)
 
         if isinstance(other, (IntegerValue, FloatValue)):
-            return FloatValue(self._value // other._value)
+            return FloatValue(self._value // other.get())
 
         return NotImplemented
 
@@ -877,7 +877,7 @@ class IntegerValue(NumberValue):
             return FloatValue(self._value ** other)
 
         if isinstance(other, IntegerValue):
-            self._value **= other._value
+            self._value **= other.get()
             return self
 
         if isinstance(other, FloatValue):
@@ -896,7 +896,7 @@ class IntegerValue(NumberValue):
                 return FloatValue(self._value ** other)
 
             if isinstance(other, IntegerValue):
-                return IntegerValue(self._value ** other._value)
+                return IntegerValue(self._value ** other.get())
 
             if isinstance(other, FloatValue):
                 return FloatValue(self._value ** other.get())
@@ -913,13 +913,13 @@ class IntegerValue(NumberValue):
                 return IntegerValue((self._value ** other) % modulo)
 
             if isinstance(other, IntegerValue) and isinstance(modulo, int):
-                return IntegerValue((self._value ** other._value) % modulo)
+                return IntegerValue((self._value ** other.get()) % modulo)
 
             if isinstance(other, int) and isinstance(modulo, IntegerValue):
                 return IntegerValue((self._value ** other) % modulo._value)
 
             if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
-                return IntegerValue((self._value ** other._value) % modulo._value)
+                return IntegerValue((self._value ** other.get()) % modulo._value)
 
         if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
             raise TypeError("pow() 3rd argument not allowed "
@@ -938,7 +938,7 @@ class IntegerValue(NumberValue):
                 return FloatValue(other ** self._value)
 
             if isinstance(other, IntegerValue):
-                return IntegerValue(other._value ** self._value)
+                return IntegerValue(other.get() ** self._value)
 
             if isinstance(other, FloatValue):
                 return FloatValue(other.get() ** self._value)
@@ -955,13 +955,13 @@ class IntegerValue(NumberValue):
                 return IntegerValue((other ** self._value) % modulo)
 
             if isinstance(other, IntegerValue) and isinstance(modulo, int):
-                return IntegerValue((other._value ** self._value) % modulo)
+                return IntegerValue((other.get() ** self._value) % modulo)
 
             if isinstance(other, int) and isinstance(modulo, IntegerValue):
                 return IntegerValue((other ** self._value) % modulo._value)
 
             if isinstance(other, IntegerValue) and isinstance(modulo, IntegerValue):
-                return IntegerValue((other._value ** self._value) % modulo._value)
+                return IntegerValue((other.get() ** self._value) % modulo._value)
 
         if (is_mod_int and is_other_float) or (is_mod_float and is_other_int):
             raise TypeError("pow() 3rd argument not allowed "
@@ -975,7 +975,7 @@ class IntegerValue(NumberValue):
             return self
 
         if isinstance(other, IntegerValue):
-            self._value %= other._value
+            self._value %= other.get()
             return self
 
         return NotImplemented
@@ -985,7 +985,7 @@ class IntegerValue(NumberValue):
             return IntegerValue(self._value % other)
 
         if isinstance(other, IntegerValue):
-            return IntegerValue(self._value % other._value)
+            return IntegerValue(self._value % other.get())
 
         return NotImplemented
 
@@ -994,7 +994,7 @@ class IntegerValue(NumberValue):
             return IntegerValue(other % self._value)
 
         if isinstance(other, IntegerValue):
-            return IntegerValue(other._value % self._value)
+            return IntegerValue(other.get() % self._value)
 
         return NotImplemented
 
@@ -1171,14 +1171,14 @@ class IntegerValue(NumberValue):
         """
         return self._value
 
-    def set(self, number: SupportsIntegerFull | StringValue) -> IntegerValue:
+    def set(self, value: SupportsIntegerFull | StringValue) -> IntegerValue:
         """
         Sets the value.
 
-        :param number: the value to set
+        :param value: the value to set
         :return this instance for use in method chaining
         """
-        self._value = IntegerValue._verify_int(number)
+        self._value = IntegerValue._verify_int(value)
         return self
 
     # Must return int
@@ -1386,7 +1386,7 @@ class IntegerValue(NumberValue):
             False otherwise.
         """
         if isinstance(number, (IntegerValue, FloatValue)):
-            return BooleanValue(self._value == number._value)
+            return BooleanValue(self._value == number.get())
 
         return BooleanValue(self._value == number)
 
@@ -1413,7 +1413,7 @@ class IntegerValue(NumberValue):
             specified number, False otherwise.
         """
         if isinstance(number, (IntegerValue, FloatValue)):
-            return BooleanValue(self._value <= number._value)
+            return BooleanValue(self._value <= number.get())
 
         return BooleanValue(self._value <= number)
 
@@ -1428,7 +1428,7 @@ class IntegerValue(NumberValue):
             specified number, False otherwise.
         """
         if isinstance(number, (IntegerValue, FloatValue)):
-            return BooleanValue(self._value >= number._value)
+            return BooleanValue(self._value >= number.get())
 
         return BooleanValue(self._value >= number)
 
@@ -1443,7 +1443,7 @@ class IntegerValue(NumberValue):
             specified number, False otherwise.
         """
         if isinstance(number, (IntegerValue, FloatValue)):
-            return BooleanValue(self._value < number._value)
+            return BooleanValue(self._value < number.get())
 
         return BooleanValue(self._value < number)
 
@@ -1458,7 +1458,7 @@ class IntegerValue(NumberValue):
             specified number, False otherwise.
         """
         if isinstance(number, (IntegerValue, FloatValue)):
-            return BooleanValue(self._value > number._value)
+            return BooleanValue(self._value > number.get())
 
         return BooleanValue(self._value > number)
 
@@ -1631,7 +1631,7 @@ class IntegerValue(NumberValue):
         return StringValue(f"{rounded:.2f}" + suffix)
 
 
-class BooleanValue(IntegerValue):
+class BooleanValue(IntegerValue, SupportsIndex):
     """Provides mutable access to a bool value"""
 
     def __init__(self, value: Any = False):
@@ -1659,7 +1659,7 @@ class BooleanValue(IntegerValue):
             False otherwise.
         """
         if isinstance(other, (BooleanValue, IntegerValue)):
-            return BooleanValue(self._value == other._value)
+            return BooleanValue(self._value == other.get())
 
         return BooleanValue(self._value == other)
 
@@ -1704,7 +1704,7 @@ class BooleanValue(IntegerValue):
 
         :return: the value
         """
-        return not not self._value
+        return bool(self._value)
 
     # Must return bool
     def get(self) -> bool:
@@ -1713,7 +1713,7 @@ class BooleanValue(IntegerValue):
 
         :return: the value
         """
-        return not not self._value
+        return bool(self._value)
 
     def set(self, value: Any) \
             -> BooleanValue:
@@ -1724,7 +1724,7 @@ class BooleanValue(IntegerValue):
         :return: this instance for use in method chaining
         """
         if isinstance(value, (BooleanValue, IntegerValue)):
-            self._value = int(bool(value._value))
+            self._value = int(bool(value.get()))
         else:
             self._value = int(bool(value))
         return self
@@ -1764,7 +1764,7 @@ class BooleanValue(IntegerValue):
 
         :return: if the value equals true
         """
-        return BooleanValue(not not self._value)
+        return BooleanValue(bool(self._value) is True)
 
     def is_false(self) -> BooleanValue:
         """
@@ -1772,7 +1772,7 @@ class BooleanValue(IntegerValue):
 
         :return: if the value equals false
         """
-        return BooleanValue(not self._value)
+        return BooleanValue(bool(self._value) is False)
 
     def set_true(self) -> BooleanValue:
         """
@@ -1792,7 +1792,7 @@ class BooleanValue(IntegerValue):
         self._value = 0
         return self
 
-    def if_true(self, function=lambda *_, **__: None, *args, **kwargs) -> BooleanValue:
+    def if_true(self, *args, function=lambda *_, **__: None, **kwargs) -> BooleanValue:
         """
         Runs the specified runnable if the value is true.
 
@@ -1807,7 +1807,7 @@ class BooleanValue(IntegerValue):
             function(*args, **kwargs)
         return self
 
-    def if_false(self, function=lambda *_, **__: None, *args, **kwargs) -> BooleanValue:
+    def if_false(self, *args, function=lambda *_, **__: None, **kwargs) -> BooleanValue:
         """
         Runs the specified runnable if the value is false.
 
@@ -2132,6 +2132,7 @@ class FloatValue(NumberValue):
         is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
         is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
+        # TODO: replace with less conditions
         if (is_mod_int and is_other_int) \
                 or (is_mod_int and is_other_float) \
                 or (is_mod_float and is_other_int):
@@ -2157,6 +2158,7 @@ class FloatValue(NumberValue):
         is_mod_int = modulo is int or isinstance(modulo, IntegerValue)
         is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
+        # TODO: replace with less conditions
         if (is_mod_int and is_other_int) \
                 or (is_mod_int and is_other_float) \
                 or (is_mod_float and is_other_int):
@@ -2214,7 +2216,7 @@ class FloatValue(NumberValue):
             return FloatValue(var1), FloatValue(var2)
 
         if isinstance(other, FloatValue):
-            var1, var2 = other._value.__divmod__(self._value)
+            var1, var2 = other.get().__divmod__(self._value)
             return FloatValue(var1), FloatValue(var2)
 
         return NotImplemented
@@ -2258,15 +2260,15 @@ class FloatValue(NumberValue):
         """
         return self._value
 
-    def set(self, number: SupportsFloatFull | StringValue) \
+    def set(self, value: SupportsFloatFull | StringValue) \
             -> FloatValue:
         """
         Sets the value.
 
-        :param number: the value to set
+        :param value: the value to set
         :return this instance for use in method chaining
         """
-        self._value = FloatValue._verify_float(number)
+        self._value = FloatValue._verify_float(value)
         return self
 
     # Must return int
@@ -2613,7 +2615,7 @@ class FloatValue(NumberValue):
         return FloatValue(float.fromhex(value))
 
 
-class StringValue(Value, _collections_abc.Sequence):
+class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
     """Provides mutable access to a str"""
 
     def __init__(self, value: SupportsStringFull | StringValue = ""):
@@ -2686,7 +2688,7 @@ class StringValue(Value, _collections_abc.Sequence):
             False otherwise.
         """
         if isinstance(other, StringValue):
-            return BooleanValue(self._value == other._value)
+            return BooleanValue(self._value == other.get())
 
         return BooleanValue(self._value == other)
 
@@ -2707,7 +2709,7 @@ class StringValue(Value, _collections_abc.Sequence):
         if isinstance(other, str):
             return BooleanValue(self._value < other)
         if isinstance(other, StringValue):
-            return BooleanValue(self._value < other._value)
+            return BooleanValue(self._value < other.get())
 
         type_name = type(other).__name__
         raise TypeError("'<' not supported between "
@@ -2718,7 +2720,7 @@ class StringValue(Value, _collections_abc.Sequence):
         if isinstance(other, str):
             return BooleanValue(self._value <= other)
         if isinstance(other, StringValue):
-            return BooleanValue(self._value <= other._value)
+            return BooleanValue(self._value <= other.get())
 
         type_name = type(other).__name__
         raise TypeError("'<=' not supported between "
@@ -2729,7 +2731,7 @@ class StringValue(Value, _collections_abc.Sequence):
         if isinstance(other, str):
             return BooleanValue(self._value > other)
         if isinstance(other, StringValue):
-            return BooleanValue(self._value > other._value)
+            return BooleanValue(self._value > other.get())
 
         type_name = type(other).__name__
         raise TypeError("'>' not supported between "
@@ -2740,7 +2742,7 @@ class StringValue(Value, _collections_abc.Sequence):
         if isinstance(other, str):
             return BooleanValue(self._value >= other)
         if isinstance(other, StringValue):
-            return BooleanValue(self._value >= other._value)
+            return BooleanValue(self._value >= other.get())
 
         type_name = type(other).__name__
         raise TypeError("'>=' not supported between "
@@ -2753,7 +2755,7 @@ class StringValue(Value, _collections_abc.Sequence):
             return other in self._value
 
         if isinstance(other, StringValue):
-            return other._value in self._value
+            return other.get() in self._value
 
         type_name = type(other).__name__
         raise TypeError("'in <StringValue>' requires string or "
@@ -2774,7 +2776,7 @@ class StringValue(Value, _collections_abc.Sequence):
 
     def __iadd__(self,
                  other: (SupportsIntFloatStr | IntegerValue
-                         | FloatValue | StringValue))\
+                         | FloatValue | StringValue)) \
             -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             self._value += str(other)
@@ -2785,7 +2787,7 @@ class StringValue(Value, _collections_abc.Sequence):
             return self
 
         if isinstance(other, StringValue):
-            self._value += other._value
+            self._value += other.get()
             return self
 
         type_name = type(other).__name__
@@ -2794,7 +2796,7 @@ class StringValue(Value, _collections_abc.Sequence):
 
     def __add__(self,
                 other: (SupportsIntFloatStr | IntegerValue
-                        | FloatValue | StringValue))\
+                        | FloatValue | StringValue)) \
             -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(self._value + str(other))
@@ -2803,7 +2805,7 @@ class StringValue(Value, _collections_abc.Sequence):
             return StringValue(self._value + other)
 
         if isinstance(other, StringValue):
-            return StringValue(self._value + other._value)
+            return StringValue(self._value + other.get())
 
         type_name = type(other).__name__
         raise TypeError("'can only concatenate str or "
@@ -2811,7 +2813,7 @@ class StringValue(Value, _collections_abc.Sequence):
 
     def __radd__(self,
                  other: (SupportsIntFloatStr | IntegerValue
-                         | FloatValue | StringValue))\
+                         | FloatValue | StringValue)) \
             -> StringValue:
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(str(other) + self._value)
@@ -2820,7 +2822,7 @@ class StringValue(Value, _collections_abc.Sequence):
             return StringValue(other + self._value)
 
         if isinstance(other, StringValue):
-            return StringValue(other._value + self._value)
+            return StringValue(other.get() + self._value)
 
         type_name = type(other).__name__
         raise TypeError("'can only concatenate str or "
@@ -2841,13 +2843,13 @@ class StringValue(Value, _collections_abc.Sequence):
         elif isinstance(other, str):
             self._value = self._value.replace(other, "")
         elif isinstance(other, StringValue):
-            self._value = self._value.replace(other._value, "")
+            self._value = self._value.replace(other.get(), "")
         else:
             return NotImplemented
         return self
 
     def __sub__(self,
-                other: int | str | IntegerValue | StringValue | re.Pattern)\
+                other: int | str | IntegerValue | StringValue | re.Pattern) \
             -> StringValue:
         if isinstance(other, int):
             if other >= 0:
@@ -2865,7 +2867,7 @@ class StringValue(Value, _collections_abc.Sequence):
             return StringValue(self._value.replace(other, ""))
 
         if isinstance(other, StringValue):
-            return StringValue(self._value.replace(other._value, ""))
+            return StringValue(self._value.replace(other.get(), ""))
 
         if isinstance(other, re.Pattern):
             return StringValue(other.sub("", self._value))
@@ -2878,7 +2880,7 @@ class StringValue(Value, _collections_abc.Sequence):
             return StringValue(other.replace(self._value, ""))
 
         if isinstance(other, StringValue):
-            return StringValue(other._value.replace(self._value, ""))
+            return StringValue(other.get().replace(self._value, ""))
 
         return NotImplemented
 
@@ -3119,7 +3121,9 @@ class StringValue(Value, _collections_abc.Sequence):
 
         return BooleanValue(self._value.endswith(suffix, start, end))
 
-    def expandtabs(self, tabsize: str | StringValue | SupportsIndex = "8") -> StringValue:
+    def expandtabs(self, tabsize: (str | StringValue
+                                   | SupportsIndex) = "8") \
+            -> StringValue:
         """
         Make all tab characters annotations in value expanded using
         spaces.
@@ -3185,8 +3189,8 @@ class StringValue(Value, _collections_abc.Sequence):
               start: SupportsIndex | None = None,
               end: SupportsIndex | None = None) -> IntegerValue:
         """
-        Return the lowest index in S where substring sub is found,
-        such that sub is contained within S[start:end].  Optional
+        Return the lowest index in value where substring sub is found,
+        such that sub is contained within value[start:end].  Optional
         arguments start and end are interpreted as in slice notation.
 
         Raises ValueError when the substring is not found.
@@ -3499,9 +3503,9 @@ class StringValue(Value, _collections_abc.Sequence):
         :return: this instance for use in method chaining
         """
         if isinstance(old, StringValue):
-            old = old._value
+            old = old.get()
         if isinstance(new, StringValue):
-            new = new._value
+            new = new.get()
         self._value = self._value.replace(old, new, count)
         return self
 
@@ -3589,7 +3593,8 @@ class StringValue(Value, _collections_abc.Sequence):
 
         return self._value.rpartition(sep)
 
-    def rsplit(self, sep: str | StringValue = None, max_split: int = -1) -> list[StringValue]:
+    def rsplit(self, sep: str | StringValue = None,
+               max_split: int = -1) -> list[StringValue]:
         """
         Return a list of the words in the string, using sep as the
         delimiter string.
@@ -3636,7 +3641,8 @@ class StringValue(Value, _collections_abc.Sequence):
             self._value = self._value.rstrip(chars)
         return self
 
-    def split(self, sep: str | StringValue = None, max_split: int = -1) -> list[StringValue]:
+    def split(self, sep: str | StringValue = None,
+              max_split: int = -1) -> list[StringValue]:
         """
         Return a list of the words in the string, using sep as the
         delimiter string.

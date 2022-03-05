@@ -38,4 +38,3 @@ from .literals import Chars
 #     SupportsIntFloatStr, SupportsIntegerFull, SupportsFloatFull, SupportsStringFull
 # )
 # from .types import Final, is_generic, is_instance, is_subclass
-

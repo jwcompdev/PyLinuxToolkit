@@ -104,9 +104,11 @@ class SettingMonitor(Logged):
         while not self._should_terminate:
             command = self._commands.get_command_by_id(self.current_cid)
             if command is not None:
-                self._debug(f"Loaded Command Output({self.current_cid}): \"{command.command}\" "
+                self._debug(f"Loaded Command Output({self.current_cid}): "
+                            f"\"{command.command}\" "
                             f"- [EC{command.exit_code}]")
-                self.processed_list.append(f"({self.current_cid} - {command.command})")
+                self.processed_list.append(
+                    f"({self.current_cid} - {command.command})")
                 self.current_cid += 1
 
             if self._print_requested:

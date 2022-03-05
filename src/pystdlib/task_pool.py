@@ -89,7 +89,6 @@ class TaskPool(Logged, metaclass=Final):
             the pool_name argument is found in the class but is
             not an instance of the type TaskPool
         """
-
         if isinstance(threaded, (str, StringValue)):
             threaded_name = str(threaded)
             try:
@@ -134,7 +133,6 @@ class TaskPool(Logged, metaclass=Final):
         :param pool_name: the string name of the task pool instance
         :return: the new decorated class method
         """
-
         local_self = args[0]
         args = args[1:]
 
@@ -161,7 +159,6 @@ class TaskPool(Logged, metaclass=Final):
         :param pool_name: the string name of the task pool instance
         :return: the new decorated class method
         """
-
         local_self = args[0]
         args = args[1:]
 
@@ -183,7 +180,6 @@ class TaskPool(Logged, metaclass=Final):
         :param func: the function that is decorated
         :return: the new decorated function
         """
-
         # noinspection PyMissingOrEmptyDocstring
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> NoReturn:
@@ -202,7 +198,6 @@ class TaskPool(Logged, metaclass=Final):
         :param func: the function that is decorated
         :return: the new decorated function
         """
-
         # noinspection PyMissingOrEmptyDocstring
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> NoReturn:
@@ -225,7 +220,6 @@ class TaskPool(Logged, metaclass=Final):
             otherwise it is run non-threaded
         :return: the new decorated function
         """
-
         # noinspection PyMissingOrEmptyDocstring
         def validate(func) -> NoReturn:
             # noinspection PyMissingOrEmptyDocstring
@@ -259,11 +253,11 @@ class TaskPool(Logged, metaclass=Final):
 
     def _base_task(self, task_id: int, func, *args, **kwargs) -> NoReturn:
         self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
-                    f"Starting...")
+                    "Starting...")
 
         if not self._is_task_ready(task_id):
             self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
-                        f"Waiting In Queue...")
+                        "Waiting In Queue...")
 
         while not self._is_task_ready(task_id):
             sleep(0.001)

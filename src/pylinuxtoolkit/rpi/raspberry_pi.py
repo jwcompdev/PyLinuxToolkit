@@ -26,7 +26,7 @@ import socket
 from abc import ABC
 from typing import NoReturn
 
-from pystdlib.bash import LinuxBash
+from pystdlib.bash.linux_bash import LinuxBash
 from pystdlib.literals import StrOrBytesPath
 
 
@@ -339,6 +339,7 @@ class SystemConfig(BaseConfig):
     """
 
 
-# pi = RaspberryPi(False)
-# print(f"System Hostname: {pi.hostname}")
-# print(f"Current Username: {pi.current_user}")
+if __name__ == "__main__":
+    pi = RaspberryPi(False)
+    print(f"System Hostname: {pi.hostname}")
+    print(f"Current Username: {pi.current_user}")

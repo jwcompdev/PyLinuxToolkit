@@ -28,7 +28,7 @@ PATH_SEPARATOR = os.sep
 StrOrBytesPath = Union[str, bytes, os.PathLike[str], os.PathLike[bytes]]
 
 
-# noinspection PyPep8Naming,SpellCheckingInspection,GrazieInspection,PyPropertyDefinition
+# noinspection PyPep8Naming,PyPropertyDefinition,GrazieInspection
 class Chars:
     """Contains some basic unicode characters."""
 
@@ -82,6 +82,7 @@ class Chars:
         """
         return "*"
 
+    # noinspection SpellCheckingInspection
     @classmethod
     @property
     def ATSIGN(cls):
@@ -172,6 +173,7 @@ class Chars:
         """
         return "."
 
+    # noinspection SpellCheckingInspection
     @classmethod
     @property
     def DQUOTE(cls):
@@ -212,6 +214,7 @@ class Chars:
         """
         return "[]"
 
+    # noinspection SpellCheckingInspection
     @classmethod
     @property
     def EMPTY_DQUOTES(cls):
@@ -232,6 +235,7 @@ class Chars:
         """
         return "()"
 
+    # noinspection SpellCheckingInspection
     @classmethod
     @property
     def EMPTY_SQUOTES(cls):
@@ -272,6 +276,7 @@ class Chars:
         """
         return "!"
 
+    # noinspection SpellCheckingInspection
     @classmethod
     @property
     def FORWARDSLASH(cls):

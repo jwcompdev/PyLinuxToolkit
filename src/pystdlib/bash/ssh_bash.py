@@ -340,7 +340,8 @@ class SSHBash(BashBase, Logged):
 
     def _internal_disconnect(self, print_ssh_connection_msgs: bool = False):
         try:
-            self._debug(f"Disconnecting from {self._ssh_username}@{self._ssh_hostname}...")
+            self._debug("Disconnecting from "
+                        f"{self._ssh_username}@{self._ssh_hostname}...")
             old_print_command = self._bash_data.print_command
             self._bash_data.print_command = False
 
@@ -393,9 +394,9 @@ class SSHBash(BashBase, Logged):
         client.sendline(command)
         client.prompt()
 
-        result = StringValue(client.before)\
-            .strip_ansi_codes()\
-            .replace(command, "")\
+        result = StringValue(client.before) \
+            .strip_ansi_codes() \
+            .replace(command, "") \
             .strip("\r\n")
 
         # Stops command output
@@ -496,11 +497,13 @@ class SSHBash(BashBase, Logged):
             elif reconnect_ssh_if_closed:
                 # If the connection is not open then reconnect and then send the command
                 self._ssh_client = pxssh.pxssh(encoding='utf-8', timeout=timeout)
-                self._ssh_connect_and_wait(ssh_login_timeout=ssh_login_timeout,
-                                           print_prompt=print_prompt,
-                                           print_ssh_connection_msgs=print_ssh_connection_msgs,
-                                           print_ssh_login_success=print_ssh_login_success,
-                                           print_ssh_mod=False)
+                self._ssh_connect_and_wait(
+                    ssh_login_timeout=ssh_login_timeout,
+                    print_prompt=print_prompt,
+                    print_ssh_connection_msgs=print_ssh_connection_msgs,
+                    print_ssh_login_success=print_ssh_login_success,
+                    print_ssh_mod=False
+                )
                 bypass_connect = True
             elif create_temp_connection_if_closed:
                 # If the connection is not open then connect just for this command

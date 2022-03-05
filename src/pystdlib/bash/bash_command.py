@@ -149,7 +149,8 @@ class BashCommand:
         if cid is not None and Caller().name_matches("add_command"):
             self._cid = cid
         else:
-            raise BashError("The cid attribute is read-only and can only be set internally!")
+            raise BashError("The cid attribute is read-only and "
+                            "can only be set internally!")
 
     @staticmethod
     def _process_output(current_line) -> StringValue:
@@ -169,8 +170,8 @@ class BashCommand:
             line.rstrip()
             line.lstrip("\n")
             line.lstrip("\r")
-            op = line.split("\r\n")
-            for line2 in op:
+            op1 = line.split("\r\n")
+            for line2 in op1:
                 op2 = line2.split('\r')
                 for line3 in op2:
                     line3.rstrip("\n")

@@ -72,5 +72,4 @@ class PiCommandsEvent:
         :param namespace: the event to fire
         :param kwargs: keyword args to pass to handlers
         """
-
         self._root_event.fire(namespace, **kwargs)

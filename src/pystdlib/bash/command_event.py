@@ -23,7 +23,7 @@ when a new BashCommand is created.
 """
 from typing import Callable, Any
 
-from pystdlib.bash import BashCommand
+from pystdlib.bash.bash_command import BashCommand
 from pystdlib.event import Event, Namespace
 
 
@@ -38,7 +38,8 @@ class CommandEvent:
 
         self._on_command = None
 
-    def on_new_command(self, handler: Callable[[BashCommand], Any] = None, ttl: int = -1):
+    def on_new_command(self, handler: Callable[[BashCommand], Any] = None,
+                       ttl: int = -1):
         """
         Registers a function to the 'command.new' event.
 
@@ -64,7 +65,6 @@ class CommandEvent:
         :param namespace: the event to fire
         :param kwargs: keyword args to pass to handlers
         """
-
         if namespace == self.NEW_COMMAND:
             self._new_command_event.fire(namespace, **kwargs)
         else:

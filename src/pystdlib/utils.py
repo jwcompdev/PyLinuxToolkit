@@ -40,15 +40,18 @@ class IllegalArgumentError(Exception):
 
 class InvalidInputError(TypeError):
     """
-    Custom error raised when received object is not a string as expected.
+    Custom error raised when received object
+    is not a string as expected.
     """
 
     def __init__(self, input_data: typing.Any):
         """
+        Initializes the error.
+
         :param input_data: Any received object
         """
         type_name = type(input_data).__name__
-        msg = 'Expected "str", received "{}"'.format(type_name)
+        msg = f'Expected "str", received "{type_name}"'
         super().__init__(msg)
 
 
@@ -283,7 +286,7 @@ def get_module_from_frame(frame):
     return None
 
 
-def kw(**kwargs) -> dict:
+def kwa(**kwargs) -> dict:
     """
     Returns the specified kwargs as a dict.
 
@@ -320,8 +323,8 @@ def save_pickle(file, data) -> NoReturn:
     :param file: the file to save to
     :param data: the data to pickle
     """
-    with open(file, 'wb') as f:
-        pickle.dump(data, f)
+    with open(file, 'wb') as open_file:
+        pickle.dump(data, open_file)
 
 
 def load_pickle(file):
@@ -331,8 +334,8 @@ def load_pickle(file):
     :param file: the file to read
     :return: the pickled data
     """
-    with open(file, 'rb') as f:
-        data = pickle.load(f, encoding='bytes')
+    with open(file, 'rb') as open_file:
+        data = pickle.load(open_file, encoding='bytes')
     return data
 
 
@@ -344,8 +347,8 @@ def save_json(file, data) -> NoReturn:
     :param file: the file to save to
     :param data: the data to convert
     """
-    with open(file, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False)
+    with open(file, 'w', encoding='utf-8') as open_file:
+        json.dump(data, open_file, ensure_ascii=False)
 
 
 def load_json(file):
@@ -355,5 +358,5 @@ def load_json(file):
     :param file: the file to read
     :return: the data object
     """
-    with open(file, 'r') as f:
-        return json.load(f)
+    with open(file, 'r') as open_file:
+        return json.load(open_file)
