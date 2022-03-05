@@ -1,8 +1,8 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# bash_exceptions.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# pystdlib/__init__.py.py
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""Contains exception classes for all bash objects."""
+"""Contains the pystdlib.bash package."""
+from __future__ import annotations
+
+# from .bash_base import BashBase, BashSettings
+# from .bash_checks import BashChecks
+# from .bash_command import BashCommand
+# from .bash_commands import BashCommands
+# from .bash_data import BashData
+# from .command_event import CommandEvent
+# from .linux_bash import LinuxBash
+# from .local_bash import LocalBash
+# from .output import OutputWriter, OutputData
+# from .ssh_bash import SSHBash
 
 
 class BashError(Exception):
@@ -34,3 +46,4 @@ class BashPermissionError(BashError):
 
 class BashValueError(BashError):
     """Raised when the incorrect value was supplied"""
+    

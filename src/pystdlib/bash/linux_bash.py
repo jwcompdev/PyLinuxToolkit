@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # linux_bash.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,11 +26,11 @@ from __future__ import annotations
 import os
 from typing import NoReturn, Union, Callable
 
-from pylinuxtoolkit.bash.local_bash import LocalBash
-from pylinuxtoolkit.bash.output_data import OutputData
-from pylinuxtoolkit.bash.output_writer import OutputWriter
-from pylinuxtoolkit.bash.ssh_bash import SSHBash
-from pylinuxtoolkit.utils.lambdas import Lambdas
+from pystdlib.bash.bash_commands import BashCommands
+from pystdlib.bash.local_bash import LocalBash
+from pystdlib.bash.output import OutputData, OutputWriter
+from pystdlib.bash.ssh_bash import SSHBash
+from pystdlib.lambdas import Lambdas
 
 StrOrBytesPath = Union[str, bytes, os.PathLike[str], os.PathLike[bytes]]
 
@@ -303,6 +303,15 @@ class LinuxBash:
         self._bash.set_global_timeout_default()
         return self
 
+    def get_past_commands(self) -> BashCommands:
+        """
+        Returns the BashCommands object that contains a list of
+        all past commands.
+
+        :return: the BashCommands object
+        """
+        return self._bash.get_past_commands()
+
     @property
     def running_dir(self) -> str:
         """
@@ -469,15 +478,21 @@ class LinuxBash:
             True then this parameter is ignored.
         """
         if self.is_remote:
-            self._ssh_bash.run_terminal_command(command, sudo,
-                                                timeout, ssh_login_timeout,
-                                                print_command, print_prompt,
-                                                print_exit_code,
-                                                print_ssh_connection_msgs,
-                                                print_ssh_login_success,
-                                                reconnect_ssh_if_closed,
-                                                create_temp_connection_if_closed)
+            self._ssh_bash.run_terminal_command(
+                command=command, sudo=sudo,
+                timeout=timeout,
+                ssh_login_timeout=ssh_login_timeout,
+                print_command=print_command,
+                print_prompt=print_prompt,
+                print_exit_code=print_exit_code,
+                print_ssh_connection_msgs=print_ssh_connection_msgs,
+                print_ssh_login_success=print_ssh_login_success,
+                reconnect_ssh_if_closed=reconnect_ssh_if_closed,
+                create_temp_connection_if_closed=create_temp_connection_if_closed
+            )
         else:
-            self._local_bash.run_terminal_command(command, sudo, timeout,
-                                                  print_command, print_prompt,
-                                                  print_exit_code)
+            self._local_bash.run_terminal_command(
+                command=command, sudo=sudo, timeout=timeout,
+                print_command=print_command, print_prompt=print_prompt,
+                print_exit_code=print_exit_code
+            )

@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # raspberry_pi.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,26 +26,23 @@ import socket
 from abc import ABC
 from typing import NoReturn
 
-from pylinuxtoolkit.bash.linux_bash import LinuxBash
+from pystdlib.bash import LinuxBash
+from pystdlib.literals import StrOrBytesPath
 
 
 class RaspberryPi:
     """This is the main raspberry pi data class."""
 
+    command_base = "sudo raspi-config nonint "
+
     def __init__(self, remote: bool = False) -> NoReturn:
         self._remote: bool = remote
-        self._bash: LinuxBash = LinuxBash()
+        self._bash: LinuxBash = LinuxBash(remote_ssh=remote)
         self._interface_config: InterfaceConfig = InterfaceConfig(self)
         self._localization_config: LocalizationConfig = LocalizationConfig(self)
         self._performance_config: PerformanceConfig = PerformanceConfig(self)
         self._ssh_config: SSHConfig = SSHConfig(self)
         self._system_config: SystemConfig = SystemConfig(self)
-
-    # ssh_config: SSH_Config
-    # interface_config: Interface_Config
-    # system_config: System_Config
-    # performance_config: Performance_Config
-    # localization_config: Localization_Config
 
     @property
     def hostname(self) -> str:
@@ -158,6 +155,17 @@ class BaseConfig(ABC):
 
     def _run_int_command(self, command: str) -> int:
         pass
+
+    @property
+    def parent(self):
+        """
+        Returns the parent RaspberryPi instance.
+
+        :return: the parent RaspberryPi instance
+        """
+        return self.__pi
+
+
 # protected final RaspberryPi pi;
 #     protected final String commandBase = "sudo raspi-config nonint ";
 #
@@ -266,6 +274,63 @@ class SSHConfig(BaseConfig):
     related settings.
     """
 
+    def __init__(self, rpi: RaspberryPi):
+        super().__init__(rpi)
+        self._login_hostname: str = ""
+        self._login_username: str = ""
+        # noinspection PyTypeChecker
+        self._login_password: str = None
+        self._login_port: int = 22
+        # noinspection PyTypeChecker
+        self._login_ssh_key: StrOrBytesPath = None
+
+    def set_login_info(self, hostname: str, username: str,
+                       password: str = None, port: int = 22,
+                       ssh_key: StrOrBytesPath = None):
+        """
+        Sets the required login info for the ssh connection.
+
+        :param hostname: the network hostname port ip address
+            of the computer to connect to
+        :param username: the username
+        :param password: the password
+        :param port: the port (Default is 22)
+        :param ssh_key: the ssh auth key filename (Optional)
+        """
+        self._login_hostname = hostname
+        self._login_username: str = username
+        self._login_password: str = password
+        self._login_port: int = port
+        self._login_ssh_key: StrOrBytesPath = ssh_key
+        self.parent.bash.set_ssh_login_info(self._login_hostname,
+                                            self._login_username,
+                                            self._login_password,
+                                            self._login_port,
+                                            self._login_ssh_key)
+
+    def connect(self, ssh_login_timeout: int = 10,
+                print_prompt: bool = False,
+                print_ssh_connection_msgs: bool = False,
+                print_ssh_login_success: bool = False,
+                print_ssh_mod: bool = False):
+        """
+        Connects to the ssh client and keeps the connection open.
+
+        :param ssh_login_timeout: the timeout to use for ssh login
+        :param print_prompt: if true prints the prompt to the output
+        :param print_ssh_connection_msgs: if true prints a message on
+            ssh connect and disconnect
+        :param print_ssh_login_success: if true prints a message on
+            ssh login success
+        :param print_ssh_mod: if true prints the server's
+            mod(Message of the Day) on login
+        """
+        self.parent.bash.ssh_connect(ssh_login_timeout,
+                                     print_prompt,
+                                     print_ssh_connection_msgs,
+                                     print_ssh_login_success,
+                                     print_ssh_mod)
+
 
 class SystemConfig(BaseConfig):
     """
@@ -274,6 +339,6 @@ class SystemConfig(BaseConfig):
     """
 
 
-pi = RaspberryPi(False)
-print(f"System Hostname: {pi.hostname}")
-print(f"Current Username: {pi.current_user}")
+# pi = RaspberryPi(False)
+# print(f"System Hostname: {pi.hostname}")
+# print(f"Current Username: {pi.current_user}")

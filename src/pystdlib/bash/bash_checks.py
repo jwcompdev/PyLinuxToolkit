@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # bash_checks.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 Contains the BashChecks class, which contains functions that
 check a line from the terminal for a conditional.
 """
-from pylinuxtoolkit.utils.values import StringValue
+from pystdlib.values import StringValue
 
 
 class BashChecks:

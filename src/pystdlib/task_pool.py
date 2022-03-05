@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # task_pool.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,16 +24,21 @@ threaded or un-threaded tasks that run in the order they are created.
 from __future__ import annotations
 
 import functools
+import logging
 from threading import Thread
 from time import sleep
 from typing import final, NoReturn
 
-from pylinuxtoolkit.utils.types import Final
-from pylinuxtoolkit.utils.values import BooleanValue, StringValue
+from pystdlib.logged import Logged
+from pystdlib.caller import Caller
+from pystdlib.decorators import decorator
+from pystdlib.func_utils import FuncInfo
+from pystdlib.types import Final
+from pystdlib.values import BooleanValue, StringValue
 
 
 @final
-class TaskPool(metaclass=Final):
+class TaskPool(Logged, metaclass=Final):
     """
     Creates a pool of any combination of threaded or un-threaded tasks
     that run in the order they are created.
@@ -43,9 +48,19 @@ class TaskPool(metaclass=Final):
         self.running_thread = 1
         self.current_thread_id = 0
 
+        caller = Caller()
+
+        self.caller_class_name = caller.cls_name
+        self.caller_name = caller.name
+
+        self.set_log_level(logging.DEBUG)
+
     # noinspection PyMethodParameters
-    def decide_class_task(pool_name: str = "task_pool",
-                          threaded: bool | BooleanValue | str | StringValue = True) \
+    @staticmethod
+    @decorator
+    def decide_class_task(method=None, pool_name: str = "task_pool",
+                          threaded: bool | BooleanValue | str | StringValue = True,
+                          *args, **kwargs) \
             -> NoReturn:
         """
         Decorator that creates a task each time
@@ -57,6 +72,7 @@ class TaskPool(metaclass=Final):
         NOTE: If you want to decorate a function you
         need to use instance.decide_task instead.
 
+        :param method: the decorated method
         :param pool_name: the string name of the task pool instance
         :param threaded: if True the task is run threaded,
             otherwise it is run non-threaded. This may also be the name
@@ -73,42 +89,40 @@ class TaskPool(metaclass=Final):
             the pool_name argument is found in the class but is
             not an instance of the type TaskPool
         """
-        # noinspection PyMissingOrEmptyDocstring
-        def pass_name(func) -> NoReturn:
-            # noinspection PyMissingOrEmptyDocstring
-            @functools.wraps(func)
-            def wrapper(self, *args, **kwargs) -> NoReturn:
-                if isinstance(threaded, (str, StringValue)):
-                    threaded_name = str(threaded)
-                    try:
-                        threaded_func = getattr(self, threaded_name.lstrip("self."))
-                    except AttributeError as ex:
-                        if "object has no attribute '" + threaded_name + "'" in str(ex):
-                            ex.args = ("Function by the name '" + threaded_name
-                                       + "' specified to return the threaded"
-                                       + " value not found in the '"
-                                       + type(threaded_name).__name__ + "' class!",)
-                        raise
-                    if callable(threaded_func):
-                        final_condition = bool(threaded_func())
-                    else:
-                        raise TypeError(
-                            "Specified method by the name '" + threaded
-                            + "' is not callable! (Type is: '"
-                            + type(threaded).__name__ + "')"
-                        )
-                else:
-                    final_condition = bool(threaded)
 
-                TaskPool._internal_class_method_wrapper(
-                    self, pool_name, final_condition, func, *args, **kwargs)
+        if isinstance(threaded, (str, StringValue)):
+            threaded_name = str(threaded)
+            try:
+                threaded_func = getattr(args[0], threaded_name.lstrip("self."))
+            except AttributeError as ex:
+                if "object has no attribute '" + threaded_name + "'" in str(ex):
+                    ex.args = ("Function by the name '" + threaded_name
+                               + "' specified to return the threaded"
+                               + " value not found in the '"
+                               + type(threaded_name).__name__ + "' class!",)
+                raise
+            if callable(threaded_func):
+                final_condition = bool(threaded_func())
+            else:
+                raise TypeError(
+                    "Specified method by the name '" + threaded
+                    + "' is not callable! (Type is: '"
+                    + type(threaded).__name__ + "')"
+                )
+        else:
+            final_condition = bool(threaded)
 
-            return wrapper
+        local_self = args[0]
+        args = args[1:]
 
-        return pass_name
+        TaskPool._internal_class_method_wrapper(
+            local_self, pool_name, final_condition, method, *args, **kwargs)
 
     # noinspection PyMethodParameters
-    def threaded_class_task(pool_name: str = "task_pool") -> NoReturn:
+    @staticmethod
+    @decorator
+    def threaded_class_task(method=None, pool_name: str = "task_pool",
+                            *args, **kwargs):
         """
         Decorator that creates a threaded task each time
         the decorated class method is called.
@@ -116,27 +130,26 @@ class TaskPool(metaclass=Final):
         NOTE: If you want to decorate a function you
         need to use instance.threaded_task instead.
 
+        :param method: the decorated method
         :param pool_name: the string name of the task pool instance
         :return: the new decorated class method
         """
-        # noinspection PyMissingOrEmptyDocstring
-        def pass_name(func) -> NoReturn:
-            # noinspection PyMissingOrEmptyDocstring
-            @functools.wraps(func)
-            def wrapper(self, *args, **kwargs) -> NoReturn:
-                TaskPool._internal_class_method_wrapper(self,
-                                                        pool_name,
-                                                        True,
-                                                        func,
-                                                        *args,
-                                                        **kwargs)
 
-            return wrapper
+        local_self = args[0]
+        args = args[1:]
 
-        return pass_name
+        TaskPool._internal_class_method_wrapper(local_self,
+                                                pool_name,
+                                                True,
+                                                method,
+                                                *args,
+                                                **kwargs)
 
     # noinspection PyMethodParameters
-    def non_threaded_class_task(pool_name: str = "task_pool") -> NoReturn:
+    @staticmethod
+    @decorator
+    def non_threaded_class_task(method=None, pool_name: str = "task_pool",
+                                *args, **kwargs):
         """
         Decorator that creates a non-threaded task each time
         the decorated class method is called.
@@ -144,24 +157,20 @@ class TaskPool(metaclass=Final):
         NOTE: If you want to decorate a function you
         need to use instance.non_threaded_task instead.
 
+        :param method: the decorated method
         :param pool_name: the string name of the task pool instance
         :return: the new decorated class method
         """
-        # noinspection PyMissingOrEmptyDocstring
-        def pass_name(func) -> NoReturn:
-            # noinspection PyMissingOrEmptyDocstring
-            @functools.wraps(func)
-            def wrapper(self, *args, **kwargs) -> NoReturn:
-                TaskPool._internal_class_method_wrapper(self,
-                                                        pool_name,
-                                                        False,
-                                                        func,
-                                                        *args,
-                                                        **kwargs)
 
-            return wrapper
+        local_self = args[0]
+        args = args[1:]
 
-        return pass_name
+        TaskPool._internal_class_method_wrapper(local_self,
+                                                pool_name,
+                                                False,
+                                                method,
+                                                *args,
+                                                **kwargs)
 
     def threaded_task(self, func) -> NoReturn:
         """
@@ -174,6 +183,7 @@ class TaskPool(metaclass=Final):
         :param func: the function that is decorated
         :return: the new decorated function
         """
+
         # noinspection PyMissingOrEmptyDocstring
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> NoReturn:
@@ -192,6 +202,7 @@ class TaskPool(metaclass=Final):
         :param func: the function that is decorated
         :return: the new decorated function
         """
+
         # noinspection PyMissingOrEmptyDocstring
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> NoReturn:
@@ -214,6 +225,7 @@ class TaskPool(metaclass=Final):
             otherwise it is run non-threaded
         :return: the new decorated function
         """
+
         # noinspection PyMissingOrEmptyDocstring
         def validate(func) -> NoReturn:
             # noinspection PyMissingOrEmptyDocstring
@@ -246,13 +258,25 @@ class TaskPool(metaclass=Final):
         self.current_thread_id += 1
 
     def _base_task(self, task_id: int, func, *args, **kwargs) -> NoReturn:
-        # print("Task " + str(task_id) + " Starting...")
+        self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
+                    f"Starting...")
+
+        if not self._is_task_ready(task_id):
+            self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
+                        f"Waiting In Queue...")
+
         while not self._is_task_ready(task_id):
             sleep(0.001)
 
+        func_wpr = FuncInfo(func)
+
+        self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
+                    f"Calling '{func_wpr.full_name}'...")
+
         func(*args, **kwargs)
 
-        # print("Task " + str(task_id) + " Complete!")
+        self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
+                    f"Calling '{func_wpr.full_name}' Complete!")
 
         sleep(0.1)
 

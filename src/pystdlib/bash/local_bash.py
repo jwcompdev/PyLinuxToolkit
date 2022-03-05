@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # local_bash.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ allows running commands locally.
 """
 from __future__ import annotations
 
+import logging
 import os
 import pwd
 import socket
@@ -32,15 +33,17 @@ from typing import NoReturn, Callable
 import pexpect
 from pexpect import spawn
 
-from pylinuxtoolkit.bash.bash_base import BashBase
-from pylinuxtoolkit.bash.bash_exceptions import BashValueError
-from pylinuxtoolkit.bash.output_data import OutputData
-from pylinuxtoolkit.utils.lambdas import Lambdas
-from pylinuxtoolkit.utils.task_pool import TaskPool
-from pylinuxtoolkit.utils.values import StringValue
+from pystdlib.bash import BashValueError
+from pystdlib.bash.bash_base import BashBase
+from pystdlib.bash.bash_command import BashCommand
+from pystdlib.bash.output import OutputData
+from pystdlib.logged import Logged
+from pystdlib.lambdas import Lambdas
+from pystdlib.task_pool import TaskPool
+from pystdlib.values import StringValue
 
 
-class LocalBash(BashBase):
+class LocalBash(BashBase, Logged):
     """A bash terminal emulator that allows running commands locally."""
 
     def __init__(self, directory="~",
@@ -75,10 +78,10 @@ class LocalBash(BashBase):
                          print_prompt=print_prompt)
 
         self._is_context_manager = False
+        self.set_log_level(logging.DEBUG)
 
         self.change_dir(directory)
 
-        self._bash_data.prompt_func = self.get_prompt
         self._bash_data.current_user = self.current_user
 
     def __enter__(self) -> LocalBash:
@@ -143,11 +146,15 @@ class LocalBash(BashBase):
         """
         return pwd.getpwuid(os.getuid()).pw_name
 
-    @staticmethod
-    def _internal_run_local_command_string(command: str, client: spawn) -> str:
+    def _internal_run_local_command_string(self, command: str, client: spawn) -> StringValue:
         client.sendline(command)
-        client.expect("[$]")
-        return client.before.replace(command, "").strip("\r\n")
+        client.expect_exact(self.get_prompt())
+        before = client.before.replace(command, "").strip("\r\n")
+        self._commands.add_command(BashCommand(
+            command, self.current_dir, before, 0
+        ))
+        self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
+        return StringValue(before)
 
     def close(self) -> NoReturn:
         """Currently does nothing."""
@@ -168,9 +175,16 @@ class LocalBash(BashBase):
         if print_command:
             self._output_writer.write_bypass(StringValue(command))
 
+        result_msg = ""
+
         if not result:
-            self._output_writer.write_bypass(
-                StringValue(f"bash: cd: {new_dir}: No such file or directory"))
+            result_msg = f"bash: cd: {new_dir}: No such file or directory"
+            self._output_writer.write_bypass(StringValue(result_msg))
+
+        self._commands.add_command(BashCommand(
+            command, self.current_dir, result_msg, 0
+        ))
+        self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
 
         if print_prompt:
             self._output_writer.write_bypass(StringValue(self.get_prompt()))
@@ -237,18 +251,37 @@ class LocalBash(BashBase):
                 client.waitnoecho()
 
                 # This must be here to catch the first prompt
-                client.expect('[$]')
+                client.expect_exact(self.get_prompt())
 
                 # Runs the requested command
-                if print_exit_code:
-                    client.sendline(command + " ; echo $?")
-                else:
-                    client.sendline(command)
+                self._debug(f"Running command '{command}'...")
+                client.sendline(command)
 
                 # This must be here to catch the prompt
                 # after the command completes
-                client.expect('[$]')
+                client.expect_exact(self.get_prompt())
+
+                result = client.before
+
+                client.logfile_read = None
+
+                self._debug(f"Retrieving exit code from command '{command}'...")
+                exit_code = self._internal_run_local_command_string("echo $?", client)
+
+                exit_code = StringValue(exit_code)\
+                    .replace("\n", "").replace("\r", "").strip()
+
+                self._debug(f"Saving output of '{command}' to BashCommands...")
+                command_obj = BashCommand(command, self.current_dir, result, exit_code.to_int())
+                self._commands.add_command(command_obj)
+                self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
+                self._debug(f"Output was:\n{self._commands.get_last().output}")
+
+                if print_exit_code:
+                    self._output_writer.write(exit_code)
 
                 # Exits the bash
                 client.sendline('exit')
                 client.expect(pexpect.EOF)
+
+                self._debug(f"Running command '{command}' complete!")

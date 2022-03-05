@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # bash_base.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,57 +25,26 @@ from __future__ import annotations
 
 import os
 from abc import ABC, abstractmethod
-from typing import NoReturn, Callable
+from typing import Callable, NoReturn
 
-from pylinuxtoolkit.bash.bash_data import BashData
-from pylinuxtoolkit.bash.output_data import OutputData
-from pylinuxtoolkit.bash.output_writer import OutputWriter
-from pylinuxtoolkit.utils.lambdas import Lambdas
-from pylinuxtoolkit.utils.protocols import SupportsWithClose
-from pylinuxtoolkit.utils.task_pool import TaskPool
+from pystdlib.bash.bash_commands import BashCommands
+from pystdlib.bash.bash_data import BashData
+from pystdlib.bash.output import OutputData, OutputWriter
+from pystdlib.lambdas import Lambdas
+from pystdlib.protocols import SupportsWithClose
+from pystdlib.task_pool import TaskPool
 
 
-class BashBase(ABC, SupportsWithClose):
-    """
-    The base class for all bash terminal emulator classes.
-    This could theoretically be subclassed, but It's not
-    specifically built for that.
-    """
+class BashSettings:
+    """Contains all base settings for the bash objects."""
 
-    def __init__(self, directory=os.getcwd(),
-                 output_function: Callable[[OutputData], NoReturn]
-                 = Lambdas.one_arg_no_return,
-                 use_threaded_worker=False, wait_for_locks=True, remote_ssh=False,
-                 timeout: int | None = 30, print_command: bool = False,
-                 print_prompt: bool = False,
-                 ) -> NoReturn:
-        """
-        :param directory: the directory to use as the current working
-            directory
-        :param output_function: the output function to use, defaults
-            to a NOOP function
-        :param use_threaded_worker: if True the entire method is run
-            in a separate thread
-        :param wait_for_locks: if True the client will wait for a file
-            lock to release before continuing without raising an
-            exception
-        :param remote_ssh: if True the client will connect to ssh,
-            otherwise it will use the local context
-        :param timeout: the timeout for all commands when they are run,
-            can be set to None to disable the timeout
-        :param print_command: prints the current command to the output
-            before the command output actually prints
-        :param print_prompt: prints the prompt after the command output
-            prints
-
-        """
-        self._new_dir: str = directory
-        self._running_dir = os.path.dirname(os.path.abspath(__file__))
-        self._timeout: int = timeout
-        self._task_pool: TaskPool = TaskPool()
-        self._is_context_manager = False
-
-        # Global Output params
+    def __init__(self,
+                 use_threaded_worker=False,
+                 wait_for_locks=True,
+                 remote_ssh=False,
+                 timeout: int | None = 30,
+                 print_command: bool = False,
+                 print_prompt: bool = False):
         self._bash_data: BashData = BashData(remote_ssh)
         self._bash_data.threaded_worker_enabled = use_threaded_worker
         self._bash_data.print_command = print_command
@@ -83,48 +52,7 @@ class BashBase(ABC, SupportsWithClose):
         self._bash_data.wait_for_locks = wait_for_locks
         self._bash_data.raise_error_on_lock_wait = False
 
-        self._bash_data.prompt_func = self.get_prompt
-        self._bash_data.client_close_func = self.close
-        self._output_writer: OutputWriter = \
-            OutputWriter(output_function, self._bash_data)
-
-    # Do not ever make a setter for this as it will cause sync issues
-    # and any open ssh connections may not be closed properly
-    @property
-    def is_remote(self):
-        """
-        Returns True if the bash is set to run remotely.
-
-        :return: True if the bash is set to run remotely
-        """
-        return self._bash_data.is_remote
-
-    def get_output_writer(self) -> OutputWriter:
-        """
-        Returns the current output writer instance.
-
-        :return: the current output writer instance
-        """
-        return self._output_writer
-
-    def get_on_output(self) -> Callable[[OutputData], NoReturn]:
-        """
-        Returns the function that handles the output.
-
-        :return: the function that handles the output
-        """
-        return self._output_writer.get_on_output()
-
-    def set_on_output(self, func: Callable[[OutputData], NoReturn]):
-        """
-        Sets the function that the output of terminal commands
-        is passed to.
-
-        :param func: the function to set
-        :return: this instance to allow for method chaining
-        """
-        self._output_writer.set_on_output(func)
-        return self
+        self._timeout = timeout
 
     def is_threaded_worker_enabled(self) -> bool:
         """
@@ -285,6 +213,96 @@ class BashBase(ABC, SupportsWithClose):
         self._timeout = 30
         return self
 
+    # Do not ever make a setter for this as it will cause sync issues
+    # and any open ssh connections may not be closed properly
+    @property
+    def is_remote(self):
+        """
+        Returns True if the bash is set to run remotely.
+
+        :return: True if the bash is set to run remotely
+        """
+        return self._bash_data.is_remote
+
+
+class BashBase(ABC, SupportsWithClose, BashSettings):
+    """
+    The base class for all bash terminal emulator classes.
+    This could theoretically be subclassed, but It's not
+    specifically built for that.
+    """
+
+    def __init__(self, directory=os.getcwd(),
+                 output_function: Callable[[OutputData], NoReturn]
+                 = Lambdas.one_arg_no_return,
+                 use_threaded_worker=False, wait_for_locks=True, remote_ssh=False,
+                 timeout: int | None = 30, print_command: bool = False,
+                 print_prompt: bool = False,
+                 ) -> NoReturn:
+        """
+        :param directory: the directory to use as the current working
+            directory
+        :param output_function: the output function to use, defaults
+            to a NOOP function
+        :param use_threaded_worker: if True the entire method is run
+            in a separate thread
+        :param wait_for_locks: if True the client will wait for a file
+            lock to release before continuing without raising an
+            exception
+        :param remote_ssh: if True the client will connect to ssh,
+            otherwise it will use the local context
+        :param timeout: the timeout for all commands when they are run,
+            can be set to None to disable the timeout
+        :param print_command: prints the current command to the output
+            before the command output actually prints
+        :param print_prompt: prints the prompt after the command output
+            prints
+
+        """
+        BashSettings.__init__(self, use_threaded_worker, wait_for_locks,
+                              remote_ssh, timeout, print_command,
+                              print_prompt)
+
+        self._new_dir: str = directory
+        self._running_dir = os.path.dirname(os.path.abspath(__file__))
+        self._timeout: int = timeout
+        self._task_pool: TaskPool = TaskPool()
+        self._is_context_manager = False
+        self._commands: BashCommands = BashCommands()
+
+        # Global Output params
+        self._bash_data.prompt_func = self.get_prompt
+        self._bash_data.client_close_func = self.close
+        self._output_writer: OutputWriter = \
+            OutputWriter(output_function, self._bash_data)
+
+    def get_output_writer(self) -> OutputWriter:
+        """
+        Returns the current output writer instance.
+
+        :return: the current output writer instance
+        """
+        return self._output_writer
+
+    def get_on_output(self) -> Callable[[OutputData], NoReturn]:
+        """
+        Returns the function that handles the output.
+
+        :return: the function that handles the output
+        """
+        return self._output_writer.get_on_output()
+
+    def set_on_output(self, func: Callable[[OutputData], NoReturn]):
+        """
+        Sets the function that the output of terminal commands
+        is passed to.
+
+        :param func: the function to set
+        :return: this instance to allow for method chaining
+        """
+        self._output_writer.set_on_output(func)
+        return self
+
     def running_dir(self) -> str:
         """
         Returns the directory of the current running program.
@@ -292,6 +310,15 @@ class BashBase(ABC, SupportsWithClose):
         :return: the directory of the current running program
         """
         return self._running_dir
+
+    def get_past_commands(self) -> BashCommands:
+        """
+        Returns the BashCommands object that contains a list of
+        all past commands.
+
+        :return: the BashCommands object
+        """
+        return self._commands
 
     @abstractmethod
     def change_dir(self, directory: str) -> NoReturn:

@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # lambdas.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,8 +22,6 @@ Contains the Lambda class that contains methods that represent
 lambda functions to use as defaults for function parameters.
 """
 from typing import NoReturn, Any, Callable
-
-from pylinuxtoolkit.utils.literals import EMPTY
 
 
 class Lambdas:
@@ -65,7 +63,7 @@ class Lambdas:
 
         :return: an empty string
         """
-        return EMPTY
+        return ""
 
     @staticmethod
     def return_zero() -> int:

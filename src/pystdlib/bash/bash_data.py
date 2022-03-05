@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # bash_data.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,13 +21,14 @@
 Contains the BashData class, a data object that stores all
 state and settings for the current bash instance.
 """
+from __future__ import annotations
+
 from typing import Callable, NoReturn
 
 from pexpect import spawn
 
-from pylinuxtoolkit.utils.lambdas import Lambdas
-from pylinuxtoolkit.utils.literals import EMPTY
-from pylinuxtoolkit.utils.values import StringValue
+from pystdlib.lambdas import Lambdas
+from pystdlib.values import StringValue
 
 
 class BashData:
@@ -45,9 +46,9 @@ class BashData:
         self._is_remote: bool = False
         # noinspection PyTypeChecker
         self.client: spawn = None
-        self.current_user: str = EMPTY
-        self.current_line: StringValue = StringValue(EMPTY)
-        self.command: str = EMPTY
+        self.current_user: str = ""
+        self.current_line: StringValue = StringValue()
+        self.command: str = ""
         self.prompt_func: Callable[[], str] = Lambdas.return_empty_str
         self.client_close_func: Callable[[], NoReturn] = Lambdas.no_return
 

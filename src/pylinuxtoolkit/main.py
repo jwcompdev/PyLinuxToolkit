@@ -2,7 +2,7 @@
 # Copyright (C) 2022 JWCompDev
 #
 # main.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,9 @@ Contains the Window class and the main entrypoint
 of the GUI program.
 """
 import atexit
+import logging
 import sys
+from time import sleep
 from typing import NoReturn
 
 from PyQt5 import QtGui, QtCore
@@ -30,9 +32,11 @@ from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QMessageBox, QAbstractItemView
 )
 
+from pystdlib.bash.linux_bash import LinuxBash
+from pystdlib.bash.output import OutputData
+from pystdlib.log_manager import LogManager
 from pylinuxtoolkit.main_window import Ui_MainWindow
-from pylinuxtoolkit.bash.linux_bash import LinuxBash
-from pylinuxtoolkit.bash.output_data import OutputData
+from pylinuxtoolkit.rpi.settings import SettingMonitor
 
 
 def main() -> NoReturn:
@@ -60,9 +64,11 @@ class Window(QMainWindow, Ui_MainWindow):
         self.lstOutput_model = QtGui.QStandardItemModel()
         self.lstOutput.setModel(self.lstOutput_model)
 
+        LogManager.enable_logging(logging.DEBUG)
+
         self.bash = LinuxBash(directory="~",
                               output_function=self.on_output,
-                              remote_ssh=False,
+                              remote_ssh=True,
                               print_ssh_connection_msgs=True,
                               print_prompt=True)
         self.bash.set_ssh_login_info(
@@ -76,6 +82,11 @@ class Window(QMainWindow, Ui_MainWindow):
         # self.bash.enable_raise_error_on_lock_wait()
 
         atexit.register(self.exit_handler)
+
+        commands = self.bash.get_past_commands()
+
+        self.monitor = SettingMonitor(commands)
+        self.monitor.start_monitoring()
 
         if self.bash.is_remote:
             self.bash.ssh_connect(print_ssh_login_success=True, print_prompt=True)
@@ -125,10 +136,10 @@ class Window(QMainWindow, Ui_MainWindow):
             line = output_data.current_line
 
             self.print_to_lst(line.get())
-            print(">> " + repr(line))
+            # print(">> " + repr(line))
 
             if "[Y/n]" in line:
-                if "apt upgrade" in output_data.current_command\
+                if "apt upgrade" in output_data.current_command \
                         or "apt-get upgrade" in output_data.current_command:
                     output_data.client.sendline("n")
                     print(">> Canceled upgrade!")
@@ -150,6 +161,111 @@ class Window(QMainWindow, Ui_MainWindow):
 
             if command.lower() == "exit":
                 self.bash.ssh_close()
+            elif command.lower().startswith("mon "):
+                if command.lower() == "mon -print" \
+                        or command.lower() == "mon -p":
+                    if command.lower() == "mon -p":
+                        self.bash.get_output_writer() \
+                            .write_bypass("mon -p")
+                    else:
+                        self.bash.get_output_writer() \
+                            .write_bypass("mon -print")
+                    self.monitor.request_processed_list()
+                    self.bash.get_output_writer() \
+                        .write_bypass("Printed to console!")
+                    self.bash.get_output_writer() \
+                        .write_bypass(self.bash.get_prompt())
+                elif command.lower() == "mon -start":
+                    self.bash.get_output_writer() \
+                        .write_bypass("mon -start")
+                    self.monitor.start_monitoring()
+                    self.bash.get_output_writer() \
+                        .write_bypass("Monitoring Started!")
+                    self.bash.get_output_writer() \
+                        .write_bypass(self.bash.get_prompt())
+                elif command.lower() == "mon -stop":
+                    self.bash.get_output_writer() \
+                        .write_bypass("mon -stop")
+                    self.monitor.request_termination()
+                    self.bash.get_output_writer() \
+                        .write_bypass("Monitoring Stopped!")
+                    self.bash.get_output_writer() \
+                        .write_bypass(self.bash.get_prompt())
+                elif command.lower() == "mon -restart" \
+                        or command.lower() == "mon -r":
+                    if command.lower() == "mon -r":
+                        self.bash.get_output_writer() \
+                            .write_bypass("mon -r")
+                    else:
+                        self.bash.get_output_writer() \
+                            .write_bypass("mon -restart")
+                    self.bash.get_output_writer() \
+                        .write_bypass("Monitoring Restarting!")
+                    self.monitor.request_termination()
+                    while self.monitor.is_running():
+                        sleep(0.09)
+                    self.monitor.start_monitoring()
+                    self.bash.get_output_writer() \
+                        .write_bypass("Monitoring Restarted!")
+                    self.bash.get_output_writer() \
+                        .write_bypass(self.bash.get_prompt())
+                elif command.lower() == "mon -help":
+                    self.bash.get_output_writer() \
+                        .write_bypass("mon -help")
+                    self.bash.get_output_writer() \
+                        .write_bypass("Usage: mon [OPTION]")
+                    self.bash.get_output_writer() \
+                        .write_bypass("Monitor the PyLinuxToolkit past "
+                                      "commands to update the GUI.")
+                    self.bash.get_output_writer() \
+                        .write_bypass("This is not a real program on the system "
+                                      "and will not run on")
+                    self.bash.get_output_writer() \
+                        .write_bypass("the command line. "
+                                      "This is a simulated command.")
+                    self.bash.get_output_writer() \
+                        .write_bypass("\n")
+                    self.bash.get_output_writer() \
+                        .write_bypass("  -p, -print                 "
+                                      "Prints the processed list.")
+                    self.bash.get_output_writer() \
+                        .write_bypass("  -start                     "
+                                      "Starts the monitor.")
+                    self.bash.get_output_writer() \
+                        .write_bypass("  -r, -restart               "
+                                      "Restarts the monitor.")
+                    self.bash.get_output_writer() \
+                        .write_bypass("  -help                     "
+                                      "Prints this info screen.")
+                    self.bash.get_output_writer() \
+                        .write_bypass("\n")
+                    self.bash.get_output_writer() \
+                        .write_bypass("This MON has Super Cow Powers.")
+                    self.bash.get_output_writer()\
+                        .write_bypass(self.bash.get_prompt())
+
+                    # """
+                    # Usage: mon [OPTION]
+                    # Monitor the PyLinuxToolkit past commands to update the GUI.
+                    # This is not a real program on the system and will not run on the
+                    # command line. This is a simulated command.
+                    #
+                    #     -p, -print                Prints the processed list.
+                    #     -start                    Starts the monitor.
+                    #     -stop                     Stops the monitor.
+                    #     -r, -restart              Restarts the monitor.
+                    #     --help                    Prints this info screen.
+                    #
+                    #                             This MON has Super Cow Powers.
+                    # """
+                else:
+                    self.bash.get_output_writer() \
+                        .write_bypass(f"mon: invalid option "
+                                      f"-- '{command.lower().removeprefix('mon -')}'")
+                    self.bash.get_output_writer() \
+                        .write_bypass("Try 'mon -help' for more information.")
+                    self.bash.get_output_writer() \
+                        .write_bypass(self.bash.get_prompt())
             else:
                 self.bash.run_terminal_command(command=command,
                                                print_prompt=True,

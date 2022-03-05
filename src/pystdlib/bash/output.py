@@ -1,8 +1,8 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# output_writer.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# output.py
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,30 +25,90 @@ from __future__ import annotations
 
 from typing import NoReturn, Callable
 
-from pylinuxtoolkit.bash.bash_checks import BashChecks
-from pylinuxtoolkit.bash.bash_data import BashData
-from pylinuxtoolkit.bash.custom_qt_worker import CustomQTWorker
-from pylinuxtoolkit.bash.bash_exceptions import BashPermissionError
-from pylinuxtoolkit.bash.output_data import OutputData
-from pylinuxtoolkit.utils.values import StringValue
+from PyQt5 import QtCore
+from pexpect import spawn
+
+from pystdlib.bash import BashPermissionError
+from pystdlib.bash.bash_checks import BashChecks
+from pystdlib.bash.bash_data import BashData
+from pystdlib.values import StringValue
 
 
-class OutputWriter:
+class OutputData:
+    """
+    This is a data object that holds all the state and information
+    for the most recent run command.
+    """
+
+    def __init__(self, is_remote: bool, client,
+                 line: str | StringValue, command: str):
+        """
+        Initializes the data object.
+
+        :param is_remote: if True the client is running over ssh
+        :param client: the bash client
+        :param line: the current line of text to be output
+        :param command: the last command run
+        """
+        self._is_remote: bool = is_remote
+        self._client: spawn = client
+        self._current_line: StringValue = StringValue(line)
+        self._current_command: str = command
+
+    @property
+    def is_remote(self) -> bool:
+        """
+        Returns True if the bash is set to run remotely.
+
+        :return: True if the bash is set to run remotely
+        """
+        return self._is_remote
+
+    @property
+    def client(self) -> spawn:
+        """
+        Returns the internal bash client instance.
+        :return: the internal bash client instance
+        """
+        return self._client
+
+    @property
+    def current_line(self) -> StringValue:
+        """
+        Returns the current line of text that was
+        just sent from the bash.
+        :return: the current line of text that was
+        just sent from the bash
+        """
+        return self._current_line
+
+    @property
+    def current_command(self) -> str:
+        """
+        Returns the most recent command run typing the bash.
+        :return: the most recent command run typing the bash
+        """
+        return self._current_command
+
+
+class OutputWriter(QtCore.QObject):
     """
     This object handles the printing and filtering of all text to be
     printed to the output. This class works just like stdout and can
     be used instead of it in other classes if desired.
     """
 
+    _on_output_signal = QtCore.pyqtSignal(OutputData, name="on_output")
+
     def __init__(self, on_output: Callable[[OutputData], NoReturn],
                  bash_data: BashData,
                  on_setting: Callable[[OutputData], NoReturn] = None):
+        super().__init__()
         self._on_output: Callable[[OutputData], NoReturn] = on_output
         self._on_setting: Callable[[OutputData], NoReturn] = on_setting
         self.data: BashData = bash_data
         self._last_line: StringValue = StringValue()
-        self._qt_worker: CustomQTWorker = CustomQTWorker()
-        self._qt_worker.set_on_output_function(self._on_output)
+        self._on_output_signal.connect(self._on_output)
         self._waiting_for_lock = False
 
     def write(self, text: str | StringValue):
@@ -121,7 +181,7 @@ class OutputWriter:
                                  self.data.command)
 
         if self.data.threaded_worker_enabled:
-            self._qt_worker.run_on_output_function(output_data)
+            self._on_output_signal.emit(output_data)
         else:
             self._on_output(output_data)
 

@@ -2,7 +2,7 @@
 
 PyLinuxToolkit is a GUI app for making linux administration tasks easier.
 
-So far it contains a built in terminal that can be used to run commands locally and over ssh.
+So far it contains a built-in terminal that can be used to run commands locally and over ssh.
 
 WARNING: This project is in the very early stages of development and the code base will be changing often.
 
@@ -10,6 +10,6 @@ WARNING: This project is in the very early stages of development and the code ba
 It is currently written in Python 3.9 but want to eventually move to 3.10 once it matures some. I am using PyCharm IDE.
 
 ## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/jwcompdev/PyLinuxToolkit/issues)
-Please feel free to help out! This project is open souce for a reason and I want to make it the most useful I can.
+Please feel free to help out! This project is open source for a reason, and I want to make it the most useful I can.
 
 ## License [![License](https://img.shields.io/github/license/jwcompdev/PyLinuxToolkit)](https://github.com/jwcompdev/PyLinuxToolkit/blob/main/LICENSE)

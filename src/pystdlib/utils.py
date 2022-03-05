@@ -1,8 +1,8 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# utils.py
-# Copyright (C) 2022 JWCompDev <jwcompdev@outlook.com>
+# utils/__init__.py
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,17 +20,37 @@
 """Contains some basic utilities."""
 from __future__ import annotations
 
+import builtins
 import datetime
+import inspect
+import json
 import math
-from typing import Any, NoReturn
+import pickle
+import sys
+import typing
+from typing import NoReturn, Any
 
-from pylinuxtoolkit.utils.exceptions import IllegalArgumentError
-from pylinuxtoolkit.utils.regex import Patterns
+
+class IllegalArgumentError(Exception):
+    """
+    This exception is raised when a required argument was not found
+    when a method was called.
+    """
 
 
-########################################
-# Check Value Utils                    #
-########################################
+class InvalidInputError(TypeError):
+    """
+    Custom error raised when received object is not a string as expected.
+    """
+
+    def __init__(self, input_data: typing.Any):
+        """
+        :param input_data: Any received object
+        """
+        type_name = type(input_data).__name__
+        msg = 'Expected "str", received "{}"'.format(type_name)
+        super().__init__(msg)
+
 
 def check_argument(expression: bool,
                    error_message="Invalid argument specified!") -> NoReturn:
@@ -73,144 +93,6 @@ def check_argument_not_none_or_empty(reference, error_message) -> Any:
     return reference
 
 
-########################################
-# String Utils                         #
-########################################
-
-def is_boolean(value: str) -> bool:
-    """Checks if a string can be converted to a Boolean.
-
-    The following strings are considered true boolean values:
-    "true", "t", "yes", "y", "1", "succeeded", "succeed", "enabled".
-    The following strings are considered false boolean values:
-    "false", "f", "no", "n", "0", "-1", "failed", "fail", "disabled".
-
-    :param value: string to check
-    :return: true if string matches a boolean,
-                false if it does not match or is None or empty
-    """
-    if not input or input is None:
-        return False
-
-    val = value.lower().strip()
-
-    return val in ("true", "t", "yes", "y", "1",
-                   "succeeded", "succeed", "enabled",
-                   "false", "f", "no", "n", "0",
-                   "failed", "fail", "disabled")
-
-
-def to_boolean(value: str) -> bool | None:
-    """Converts a string to a Boolean.
-
-    The following strings are considered true boolean values:
-    "true", "t", "yes", "y", "1", "succeeded", "succeed", "enabled".
-    The following strings are considered false boolean values:
-    "false", "f", "no", "n", "0", "-1", "failed", "fail", "disabled".
-
-    None is returned if the string does not match a boolean value,
-    an empty string or having the value None
-
-    :param value: the string to convert
-    :return: the converted boolean,
-                None is returned if a match is not found
-    """
-    if value and value is not None:
-        val = value.lower().strip()
-
-        is_true = val in ("true", "t", "yes", "y", "1",
-                          "succeeded", "succeed", "enabled")
-
-        is_false = val in ("false", "f", "no", "n", "0",
-                           "failed", "fail", "disabled")
-
-        if is_true:
-            return True
-        if is_false:
-            return False
-
-    return None
-
-
-def parse_int_or_default(value: str, default: int) -> int:
-    """Attempts to parse a string to an int.
-    If it fails, returns the default
-
-    :param value: the string to parse
-    :param default: the value to return if parsing fails
-    :return: the parsed int, or the default if parsing failed
-    """
-    check_argument(isinstance(default, int), "\"default\" must be a int!")
-
-    try:
-        return int(value)
-    except ValueError:
-        return default
-
-
-def parse_float_or_default(value: str, default: float) -> float:
-    """Attempts to parse a string to a float.
-    If it fails, returns the default
-
-    :param value: the string to parse
-    :param default: the value to return if parsing fails
-    :return: the parsed float, or the default if parsing failed
-    """
-    check_argument(isinstance(default, float), "\"default\" must be a float!")
-
-    try:
-        return float(value)
-    except ValueError:
-        return default
-
-
-def strip_ansi_codes(line) -> str:
-    """Strips all ansi codes from the specified string.
-
-    :param line: the line to strip_ansi_codes from
-    :return: the modified line
-    """
-    return Patterns.ANSI_BASIC_ESCAPE.sub("", line) \
-        .replace("\x1b7", "") \
-        .replace("\x1b7r", "") \
-        .replace("\x1b8", "") \
-        .replace("\x1b8r", "")
-
-
-def wrap(value: str, wrap_char: str) -> str:
-    """Wraps a character around the given string .
-
-    :param value: the string to be wrapped
-    :param wrap_char: the character used to wrap
-    :return: wrapped string or the original string
-                if wrap_char is empty
-    """
-    if not wrap_char:
-        return value
-
-    return f"{wrap_char}{value}{wrap_char}"
-
-
-def unwrap(value: str, wrap_char: str) -> str:
-    """Unwraps a given string from a character.
-
-    :param value: the string to be unwrapped
-    :param wrap_char: the character used to unwrap
-    :return: unwrapped string or the original string if it is not
-                quoted properly with the wrap character
-    """
-    if str and wrap_char and \
-            value[0] == wrap_char and \
-            value[-1] == wrap_char:
-        return value[1:-1]
-
-    return value
-
-
-########################################
-# Integer Utils                        #
-########################################
-
 def convert_bytes_to_string(number: int) -> str:
     """Returns the conversion from bytes to the correct
     version (1024 bytes = 1 KB) as a string.
@@ -218,17 +100,19 @@ def convert_bytes_to_string(number: int) -> str:
     :param number: number to convert to a readable string
     :return: the specified number converted to a readable string
     """
+    num = number
+
     factor = 1024
-    if number >= factor:
-        number /= factor
-        if number >= factor:
-            number /= factor
-            if number >= factor:
-                number /= factor
-                if number >= factor:
-                    number /= factor
-                    if number >= factor:
-                        number /= factor
+    if num >= factor:
+        num /= factor
+        if num >= factor:
+            num /= factor
+            if num >= factor:
+                num /= factor
+                if num >= factor:
+                    num /= factor
+                    if num >= factor:
+                        num /= factor
                         suffix = " PB"
                     else:
                         suffix = " TB"
@@ -242,13 +126,9 @@ def convert_bytes_to_string(number: int) -> str:
         suffix = " Bytes"
 
     rounding_factor = 10 ** 2
-    rounded = math.floor(number * rounding_factor) / rounding_factor
+    rounded = math.floor(num * rounding_factor) / rounding_factor
     return f"{rounded:.2f}" + suffix
 
-
-########################################
-# Other Utils                          #
-########################################
 
 def timesince(d_t: datetime.datetime | datetime.timedelta,
               default: str = 'just now') -> str:
@@ -322,3 +202,158 @@ def timesince(d_t: datetime.datetime | datetime.timedelta,
         return f"{' and '.join(output[:2])} ago"
 
     return default
+
+
+def get_method_parent(meth) -> type | None:
+    """
+    Returns the class of the parent of the specified method.
+
+    :param meth: the method to check
+    :return: the class of the parent of the specified method
+    """
+    if inspect.ismethod(meth) \
+            or (inspect.isbuiltin(meth)
+                and getattr(meth, '__self__', None) is not None
+                and getattr(meth.__self__, '__class__', None)):
+        for cls in inspect.getmro(meth.__self__.__class__):
+            if meth.__name__ in cls.__dict__:
+                return cls
+        meth = getattr(meth, '__func__', meth)  # fallback to __qualname__ parsing
+    if inspect.isfunction(meth):
+        cls = getattr(inspect.getmodule(meth),
+                      meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0],
+                      None)
+        if isinstance(cls, type):
+            return cls
+    return getattr(meth, '__objclass__', None)  # handle special descriptor objects
+
+
+def get_method_name_from_frame(frame) -> str:
+    """
+    Retrieves the method name from the specified frame.
+
+    :param frame: the frame to check
+    :return: the method name from the specified frame
+    """
+    return frame.f_code.co_name
+
+
+def get_class_instance_from_frame(frame):
+    """
+    Retrieves the class instance from the specified frame.
+
+    :param frame: the frame to check
+    :return: the class instance from the specified frame
+    """
+    return frame.f_locals.get('self', None)
+
+
+def get_class_from_frame(frame):
+    """
+    Retrieves the class object from the specified frame.
+
+    :param frame: the frame to check
+    :return: the class object from the specified frame
+    """
+    args, _, _, value_dict = inspect.getargvalues(frame)
+    # we check the first parameter for the frame function is
+    # named 'self'
+    if len(args) and args[0] == 'self':
+        # in that case, 'self' will be referenced in value_dict
+        instance = value_dict.get('self', None)
+        if instance:
+            # return its class
+            return getattr(instance, '__class__', None)
+    # return None otherwise
+    return None
+
+
+def get_module_from_frame(frame):
+    """
+    Retrieves the class object from the specified frame.
+
+    :param frame: the frame to check
+    :return: the class object from the specified frame
+    """
+    cls = get_class_from_frame(frame)
+
+    if cls is not None:
+        return sys.modules[cls.__module__]
+
+    return None
+
+
+def kw(**kwargs) -> dict:
+    """
+    Returns the specified kwargs as a dict.
+
+    :param kwargs: the kwargs to convert
+    :return: the specified kwargs as a dict
+    """
+    return kwargs
+
+
+def get_type_by_name(name: str) -> type | None:
+    """
+    Returns the type that matches the specified name or None if not
+    found.
+
+    :param name: the name to lookup
+    :return: the type that matches the specified name or None if not
+        found.
+    """
+    try:
+        return getattr(builtins, name)
+    except AttributeError:
+        try:
+            obj = globals()[name]
+        except KeyError:
+            return None
+
+        return obj if isinstance(obj, type) else None
+
+
+def save_pickle(file, data) -> NoReturn:
+    """
+    Pickles the specified data to the specified file.
+
+    :param file: the file to save to
+    :param data: the data to pickle
+    """
+    with open(file, 'wb') as f:
+        pickle.dump(data, f)
+
+
+def load_pickle(file):
+    """
+    Loads the pickled data from the specified file.
+
+    :param file: the file to read
+    :return: the pickled data
+    """
+    with open(file, 'rb') as f:
+        data = pickle.load(f, encoding='bytes')
+    return data
+
+
+def save_json(file, data) -> NoReturn:
+    """
+    Converts the specified data to JSON
+    and saves it in the specified file.
+
+    :param file: the file to save to
+    :param data: the data to convert
+    """
+    with open(file, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False)
+
+
+def load_json(file):
+    """
+    Converts the JSON from the specified file to a python object.
+
+    :param file: the file to read
+    :return: the data object
+    """
+    with open(file, 'r') as f:
+        return json.load(f)
