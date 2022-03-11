@@ -30,13 +30,12 @@ import re
 import sys
 import threading
 import time
-import traceback
 from concurrent.futures import ThreadPoolExecutor, Future
 from functools import partial
 from inspect import iscoroutinefunction, isgeneratorfunction
 from typing import Any, Callable
 
-from pystdlib.func_utils import FuncInfo, Signature
+from pystdlib.introspection import Func, Signature
 
 logging_logger = logging.getLogger(__name__)
 
@@ -409,7 +408,7 @@ def show_cputime(func, *args, **kwargs):
     :param kwargs: the keyword args of the function
     :return: the function return value
     """
-    print(f"CPU time for {FuncInfo(func).full_name}:")
+    print(f"CPU time for {Func(func).full_name}:")
 
     timer = cProfile.Profile()
     result = timer.runcall(func, *args, **kwargs)
@@ -437,7 +436,7 @@ def show_docs(func, *args, **kwargs):
     :param kwargs: the keyword args of the function
     :return: the function return value
     """
-    func = FuncInfo(func)
+    func = Func(func)
 
     print(f"Documentation for {func.full_name}:")
     print(func.doc)
@@ -445,12 +444,9 @@ def show_docs(func, *args, **kwargs):
     return func(*args, **kwargs)
 
 
-def show_time(func=None, *, timer=time.perf_counter, handler=None):
+def show_time(func=None, *, handler=None):
     """
     Display Runtime statistics of given function.
-
-    This uses a "time.perf_counter" by default but that can be replaced
-    by any object of type Callable[None, int].
 
     A custom handler can be passed as a parameter. If no
     handler is supplied, the info is printed as a debug log.
@@ -467,24 +463,21 @@ def show_time(func=None, *, timer=time.perf_counter, handler=None):
     >>>
     :param func: the function, if None decorator
         usage is assumed
-    :param timer: the timer object
     :param handler: a change_function that will be called
         when func is done execution
     :return: the function return value
     """
+
     @decorator
     def _wrapper(_func, *args, **kwargs):
-        _func = FuncInfo(_func)
+        _func = Func(_func)
 
-        start = timer()
         result = _func(*args, **kwargs)
-        end = timer()
 
-        run_time = end - start
         if handler:
-            handler(_func.full_name, run_time)
+            handler(_func.full_name, _func.last_run_time_string)
         logging_logger.debug(f"{_func.full_name}"
-                             f" executed in {run_time} seconds")
+                             f" executed in {_func.last_run_time_string} seconds")
 
         return result
 
@@ -511,7 +504,7 @@ def show_trace(func, *args, **kwargs):
     :param kwargs: the keyword args of the function
     :return: the function return value
     """
-    func = FuncInfo(func)
+    func = Func(func)
 
     print(f"Calling {func.full_name} with: \n   "
           f"args: {args} \n   "
@@ -527,6 +520,7 @@ def show_num_calls(func):
     :param func: the decorated function
     :return: the function return value
     """
+
     @functools.wraps(func)
     def _wrapper(*args, **kwargs):
         _wrapper.num_calls += 1
@@ -570,6 +564,7 @@ def singleton(cls):
     :param cls: the decorated class
     :return: the singleton class instance
     """
+
     @functools.wraps(cls)
     def _wrapper(*args, **kwargs):
         if _wrapper.instance is None:
@@ -650,6 +645,8 @@ def trycatch(func=None, *, exception=None, handler=None, silent=False):
     handler must be of type Callable[Exception, Generic[T]]. In other
     words, its signature must take one parameter of type Exception.
 
+    NOTE: If an exception is thrown the function will return None.
+
     >>> @trycatch
     >>> def function():
     >>>     print(0/0) # Division by 0 must raise exception
@@ -679,10 +676,11 @@ def trycatch(func=None, *, exception=None, handler=None, silent=False):
             if not silent:
                 if not handler:
                     logging.exception("Exception occurred during execution"
-                                      f"of {_func.__name__}: [{exc}]")
-                    traceback.print_exc()
+                                      f" of '{_func.__name__}': [{exc}]")
                 else:
-                    handler(exc)
+                    handler(_func.__name__, exc)
+
+            return None
 
     return _wrapper if func is None else _wrapper(func)
 
@@ -731,14 +729,15 @@ def throttle(func=None, *, limit=1, every=1):
 
     @decorator
     def _wrapper(_func, *args, **kwargs):
-        with semaphore.acquire():
-            try:
-                return _func(*args, **kwargs)
+        semaphore.acquire()
 
-            finally:  # ensure semaphore release
-                timer = threading.Timer(every, semaphore.release)
-                timer.daemon = True  # allows the timer to be canceled on exit
-                timer.start()
+        try:
+            return _func(*args, **kwargs)
+
+        finally:  # ensure semaphore release
+            timer = threading.Timer(every, semaphore.release)
+            timer.daemon = True  # allows the timer to be canceled on exit
+            timer.start()
 
     return _wrapper if func is None else _wrapper(func)
 
@@ -765,8 +764,6 @@ def require_root(func, *args, **kwargs):
 ########################################
 # Validation Decorators                #
 ########################################
-def _validate_types(value, type_):
-    return isinstance(value, type_) or issubclass(type(value), type_)
 
 
 def accepts(func=None, **signature):
@@ -783,13 +780,14 @@ def accepts(func=None, **signature):
         hints on the function decorate checked instead
     :return: The result of the function if verification didn't fail
     """
+
     @decorator
     def _wrapped(_func, *args, **kwargs):
         if signature is not None:
             sig = Signature(signature)
         else:
-            _func = FuncInfo(_func)
-            sig = func.signature
+            _func = Func(_func)
+            sig = _func.signature
 
         sig.verify_args(*args, **kwargs)
 
@@ -807,10 +805,20 @@ def returns(func=None, return_type=None):
     :param return_type: the expected return type
     :return: the function return value if the type matches
     """
+
     @decorator
     def _wrapped(_func, *args, **kwargs):
-        result = _func(*args, **kwargs)
-        _validate_types(result, return_type)
+        func_instance = Func(_func)
+        result = func_instance(*args, **kwargs)
+
+        match = (isinstance(result, return_type)
+                 or issubclass(type(result), return_type))
+
+        if not match:
+            raise ValueError("Return value Mismatch:"
+                             f"\n>>> Expected: '{return_type.__name__}',"
+                             f" Found: '{type(result).__name__}'"
+                             f" with value '{str(result)}'")
         return result
 
     return _wrapped if func is None else _wrapped(func)
@@ -856,6 +864,7 @@ def threaded(func, *args, **kwargs):
 @decorator
 def thread_pool(func, executor: ThreadPoolExecutor = None,
                 *args, **kwargs) -> Future:
+    # noinspection PyProtectedMember
     """
     Runs the function in a thread pool.
 
@@ -877,7 +886,7 @@ def thread_pool(func, executor: ThreadPoolExecutor = None,
     >>> t2 = waste_time(2)
     >>>
     >>> print(t1)           # <Future at 0x104130a90 state=running>
-    >>> print(t1.result())  # 42
+    >>> print(t1._result())  # 42
     ThreadPoolExecutor-0_1 woke up after 2s!
     ThreadPoolExecutor-0_0 woke up after 5s!
     >>>
@@ -937,6 +946,7 @@ def change_args(func=None, *args, **kwargs):
     :param kwargs: run_in_thread keyword arguments to inject
     :return: the function return value
     """
+
     # noinspection PyUnusedLocal
     @decorator
     def _wrapper(_func, *unneeded_args, **unneeded_kwargs):
@@ -953,6 +963,7 @@ def change_function(func=None):
         decorator usage is assumed
     :return: the function return value
     """
+
     # noinspection PyUnusedLocal
     @decorator
     def _wrapper(unneeded_func, *args, **kwargs):
@@ -1055,6 +1066,7 @@ def retry(func=None, exceptions=Exception, tries=-1, delay=0, max_delay=None,
         failed attempts. If None, logging is disabled.
     :returns: the function return value
     """
+
     @decorator
     def _wrapper(_func, *args, **kwargs):
         _args = args if args else []

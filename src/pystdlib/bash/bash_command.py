@@ -27,7 +27,8 @@ from typing import NoReturn
 
 from pystdlib.bash import BashError
 from pystdlib.bash.bash_checks import BashChecks
-from pystdlib.caller import Caller
+from pystdlib.introspection import Caller
+from pystdlib.str_utils import build_repr
 from pystdlib.values import StringValue, IntegerValue, FloatValue
 
 
@@ -79,8 +80,8 @@ class BashCommand:
                f" exit_code={self._exit_code})"
 
     def __repr__(self):
-        return f"BashCommand(\"{self._command}\", " \
-               f"\"{self._directory}\", \"\", {self.exit_code})"
+        return build_repr(self, self._command, self._directory,
+                          self._output, self._exit_code)
 
     @property
     def cid(self) -> int:

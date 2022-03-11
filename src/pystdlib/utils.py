@@ -20,13 +20,10 @@
 """Contains some basic utilities."""
 from __future__ import annotations
 
-import builtins
 import datetime
-import inspect
 import json
 import math
 import pickle
-import sys
 import typing
 from typing import NoReturn, Any
 
@@ -67,6 +64,22 @@ def check_argument(expression: bool,
     """
     if not expression:
         raise IllegalArgumentError(str(error_message))
+
+
+def check_argument_type(value,
+                        value_name,
+                        types: type | tuple[type, ...]) -> NoReturn:
+    """Ensures the truth of an expression involving one or
+    more parameters to the calling method.
+
+    :param value: the value to check
+    :param value_name: the name of the value
+    :param types: a type or tuple of types to check
+    :raises IllegalArgumentError: if expression is False
+    """
+    if not isinstance(value, types):
+        raise IllegalArgumentError(f"\"{value_name}\" must be one "
+                                   f"of the following types: {types}")
 
 
 def check_argument_not_none(reference, error_message) -> Any:
@@ -184,8 +197,6 @@ def timesince(d_t: datetime.datetime | datetime.timedelta,
         diff = abs(now - d_t)
 
     periods = (
-        (diff.days / 365, 'year', 'years'),
-        (diff.days % 365 / 30, 'month', 'months'),
         (diff.days % 30 / 7, 'week', 'weeks'),
         (diff.days % 7, 'day', 'days'),
         (diff.seconds / 3600, 'hour', 'hours'),
@@ -207,85 +218,6 @@ def timesince(d_t: datetime.datetime | datetime.timedelta,
     return default
 
 
-def get_method_parent(meth) -> type | None:
-    """
-    Returns the class of the parent of the specified method.
-
-    :param meth: the method to check
-    :return: the class of the parent of the specified method
-    """
-    if inspect.ismethod(meth) \
-            or (inspect.isbuiltin(meth)
-                and getattr(meth, '__self__', None) is not None
-                and getattr(meth.__self__, '__class__', None)):
-        for cls in inspect.getmro(meth.__self__.__class__):
-            if meth.__name__ in cls.__dict__:
-                return cls
-        meth = getattr(meth, '__func__', meth)  # fallback to __qualname__ parsing
-    if inspect.isfunction(meth):
-        cls = getattr(inspect.getmodule(meth),
-                      meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0],
-                      None)
-        if isinstance(cls, type):
-            return cls
-    return getattr(meth, '__objclass__', None)  # handle special descriptor objects
-
-
-def get_method_name_from_frame(frame) -> str:
-    """
-    Retrieves the method name from the specified frame.
-
-    :param frame: the frame to check
-    :return: the method name from the specified frame
-    """
-    return frame.f_code.co_name
-
-
-def get_class_instance_from_frame(frame):
-    """
-    Retrieves the class instance from the specified frame.
-
-    :param frame: the frame to check
-    :return: the class instance from the specified frame
-    """
-    return frame.f_locals.get('self', None)
-
-
-def get_class_from_frame(frame):
-    """
-    Retrieves the class object from the specified frame.
-
-    :param frame: the frame to check
-    :return: the class object from the specified frame
-    """
-    args, _, _, value_dict = inspect.getargvalues(frame)
-    # we check the first parameter for the frame function is
-    # named 'self'
-    if len(args) and args[0] == 'self':
-        # in that case, 'self' will be referenced in value_dict
-        instance = value_dict.get('self', None)
-        if instance:
-            # return its class
-            return getattr(instance, '__class__', None)
-    # return None otherwise
-    return None
-
-
-def get_module_from_frame(frame):
-    """
-    Retrieves the class object from the specified frame.
-
-    :param frame: the frame to check
-    :return: the class object from the specified frame
-    """
-    cls = get_class_from_frame(frame)
-
-    if cls is not None:
-        return sys.modules[cls.__module__]
-
-    return None
-
-
 def kwa(**kwargs) -> dict:
     """
     Returns the specified kwargs as a dict.
@@ -294,26 +226,6 @@ def kwa(**kwargs) -> dict:
     :return: the specified kwargs as a dict
     """
     return kwargs
-
-
-def get_type_by_name(name: str) -> type | None:
-    """
-    Returns the type that matches the specified name or None if not
-    found.
-
-    :param name: the name to lookup
-    :return: the type that matches the specified name or None if not
-        found.
-    """
-    try:
-        return getattr(builtins, name)
-    except AttributeError:
-        try:
-            obj = globals()[name]
-        except KeyError:
-            return None
-
-        return obj if isinstance(obj, type) else None
 
 
 def save_pickle(file, data) -> NoReturn:

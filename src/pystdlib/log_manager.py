@@ -26,9 +26,10 @@ from __future__ import annotations
 import logging
 import sys
 
-from pystdlib.decorators import classproperty
+from pystdlib.decorators import classproperty, singleton
 
 
+@singleton
 class LogManager:
     """
     Contains basic tools for logging related

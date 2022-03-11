@@ -18,16 +18,16 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-Contains the Caller class, that wraps the caller of a method
+Contains the Caller class, that
+wraps the caller of the current method
 to provide basic info about it.
 """
 from __future__ import annotations
 
-import inspect
-import sys
 from types import ModuleType
 
-from pystdlib.values import StringValue
+from pystdlib.introspection import CallFrame
+from pystdlib.str_utils import build_repr
 
 
 class Caller:
@@ -38,82 +38,23 @@ class Caller:
 
     def __init__(self):
         """Initializes the CallerWrapper instance."""
-        frame = inspect.stack()[2][0]
+        # Grabs the stack from the location the "__init__"
+        # method was called.
+        self._frame = CallFrame.current().parent.parent
 
-        self._name = self._get_method_name_from_frame(frame)
-        self._cls = self._get_class_from_frame(frame)
-        self._cls_instance = self._get_class_instance_from_frame(frame)
-        self._module = self._get_module_from_frame(frame)
-
-    @staticmethod
-    def _get_method_name_from_frame(frame) -> str:
-        """
-        Retrieves the method name from the specified frame.
-
-        :param frame: the frame to check
-        :return: the method name from the specified frame
-        """
-        return frame.f_code.co_name
-
-    @staticmethod
-    def _get_class_from_frame(frame):
-        """
-        Retrieves the class from the specified frame.
-
-        :param frame: the frame to check
-        :return: the class from the specified frame
-        """
-        args, _, _, value_dict = inspect.getargvalues(frame)
-        # we check the first parameter for the frame function is
-        # named 'self'
-        if len(args) and args[0] == 'self':
-            # in that case, 'self' will be referenced in value_dict
-            instance = value_dict.get('self', None)
-            if instance:
-                # return its class
-                return getattr(instance, '__class__', None)
-        # return None otherwise
-        return None
-
-    @staticmethod
-    def _get_class_instance_from_frame(frame):
-        """
-        Retrieves the class instance from the specified frame.
-
-        :param frame: the frame to check
-        :return: the class instance from the specified frame
-        """
-        return frame.f_locals.get('self', None)
-
-    @staticmethod
-    def _get_module_from_frame(frame):
-        """
-        Retrieves the class object from the specified frame.
-
-        :param frame: the frame to check
-        :return: the class object from the specified frame
-        """
-        args, _, _, value_dict = inspect.getargvalues(frame)
-        # we check the first parameter for the frame function is
-        # named 'self'
-        if len(args) and args[0] == 'self':
-            # in that case, 'self' will be referenced in value_dict
-            instance = value_dict.get('self', None)
-            if instance:
-                # return its class
-                cls = getattr(instance, '__class__', None)
-                return sys.modules[cls.__module__]
-        # return None otherwise
-        return None
+    def __repr__(self):
+        return build_repr(self)
 
     @property
     def name(self) -> str:
         """
         Returns the caller's name.
 
+        This is equivalent to "obj.__name__".
+
         :return: the caller's name
         """
-        return self._name
+        return self._frame.current_name
 
     @property
     def cls(self) -> type | None:
@@ -122,7 +63,7 @@ class Caller:
 
         :return: the caller's class
         """
-        return self._cls
+        return self._frame.current_cls
 
     @property
     def cls_instance(self):
@@ -131,7 +72,7 @@ class Caller:
 
         :return: the caller's class instance
         """
-        return self._cls_instance
+        return self._frame.current_cls_instance
 
     @property
     def cls_name(self) -> str | None:
@@ -140,9 +81,7 @@ class Caller:
 
         :return: the caller's class name
         """
-        if self._cls is not None:
-            return self._cls.__name__
-        return None
+        return self._frame.current_cls_name
 
     @property
     def module(self) -> ModuleType | None:
@@ -151,7 +90,7 @@ class Caller:
 
         :return: the caller's module
         """
-        return self._module
+        return self._frame.current_module
 
     @property
     def module_name(self) -> str | None:
@@ -160,9 +99,7 @@ class Caller:
 
         :return: the caller's module name
         """
-        if self._module is not None:
-            return self._module.__name__
-        return None
+        return self._frame.cu
 
     @property
     def module_filename(self) -> str | None:
@@ -171,9 +108,7 @@ class Caller:
 
         :return: the caller's module filename
         """
-        if self._module is not None:
-            return self._module.__file__
-        return None
+        return self._frame.current_module_filename
 
     @property
     def package_name(self) -> str | None:
@@ -182,9 +117,7 @@ class Caller:
 
         :return: the caller's package name
         """
-        if self._module is not None:
-            return self._module.__package__
-        return None
+        return self._frame.current_package_name
 
     @property
     def root_package_name(self) -> str | None:
@@ -193,9 +126,7 @@ class Caller:
 
         :return: the caller's root package name
         """
-        if self.package_name is not None:
-            return self.package_name.partition('.')[0]
-        return None
+        return self._frame.current_root_package_name
 
     @property
     def full_name(self) -> str:
@@ -206,10 +137,7 @@ class Caller:
 
         :return: the full name
         """
-        if self.cls_name is None:
-            return self.name
-
-        return f"{self.cls_name}.{self.name}"
+        return self._frame.current_full_name
 
     @property
     def full_path(self) -> str:
@@ -224,29 +152,20 @@ class Caller:
 
         :return: the full path
         """
-        if self.module_name is None:
-            if self.cls_name is None:
-                return self.name
+        return self._frame.current_full_path
 
-            return f"{self.cls_name}.{self.name}"
-
-        if self.cls_name is None:
-            return f"{self.module_name}.{self.name}"
-
-        return f"{self.module_name}.{self.cls_name}.{self.name}"
-
-    def name_matches(self, comparison: str | StringValue):
+    def name_matches(self, *comparison: str) -> bool:
         """
         Returns True if the name of the caller method matches
-        the specified name, False otherwise.
+        the specified name or names, False otherwise.
 
-        :param comparison: the name to check against
+        :param comparison: the name or names to check against
         :return: True if the name of the caller method matches
             the specified name, False otherwise
         """
-        return self.name == comparison
+        return self.name in list(comparison)
 
-    def cls_name_matches(self, comparison: str | StringValue):
+    def cls_name_matches(self, *comparison: str) -> bool:
         """
         Returns True if the name of the caller class matches
         the specified name, False otherwise.
@@ -255,9 +174,9 @@ class Caller:
         :return: True if the name of the caller class matches
             the specified name, False otherwise
         """
-        return self.cls_name == comparison
+        return self.cls_name in list(comparison)
 
-    def module_name_matches(self, comparison: str | StringValue):
+    def module_name_matches(self, *comparison: str) -> bool:
         """
         Returns True if the name of the caller module
         matches the specified module, False otherwise.
@@ -266,9 +185,9 @@ class Caller:
         :return: True if the name of the caller module
             matches the specified module, False otherwise
         """
-        return self.module_name == comparison
+        return self.module_name in list(comparison)
 
-    def module_filename_matches(self, comparison: str | StringValue):
+    def module_filename_matches(self, *comparison: str) -> bool:
         """
         Returns True if the name of the caller module
         filename matches the specified module filename, False otherwise.
@@ -278,9 +197,9 @@ class Caller:
             filename matches the specified module filename,
             False otherwise
         """
-        return self.module_filename == comparison
+        return self.module_filename in list(comparison)
 
-    def path_matches(self, comparison: str | StringValue):
+    def path_matches(self, *comparison: str) -> bool:
         """
         Returns True if the name of the caller's full path
         matches the specified path, False otherwise.
@@ -289,4 +208,4 @@ class Caller:
         :return: True if the name of the caller's full path
             matches the specified path, False otherwise
         """
-        return self.full_path == comparison
+        return self.full_path in list(comparison)

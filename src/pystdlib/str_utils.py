@@ -24,10 +24,11 @@ import binascii
 import os
 import random
 import string
-from uuid import uuid4
+import uuid as uuid_native
 
 from pystdlib.regex import Patterns
-from pystdlib.utils import check_argument, InvalidInputError
+from pystdlib.types import NoneType
+from pystdlib.utils import check_argument, InvalidInputError, check_argument_type
 
 
 def is_boolean(value: str) -> bool:
@@ -42,7 +43,7 @@ def is_boolean(value: str) -> bool:
     :return: true if string matches a boolean,
                 false if it does not match or is None or empty
     """
-    if not input or input is None:
+    if not isinstance(value, str):
         return False
 
     val = value.lower().strip()
@@ -68,7 +69,7 @@ def to_boolean(value: str) -> bool | None:
     :return: the converted boolean,
                 None is returned if a match is not found
     """
-    if value and value is not None:
+    if isinstance(value, str):
         val = value.lower().strip()
 
         is_true = val in ("true", "t", "yes", "y", "1",
@@ -85,7 +86,7 @@ def to_boolean(value: str) -> bool | None:
     return None
 
 
-def parse_int(value: str, default: int = None) -> int:
+def parse_int(value: str, default: int | float | None = None) -> int:
     """Attempts to parse a string to an int.
     If it fails, returns the default.
     If default is None then ValueError is raised.
@@ -95,19 +96,21 @@ def parse_int(value: str, default: int = None) -> int:
     :return: the parsed int, or the default if parsing failed
     :raises ValueError: if parse failed and default is None
     """
-    check_argument(isinstance(default, (int, type(None))),
-                   "\"default\" must be a int or None!")
+    check_argument_type(default, "default", (int, float, NoneType))
 
     try:
         return int(value)
-    except ValueError:
+    except (TypeError, ValueError):
         if default is not None:
-            return default
+            if isinstance(default, int):
+                return default
+            elif isinstance(default, float):
+                return int(default)
 
         raise
 
 
-def parse_float(value: str, default: float = None) -> float:
+def parse_float(value: str, default: int | float | None = None) -> float:
     """Attempts to parse a string to a float.
     If it fails, returns the default.
     If default is None then ValueError is raised.
@@ -117,14 +120,16 @@ def parse_float(value: str, default: float = None) -> float:
     :return: the parsed float, or the default if parsing failed
     :raises ValueError: if parse failed and default is None
     """
-    check_argument(isinstance(default, (float, type(None))),
-                   "\"default\" must be a float or None!")
+    check_argument_type(default, "default", (int, float, NoneType))
 
     try:
         return float(value)
-    except ValueError:
+    except (TypeError, ValueError):
         if default is not None:
-            return default
+            if isinstance(default, float):
+                return default
+            elif isinstance(default, int):
+                return float(default)
 
         raise
 
@@ -143,48 +148,64 @@ def strip_ansi_codes(line) -> str:
 
 
 def wrap(value: str, wrap_char: str) -> str:
-    """Wraps a character around the given string .
+    """Wraps a character or string around the given string.
 
     :param value: the string to be wrapped
-    :param wrap_char: the character used to wrap
+    :param wrap_char: the character or string used to wrap
     :return: wrapped string or the original string
                 if wrap_char is empty
+    :raise IllegalArgumentError: if either parameter is not a string
     """
-    if not wrap_char:
-        return value
+    check_argument_type(value, "value", str)
+
+    check_argument_type(wrap_char, "wrap_char", str)
 
     return f"{wrap_char}{value}{wrap_char}"
 
 
 def unwrap(value: str, wrap_char: str) -> str:
-    """Unwraps a given string from a character.
+    """Unwraps a given string from a character or string.
 
     :param value: the string to be unwrapped
-    :param wrap_char: the character used to unwrap
+    :param wrap_char: the character or string used to unwrap
     :return: unwrapped string or the original string if it is not
-                quoted properly with the wrap character
+                quoted properly with the wrap character or string
+    :raise IllegalArgumentError: if either parameter is not a string
     """
-    if str and wrap_char and \
-            value[0] == wrap_char and \
-            value[-1] == wrap_char:
-        return value[1:-1]
+    check_argument_type(value, "value", str)
+    check_argument_type(wrap_char, "wrap_char", str)
+
+    if is_not_blank(value) and is_not_blank(wrap_char):
+        if value[0] == wrap_char \
+                and value[-1] == wrap_char:
+            return value[1:-1]
+        elif value[0:len(wrap_char)] == wrap_char \
+                and value[-len(wrap_char):] == wrap_char:
+            return value[len(wrap_char): -len(wrap_char)]
 
     return value
 
 
-def uuid(as_hex: bool = False) -> str:
+def uuid(as_hex: bool = False, seed: int = None) -> str:
     """
-    Generated a UUID string (using `uuid.uuid4()`).
-    *Examples:*
+    Generates a UUID string (using `uuid.uuid4()`).
 
-    >>> uuid() # possible output: '3917ea5e-86bd-430a-a1c8-54cd27085e01'
-    >>> uuid(as_hex=True) # possible output: '3917ea5e86bd430aa1c854cd27085e01'
+    >>> uuid(seed=1234)
+    1de9ea66-70d3-4a1f-8735-df5ef7697fb9
+    >>> uuid(as_hex=True, seed=1234)
+    1de9ea6670d34a1f8735df5ef7697fb9
 
     :param as_hex: True to return the hex value of the UUID,
-    False to get its default representation (default).
-    :return: uuid string.
+    False to get its default representation (default)
+    :param seed: an int to use as a seed for the randomness
+    :return: an uuid string
     """
-    uid = uuid4()
+    rd = random.Random()
+
+    if isinstance(seed, int):
+        rd.seed(seed)
+
+    uid = uuid_native.UUID(int=rd.getrandbits(128), version=4)
 
     if as_hex:
         return uid.hex
@@ -192,22 +213,28 @@ def uuid(as_hex: bool = False) -> str:
     return str(uid)
 
 
-def random_string(size: int) -> str:
+def random_string(size: int, seed: int = None) -> str:
     """
     Returns a string of the specified size containing random characters
     (uppercase/lowercase ascii letters and digits).
 
-    >>> random_string(9) # possible output: "J1Mna4oY6"
+    >>> random_string(9, seed=1234)
+    9XChaf688
 
     :param size: Desired string size
-    :type size: int
+    :param seed: an int to use as a seed for the randomness
     :return: Random string
     """
-    if not isinstance(size, int) or size < 1:
-        raise ValueError('size must be >= 1')
+    check_argument_type(size, "size", int)
+    check_argument(size >= 1, 'size must be >= 1')
+
+    rd = random.Random()
+
+    if isinstance(seed, int):
+        rd.seed(seed)
 
     chars = string.ascii_letters + string.digits
-    buffer = [random.choice(chars) for _ in range(size)]
+    buffer = [rd.choice(chars) for _ in range(size)]
     out = ''.join(buffer)
 
     return out
@@ -227,8 +254,8 @@ def secure_random_hex(byte_count: int) -> str:
     :type byte_count: int
     :return: Hexadecimal string representation of generated random bytes
     """
-    if not isinstance(byte_count, int) or byte_count < 1:
-        raise ValueError('byte_count must be >= 1')
+    check_argument_type(byte_count, "byte_count", int)
+    check_argument(byte_count >= 1, 'byte_count must be >= 1')
 
     random_bytes = os.urandom(byte_count)
     hex_bytes = binascii.hexlify(random_bytes)
@@ -240,8 +267,10 @@ def secure_random_hex(byte_count: int) -> str:
 def reverse(input_string: str) -> str:
     """
     Returns the string with its chars reversed.
-    *Example:*
-    >>> reverse('hello') # returns 'olleh'
+
+    >>> reverse('hello')
+    olleh
+
     :param input_string: String to revert.
     :type input_string: str
     :return: Reversed string.
@@ -319,6 +348,60 @@ def is_not_blank_or_none(value: str):
     :return: True if the specified string is not whitespace, empty or None
     """
     try:
-        return "".__eq__(value.strip())
+        return not "".__eq__(value.strip())
     except AttributeError:
         return value is not None
+
+
+def build_repr(self, *args, _to_repr: bool = True, **kwargs) -> str:
+    """
+    Builds a clear repr string that can be used when overriding
+    '__repr__' in classes.
+
+    NOTE: all args and kwargs are by default converted
+    to a string using 'str()' or if '_to_repr' is True are
+    converted using 'repr()'. If the args or kwargs are already
+    a string then no conversion is done.
+
+    :param self: the instance of the class
+    :param args: the args that can be used to recreate the instance
+    :param _to_repr: if True uses 'repr()' on all args, otherwise
+        uses 'str()' on all args
+    :param kwargs: the keyword args that can be used to recreate
+        the instance
+    :return: a clear repr string
+    """
+    final_args_str = ""
+
+    if len(args) == 1:
+        if type(args[0]) is str:
+            final_args_str = args[0]
+        else:
+            if _to_repr:
+                final_args_str = repr(args[0])
+            else:
+                final_args_str = str(args[0])
+
+    elif len(args) > 1:
+        for item in args:
+            if type(item) is str:
+                final_args_str += item + ", "
+            else:
+                if _to_repr:
+                    final_args_str += repr(item) + ", "
+                else:
+                    final_args_str += str(item) + ", "
+
+    if len(kwargs) >= 1:
+        for key, item in kwargs.items():
+            if type(item) is str:
+                final_args_str += f"{key}={item}, "
+            else:
+                if _to_repr:
+                    final_args_str += f"{key}={repr(item)}, "
+                else:
+                    final_args_str += f"{key}={str(item)}, "
+
+    final_args_str = final_args_str.rstrip(", ")
+
+    return f"{type(self).__name__}({final_args_str})"

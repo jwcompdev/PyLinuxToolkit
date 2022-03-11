@@ -25,6 +25,7 @@ from typing import Callable, Any
 
 from pystdlib.bash.bash_command import BashCommand
 from pystdlib.event import Event, Namespace
+from pystdlib.str_utils import build_repr
 
 
 class CommandEvent:
@@ -37,6 +38,9 @@ class CommandEvent:
         self._new_command_event = Event(_wildcard=True, command=BashCommand)
 
         self._on_command = None
+
+    def __repr__(self):
+        return build_repr(self)
 
     def on_new_command(self, handler: Callable[[BashCommand], Any] = None,
                        ttl: int = -1):

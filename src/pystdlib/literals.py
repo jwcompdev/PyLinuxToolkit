@@ -475,7 +475,7 @@ class Chars:
 
         :return: the pound currency character (£)
         """
-        return "\u00B6"
+        return "\u00A3"
 
     @classmethod
     @property
@@ -485,7 +485,7 @@ class Chars:
 
         :return: the power character (⏻)
         """
-        return "⏻"
+        return "\u23FB"
 
     @classmethod
     @property
@@ -555,7 +555,7 @@ class Chars:
 
         :return: the tilde character (~)
         """
-        return "\t"
+        return "~"
 
     @classmethod
     @property

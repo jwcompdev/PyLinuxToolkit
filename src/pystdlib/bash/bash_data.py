@@ -28,6 +28,7 @@ from typing import Callable, NoReturn
 from pexpect import spawn
 
 from pystdlib.lambdas import Lambdas
+from pystdlib.str_utils import build_repr
 from pystdlib.values import StringValue
 
 
@@ -58,6 +59,9 @@ class BashData:
         self.print_prompt: bool = False
         self.wait_for_locks: bool = False
         self.raise_error_on_lock_wait: bool = False
+
+    def __repr__(self):
+        return build_repr(self, self._is_remote)
 
     @property
     def is_remote(self):

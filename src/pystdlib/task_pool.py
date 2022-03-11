@@ -30,9 +30,8 @@ from time import sleep
 from typing import final, NoReturn
 
 from pystdlib.logged import Logged
-from pystdlib.caller import Caller
 from pystdlib.decorators import decorator
-from pystdlib.func_utils import FuncInfo
+from pystdlib.introspection import Func, Caller
 from pystdlib.types import Final
 from pystdlib.values import BooleanValue, StringValue
 
@@ -262,7 +261,7 @@ class TaskPool(Logged, metaclass=Final):
         while not self._is_task_ready(task_id):
             sleep(0.001)
 
-        func_wpr = FuncInfo(func)
+        func_wpr = Func(func)
 
         self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
                     f"Calling '{func_wpr.full_name}'...")

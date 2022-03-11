@@ -364,7 +364,6 @@ class SSHBash(BashBase, Logged):
             # This should only happen when force quitting the program
             # while connected to the client
             self._debug("SSH connection interrupted because of SIGINT!")
-            pass
 
     def _internal_run_ssh_command_string(self, command: str, client: pxssh) -> str:
         client.sendline(command)

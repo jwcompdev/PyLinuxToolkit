@@ -22,21 +22,32 @@ Contains the BashOutput class, a cache of the most
 recent command outputs.
 """
 from pystdlib.bash.bash_command import BashCommand
+from pystdlib.str_utils import build_repr
 
 
 class BashCommands:
     """Contains a dictionary of all previously run commands."""
 
-    def __init__(self):
+    def __init__(self, commands: dict[int, BashCommand] = None):
         """Initializes the BashCommands object."""
         self._current_cid: int = 1
-        self._commands: dict[int, BashCommand] = {}
+
+        if commands is None:
+            self._commands: dict[int, BashCommand] = {}
+        else:
+            self._commands: dict[int, BashCommand] = commands
+
+            for command in commands.values():
+                if command.cid > self._current_cid:
+                    self._current_cid = command.cid + 1
+                elif command.cid == self._current_cid:
+                    self._current_cid += 1
 
     def __str__(self):
         return self._commands.__str__()
 
     def __repr__(self):
-        return self._commands.__repr__()
+        return build_repr(self, self._commands)
 
     def get_commands(self) -> dict[int, BashCommand]:
         """

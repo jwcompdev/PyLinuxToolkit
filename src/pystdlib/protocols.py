@@ -24,7 +24,15 @@ checks.
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import runtime_checkable, Protocol, NoReturn
+from typing import (
+    runtime_checkable, Protocol, NoReturn, Union, Sequence,
+    SupportsInt, SupportsFloat, SupportsIndex
+)
+
+SupportsIntegerFull = Union[str, bytes, bytearray, SupportsInt, SupportsIndex]
+SupportsFloatFull = Union[SupportsIntegerFull, SupportsFloat]
+SupportsStringFull = Union[str, Sequence[str]]
+SupportsIntFloatStr = Union[int, float, str]
 
 
 @runtime_checkable

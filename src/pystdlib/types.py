@@ -21,13 +21,17 @@
 Contains some general type classes that can be inherited from
 and some basic typing utils.
 """
+from __future__ import annotations
+
 import builtins
+import inspect
 import typing
 from collections import (
     deque, defaultdict, OrderedDict, UserDict, ChainMap, Counter, UserList
 )
 
-import introspection
+from inspect import Parameter
+
 from introspection.typing import (
     get_generic_base_class, is_generic_base_class, is_parameterized_generic
 )
@@ -50,6 +54,9 @@ class Final(type):
         return type.__new__(cls, name, bases, dict(classdict))
 
 
+NoneType = type(None)
+
+
 def _get_subtypes(cls):
     subtypes = cls.__args__
 
@@ -68,7 +75,7 @@ def _is_callable(value, type_):
         return True
 
     param_types, ret_type = _get_subtypes(type_)
-    sig = introspection.signature(value)
+    sig = inspect.signature(value)
 
     missing_annotations = []
 
@@ -82,14 +89,14 @@ def _is_callable(value, type_):
         # Then, if any annotations are missing, we'll throw an exception.
         for param, expected_type in zip(sig.parameters.values(), param_types):
             param_type = param.annotation
-            if param_type is introspection.Parameter.empty:
+            if param_type is Parameter.empty:
                 missing_annotations.append(param)
                 continue
 
             if not is_subclass(param_type, expected_type):
                 return False
 
-    if sig.return_annotation is introspection.Parameter.empty:
+    if sig.return_annotation is Parameter.empty:
         missing_annotations.append('return')
     else:
         if not is_subclass(sig.return_annotation, ret_type):
@@ -223,12 +230,14 @@ def to_python_type(annotation):
     return annotation
 
 
-def get_type_from_name(name: str):
+def get_type_from_name(name: str) -> type | None:
     """
-    Returns the type matching the specified name.
+    Returns the type matching the specified name
+    or None if not found.
 
     :param name: the name of the type to lookup
     :return: the type matching the specified name
+        or None if annotations found
     """
     try:
         return getattr(builtins, name)

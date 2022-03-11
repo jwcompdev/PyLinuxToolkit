@@ -31,6 +31,7 @@ from pexpect import spawn
 from pystdlib.bash import BashPermissionError
 from pystdlib.bash.bash_checks import BashChecks
 from pystdlib.bash.bash_data import BashData
+from pystdlib.str_utils import build_repr
 from pystdlib.values import StringValue
 
 
@@ -54,6 +55,14 @@ class OutputData:
         self._client: spawn = client
         self._current_line: StringValue = StringValue(line)
         self._current_command: str = command
+
+    def __str__(self):
+        return f"(is_remote={self._is_remote}, client=\"{str(self._client)}\"," \
+               f" current_line=\"{str(self._current_line)}\", " \
+               f"current_command=\"{str(self._current_command)}\""
+
+    def __repr__(self):
+        return build_repr(self, self._is_remote, str(self._current_line))
 
     @property
     def is_remote(self) -> bool:

@@ -28,16 +28,33 @@ can be found here: (https://github.com/riga/pymitter).
 from __future__ import annotations
 
 import inspect
+from inspect import Parameter
 import logging
 from datetime import datetime
 from typing import (Iterator, NoReturn, Callable, Optional)
 
 from pystdlib import Chars
-from pystdlib.func_utils import FuncInfo, Signature
+from pystdlib.introspection import Func, Signature, Caller
 from pystdlib.logged import Logged
-from pystdlib.str_utils import is_blank, is_not_blank
+from pystdlib.str_utils import is_blank, is_not_blank, build_repr
 from pystdlib.types import is_subclass
 from pystdlib.values import StringValue
+
+
+class EventError(Exception):
+    """The base Event error."""
+
+
+class EventSignatureError(EventError):
+    """The EventSignatureError."""
+
+
+class EventHandlerMismatchError(EventError):
+    """The EventHandlerMismatchError."""
+
+
+class EventFireMismatchError(EventError):
+    """The EventFireMismatchError."""
 
 
 class Namespace:
@@ -100,7 +117,7 @@ class Namespace:
 
         :return: a code representation of this namespace
         """
-        return f"Namespace(\"{self._name}\")"
+        return build_repr(self, self._name)
 
     def __eq__(self, other):
         """
@@ -144,7 +161,7 @@ class _Handler:
 
         :return: a code representation of this handler
         """
-        return f"Handler({self._func},{self._namespace},{self._ttl})"
+        return build_repr(self, self._func, self._namespace, self._ttl)
 
     @property
     def name(self) -> str:
@@ -219,13 +236,16 @@ class Branch(Logged):
 
         self._debug(f"New Branch Created: {name}")
 
+    def __str__(self):
+        return self._name
+
     def __repr__(self):
         """
         Returns a code representation of this branch.
 
         :return: a code representation of this branch
         """
-        return f"Branch(\"{self._name}\")"
+        return build_repr(self, self._name)
 
     @classmethod
     def _new_branch(cls) -> dict:
@@ -239,6 +259,16 @@ class Branch(Logged):
         """
         return {cls._CB_KEY: []}
 
+    def clear_handlers(self) -> Branch:
+        """
+        Clears all existing handlers.
+
+        :return: this instance for use in method chaining
+        """
+        self._handlers.clear()
+
+        return self
+
     def get_handlers(self) -> list[_Handler]:
         """
         Returns a surface copy list of all root handlers.
@@ -251,10 +281,21 @@ class Branch(Logged):
         """
         Adds the specified handler to the root list.
 
+        NOTE: This method is only meant to be called by the
+        event class internally.
+
         :param handler: the handler to add
         :return: this instance for use in method chaining
         """
-        self._handlers.append(handler)
+        caller = Caller()
+
+        if handler is not None and caller.name_matches("on", "on_any")\
+                and caller.cls_name_matches("Event"):
+            self._handlers.append(handler)
+        else:
+            raise EventError("This method is meant to only be called"
+                             " internally!")
+
         return self
 
     def remove_handler(self, handler: Callable) -> NoReturn:
@@ -421,9 +462,9 @@ class Event(Logged):
                  _new_handler: bool = False,
                  _max_handlers: int = -1,
                  _delimiter: str = Chars.DOT,
-                 _signature: dict[str, type] | Signature = None,
+                 _signature: dict[str, type | Parameter] | Signature = None,
                  _make_keyword_only: bool = False,
-                 **kwargs: type):
+                 **kwargs: type | Parameter):
         """
         Initializes the Event object.
 
@@ -449,6 +490,9 @@ class Event(Logged):
         :param _signature: the parameter signature that all handlers
             are required to match and the signature that will be
             required to use when the event is fired.
+        :param _make_keyword_only: if True all kwargs added parameters
+            are added as 'Parameter.KEYWORD_ONLY' instead of the
+            default 'Parameter.POSITIONAL_OR_KEYWORD'
         :param kwargs: the parameter signature that all handlers
             are required to match and the signature that will be
             required to use when the event is fired.
@@ -469,7 +513,7 @@ class Event(Logged):
         else:
             raise ValueError(f"'signature' type is invalid! ({type(_signature)})")
 
-        self._new_handler_signature = Signature(_func=Callable, evt=str)
+        self._new_handler_signature = Signature(func=Callable, evt=str)
 
         self._root = Branch("ROOT")
 
@@ -487,24 +531,34 @@ class Event(Logged):
 
         :return: a code representation of this event
         """
-        value = "Signature("
+        kwargs = {}
 
         if self._wildcard:
-            value += f"_wildcard={self._wildcard}, "
+            kwargs["_wildcard"] = self._wildcard
 
         if self._new_handler:
-            value += f"_new_handler={self._new_handler}, "
+            kwargs["_new_handler"] = self._new_handler
 
         if self._max_handlers >= 0:
-            value += f"_max_handlers={self._max_handlers}, "
+            kwargs["_max_handlers"] = self._max_handlers
 
         if self._delimiter != Chars.DOT:
-            value += f"_delimiter=\"{self._delimiter}\", "
+            kwargs["_delimiter"] = self._delimiter
 
         if self._signature is not None:
-            value += f"{self._signature}"
+            for key, value in self._signature.parameters.items():
+                if value.default is Parameter.empty:
+                    default = "Parameter.empty"
+                else:
+                    default = value.default
 
-        return value.rstrip(", ") + ")"
+                kind = "Parameter." + str(value.kind)
+
+                kwargs[key] = build_repr(value, repr(value.name),
+                                         kind, default=default,
+                                         annotation=str(value.annotation.__name__))
+
+        return build_repr(self, **kwargs)
 
     def __iadd__(self, handler):
         """
@@ -552,14 +606,74 @@ class Event(Logged):
 
         return self
 
-    def signature(self, **kwargs) -> Event:
+    def __setitem__(self, key, value):
+        """
+        Registers a function to an event.
+
+        NOTE: type hinting on parameters is not required but,
+        if used, is enforced to match the event signature.
+
+        NOTE: handler can also be a collection of handlers
+        or even a tuple (event["namespace.event1"] = handler1, handler2).
+
+        :param key: the event to register
+        :param value: the function to add as handler
+        """
+        try:
+            iter(value)
+        except TypeError:
+            if callable(value):
+                self.on(key, handler=value)
+        else:
+            for item in value:
+                if callable(item):
+                    self.on(key, handler=item)
+
+    def __delitem__(self, key):
+        """
+        Removes all handlers from the specified branch.
+
+        :param key: the event namespace to clear
+        """
+        if self._root.find_branch(key):
+            self.off_branch(key)
+
+    @property
+    def signature(self) -> Signature:
+        """
+        Returns the current signature.
+
+        :return: the current signature
+        """
+        return self._signature
+
+    def set_signature(self, _signature: dict[str, type | Parameter] | Signature = None,
+                      _make_keyword_only: bool = False,
+                      **kwargs: type | Parameter) -> Event:
         """
         Sets the event signature.
 
-        :param kwargs: the keyword signature to set
+        :param _make_keyword_only: if True all kwargs added parameters
+            are added as 'Parameter.KEYWORD_ONLY' instead of the
+            default 'Parameter.POSITIONAL_OR_KEYWORD'
+        :param _signature: the parameter signature that all handlers
+            are required to match and the signature that will be
+            required to use when the event is fired.
+        :param kwargs: the parameter signature that all handlers
+            are required to match and the signature that will be
+            required to use when the event is fired.
         :return: this instance for use in method chaining
         """
-        self._signature = Signature(**kwargs)
+        if _signature is None:
+            self._signature = Signature(_make_keyword_only=_make_keyword_only,
+                                        **kwargs)
+        elif isinstance(_signature, dict):
+            self._signature = Signature(_make_keyword_only=_make_keyword_only,
+                                        **{**_signature, **kwargs})
+        elif isinstance(_signature, Signature):
+            self._signature = _signature
+        else:
+            raise ValueError(f"'signature' type is invalid! ({type(_signature)})")
         return self
 
     def is_wildcard_enabled(self) -> bool:
@@ -802,7 +916,7 @@ class Event(Logged):
             # then check if handlers has exceeded max handlers
             if 0 <= self._max_handlers <= len(handlers):
                 self._warning("Cannot add "
-                              f"'{FuncInfo(func).full_name}' "
+                              f"'{Func(func).full_name}' "
                               f"as handler to '{str(event)}' event, "
                               f"Max handlers ({self._max_handlers}) "
                               "has been exceeded!")
@@ -924,7 +1038,7 @@ class Event(Logged):
             # If the branch doesn't exist, ignore
             if branch is None:
                 self._warning("Cannot remove "
-                              f"'{FuncInfo(func).full_name}' "
+                              f"'{Func(func).full_name}' "
                               f"handler from '{str(event)}' event, "
                               "Event doesn't exist!")
                 return func
@@ -959,6 +1073,20 @@ class Event(Logged):
             return func
 
         return off_any(handler) if handler else off_any
+
+    def off_branch(self, event: str | StringValue | Namespace) -> Event:
+        """
+        Removes all handlers from the specified branch.
+
+        :param event: the event namespace to clear
+        :return: this instance for use in method chaining
+        """
+        branch = self._root.find_branch(event)
+
+        if branch:
+            branch.clear_handlers()
+
+        return self
 
     def off_all(self) -> NoReturn:
         """Removes all registered functions."""
@@ -1004,7 +1132,6 @@ class Event(Logged):
 
         :return: all registered functions
         """
-
         # Grab the list of handlers in the root branch
         handlers = self._root.get_handlers()
 
@@ -1087,14 +1214,10 @@ class Event(Logged):
             if handler.ttl == 0:
                 self.off(event=handler.namespace.name, handler=handler.func)
 
+    def copy(self) -> Event:
+        """
+        Creates a copy of this event with a new root branch.
 
-class EventSignatureError(Exception):
-    """The EventSignatureError."""
-
-
-class EventHandlerMismatchError(Exception):
-    """The EventHandlerMismatchError."""
-
-
-class EventFireMismatchError(Exception):
-    """The EventFireMismatchError."""
+        :return: a copy of this event with a new root branch
+        """
+        return eval(self.__repr__())

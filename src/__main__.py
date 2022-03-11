@@ -1,7 +1,7 @@
 # PyLinuxToolkit
 # Copyright (C) 2022 JWCompDev
 #
-# __init__.py
+# __main__.py
 # Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -17,4 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""Contains the pylinuxtoolkit.rpi package."""
+"""Contains the main starting point for the application."""
+from pylinuxtoolkit import main
+
+main.main()
