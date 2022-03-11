@@ -1,8 +1,34 @@
+# PyLinuxToolkit
+# Copyright (C) 2022 JWCompDev
+#
+# string_value.py
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+Contains the StringValue class, which provides
+mutable access to a str value.
+"""
 from __future__ import annotations
 
 import _collections_abc
 import re
-from typing import SupportsInt, SupportsFloat, Iterator, Sequence, SupportsIndex, Mapping, TYPE_CHECKING, Iterable
+from typing import (
+    SupportsInt, SupportsFloat, Iterator, Sequence,
+    SupportsIndex, Mapping, TYPE_CHECKING, Iterable
+)
 
 from pystdlib import Chars
 from pystdlib.protocols import SupportsStringFull, SupportsIntFloatStr
@@ -12,9 +38,9 @@ from pystdlib.utils import check_argument_type
 from pystdlib.values.value import Value
 
 if TYPE_CHECKING:
-    from pystdlib.values.boolean_value import BooleanValue
-    from pystdlib.values.integer_value import IntegerValue
-    from pystdlib.values.float_value import FloatValue
+    from pystdlib.values import (
+        BooleanValue, IntegerValue, FloatValue
+    )
 
 
 class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
@@ -39,7 +65,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             return value
 
         if isinstance(value, StringValue):
-            return value._value
+            return value.get()
 
         return str(value)
 
@@ -388,7 +414,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         from pystdlib.values.boolean_value import BooleanValue
         if isinstance(value, StringValue):
-            return BooleanValue(self._value == value._value)
+            return BooleanValue(self._value == value.get())
 
         return BooleanValue(self._value == value)
 
@@ -471,7 +497,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(fill_char, StringValue):
-            self._value = self._value.center(width, fill_char._value)
+            self._value = self._value.center(width, fill_char.get())
         else:
             self._value = self._value.center(width, fill_char)
         return self
@@ -514,7 +540,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: the encoded string in bytes
         """
         if isinstance(encoding, StringValue):
-            return self._value.encode(encoding._value, errors)
+            return self._value.encode(encoding.get(), errors)
 
         return self._value.encode(encoding, errors)
 
@@ -536,7 +562,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         from pystdlib.values.boolean_value import BooleanValue
         if isinstance(suffix, StringValue):
-            return BooleanValue(self._value.endswith(suffix._value, start, end))
+            return BooleanValue(self._value.endswith(suffix.get(), start, end))
 
         return BooleanValue(self._value.endswith(suffix, start, end))
 
@@ -552,7 +578,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(tabsize, StringValue):
-            self._value = self._value.expandtabs(tabsize._value)
+            self._value = self._value.expandtabs(tabsize.get())
         else:
             self._value = self._value.expandtabs(tabsize)
         return self
@@ -576,7 +602,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         from pystdlib.values.integer_value import IntegerValue
         if isinstance(sub, StringValue):
-            return IntegerValue(self._value.find(sub._value, start, end))
+            return IntegerValue(self._value.find(sub.get(), start, end))
 
         return IntegerValue(self._value.find(sub, start, end))
 
@@ -624,7 +650,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         from pystdlib.values.integer_value import IntegerValue
         if isinstance(sub, StringValue):
-            return IntegerValue(self._value.index(sub._value, start, end))
+            return IntegerValue(self._value.index(sub.get(), start, end))
 
         return IntegerValue(self._value.index(sub, start, end))
 
@@ -829,7 +855,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(fill_char, StringValue):
-            self._value = self._value.ljust(width, fill_char._value)
+            self._value = self._value.ljust(width, fill_char.get())
         else:
             self._value = self._value.ljust(width, fill_char)
         return self
@@ -855,7 +881,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(chars, StringValue):
-            self._value = self._value.lstrip(chars._value)
+            self._value = self._value.lstrip(chars.get())
         else:
             self._value = self._value.lstrip(chars)
         return self
@@ -879,7 +905,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: the partitioned string
         """
         if isinstance(sep, StringValue):
-            return self._value.partition(sep._value)
+            return self._value.partition(sep.get())
 
         return self._value.partition(sep)
 
@@ -896,7 +922,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(prefix, StringValue):
-            self._value = self._value.removeprefix(prefix._value)
+            self._value = self._value.removeprefix(prefix.get())
         else:
             self._value = self._value.removeprefix(prefix)
         return self
@@ -914,7 +940,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(suffix, StringValue):
-            self._value = self._value.removesuffix(suffix._value)
+            self._value = self._value.removesuffix(suffix.get())
         else:
             self._value = self._value.removesuffix(suffix)
         return self
@@ -960,7 +986,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         from pystdlib.values.integer_value import IntegerValue
         if isinstance(sub, StringValue):
-            return IntegerValue(self._value.rfind(sub._value, start, end))
+            return IntegerValue(self._value.rfind(sub.get(), start, end))
 
         return IntegerValue(self._value.rfind(sub, start, end))
 
@@ -984,7 +1010,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         from pystdlib.values.integer_value import IntegerValue
         if isinstance(sub, StringValue):
-            return IntegerValue(self._value.rindex(sub._value, start, end))
+            return IntegerValue(self._value.rindex(sub.get(), start, end))
 
         return IntegerValue(self._value.rindex(sub, start, end))
 
@@ -1002,7 +1028,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(fill_char, StringValue):
-            self._value = self._value.rjust(width, fill_char._value)
+            self._value = self._value.rjust(width, fill_char.get())
         else:
             self._value = self._value.rjust(width, fill_char)
         return self
@@ -1024,7 +1050,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: the partitioned string
         """
         if isinstance(sep, StringValue):
-            return self._value.rpartition(sep._value)
+            return self._value.rpartition(sep.get())
 
         return self._value.rpartition(sep)
 
@@ -1048,7 +1074,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             delimiter string
         """
         if isinstance(sep, StringValue):
-            words = self._value.rsplit(sep._value, max_split)
+            words = self._value.rsplit(sep.get(), max_split)
         else:
             words = self._value.rsplit(sep, max_split)
 
@@ -1071,7 +1097,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(chars, StringValue):
-            self._value = self._value.rstrip(chars._value)
+            self._value = self._value.rstrip(chars.get())
         else:
             self._value = self._value.rstrip(chars)
         return self
@@ -1093,7 +1119,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             delimiter string
         """
         if isinstance(sep, StringValue):
-            words = self._value.split(sep._value, max_split)
+            words = self._value.split(sep.get(), max_split)
         else:
             words = self._value.split(sep, max_split)
 
@@ -1138,7 +1164,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         from pystdlib.values.boolean_value import BooleanValue
         if isinstance(prefix, StringValue):
-            return BooleanValue(self._value.startswith(prefix._value, start, end))
+            return BooleanValue(self._value.startswith(prefix.get(), start, end))
 
         return BooleanValue(self._value.startswith(prefix, start, end))
 
@@ -1154,7 +1180,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: this instance for use in method chaining
         """
         if isinstance(chars, StringValue):
-            self._value = self._value.strip(chars._value)
+            self._value = self._value.strip(chars.get())
         else:
             self._value = self._value.strip(chars)
         return self
@@ -1250,7 +1276,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         if wrap_char:
             if isinstance(wrap_char, StringValue):
-                self._value = f"{wrap_char._value}{self._value}{wrap_char._value}"
+                self._value = f"{wrap_char.get()}{self._value}{wrap_char.get()}"
             else:
                 self._value = f"{wrap_char}{self._value}{wrap_char}"
 
@@ -1265,7 +1291,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
                     quoted properly with the wrap character
         """
         if isinstance(wrap_char, StringValue):
-            wrap_char = wrap_char._value
+            wrap_char = wrap_char.get()
 
         if wrap_char and self._value[0] == wrap_char \
                 and self._value[-1] == wrap_char:

@@ -1,15 +1,41 @@
+# PyLinuxToolkit
+# Copyright (C) 2022 JWCompDev
+#
+# float_value.py
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+Contains the FloatValue class, which provides
+mutable access to a float value.
+"""
 from __future__ import annotations
 
-from typing import SupportsFloat, SupportsIndex, SupportsInt, TYPE_CHECKING, Optional
+from typing import (
+    SupportsFloat, SupportsIndex, SupportsInt,
+    Optional, TYPE_CHECKING
+)
 
 from pystdlib.protocols import SupportsFloatFull
 from pystdlib.str_utils import build_repr
 from pystdlib.values.number_value import NumberValue
 
 if TYPE_CHECKING:
-    from pystdlib.values.integer_value import IntegerValue
-    from pystdlib.values.boolean_value import BooleanValue
-    from pystdlib.values.string_value import StringValue
+    from pystdlib.values import (
+        IntegerValue, BooleanValue, StringValue
+    )
 
 
 class FloatValue(NumberValue):

@@ -152,9 +152,8 @@ class Signature(inspect.Signature):
         # Check if any of the type annotations are a string and
         # replace them with their respective types
         values = list(_new_signature)
-        for index in range(len(values)):
-            param = values[index]
-            if type(param.annotation) is str:
+        for index, param in enumerate(values):
+            if isinstance(param.annotation, str):
                 name = param.name
                 annotation = get_type_from_name(param.annotation)
                 kind = param.kind
@@ -168,7 +167,7 @@ class Signature(inspect.Signature):
 
         # Check if the return annotation is a string and
         # replace it with its respective types
-        if type(_new_return_annotation) is str:
+        if isinstance(_new_return_annotation, str):
             _new_return_annotation = get_type_from_name(_new_return_annotation)
 
         super().__init__(

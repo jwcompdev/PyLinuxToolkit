@@ -17,8 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""Contains the Condition class, an object that allows evaluation of
-    one or more conditions."""
+"""
+Contains the Condition class, an object that allows evaluation of
+one or more conditions.
+"""
 from __future__ import annotations
 
 from typing import Set, List, Dict, Tuple, Union, Any, Type, SupportsIndex
@@ -89,7 +91,6 @@ class Condition:
         :return: True if the result is equal to the specified value,
             False otherwise.
         """
-
         return self._result == other
 
     def __ne__(self, other: bool | SupportsIndex) -> bool:
@@ -146,7 +147,7 @@ class Condition:
         """
         self._append_conditions(*conditions)
 
-        if self._conditions is None or not len(self._conditions):
+        if self._conditions is None or len(self._conditions) == 0:
             raise ValueError("condition or multiple conditions must be specified!")
 
         if self._use_or:
@@ -246,7 +247,8 @@ class Condition:
             func(*args, **kwargs)
         return self
 
-    def raise_if_true(self, exception: Type[Exception] = AssertionError, message: str = "") -> Condition:
+    def raise_if_true(self, exception: Type[Exception] = AssertionError,
+                      message: str = "") -> Condition:
         """
         Raises the specified exception with the specified message if
         the result is True.
@@ -273,7 +275,8 @@ class Condition:
             raise exception(message)
         return self
 
-    def raise_if_false(self, exception: Type[Exception] = AssertionError, message: str = "") -> Condition:
+    def raise_if_false(self, exception: Type[Exception] = AssertionError,
+                       message: str = "") -> Condition:
         """
         Raises the specified exception with the specified message if
         the result is False.

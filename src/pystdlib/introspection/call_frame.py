@@ -46,11 +46,13 @@ class CallFrame:
             ...  # do stuff with the frame
         # at this point, the frame has become unusable
     """
+
     __slots__ = ('__frame',)
 
     def __init__(self, frame):
         """
-        Creates a new ``CallFrame`` from a ``CallFrame`` or :data:`types.FrameType` object.
+        Creates a new ``CallFrame`` from a ``CallFrame``
+        or :data:`types.FrameType` object.
 
         :param frame: An existing frame object
         """
@@ -65,13 +67,16 @@ class CallFrame:
     def current(cls) -> CallFrame:
         """
         Retrieves the current call frame.
+
+        :return: the current call frame
         """
         return cls(inspect.currentframe().f_back)
 
     @classmethod
     def from_frame(cls, frame):
         """
-        Creates a new ``CallFrame`` from a ``CallFrame`` or :data:`types.FrameType` object.
+        Creates a new ``CallFrame`` from a ``CallFrame``
+        or :data:`types.FrameType` object.
 
         This is equivalent to calling ``CallFrame(frame)``.
         """
@@ -85,10 +90,11 @@ class CallFrame:
         if isinstance(other, __class__):
             # noinspection PyUnresolvedReferences
             return self.__frame == other.__frame
-        elif isinstance(other, FrameType):
+
+        if isinstance(other, FrameType):
             return self.__frame == other
-        else:
-            return NotImplemented
+
+        return NotImplemented
 
     def __enter__(self):
         return self
@@ -109,6 +115,8 @@ class CallFrame:
     def parent(self) -> CallFrame | None:
         """
         Returns the next frame one level higher on the call stack.
+
+        :return: the next frame one level higher on the call stack
         """
         parent = self.__frame.f_back
         if parent is None:
@@ -121,6 +129,8 @@ class CallFrame:
     def builtins(self) -> dict[str, Any]:
         """
         Returns the builtins seen by this frame.
+
+        :return: the builtins seen by this frame
         """
         return self.__frame.f_builtins
 
@@ -128,6 +138,8 @@ class CallFrame:
     def globals(self) -> dict[str, Any]:
         """
         Returns the global scope seen by this frame.
+
+        :return: the global scope seen by this frame
         """
         return self.__frame.f_globals
 
@@ -135,6 +147,8 @@ class CallFrame:
     def locals(self) -> dict[str, Any]:
         """
         Returns the frame's local variable scope.
+
+        :return: the frame's local variable scope
         """
         return self.__frame.f_locals
 
@@ -151,6 +165,8 @@ class CallFrame:
     def code_object(self) -> CodeType:
         """
         Returns the code object being executed in this frame.
+
+        :return: the code object being executed in this frame
         """
         return self.__frame.f_code
 
@@ -235,9 +251,9 @@ class CallFrame:
 
         :return: the module filename from the frame
         """
-        if self.current_module is not None:
-            if hasattr(self.current_module, "__file__"):
-                return self.current_module.__file__
+        if self.current_module is not None \
+                and hasattr(self.current_module, "__file__"):
+            return self.current_module.__file__
 
         return None
 
@@ -248,9 +264,9 @@ class CallFrame:
 
         :return: the package name from the frame
         """
-        if self.current_module is not None:
-            if hasattr(self.current_module, "__package__"):
-                return self.current_module.__package__
+        if self.current_module is not None \
+                and hasattr(self.current_module, "__package__"):
+            return self.current_module.__package__
 
         return None
 
@@ -297,27 +313,40 @@ class CallFrame:
             if self.current_cls_name is None:
                 return self.current_method_name
 
-            return f"{self.current_cls_name}.{self.current_method_name}"
+            return f"{self.current_cls_name}" \
+                   f".{self.current_method_name}"
 
         if self.current_cls_name is None:
-            return f"{self.current_module_name}.{self.current_method_name}"
+            return f"{self.current_module_name}" \
+                   f".{self.current_method_name}"
 
-        return f"{self.current_module_name}.{self.current_cls_name}.{self.current_method_name}"
+        return f"{self.current_module_name}" \
+               f".{self.current_cls_name}" \
+               f".{self.current_method_name}"
 
     @property
     def file_name(self) -> str:
         """
-        Returns the name of the file in which this frame's code was defined.
+        Returns the name of the file in which this frame's
+        code was defined.
+
+        :return: the name of the file in which this frame's
+            code was defined
         """
         return self.code_object.co_filename
 
     @property
     def scope_name(self) -> str:
         """
-        Returns the name of the scope in which this frame's code was defined.
+        Returns the name of the scope in which this frame's
+        code was defined.
         In case of a function, the function's name.
         In case of a class, the class's name.
-        In any other case, whichever name the interpreter assigned to that scope.
+        In any other case, whichever name the interpreter
+        assigned to that scope.
+
+        :return: the name of the scope in which this frame's
+        code was defined
         """
         return self.code_object.co_name
 
@@ -331,6 +360,8 @@ class CallFrame:
         the source code, and the index of the current line within that list.
         The optional second argument specifies the number of lines of context
         to return, which are centered around the current line.
+
+        :return: information about a frame object
         """
         return inspect.getframeinfo(self.__frame)
 
@@ -366,11 +397,13 @@ class CallFrame:
 
     def get_surrounding_function(self) -> Optional[Callable]:
         """
-        Finds and returns the function in which the code of this frame was defined.
+        Finds and returns the function in which the code of this
+        frame was defined.
 
         If the function can't be found, ``None`` is returned.
 
-        :return: The calling function object or ``None`` if it can't be found
+        :return: The calling function object or ``None``
+            if it can't be found
         """
         parent = self.parent
         if parent is None:

@@ -1,13 +1,42 @@
+# PyLinuxToolkit
+# Copyright (C) 2022 JWCompDev
+#
+# number_value.py
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+Contains the NumberValue class, which provides
+mutable access to a number value.
+"""
 from __future__ import annotations
 
 from abc import abstractmethod
 from numbers import Number
-from typing import SupportsInt, SupportsFloat, SupportsIndex, Optional, Tuple, TYPE_CHECKING
+from typing import (
+    SupportsInt, SupportsFloat, SupportsIndex,
+    Optional, Tuple, TYPE_CHECKING
+)
 
+from pystdlib.protocols import SupportsIntFloatStr
 from pystdlib.values.value import Value
 
 if TYPE_CHECKING:
-    from pystdlib.values import IntegerValue, FloatValue, BooleanValue, SupportsIntFloatStr, StringValue
+    from pystdlib.values import (
+        IntegerValue, FloatValue, BooleanValue, StringValue
+    )
 
 
 class NumberValue(Value, Number, SupportsInt, SupportsFloat):

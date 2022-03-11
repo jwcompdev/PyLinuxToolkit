@@ -1,16 +1,42 @@
+# PyLinuxToolkit
+# Copyright (C) 2022 JWCompDev
+#
+# integer_value.py
+# Copyright (C) 2022 JWCompDev <jwcompdev@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+"""
+Contains the IntegerValue class, which provides
+mutable access to an int value.
+"""
 from __future__ import annotations
 
 import math
-from typing import SupportsInt, SupportsIndex, Optional, Literal, Iterable, TYPE_CHECKING, SupportsBytes
+from typing import (
+    SupportsInt, SupportsIndex, Optional, Literal,
+    Iterable, SupportsBytes, TYPE_CHECKING
+)
 
 from pystdlib.protocols import SupportsIntegerFull, SupportsIntFloatStr
 from pystdlib.str_utils import build_repr
 from pystdlib.values.number_value import NumberValue
 
 if TYPE_CHECKING:
-    from pystdlib.values.float_value import FloatValue
-    from pystdlib.values.boolean_value import BooleanValue
-    from pystdlib.values.string_value import StringValue
+    from pystdlib.values import (
+        FloatValue, BooleanValue, StringValue
+    )
 
 
 class IntegerValue(NumberValue):

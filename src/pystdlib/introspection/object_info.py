@@ -255,7 +255,7 @@ class ObjectInfo:
         return module
 
     @classmethod
-    def from_frame(cls, stack_frame: CallFrame) -> ObjectInfo:
+    def from_frame(cls, stack_frame: CallFrame) -> ObjectInfo | None:
         """
         Creates a new instance from a CallFrame.
 
@@ -274,60 +274,65 @@ class ObjectInfo:
             #     # should be able to get the module filename
             #     _module_filename = stack_frame.traceback.filename
 
+        return None
+
     @classmethod
-    def from_func(cls, func) -> ObjectInfo:
+    def from_func(cls, func) -> ObjectInfo | None:
         """
         Creates a new instance from a function.
 
         :param func: the function
         :return: a new instance of ObjectInfo
         """
-        _name = func.__name__
-        _cls = cls._get_parent_class(func)
-        _module = inspect.getmodule(func)
+        if func is not None:
+            _name = func.__name__
+            _cls = cls._get_parent_class(func)
+            _module = inspect.getmodule(func)
 
-        return cls(_name, _cls, _module)
+            return cls(_name, _cls, _module)
+
+        return None
 
     def name_matches(self, *comparison: str) -> bool:
         """
-        Returns True if the name of the caller method matches
+        Returns True if the name of the object matches
         the specified name or names, False otherwise.
 
         :param comparison: the name or names to check against
-        :return: True if the name of the caller method matches
+        :return: True if the name of the object matches
             the specified name, False otherwise
         """
         return self.name in list(comparison)
 
     def cls_name_matches(self, *comparison: str) -> bool:
         """
-        Returns True if the name of the caller class matches
+        Returns True if the name of the object's class matches
         the specified name, False otherwise.
 
         :param comparison: the name to check against
-        :return: True if the name of the caller class matches
+        :return: True if the name of the object's class matches
             the specified name, False otherwise
         """
         return self.cls_name in list(comparison)
 
     def module_name_matches(self, *comparison: str) -> bool:
         """
-        Returns True if the name of the caller module
+        Returns True if the name of the object module
         matches the specified module, False otherwise.
 
         :param comparison: the name to check against
-        :return: True if the name of the caller module
+        :return: True if the name of the object module
             matches the specified module, False otherwise
         """
         return self.module_name in list(comparison)
 
     def module_filename_matches(self, *comparison: str) -> bool:
         """
-        Returns True if the name of the caller module
+        Returns True if the name of the object's module
         filename matches the specified module filename, False otherwise.
 
         :param comparison: the name to check against
-        :return: True if the name of the caller module
+        :return: True if the name of the object's module
             filename matches the specified module filename,
             False otherwise
         """
@@ -335,11 +340,11 @@ class ObjectInfo:
 
     def path_matches(self, *comparison: str) -> bool:
         """
-        Returns True if the name of the caller's full path
+        Returns True if the name of the object's full path
         matches the specified path, False otherwise.
 
         :param comparison: the path to check against
-        :return: True if the name of the caller's full path
+        :return: True if the name of the object's full path
             matches the specified path, False otherwise
         """
         return self.full_path in list(comparison)

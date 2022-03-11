@@ -665,7 +665,7 @@ def trycatch(func=None, *, exception=None, handler=None, silent=False):
     """
     if not exception:
         exception = Exception
-    elif type(exception) is list:
+    elif isinstance(exception, list):
         exception = tuple(exception)
 
     @decorator
@@ -946,7 +946,6 @@ def change_args(func=None, *args, **kwargs):
     :param kwargs: run_in_thread keyword arguments to inject
     :return: the function return value
     """
-
     # noinspection PyUnusedLocal
     @decorator
     def _wrapper(_func, *unneeded_args, **unneeded_kwargs):
@@ -963,7 +962,6 @@ def change_function(func=None):
         decorator usage is assumed
     :return: the function return value
     """
-
     # noinspection PyUnusedLocal
     @decorator
     def _wrapper(unneeded_func, *args, **kwargs):

@@ -104,7 +104,8 @@ def parse_int(value: str, default: int | float | None = None) -> int:
         if default is not None:
             if isinstance(default, int):
                 return default
-            elif isinstance(default, float):
+
+            if isinstance(default, float):
                 return int(default)
 
         raise
@@ -128,7 +129,8 @@ def parse_float(value: str, default: int | float | None = None) -> float:
         if default is not None:
             if isinstance(default, float):
                 return default
-            elif isinstance(default, int):
+
+            if isinstance(default, int):
                 return float(default)
 
         raise
@@ -179,7 +181,8 @@ def unwrap(value: str, wrap_char: str) -> str:
         if value[0] == wrap_char \
                 and value[-1] == wrap_char:
             return value[1:-1]
-        elif value[0:len(wrap_char)] == wrap_char \
+
+        if value[0:len(wrap_char)] == wrap_char \
                 and value[-len(wrap_char):] == wrap_char:
             return value[len(wrap_char): -len(wrap_char)]
 
@@ -200,12 +203,12 @@ def uuid(as_hex: bool = False, seed: int = None) -> str:
     :param seed: an int to use as a seed for the randomness
     :return: an uuid string
     """
-    rd = random.Random()
+    random_ = random.Random()
 
     if isinstance(seed, int):
-        rd.seed(seed)
+        random_.seed(seed)
 
-    uid = uuid_native.UUID(int=rd.getrandbits(128), version=4)
+    uid = uuid_native.UUID(int=random_.getrandbits(128), version=4)
 
     if as_hex:
         return uid.hex
@@ -228,13 +231,13 @@ def random_string(size: int, seed: int = None) -> str:
     check_argument_type(size, "size", int)
     check_argument(size >= 1, 'size must be >= 1')
 
-    rd = random.Random()
+    random_ = random.Random()
 
     if isinstance(seed, int):
-        rd.seed(seed)
+        random_.seed(seed)
 
     chars = string.ascii_letters + string.digits
-    buffer = [rd.choice(chars) for _ in range(size)]
+    buffer = [random_.choice(chars) for _ in range(size)]
     out = ''.join(buffer)
 
     return out
@@ -374,7 +377,7 @@ def build_repr(self, *args, _to_repr: bool = True, **kwargs) -> str:
     final_args_str = ""
 
     if len(args) == 1:
-        if type(args[0]) is str:
+        if isinstance(args[0], str):
             final_args_str = args[0]
         else:
             if _to_repr:
@@ -384,7 +387,7 @@ def build_repr(self, *args, _to_repr: bool = True, **kwargs) -> str:
 
     elif len(args) > 1:
         for item in args:
-            if type(item) is str:
+            if isinstance(item, str):
                 final_args_str += item + ", "
             else:
                 if _to_repr:
@@ -394,7 +397,7 @@ def build_repr(self, *args, _to_repr: bool = True, **kwargs) -> str:
 
     if len(kwargs) >= 1:
         for key, item in kwargs.items():
-            if type(item) is str:
+            if isinstance(item, str):
                 final_args_str += f"{key}={item}, "
             else:
                 if _to_repr:

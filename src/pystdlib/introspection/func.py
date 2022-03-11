@@ -413,19 +413,17 @@ class Func:
         return self._signature
 
     @property
-    def attributes(self, predicate=None) \
+    def attributes(self) \
             -> list[tuple[str, typing.Any]]:
         """
         Return all attributes as (name, value) pairs sorted by name.
-        Optionally, only return members that satisfy a given predicate.
 
         This is equivalent to calling
-        "inspect.getmembers(func, predicate)".
+        "inspect.getmembers(func)".
 
-        :param predicate: if not None, only return members that satisfy
-            the predicate
+        :return: all attributes as (name, value) pairs sorted by name
         """
-        return inspect.getmembers(self._func, predicate)
+        return inspect.getmembers(self._func)
 
     @property
     def annotations(self) -> dict[str, typing.Any]:
@@ -464,7 +462,7 @@ class Func:
         :return: the execution time of the last time the function
         was called, as a string
         """
-        return ("{:.35f}".format(self._last_run_time)
+        return (f"{self._last_run_time:.35f}"
                 if self._last_run_time is not None
                 else "").rstrip("0")
 
@@ -617,11 +615,11 @@ class Func:
                                annotation=Func)
         from pystdlib.event import Event
 
-        if isinstance(event, Event) or issubclass(type(event), Event):
-            if event.signature == Signature(func=func_param):
-                self._before_event = event
-                self._before_event_namespace = namespace
-                self._fire_event_before = True
+        if isinstance(event, Event) or issubclass(type(event), Event) \
+                and event.signature == Signature(func=func_param):
+            self._before_event = event
+            self._before_event_namespace = namespace
+            self._fire_event_before = True
 
         return self
 
@@ -640,11 +638,11 @@ class Func:
                                annotation=Func)
         from pystdlib.event import Event
 
-        if isinstance(event, Event) or issubclass(type(event), Event):
-            if event.signature == Signature(func=func_param):
-                self._after_event = event
-                self._after_event_namespace = namespace
-                self._fire_event_after = True
+        if isinstance(event, Event) or issubclass(type(event), Event) \
+                and event.signature == Signature(func=func_param):
+            self._after_event = event
+            self._after_event_namespace = namespace
+            self._fire_event_after = True
 
         return self
 
