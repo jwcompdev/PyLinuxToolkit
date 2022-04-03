@@ -165,3 +165,4 @@ atlassian-ide-plugin.xml
 /pylinuxtoolkit/
 /pystdlib/
 !/docs/build/
+!/docs-build/build/
