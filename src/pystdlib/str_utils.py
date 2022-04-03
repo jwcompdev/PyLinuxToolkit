@@ -48,10 +48,24 @@ def is_boolean(value: str) -> bool:
 
     val = value.lower().strip()
 
-    return val in ("true", "t", "yes", "y", "1",
-                   "succeeded", "succeed", "enabled",
-                   "false", "f", "no", "n", "0",
-                   "failed", "fail", "disabled")
+    return val in (
+        "true",
+        "t",
+        "yes",
+        "y",
+        "1",
+        "succeeded",
+        "succeed",
+        "enabled",
+        "false",
+        "f",
+        "no",
+        "n",
+        "0",
+        "failed",
+        "fail",
+        "disabled",
+    )
 
 
 def to_boolean(value: str) -> bool | None:
@@ -72,11 +86,18 @@ def to_boolean(value: str) -> bool | None:
     if isinstance(value, str):
         val = value.lower().strip()
 
-        is_true = val in ("true", "t", "yes", "y", "1",
-                          "succeeded", "succeed", "enabled")
+        is_true = val in (
+            "true",
+            "t",
+            "yes",
+            "y",
+            "1",
+            "succeeded",
+            "succeed",
+            "enabled",
+        )
 
-        is_false = val in ("false", "f", "no", "n", "0",
-                           "failed", "fail", "disabled")
+        is_false = val in ("false", "f", "no", "n", "0", "failed", "fail", "disabled")
 
         if is_true:
             return True
@@ -142,11 +163,13 @@ def strip_ansi_codes(line) -> str:
     :param line: the line to strip_ansi_codes from
     :return: the modified line
     """
-    return Patterns.ANSI_BASIC_ESCAPE.sub("", line) \
-        .replace("\x1b7", "") \
-        .replace("\x1b7r", "") \
-        .replace("\x1b8", "") \
+    return (
+        Patterns.ANSI_BASIC_ESCAPE.sub("", line)
+        .replace("\x1b7", "")
+        .replace("\x1b7r", "")
+        .replace("\x1b8", "")
         .replace("\x1b8r", "")
+    )
 
 
 def wrap(value: str, wrap_char: str) -> str:
@@ -178,13 +201,14 @@ def unwrap(value: str, wrap_char: str) -> str:
     check_argument_type(wrap_char, "wrap_char", str)
 
     if is_not_blank(value) and is_not_blank(wrap_char):
-        if value[0] == wrap_char \
-                and value[-1] == wrap_char:
+        if value[0] == wrap_char and value[-1] == wrap_char:
             return value[1:-1]
 
-        if value[0:len(wrap_char)] == wrap_char \
-                and value[-len(wrap_char):] == wrap_char:
-            return value[len(wrap_char): -len(wrap_char)]
+        if (
+            value[0 : len(wrap_char)] == wrap_char
+            and value[-len(wrap_char) :] == wrap_char
+        ):
+            return value[len(wrap_char) : -len(wrap_char)]
 
     return value
 
@@ -229,7 +253,7 @@ def random_string(size: int, seed: int = None) -> str:
     :return: Random string
     """
     check_argument_type(size, "size", int)
-    check_argument(size >= 1, 'size must be >= 1')
+    check_argument(size >= 1, "size must be >= 1")
 
     random_ = random.Random()
 
@@ -238,7 +262,7 @@ def random_string(size: int, seed: int = None) -> str:
 
     chars = string.ascii_letters + string.digits
     buffer = [random_.choice(chars) for _ in range(size)]
-    out = ''.join(buffer)
+    out = "".join(buffer)
 
     return out
 
@@ -258,7 +282,7 @@ def secure_random_hex(byte_count: int) -> str:
     :return: Hexadecimal string representation of generated random bytes
     """
     check_argument_type(byte_count, "byte_count", int)
-    check_argument(byte_count >= 1, 'byte_count must be >= 1')
+    check_argument(byte_count >= 1, "byte_count must be >= 1")
 
     random_bytes = os.urandom(byte_count)
     hex_bytes = binascii.hexlify(random_bytes)

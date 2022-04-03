@@ -63,7 +63,7 @@ class ObjectInfo:
                 self._package_name = self._module.__package__
 
         if self._package_name is not None:
-            self._root_package_name = self._package_name.partition('.')[0]
+            self._root_package_name = self._package_name.partition(".")[0]
 
         if self._module_name is None:
             if self._cls_name is None:
@@ -189,24 +189,27 @@ class ObjectInfo:
         if inspect.isclass(meth):
             return type(meth)
 
-        if inspect.ismethod(meth) \
-                or (inspect.isbuiltin(meth)
-                    and getattr(meth, '__self__', None) is not None
-                    and getattr(meth.__self__, '__class__', None)):
+        if inspect.ismethod(meth) or (
+            inspect.isbuiltin(meth)
+            and getattr(meth, "__self__", None) is not None
+            and getattr(meth.__self__, "__class__", None)
+        ):
             for cls in inspect.getmro(meth.__self__.__class__):
                 if meth.__name__ in cls.__dict__:
                     return cls
-            meth = getattr(meth, '__func__', meth)  # fallback to __qualname__ parsing
+            meth = getattr(meth, "__func__", meth)  # fallback to __qualname__ parsing
 
         if inspect.isfunction(meth):
-            cls = getattr(inspect.getmodule(meth),
-                          meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0],
-                          None)
+            cls = getattr(
+                inspect.getmodule(meth),
+                meth.__qualname__.split(".<locals>", 1)[0].rsplit(".", 1)[0],
+                None,
+            )
             if isinstance(cls, type):
                 return cls
 
         # noinspection SpellCheckingInspection
-        return getattr(meth, '__objclass__', None)  # handle special descriptor objects
+        return getattr(meth, "__objclass__", None)  # handle special descriptor objects
 
     @staticmethod
     def _get_name_from_frame(frame: CallFrame) -> str:
@@ -226,10 +229,10 @@ class ObjectInfo:
         :param frame: the frame to check
         :return: the class from the specified frame
         """
-        instance = frame.locals.get('self', None)
+        instance = frame.locals.get("self", None)
         if instance:
             # return its class
-            return getattr(instance, '__class__', None)
+            return getattr(instance, "__class__", None)
         # return None otherwise
         return None
 
@@ -242,10 +245,10 @@ class ObjectInfo:
         :return: the module from the specified frame
         """
         module = None
-        instance = frame.locals.get('self', None)
+        instance = frame.locals.get("self", None)
         if instance:
             # return its class
-            cls = getattr(instance, '__class__', None)
+            cls = getattr(instance, "__class__", None)
             module = sys.modules[cls.__module__]
 
         if module is None:

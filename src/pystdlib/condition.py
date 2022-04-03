@@ -27,12 +27,11 @@ from typing import Set, List, Dict, Tuple, Union, Any, Type, SupportsIndex
 
 from pystdlib.str_utils import build_repr
 
-_SupportsBuiltInBool = Union[bool, set[bool], list[bool],
-                             dict[Any, bool],
-                             tuple[bool, ...]]
+_SupportsBuiltInBool = Union[
+    bool, set[bool], list[bool], dict[Any, bool], tuple[bool, ...]
+]
 
-_SupportsTypingBool = Union[Set[bool], List[bool],
-                            Dict[Any, bool], Tuple[bool]]
+_SupportsTypingBool = Union[Set[bool], List[bool], Dict[Any, bool], Tuple[bool]]
 
 _SupportsBool = Union[_SupportsBuiltInBool, _SupportsTypingBool]
 
@@ -43,9 +42,14 @@ class Condition:
     one or more conditions.
     """
 
-    def __init__(self, *conditions: _SupportsBool,
-                 use_or: bool = False, use_not: bool = False,
-                 ignore_invalid: bool = False, lazy: bool = False):
+    def __init__(
+        self,
+        *conditions: _SupportsBool,
+        use_or: bool = False,
+        use_not: bool = False,
+        ignore_invalid: bool = False,
+        lazy: bool = False,
+    ):
         """
         Initializes the Condition object.
 
@@ -105,8 +109,10 @@ class Condition:
 
     def __bool__(self) -> bool:
         if self._result is None:
-            raise ValueError("Condition has yet to be evaluated! "
-                             "'evaluate()' method needs to be called.")
+            raise ValueError(
+                "Condition has yet to be evaluated! "
+                "'evaluate()' method needs to be called."
+            )
 
         return self._result
 
@@ -124,8 +130,9 @@ class Condition:
                         self._conditions.append(item)
             else:
                 if not self._ignore_invalid:
-                    raise ValueError(f"condition value #{str(index)} "
-                                     "is not a supported type!")
+                    raise ValueError(
+                        f"condition value #{str(index)} is not a supported type!"
+                    )
 
     # Must return bool
     def get(self) -> bool | None:
@@ -209,8 +216,10 @@ class Condition:
             has yet to be run or if 'func' isn't callable
         """
         if self._result is None:
-            raise ValueError("Condition has yet to be evaluated! "
-                             "'evaluate()' method needs to be called.")
+            raise ValueError(
+                "Condition has yet to be evaluated! "
+                "'evaluate()' method needs to be called."
+            )
 
         if not callable(func):
             raise ValueError("Specified 'function' is not a callable!")
@@ -237,8 +246,10 @@ class Condition:
             has yet to be run or if 'func' isn't callable
         """
         if self._result is None:
-            raise ValueError("Condition has yet to be evaluated! "
-                             "'evaluate()' method needs to be called.")
+            raise ValueError(
+                "Condition has yet to be evaluated! "
+                "'evaluate()' method needs to be called."
+            )
 
         if not callable(func):
             raise ValueError("Specified 'function' is not a callable!")
@@ -247,8 +258,9 @@ class Condition:
             func(*args, **kwargs)
         return self
 
-    def raise_if_true(self, exception: Type[Exception] = AssertionError,
-                      message: str = "") -> Condition:
+    def raise_if_true(
+        self, exception: Type[Exception] = AssertionError, message: str = ""
+    ) -> Condition:
         """
         Raises the specified exception with the specified message if
         the result is True.
@@ -265,8 +277,10 @@ class Condition:
             inherit from Exception
         """
         if self._result is None:
-            raise ValueError("Condition has yet to be evaluated! "
-                             "'evaluate()' method needs to be called.")
+            raise ValueError(
+                "Condition has yet to be evaluated! "
+                "'evaluate()' method needs to be called."
+            )
 
         if not issubclass(exception, Exception):
             raise ValueError("Specified 'exception' is not an Exception!")
@@ -275,8 +289,9 @@ class Condition:
             raise exception(message)
         return self
 
-    def raise_if_false(self, exception: Type[Exception] = AssertionError,
-                       message: str = "") -> Condition:
+    def raise_if_false(
+        self, exception: Type[Exception] = AssertionError, message: str = ""
+    ) -> Condition:
         """
         Raises the specified exception with the specified message if
         the result is False.
@@ -293,8 +308,10 @@ class Condition:
             inherit from Exception
         """
         if self._result is None:
-            raise ValueError("Condition has yet to be evaluated! "
-                             "'evaluate()' method needs to be called.")
+            raise ValueError(
+                "Condition has yet to be evaluated! "
+                "'evaluate()' method needs to be called."
+            )
 
         if not issubclass(exception, Exception):
             raise ValueError("Specified 'exception' is not an Exception!")

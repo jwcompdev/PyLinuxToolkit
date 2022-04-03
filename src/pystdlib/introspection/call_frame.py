@@ -18,7 +18,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """
-Contains the CallFrame class, that represents a call frame.
+Contains the CallFrame class,
+that represents a call frame.
 """
 from __future__ import annotations
 
@@ -47,7 +48,7 @@ class CallFrame:
         # at this point, the frame has become unusable
     """
 
-    __slots__ = ('__frame',)
+    __slots__ = ("__frame",)
 
     def __init__(self, frame):
         """
@@ -186,7 +187,7 @@ class CallFrame:
 
         :return: the class instance from the frame
         """
-        return self.locals.get('self', None)
+        return self.locals.get("self", None)
 
     @property
     def current_cls(self) -> Any | None:
@@ -198,7 +199,7 @@ class CallFrame:
         instance = self.current_cls_instance
         if instance is not None:
             # return its class
-            return getattr(instance, '__class__', None)
+            return getattr(instance, "__class__", None)
         # return None otherwise
         return None
 
@@ -251,8 +252,7 @@ class CallFrame:
 
         :return: the module filename from the frame
         """
-        if self.current_module is not None \
-                and hasattr(self.current_module, "__file__"):
+        if self.current_module is not None and hasattr(self.current_module, "__file__"):
             return self.current_module.__file__
 
         return None
@@ -264,8 +264,9 @@ class CallFrame:
 
         :return: the package name from the frame
         """
-        if self.current_module is not None \
-                and hasattr(self.current_module, "__package__"):
+        if self.current_module is not None and hasattr(
+            self.current_module, "__package__"
+        ):
             return self.current_module.__package__
 
         return None
@@ -278,7 +279,7 @@ class CallFrame:
         :return: the root package name from the frame
         """
         if self.current_package_name is not None:
-            return self.current_package_name.partition('.')[0]
+            return self.current_package_name.partition(".")[0]
 
         return None
 
@@ -313,16 +314,16 @@ class CallFrame:
             if self.current_cls_name is None:
                 return self.current_method_name
 
-            return f"{self.current_cls_name}" \
-                   f".{self.current_method_name}"
+            return f"{self.current_cls_name}.{self.current_method_name}"
 
         if self.current_cls_name is None:
-            return f"{self.current_module_name}" \
-                   f".{self.current_method_name}"
+            return f"{self.current_module_name}.{self.current_method_name}"
 
-        return f"{self.current_module_name}" \
-               f".{self.current_cls_name}" \
-               f".{self.current_method_name}"
+        return (
+            f"{self.current_module_name}"
+            f".{self.current_cls_name}"
+            f".{self.current_method_name}"
+        )
 
     @property
     def file_name(self) -> str:
@@ -418,7 +419,7 @@ class CallFrame:
             del parent
 
         # Make sure the name referred to the correct function
-        if getattr(function, '__code__', None) is not self.code_object:
+        if getattr(function, "__code__", None) is not self.code_object:
             return None
 
         return function

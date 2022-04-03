@@ -18,8 +18,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """Contains the pystdlib package."""
+__version__ = '0.0.1'
 
 from .literals import Chars
+
 # from .caller import Caller
 # # from .event import Event, Branch, Namespace
 #

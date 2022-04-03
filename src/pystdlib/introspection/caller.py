@@ -54,7 +54,7 @@ class Caller:
 
         :return: the caller's name
         """
-        return self._frame.current_name
+        return self._frame.current_method_name
 
     @property
     def cls(self) -> type | None:

@@ -18,3 +18,4 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 """Contains the pylinuxtoolkit package."""
+__version__ = '0.0.1'

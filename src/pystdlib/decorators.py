@@ -39,7 +39,7 @@ from pystdlib.introspection import Func, Signature
 
 logging_logger = logging.getLogger(__name__)
 
-DEF = re.compile(r'\s*def\s*([_\w][_\w\d]*)\s*\(')
+DEF = re.compile(r"\s*def\s*([_\w][_\w\d]*)\s*\(")
 POS = inspect.Parameter.POSITIONAL_OR_KEYWORD
 EMPTY = inspect.Parameter.empty
 
@@ -144,13 +144,17 @@ class ConfigClassMeta(type):
                     "no 'standard' methods (instance-level methods) are "
                     "allowed in the config class. Only classmethods and "
                     "staticmethods are allowed "
-                    f"('{attr_name}' is a 'standard' method).")
-            if not attr_name.startswith("_") \
-                    and not isinstance(attr_value, (classmethod, staticmethod)) \
-                    and attr_name != attr_name.upper():
+                    f"('{attr_name}' is a 'standard' method)."
+                )
+            if (
+                not attr_name.startswith("_")
+                and not isinstance(attr_value, (classmethod, staticmethod))
+                and attr_name != attr_name.upper()
+            ):
                 raise RuntimeError(
                     f"all class variable names in class {name} "
-                    f"must be upper case ('{attr_name}' value is not)")
+                    f"must be upper case ('{attr_name}' value is not)"
+                )
         # Create the new type
         new_config_class: type = type.__new__(mcs, name, bases, attrs)
 
@@ -218,6 +222,7 @@ def decorate(func, caller, extras=(), kwsyntax=False):
     """
     sig = inspect.signature(func)
     if iscoroutinefunction(caller):
+
         async def fun(*args, **kwargs):
             """
             The coroutine decorator.
@@ -229,7 +234,9 @@ def decorate(func, caller, extras=(), kwsyntax=False):
             if not kwsyntax:
                 args, kwargs = _fix(args, kwargs, sig)
             return await caller(func, *(extras + args), **kwargs)
+
     elif isgeneratorfunction(caller):
+
         def fun(*args, **kwargs):
             """
             The generator decorator.
@@ -242,7 +249,9 @@ def decorate(func, caller, extras=(), kwsyntax=False):
                 args, kwargs = _fix(args, kwargs, sig)
             for res in caller(func, *(extras + args), **kwargs):
                 yield res
+
     else:
+
         def fun(*args, **kwargs):
             """
             The function decorator.
@@ -254,6 +263,7 @@ def decorate(func, caller, extras=(), kwsyntax=False):
             if not kwsyntax:
                 args, kwargs = _fix(args, kwargs, sig)
             return caller(func, *(extras + args), **kwargs)
+
     fun.__name__ = func.__name__
     fun.__doc__ = func.__doc__
     fun.__wrapped__ = func
@@ -319,9 +329,11 @@ def decorator(caller, kwsyntax=False):
         :return: the decorator
         """
         num_args = len(args) + 1
-        extras = args + tuple(kwargs.get(p.name, p.default)
-                              for p in dec_params[num_args:]
-                              if p.default is not EMPTY)
+        extras = args + tuple(
+            kwargs.get(p.name, p.default)
+            for p in dec_params[num_args:]
+            if p.default is not EMPTY
+        )
         if func is None:
             return lambda l_func: decorate(l_func, caller, extras, kwsyntax)
 
@@ -332,7 +344,7 @@ def decorator(caller, kwsyntax=False):
     dec.__doc__ = caller.__doc__
     dec.__wrapped__ = caller
     dec.__qualname__ = caller.__qualname__
-    dec.__kwdefaults__ = getattr(caller, '__kwdefaults__', None)
+    dec.__kwdefaults__ = getattr(caller, "__kwdefaults__", None)
     dec.__dict__.update(caller.__dict__)
     return dec
 
@@ -476,8 +488,9 @@ def show_time(func=None, *, handler=None):
 
         if handler:
             handler(_func.full_name, _func.last_run_time_string)
-        logging_logger.debug(f"{_func.full_name}"
-                             f" executed in {_func.last_run_time_string} seconds")
+        logging_logger.debug(
+            f"{_func.full_name} executed in {_func.last_run_time_string} seconds"
+        )
 
         return result
 
@@ -506,9 +519,11 @@ def show_trace(func, *args, **kwargs):
     """
     func = Func(func)
 
-    print(f"Calling {func.full_name} with: \n   "
-          f"args: {args} \n   "
-          f"kwargs: {kwargs}")
+    print(
+        f"Calling {func.full_name} with: \n   "
+        f"args: {args} \n   "
+        f"kwargs: {kwargs}"
+    )
 
     return func(*args, **kwargs)
 
@@ -675,8 +690,10 @@ def trycatch(func=None, *, exception=None, handler=None, silent=False):
         except exception as exc:
             if not silent:
                 if not handler:
-                    logging.exception("Exception occurred during execution"
-                                      f" of '{_func.__name__}': [{exc}]")
+                    logging.exception(
+                        "Exception occurred during execution"
+                        f" of '{_func.__name__}': [{exc}]"
+                    )
                 else:
                     handler(_func.__name__, exc)
 
@@ -756,8 +773,10 @@ def require_root(func, *args, **kwargs):
         result = func(*args, **kwargs)
         return result
 
-    logging_logger.critical("[PERMISSION REQUIRED!] You need to be a root user "
-                            f"to execute function [{func.__name__}()]")
+    logging_logger.critical(
+        "[PERMISSION REQUIRED!] You need to be a root user "
+        f"to execute function [{func.__name__}()]"
+    )
     sys.exit(0)
 
 
@@ -811,14 +830,15 @@ def returns(func=None, return_type=None):
         func_instance = Func(_func)
         result = func_instance(*args, **kwargs)
 
-        match = (isinstance(result, return_type)
-                 or issubclass(type(result), return_type))
+        match = isinstance(result, return_type) or issubclass(type(result), return_type)
 
         if not match:
-            raise ValueError("Return value Mismatch:"
-                             f"\n>>> Expected: '{return_type.__name__}',"
-                             f" Found: '{type(result).__name__}'"
-                             f" with value '{str(result)}'")
+            raise ValueError(
+                "Return value Mismatch:"
+                f"\n>>> Expected: '{return_type.__name__}',"
+                f" Found: '{type(result).__name__}'"
+                f" with value '{str(result)}'"
+            )
         return result
 
     return _wrapped if func is None else _wrapped(func)
@@ -858,12 +878,11 @@ def threaded(func, *args, **kwargs):
     :return: No Return
     """
     threading.Thread(target=func, args=(args, kwargs)).start()
-    logging_logger.debug(f'Thread started for function {func}')
+    logging_logger.debug(f"Thread started for function {func}")
 
 
 @decorator
-def thread_pool(func, executor: ThreadPoolExecutor = None,
-                *args, **kwargs) -> Future:
+def thread_pool(func, executor: ThreadPoolExecutor = None, *args, **kwargs) -> Future:
     # noinspection PyProtectedMember
     """
     Runs the function in a thread pool.
@@ -930,7 +949,7 @@ def create_threads(func, thread_count=1, *args, **kwargs):
     """
     for _ in range(thread_count):
         threading.Thread(target=func, args=(args, kwargs)).start()
-        logging.info(f'Thread started for function {func}')
+        logging.info(f"Thread started for function {func}")
 
 
 ########################################
@@ -1002,9 +1021,16 @@ def repeat(func, num: int = 1, *args, **kwargs):
     return result
 
 
-def __retry_internal(func, exceptions=Exception, tries=-1, delay=0,
-                     max_delay=None, backoff=1, jitter=0,
-                     logger=logging_logger):
+def __retry_internal(
+    func,
+    exceptions=Exception,
+    tries=-1,
+    delay=0,
+    max_delay=None,
+    backoff=1,
+    jitter=0,
+    logger=logging_logger,
+):
     """
     Executes a function and retries it if it failed.
 
@@ -1045,8 +1071,16 @@ def __retry_internal(func, exceptions=Exception, tries=-1, delay=0,
                 _delay = min(_delay, max_delay)
 
 
-def retry(func=None, exceptions=Exception, tries=-1, delay=0, max_delay=None,
-          backoff=1, jitter=0, logger=logging_logger):
+def retry(
+    func=None,
+    exceptions=Exception,
+    tries=-1,
+    delay=0,
+    max_delay=None,
+    backoff=1,
+    jitter=0,
+    logger=logging_logger,
+):
     """
     Returns a retry decorator.
 
@@ -1069,15 +1103,32 @@ def retry(func=None, exceptions=Exception, tries=-1, delay=0, max_delay=None,
     def _wrapper(_func, *args, **kwargs):
         _args = args if args else []
         _kwargs = kwargs if kwargs else {}
-        return __retry_internal(partial(_func, *_args, **_kwargs), exceptions, tries,
-                                delay, max_delay, backoff, jitter, logger)
+        return __retry_internal(
+            partial(_func, *_args, **_kwargs),
+            exceptions,
+            tries,
+            delay,
+            max_delay,
+            backoff,
+            jitter,
+            logger,
+        )
 
     return _wrapper if func is None else _wrapper(func)
 
 
-def retry_call(func, args=None, kwargs=None, exceptions=Exception, tries=-1,
-               delay=0, max_delay=None, backoff=1, jitter=0,
-               logger=logging_logger):
+def retry_call(
+    func,
+    args=None,
+    kwargs=None,
+    exceptions=Exception,
+    tries=-1,
+    delay=0,
+    max_delay=None,
+    backoff=1,
+    jitter=0,
+    logger=logging_logger,
+):
     """
     Calls a function and re-executes it if it failed.
 
@@ -1098,5 +1149,13 @@ def retry_call(func, args=None, kwargs=None, exceptions=Exception, tries=-1,
     """
     _args = args if args else []
     _kwargs = kwargs if kwargs else {}
-    return __retry_internal(partial(func, *_args, **_kwargs), exceptions, tries,
-                            delay, max_delay, backoff, jitter, logger)
+    return __retry_internal(
+        partial(func, *_args, **_kwargs),
+        exceptions,
+        tries,
+        delay,
+        max_delay,
+        backoff,
+        jitter,
+        logger,
+    )

@@ -42,8 +42,9 @@ class CommandEvent:
     def __repr__(self):
         return build_repr(self)
 
-    def on_new_command(self, handler: Callable[[BashCommand], Any] = None,
-                       ttl: int = -1):
+    def on_new_command(
+        self, handler: Callable[[BashCommand], Any] = None, ttl: int = -1
+    ):
         """
         Registers a function to the 'command.new' event.
 

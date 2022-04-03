@@ -26,28 +26,28 @@ from __future__ import annotations
 from abc import abstractmethod
 from numbers import Number
 from typing import (
-    SupportsInt, SupportsFloat, SupportsIndex,
-    Optional, Tuple, TYPE_CHECKING
+    SupportsInt,
+    SupportsFloat,
+    SupportsIndex,
+    Optional,
+    Tuple,
+    TYPE_CHECKING,
 )
 
 from pystdlib.protocols import SupportsIntFloatStr
 from pystdlib.values.value import Value
 
 if TYPE_CHECKING:
-    from pystdlib.values import (
-        IntegerValue, FloatValue, BooleanValue, StringValue
-    )
+    from pystdlib.values import IntegerValue, FloatValue, BooleanValue, StringValue
 
 
 class NumberValue(Value, Number, SupportsInt, SupportsFloat):
     """Provides mutable access to a number"""
 
-    def __eq__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __eq__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_equal_to(other)
 
-    def __ne__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ne__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_not_equal_to(other)
 
     @abstractmethod
@@ -94,99 +94,116 @@ class NumberValue(Value, Number, SupportsInt, SupportsFloat):
         pass
 
     @abstractmethod
-    def __iadd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __iadd__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __add__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __add__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __radd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __radd__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __isub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __isub__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __sub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __sub__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __rsub__(self,
-                 other: SupportsIntFloatStr | IntegerValue | FloatValue | StringValue) \
-            -> IntegerValue | FloatValue | StringValue:
+    def __rsub__(
+        self, other: SupportsIntFloatStr | IntegerValue | FloatValue | StringValue
+    ) -> IntegerValue | FloatValue | StringValue:
         pass
 
     @abstractmethod
-    def __imul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __imul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __mul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __mul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
-    def __rmul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
-        pass
-
-    # noinspection SpellCheckingInspection
-    @abstractmethod
-    def __itruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
-        pass
-
-    @abstractmethod
-    def __truediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
-        pass
-
-    @abstractmethod
-    def __rtruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rmul__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         pass
 
     # noinspection SpellCheckingInspection
     @abstractmethod
-    def __ifloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __itruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     @abstractmethod
-    def __floordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __truediv__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         pass
 
     @abstractmethod
-    def __rfloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rtruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     # noinspection SpellCheckingInspection
     @abstractmethod
-    def __ipow__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __ifloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     @abstractmethod
-    def __pow__(self, other: int | float | IntegerValue | FloatValue,
-                modulo: Optional[int | IntegerValue] = None) \
-            -> IntegerValue | FloatValue:
+    def __floordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         pass
 
     @abstractmethod
-    def __rpow__(self, other: int | float | IntegerValue | FloatValue,
-                 modulo: Optional[int | IntegerValue] = None) \
-            -> IntegerValue | FloatValue:
+    def __rfloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
+        pass
+
+    # noinspection SpellCheckingInspection
+    @abstractmethod
+    def __ipow__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
+        pass
+
+    @abstractmethod
+    def __pow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[int | IntegerValue] = None,
+    ) -> IntegerValue | FloatValue:
+        pass
+
+    @abstractmethod
+    def __rpow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[int | IntegerValue] = None,
+    ) -> IntegerValue | FloatValue:
         pass
 
     @abstractmethod
@@ -203,33 +220,27 @@ class NumberValue(Value, Number, SupportsInt, SupportsFloat):
 
     # noinspection SpellCheckingInspection
     @abstractmethod
-    def __divmod__(self, other: SupportsIndex) \
-            -> Tuple[IntegerValue, IntegerValue]:
+    def __divmod__(self, other: SupportsIndex) -> Tuple[IntegerValue, IntegerValue]:
         pass
 
     @abstractmethod
-    def __rdivmod__(self, other: SupportsIndex) \
-            -> Tuple[IntegerValue, IntegerValue]:
+    def __rdivmod__(self, other: SupportsIndex) -> Tuple[IntegerValue, IntegerValue]:
         pass
 
     @abstractmethod
-    def __lt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __lt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         pass
 
     @abstractmethod
-    def __le__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __le__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         pass
 
     @abstractmethod
-    def __gt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __gt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         pass
 
     @abstractmethod
-    def __ge__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ge__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         pass
 
     @abstractmethod

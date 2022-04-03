@@ -52,8 +52,9 @@ class InvalidInputError(TypeError):
         super().__init__(msg)
 
 
-def check_argument(expression: bool,
-                   error_message="Invalid argument specified!") -> NoReturn:
+def check_argument(
+    expression: bool, error_message="Invalid argument specified!"
+) -> NoReturn:
     """Ensures the truth of an expression involving one or
     more parameters to the calling method.
 
@@ -66,9 +67,7 @@ def check_argument(expression: bool,
         raise IllegalArgumentError(str(error_message))
 
 
-def check_argument_type(value,
-                        value_name,
-                        types: type | tuple[type, ...]) -> NoReturn:
+def check_argument_type(value, value_name, types: type | tuple[type, ...]) -> NoReturn:
     """Ensures the truth of an expression involving one or
     more parameters to the calling method.
 
@@ -78,8 +77,9 @@ def check_argument_type(value,
     :raises IllegalArgumentError: if expression is False
     """
     if not isinstance(value, types):
-        raise IllegalArgumentError(f"\"{value_name}\" must be one "
-                                   f"of the following types: {types}")
+        raise IllegalArgumentError(
+            f'"{value_name}" must be one ' f"of the following types: {types}"
+        )
 
 
 def check_argument_not_none(reference, error_message) -> Any:
@@ -141,13 +141,14 @@ def convert_bytes_to_string(number: int) -> str:
     else:
         suffix = " Bytes"
 
-    rounding_factor = 10 ** 2
+    rounding_factor = 10**2
     rounded = math.floor(num * rounding_factor) / rounding_factor
     return f"{rounded:.2f}" + suffix
 
 
-def timesince(d_t: datetime.datetime | datetime.timedelta,
-              default: str = 'just now') -> str:
+def timesince(
+    d_t: datetime.datetime | datetime.timedelta, default: str = "just now"
+) -> str:
     """
     Returns string representing 'time since' e.g.
     3 days ago, 5 hours ago etc.
@@ -197,20 +198,20 @@ def timesince(d_t: datetime.datetime | datetime.timedelta,
         diff = abs(now - d_t)
 
     periods = (
-        (diff.days % 30 / 7, 'week', 'weeks'),
-        (diff.days % 7, 'day', 'days'),
-        (diff.seconds / 3600, 'hour', 'hours'),
-        (diff.seconds % 3600 / 60, 'minute', 'minutes'),
-        (diff.seconds % 60, 'second', 'seconds'),
+        (diff.days % 30 / 7, "week", "weeks"),
+        (diff.days % 7, "day", "days"),
+        (diff.seconds / 3600, "hour", "hours"),
+        (diff.seconds % 3600 / 60, "minute", "minutes"),
+        (diff.seconds % 60, "second", "seconds"),
     )
 
     output = []
     for period, singular, plural in periods:
         if int(period):
             if int(period) == 1:
-                output.append(f'{period} {singular}')
+                output.append(f"{period} {singular}")
             else:
-                output.append(f'{period} {plural}')
+                output.append(f"{period} {plural}")
 
     if output:
         return f"{' and '.join(output[:2])} ago"
@@ -235,7 +236,7 @@ def save_pickle(file, data) -> NoReturn:
     :param file: the file to save to
     :param data: the data to pickle
     """
-    with open(file, 'wb') as open_file:
+    with open(file, "wb") as open_file:
         pickle.dump(data, open_file)
 
 
@@ -246,8 +247,8 @@ def load_pickle(file):
     :param file: the file to read
     :return: the pickled data
     """
-    with open(file, 'rb') as open_file:
-        data = pickle.load(open_file, encoding='bytes')
+    with open(file, "rb") as open_file:
+        data = pickle.load(open_file, encoding="bytes")
     return data
 
 
@@ -259,7 +260,7 @@ def save_json(file, data) -> NoReturn:
     :param file: the file to save to
     :param data: the data to convert
     """
-    with open(file, 'w', encoding='utf-8') as open_file:
+    with open(file, "w", encoding="utf-8") as open_file:
         json.dump(data, open_file, ensure_ascii=False)
 
 
@@ -270,5 +271,5 @@ def load_json(file):
     :param file: the file to read
     :return: the data object
     """
-    with open(file, 'r') as open_file:
+    with open(file, "r") as open_file:
         return json.load(open_file)

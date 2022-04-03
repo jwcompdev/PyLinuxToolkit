@@ -38,13 +38,15 @@ from pystdlib.task_pool import TaskPool
 class BashSettings:
     """Contains all base settings for the bash objects."""
 
-    def __init__(self,
-                 use_threaded_worker=False,
-                 wait_for_locks=True,
-                 remote_ssh=False,
-                 timeout: int | None = 30,
-                 print_command: bool = False,
-                 print_prompt: bool = False):
+    def __init__(
+        self,
+        use_threaded_worker=False,
+        wait_for_locks=True,
+        remote_ssh=False,
+        timeout: int | None = 30,
+        print_command: bool = False,
+        print_prompt: bool = False,
+    ):
         self._bash_data: BashData = BashData(remote_ssh)
         self._bash_data.threaded_worker_enabled = use_threaded_worker
         self._bash_data.print_command = print_command
@@ -232,13 +234,17 @@ class BashBase(ABC, SupportsWithClose, BashSettings):
     specifically built for that.
     """
 
-    def __init__(self, directory=os.getcwd(),
-                 output_function: Callable[[OutputData], NoReturn]
-                 = Lambdas.one_arg_no_return,
-                 use_threaded_worker=False, wait_for_locks=True, remote_ssh=False,
-                 timeout: int | None = 30, print_command: bool = False,
-                 print_prompt: bool = False,
-                 ) -> NoReturn:
+    def __init__(
+        self,
+        directory=os.getcwd(),
+        output_function: Callable[[OutputData], NoReturn] = Lambdas.one_arg_no_return,
+        use_threaded_worker=False,
+        wait_for_locks=True,
+        remote_ssh=False,
+        timeout: int | None = 30,
+        print_command: bool = False,
+        print_prompt: bool = False,
+    ) -> NoReturn:
         """
         :param directory: the directory to use as the current working
             directory
@@ -259,9 +265,15 @@ class BashBase(ABC, SupportsWithClose, BashSettings):
             prints
 
         """
-        BashSettings.__init__(self, use_threaded_worker, wait_for_locks,
-                              remote_ssh, timeout, print_command,
-                              print_prompt)
+        BashSettings.__init__(
+            self,
+            use_threaded_worker,
+            wait_for_locks,
+            remote_ssh,
+            timeout,
+            print_command,
+            print_prompt,
+        )
 
         self._new_dir: str = directory
         self._running_dir = os.path.dirname(os.path.abspath(__file__))
@@ -273,8 +285,9 @@ class BashBase(ABC, SupportsWithClose, BashSettings):
         # Global Output params
         self._bash_data.prompt_func = self.get_prompt
         self._bash_data.client_close_func = self.close
-        self._output_writer: OutputWriter = \
-            OutputWriter(output_function, self._bash_data)
+        self._output_writer: OutputWriter = OutputWriter(
+            output_function, self._bash_data
+        )
 
     def get_output_writer(self) -> OutputWriter:
         """
@@ -387,9 +400,9 @@ class BashBase(ABC, SupportsWithClose, BashSettings):
             like in the current working directory
         """
         current_dir = "~"
-        sudo_char = '$'
+        sudo_char = "$"
         if self.current_user == "root":
-            sudo_char = '#'
+            sudo_char = "#"
         if self.current_dir != self.home_dir:
             current_dir = self.current_dir
 

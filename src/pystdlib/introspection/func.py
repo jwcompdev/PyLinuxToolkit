@@ -45,13 +45,17 @@ if typing.TYPE_CHECKING:
 class Func:
     """Wraps a function to provide basic info about it."""
 
-    def __init__(self, func: typing.Callable,
-                 *, strict: bool = False,
-                 strict_args: bool = False,
-                 strict_return: bool = False,
-                 sleep_after: int = 0,
-                 sleep_before: int = 0,
-                 debug: bool = False):
+    def __init__(
+        self,
+        func: typing.Callable,
+        *,
+        strict: bool = False,
+        strict_args: bool = False,
+        strict_return: bool = False,
+        sleep_after: int = 0,
+        sleep_before: int = 0,
+        debug: bool = False,
+    ):
         """
         Initializes the FuncWrapper instance.
 
@@ -172,15 +176,17 @@ class Func:
             if return_annotation is Parameter.empty:
                 return_annotation = NoneType
 
-            match = (isinstance(result, return_annotation)
-                     or issubclass(type(result), return_annotation))
+            match = isinstance(result, return_annotation) or issubclass(
+                type(result), return_annotation
+            )
 
             if not match:
                 raise FuncArgsMismatchError(
                     "Return Type Mismatch:"
                     f"\n>>> Expected: '{return_annotation.__name__}',"
                     f" Found: '{type(result).__name__}'"
-                    f" with value '{str(result)}'")
+                    f" with value '{str(result)}'"
+                )
 
         # If 'debug' enabled print trace to the console
         if self._debug:
@@ -413,8 +419,7 @@ class Func:
         return self._signature
 
     @property
-    def attributes(self) \
-            -> list[tuple[str, typing.Any]]:
+    def attributes(self) -> list[tuple[str, typing.Any]]:
         """
         Return all attributes as (name, value) pairs sorted by name.
 
@@ -462,9 +467,9 @@ class Func:
         :return: the execution time of the last time the function
         was called, as a string
         """
-        return (f"{self._last_run_time:.35f}"
-                if self._last_run_time is not None
-                else "").rstrip("0")
+        return (
+            f"{self._last_run_time:.35f}" if self._last_run_time is not None else ""
+        ).rstrip("0")
 
     @property
     def last_args(self) -> list:
@@ -503,11 +508,13 @@ class Func:
         :return: a string with some basic info about the last time
         the function was called
         """
-        return (f"'{self.full_name}' last execution took:\n"
-                f"{self.last_run_time_string} seconds\n"
-                "and was last called with:\n"
-                f"args: {self._last_args}\n"
-                f"kwargs: {self._last_kwargs}")
+        return (
+            f"'{self.full_name}' last execution took:\n"
+            f"{self.last_run_time_string} seconds\n"
+            "and was last called with:\n"
+            f"args: {self._last_args}\n"
+            f"kwargs: {self._last_kwargs}"
+        )
 
     @property
     def last_result(self) -> typing.Any | None:
@@ -600,8 +607,9 @@ class Func:
         """
         self._strict_return = value
 
-    def fire_event_before(self, event: Event,
-                          namespace: str | StringValue | Namespace) -> Func:
+    def fire_event_before(
+        self, event: Event, namespace: str | StringValue | Namespace
+    ) -> Func:
         """
         Fires the specified event at the specified namespace right
         before the function is called.
@@ -611,20 +619,23 @@ class Func:
             the event
         :return: this instance for use in method chaining
         """
-        func_param = Parameter("func", Parameter.POSITIONAL_OR_KEYWORD,
-                               annotation=Func)
+        func_param = Parameter("func", Parameter.POSITIONAL_OR_KEYWORD, annotation=Func)
         from pystdlib.event import Event
 
-        if isinstance(event, Event) or issubclass(type(event), Event) \
-                and event.signature == Signature(func=func_param):
+        if (
+            isinstance(event, Event)
+            or issubclass(type(event), Event)
+            and event.signature == Signature(func=func_param)
+        ):
             self._before_event = event
             self._before_event_namespace = namespace
             self._fire_event_before = True
 
         return self
 
-    def fire_event_after(self, event: Event,
-                         namespace: str | StringValue | Namespace) -> Func:
+    def fire_event_after(
+        self, event: Event, namespace: str | StringValue | Namespace
+    ) -> Func:
         """
         Fires the specified event at the specified namespace right
         after the function is called.
@@ -634,12 +645,14 @@ class Func:
             the event
         :return: this instance for use in method chaining
         """
-        func_param = Parameter("func", Parameter.POSITIONAL_OR_KEYWORD,
-                               annotation=Func)
+        func_param = Parameter("func", Parameter.POSITIONAL_OR_KEYWORD, annotation=Func)
         from pystdlib.event import Event
 
-        if isinstance(event, Event) or issubclass(type(event), Event) \
-                and event.signature == Signature(func=func_param):
+        if (
+            isinstance(event, Event)
+            or issubclass(type(event), Event)
+            and event.signature == Signature(func=func_param)
+        ):
             self._after_event = event
             self._after_event_namespace = namespace
             self._fire_event_after = True

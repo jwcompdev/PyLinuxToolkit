@@ -37,12 +37,12 @@ class Signature(inspect.Signature):
 
     @staticmethod
     def _format_annotation(annotation, base_module=None):
-        if getattr(annotation, '__module__', None) == 'typing':
-            return repr(annotation).replace('typing.', '')
+        if getattr(annotation, "__module__", None) == "typing":
+            return repr(annotation).replace("typing.", "")
         if isinstance(annotation, type):
-            if annotation.__module__ in ('builtins', base_module):
+            if annotation.__module__ in ("builtins", base_module):
                 return annotation.__qualname__
-            return annotation.__module__ + '.' + annotation.__qualname__
+            return annotation.__module__ + "." + annotation.__qualname__
         return repr(annotation)
 
     @staticmethod
@@ -75,11 +75,15 @@ class Signature(inspect.Signature):
 
         return is_instance(value, type_) or is_subclass(type(value), type_)
 
-    def __init__(self, _func=None, *,
-                 _signature: inspect.Signature | Signature = None,
-                 _return_type=None,
-                 _make_keyword_only: bool = False,
-                 **kwargs: type | Parameter):
+    def __init__(
+        self,
+        _func=None,
+        *,
+        _signature: inspect.Signature | Signature = None,
+        _return_type=None,
+        _make_keyword_only: bool = False,
+        **kwargs: type | Parameter,
+    ):
         """
         Initializes the Signature object.
 
@@ -105,39 +109,40 @@ class Signature(inspect.Signature):
             is the type hint. You can also specify inspect.Parameter
             instances instead of the type hint.
         """
-        _new_signature: list[Parameter] = []
-        _new_return_annotation = Parameter.empty
-
         if _func is not None:
             sig = inspect.signature(_func, follow_wrapped=True)
 
             _new_signature = list(sig.parameters.values())
             _new_return_annotation = sig.return_annotation
-        elif _signature is not None \
-                and isinstance(_signature, (inspect.Signature, Signature)):
+        elif _signature is not None and isinstance(
+            _signature, (inspect.Signature, Signature)
+        ):
             _new_signature = list(_signature.parameters.values())
             _new_return_annotation = _signature.return_annotation
         else:
             valid = True
             for value in kwargs.values():
-                if not isinstance(value, Parameter) \
-                        and not isinstance(value, type) \
-                        and "typing." not in str(value):
+                if (
+                    not isinstance(value, Parameter)
+                    and not isinstance(value, type)
+                    and "typing." not in str(value)
+                ):
                     valid = False
                     break
 
             if valid:
+                _new_signature: list[Parameter] = []
                 for name, value in kwargs.items():
                     if isinstance(value, Parameter):
                         _new_parameter = value
                     else:
-                        kind = (Parameter.KEYWORD_ONLY
-                                if _make_keyword_only
-                                else Parameter.POSITIONAL_OR_KEYWORD)
-
-                        _new_parameter = Parameter(
-                            name, kind, annotation=value
+                        kind = (
+                            Parameter.KEYWORD_ONLY
+                            if _make_keyword_only
+                            else Parameter.POSITIONAL_OR_KEYWORD
                         )
+
+                        _new_parameter = Parameter(name, kind, annotation=value)
 
                     _new_signature.append(_new_parameter)
             else:
@@ -145,7 +150,8 @@ class Signature(inspect.Signature):
                     "'kwargs' has the wrong value types! They must be"
                     " any combination of 'typing.Parameter',"
                     " 'type' or any type hint from the 'typing'"
-                    " module.")
+                    " module."
+                )
 
             _new_return_annotation = _return_type
 
@@ -159,8 +165,7 @@ class Signature(inspect.Signature):
                 kind = param.kind
                 default = param.default
                 values[index] = Parameter(
-                    name, kind, default=default,
-                    annotation=annotation
+                    name, kind, default=default, annotation=annotation
                 )
 
         _new_signature = values
@@ -173,17 +178,12 @@ class Signature(inspect.Signature):
         super().__init__(
             _new_signature,
             return_annotation=_new_return_annotation,
-            __validate_parameters__=False
+            __validate_parameters__=False,
         )
 
-        types: list[type] = [par.annotation for par
-                             in list(self.parameters.values())]
+        types: list[type] = [par.annotation for par in list(self.parameters.values())]
 
         func_error = "Function signature parameters cannot be of type '%s'!"
-
-        # Check for 'None' type
-        if None in types:
-            raise FuncSignatureError(func_error % "None")
 
         # Check for 'NoReturn' type
         if typing.NoReturn in types:
@@ -196,17 +196,19 @@ class Signature(inspect.Signature):
             raise FuncSignatureError(func_error % "typing.Final")
 
         for type_ in types:
-            # Check if the type is actually a type or a type hint
+            # Check if the type is actually a type, a type hint or Parameter.empty
             valid = Condition(
-                type_ is not Parameter.empty,
-                (type == type_.__class__
-                 or str(typing.get_origin(type_)).startswith("typing.")
-                 or str(type_).startswith("typing."))
+                type_ is Parameter.empty,
+                type_ is None,
+                type == type_.__class__,
+                str(typing.get_origin(type_)).startswith("typing."),
+                str(type_).startswith("typing."),
+                use_or=True,
             )
 
             if not valid:
                 raise FuncSignatureError(
-                    "Function signature parameters must be a valid type!"
+                    f"Function signature parameters must be a valid type! Provided Type: {type_}"
                 )
 
     def __contains__(self, item):
@@ -339,10 +341,12 @@ class Signature(inspect.Signature):
         num_args = 0
 
         for param in self.parameters.values():
-            if param.kind == param.VAR_POSITIONAL \
-                    or param.kind == param.VAR_KEYWORD \
-                    or param.kind == param.KEYWORD_ONLY \
-                    or param.default != param.empty:
+            if (
+                param.kind == param.VAR_POSITIONAL
+                or param.kind == param.VAR_KEYWORD
+                or param.kind == param.KEYWORD_ONLY
+                or param.default != param.empty
+            ):
                 break
 
             num_args += 1
@@ -406,8 +410,10 @@ class Signature(inspect.Signature):
 
         is_valid = True
 
-        if not self.expected_arg_count == actual_arg_count \
-                and self.expected_arg_count <= actual_kwarg_count:
+        if (
+            not self.expected_arg_count == actual_arg_count
+            and self.expected_arg_count <= actual_kwarg_count
+        ):
             has_positional_only = False
 
             for param in self.parameters.values():
@@ -424,32 +430,33 @@ class Signature(inspect.Signature):
             if _length == 1:
                 arg_error_text = "'args' must have at least 1 argument:"
             else:
-                arg_error_text = "'args' must have at least " \
-                                 f"{_length} arguments:"
+                arg_error_text = f"'args' must have at least {_length} arguments:"
 
             if actual_arg_count == 1 and actual_kwarg_count == 1:
-                arg_text = "and instead has " \
-                           "1 argument " \
-                           "and has 1 kwarg."
+                arg_text = "and instead has 1 argument and has 1 kwarg."
             elif actual_arg_count == 1 and actual_kwarg_count > 1:
-                arg_text = "and instead has " \
-                           "1 argument " \
-                           f"and has {actual_kwarg_count} kwargs."
-            elif actual_arg_count == 1 and actual_kwarg_count > 1:
-                arg_text = "and instead has " \
-                           f"{actual_arg_count} arguments " \
-                           "and has 1 kwarg."
+                arg_text = (
+                    "and instead has "
+                    "1 argument "
+                    f"and has {actual_kwarg_count} kwargs."
+                )
+            elif actual_arg_count > 1 and actual_kwarg_count == 1:
+                arg_text = (
+                    "and instead has "
+                    f"{actual_arg_count} arguments "
+                    "and has 1 kwarg."
+                )
             else:
-                arg_text = "and instead has " \
-                           f"{actual_arg_count} arguments " \
-                           f"and has {actual_kwarg_count} kwargs."
+                arg_text = (
+                    "and instead has "
+                    f"{actual_arg_count} arguments "
+                    f"and has {actual_kwarg_count} kwargs."
+                )
 
             raise FuncArgsMismatchError(f"{arg_error_text} ({self}) {arg_text}")
 
     def _check_arg(self, name, arg):
-        arg_error_text = "Signature Mismatch " \
-                         f"({self}) " \
-                         f"[Parameter '{name}']: "
+        arg_error_text = f"Signature Mismatch ({self}) [Parameter '{name}']: "
 
         param = self.parameters.get(name)
 
@@ -467,10 +474,11 @@ class Signature(inspect.Signature):
             kwargs_valid = self._validate_type(arg, p_type)
 
             if not kwargs_valid:
-                raise FuncArgsMismatchError(arg_error_text +
-                                            f"\n>>> Expected: '{p_type_name}',"
-                                            f" Found: '{a_type_name}'"
-                                            f" with value '{arg}'")
+                raise FuncArgsMismatchError(
+                    arg_error_text + f"\n>>> Expected: '{p_type_name}',"
+                    f" Found: '{a_type_name}'"
+                    f" with value '{arg}'"
+                )
 
     def verify_args(self, *args, **kwargs):
         """

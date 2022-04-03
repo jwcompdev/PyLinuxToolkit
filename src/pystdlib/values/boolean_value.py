@@ -47,8 +47,7 @@ class BooleanValue(IntegerValue, SupportsIndex):
     def __format__(self, format_spec) -> str:
         return bool(self._value).__format__(format_spec)
 
-    def __eq__(self, other: bool | BooleanValue | SupportsIndex) \
-            -> BooleanValue:
+    def __eq__(self, other: bool | BooleanValue | SupportsIndex) -> BooleanValue:
         """
         Returns True if the value is equal to the specified value,
         False otherwise.
@@ -61,8 +60,7 @@ class BooleanValue(IntegerValue, SupportsIndex):
 
         return BooleanValue(self._value == other)
 
-    def __ne__(self, other: bool | BooleanValue | SupportsIndex) \
-            -> BooleanValue:
+    def __ne__(self, other: bool | BooleanValue | SupportsIndex) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         value, False otherwise.
@@ -113,8 +111,7 @@ class BooleanValue(IntegerValue, SupportsIndex):
         """
         return bool(self._value)
 
-    def set(self, value: Any) \
-            -> BooleanValue:
+    def set(self, value: Any) -> BooleanValue:
         """
         Sets the value.
 
@@ -127,9 +124,7 @@ class BooleanValue(IntegerValue, SupportsIndex):
             self._value = int(bool(value))
         return self
 
-    def is_equal_to(
-            self, value: bool | BooleanValue | SupportsIndex) \
-            -> BooleanValue:
+    def is_equal_to(self, value: bool | BooleanValue | SupportsIndex) -> BooleanValue:
         """
         Returns True if the value is equal to the specified value,
         False otherwise.
@@ -144,8 +139,8 @@ class BooleanValue(IntegerValue, SupportsIndex):
         return BooleanValue(self._value == value)
 
     def is_not_equal_to(
-            self, value: bool | BooleanValue | SupportsIndex) \
-            -> BooleanValue:
+        self, value: bool | BooleanValue | SupportsIndex
+    ) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         value, False otherwise.

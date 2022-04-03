@@ -31,7 +31,7 @@ import inspect
 from inspect import Parameter
 import logging
 from datetime import datetime
-from typing import (Iterator, NoReturn, Callable, Optional)
+from typing import Iterator, NoReturn, Callable, Optional
 
 from pystdlib import Chars
 from pystdlib.introspection import Func, Signature, Caller
@@ -92,8 +92,10 @@ class Namespace:
 
         # Check if '__callbacks' is in event namespace
         if self._CB_KEY in self._parts:
-            raise ValueError(f"'{self._CB_KEY}' is not valid for an "
-                             "event or namespace level name!")
+            raise ValueError(
+                f"'{self._CB_KEY}' is not valid for an "
+                "event or namespace level name!"
+            )
 
     def __iter__(self) -> Iterator[str]:
         """
@@ -144,9 +146,7 @@ class _Handler:
     specific *event* and that keeps track of the times left to handle.
     """
 
-    def __init__(self, func: Callable,
-                 namespace: Optional[Namespace],
-                 ttl: int):
+    def __init__(self, func: Callable, namespace: Optional[Namespace], ttl: int):
         self._name = func.__name__
         self._func = func
         self._namespace = namespace
@@ -289,12 +289,14 @@ class Branch(Logged):
         """
         caller = Caller()
 
-        if handler is not None and caller.name_matches("on", "on_any")\
-                and caller.cls_name_matches("Event"):
+        if (
+            handler is not None
+            and caller.name_matches("on", "on_any")
+            and caller.cls_name_matches("Event")
+        ):
             self._handlers.append(handler)
         else:
-            raise EventError("This method is meant to only be called"
-                             " internally!")
+            raise EventError("This method is meant to only be called internally!")
 
         return self
 
@@ -304,8 +306,9 @@ class Branch(Logged):
 
         :param handler: the function to remove as handler
         """
-        indexes = [index for index, hdr in enumerate(self._handlers)
-                   if hdr.func == handler]
+        indexes = [
+            index for index, hdr in enumerate(self._handlers) if hdr.func == handler
+        ]
 
         for i in indexes[::-1]:
             self._handlers.pop(i)
@@ -344,8 +347,7 @@ class Branch(Logged):
             self._root[name] = Branch(name)
         return self
 
-    def find_branch(self, namespace: Namespace) \
-            -> Optional[Branch]:
+    def find_branch(self, namespace: Namespace) -> Optional[Branch]:
         """
         Returns a branch of the tree structure that matches *namespace*.
         Wildcards are not applied.
@@ -361,9 +363,9 @@ class Branch(Logged):
 
         return branch
 
-    def get_namespace_branches(self, namespace: Namespace,
-                               wildcard: bool = False) \
-            -> list[Branch]:
+    def get_namespace_branches(
+        self, namespace: Namespace, wildcard: bool = False
+    ) -> list[Branch]:
         """
         Returns a list of all branches that match the namespace parts
         and if wildcard is True then any wildcard branches are
@@ -394,8 +396,7 @@ class Branch(Logged):
 
         return branches
 
-    def expand_namespace(self, namespace: Namespace) \
-            -> Optional[Branch]:
+    def expand_namespace(self, namespace: Namespace) -> Optional[Branch]:
         """
         Loop through each part of namespace and create new branch
         for each part if it doesn't exist.
@@ -458,13 +459,16 @@ class Event(Logged):
     _NEW_HANDLER = Namespace("new_handler")
     _NO_NAME = "_NO_NAME"
 
-    def __init__(self, _wildcard: bool = False,
-                 _new_handler: bool = False,
-                 _max_handlers: int = -1,
-                 _delimiter: str = Chars.DOT,
-                 _signature: dict[str, type | Parameter] | Signature = None,
-                 _make_keyword_only: bool = False,
-                 **kwargs: type | Parameter):
+    def __init__(
+        self,
+        _wildcard: bool = False,
+        _new_handler: bool = False,
+        _max_handlers: int = -1,
+        _delimiter: str = Chars.DOT,
+        _signature: dict[str, type | Parameter] | Signature = None,
+        _make_keyword_only: bool = False,
+        **kwargs: type | Parameter,
+    ):
         """
         Initializes the Event object.
 
@@ -503,11 +507,11 @@ class Event(Logged):
         self._max_handlers = _max_handlers
 
         if _signature is None:
-            self._signature = Signature(_make_keyword_only=_make_keyword_only,
-                                        **kwargs)
+            self._signature = Signature(_make_keyword_only=_make_keyword_only, **kwargs)
         elif isinstance(_signature, dict):
-            self._signature = Signature(_make_keyword_only=_make_keyword_only,
-                                        **{**_signature, **kwargs})
+            self._signature = Signature(
+                _make_keyword_only=_make_keyword_only, **{**_signature, **kwargs}
+            )
         elif isinstance(_signature, Signature):
             self._signature = _signature
         else:
@@ -554,9 +558,13 @@ class Event(Logged):
 
                 kind = "Parameter." + str(value.kind)
 
-                kwargs[key] = build_repr(value, repr(value.name),
-                                         kind, default=default,
-                                         annotation=str(value.annotation.__name__))
+                kwargs[key] = build_repr(
+                    value,
+                    repr(value.name),
+                    kind,
+                    default=default,
+                    annotation=str(value.annotation.__name__),
+                )
 
         return build_repr(self, **kwargs)
 
@@ -647,9 +655,12 @@ class Event(Logged):
         """
         return self._signature
 
-    def set_signature(self, _signature: dict[str, type | Parameter] | Signature = None,
-                      _make_keyword_only: bool = False,
-                      **kwargs: type | Parameter) -> Event:
+    def set_signature(
+        self,
+        _signature: dict[str, type | Parameter] | Signature = None,
+        _make_keyword_only: bool = False,
+        **kwargs: type | Parameter,
+    ) -> Event:
         """
         Sets the event signature.
 
@@ -665,11 +676,11 @@ class Event(Logged):
         :return: this instance for use in method chaining
         """
         if _signature is None:
-            self._signature = Signature(_make_keyword_only=_make_keyword_only,
-                                        **kwargs)
+            self._signature = Signature(_make_keyword_only=_make_keyword_only, **kwargs)
         elif isinstance(_signature, dict):
-            self._signature = Signature(_make_keyword_only=_make_keyword_only,
-                                        **{**_signature, **kwargs})
+            self._signature = Signature(
+                _make_keyword_only=_make_keyword_only, **{**_signature, **kwargs}
+            )
         elif isinstance(_signature, Signature):
             self._signature = _signature
         else:
@@ -764,29 +775,34 @@ class Event(Logged):
         """
         self._max_handlers = max_handlers
 
-    def _check_handler_length(self, obj, requirement_name: str,
-                              value_name: str, exception,
-                              signature: Signature):
+    def _check_handler_length(
+        self,
+        obj,
+        requirement_name: str,
+        value_name: str,
+        exception,
+        signature: Signature,
+    ):
         # Checks to see if there is fewer parameters than what is required
         if len(obj) < signature.length:
             if signature.length == 1:
-                arg_error_text = f"{requirement_name} must have at least " \
-                                 f"1 {value_name}:"
+                arg_error_text = (
+                    f"{requirement_name} must have at least 1 {value_name}:"
+                )
             else:
-                arg_error_text = f"{requirement_name} must have at least " \
-                                 f"{signature.length} {value_name}s:"
+                arg_error_text = (
+                    f"{requirement_name} must have at least "
+                    f"{signature.length} {value_name}s:"
+                )
 
             if len(obj) == 0:
                 arg_text = f"and instead has 0 {value_name}s."
             elif len(obj) == 1:
                 arg_text = f"and instead only has 1 {value_name}."
             else:
-                arg_text = "and instead only has " \
-                           f"{len(obj)} {value_name}s."
+                arg_text = f"and instead only has {len(obj)} {value_name}s."
 
-            raise exception(arg_error_text
-                            + f" ({self}) "
-                            + arg_text)
+            raise exception(arg_error_text + f" ({self}) " + arg_text)
 
     def _verify_handler(self, handler: Callable, signature: Signature) -> NoReturn:
         """
@@ -799,37 +815,42 @@ class Event(Logged):
         params = Signature(handler).parameters
 
         # Skip check if only param in handler is kwargs
-        if not (len(params) == 1
-                and list(params.values())[0].kind == inspect.Parameter.VAR_KEYWORD):
+        if not (
+            len(params) == 1
+            and list(params.values())[0].kind == inspect.Parameter.VAR_KEYWORD
+        ):
 
-            self._check_handler_length(params, "Handler", "parameter",
-                                       EventHandlerMismatchError, signature)
+            self._check_handler_length(
+                params, "Handler", "parameter", EventHandlerMismatchError, signature
+            )
 
             index_offset = 0
 
             # Loops through all the parameters to see if they match the signature
             for index, param in enumerate(params.values(), 0):
-                arg_error_text = "Signature Mismatch " \
-                                 f"({self}) " \
-                                 f"[Parameter #{index + 1} '{param.name}']: "
+                arg_error_text = (
+                    "Signature Mismatch "
+                    f"({self}) "
+                    f"[Parameter #{index + 1} '{param.name}']: "
+                )
 
                 mod_index = index + index_offset
 
                 # Checks if this parameter can be assigned by a keyword argument
                 if param.kind == param.POSITIONAL_ONLY:
                     raise EventHandlerMismatchError(
-                        arg_error_text +
-                        "Cannot be assigned with keyword argument!")
+                        arg_error_text + "Cannot be assigned with keyword argument!"
+                    )
 
                 # Checks if the current param a *args
                 if param.kind == param.VAR_POSITIONAL:
                     # Checks if any params exist after *args
                     if index == len(params) - 1:
                         raise EventHandlerMismatchError(
-                            arg_error_text +
-                            f"No match after '{param.name}'"
+                            arg_error_text + f"No match after '{param.name}'"
                             " that can be assigned with keyword "
-                            "argument!")
+                            "argument!"
+                        )
 
                     index_offset -= 1
 
@@ -842,17 +863,17 @@ class Event(Logged):
                     # Checks if this additional parameter has a default value
                     if param.default is param.empty:
                         raise EventHandlerMismatchError(
-                            arg_error_text + "No Default Value!")
+                            arg_error_text + "No Default Value!"
+                        )
 
-                    self._warning(arg_error_text +
-                                  f"Default Value - '{param.default}'")
+                    self._warning(arg_error_text + f"Default Value - '{param.default}'")
 
                 # Checks if this parameter has the correct name
                 elif param.name != signature.names[mod_index]:
                     raise EventHandlerMismatchError(
-                        arg_error_text +
-                        "Name should be "
-                        f"'{signature.names[mod_index]}'.")
+                        arg_error_text + "Name should be "
+                        f"'{signature.names[mod_index]}'."
+                    )
 
                 # Checks if this parameter has the correct type
                 elif param.annotation is not param.empty:
@@ -860,16 +881,19 @@ class Event(Logged):
 
                     if not is_subclass(param_type, signature.types[mod_index]):
                         raise EventHandlerMismatchError(
-                            arg_error_text +
-                            "Type should be "
+                            arg_error_text + "Type should be "
                             f"'{str(signature.types[mod_index])}' "
-                            f"not {str(param_type)}.")
+                            f"not {str(param_type)}."
+                        )
 
         return handler
 
-    def on(self, event: str | StringValue | Namespace = "",
-           handler: Callable = None,
-           ttl: int = -1) -> Callable:
+    def on(
+        self,
+        event: str | StringValue | Namespace = "",
+        handler: Callable = None,
+        ttl: int = -1,
+    ) -> Callable:
         """
         Registers a function to an event.
 
@@ -915,11 +939,13 @@ class Event(Logged):
             # If max handlers isn't disabled (-1)
             # then check if handlers has exceeded max handlers
             if 0 <= self._max_handlers <= len(handlers):
-                self._warning("Cannot add "
-                              f"'{Func(func).full_name}' "
-                              f"as handler to '{str(event)}' event, "
-                              f"Max handlers ({self._max_handlers}) "
-                              "has been exceeded!")
+                self._warning(
+                    "Cannot add "
+                    f"'{Func(func).full_name}' "
+                    f"as handler to '{str(event)}' event, "
+                    f"Max handlers ({self._max_handlers}) "
+                    "has been exceeded!"
+                )
                 return func
 
             # Create a new handler and append it to the list
@@ -949,8 +975,7 @@ class Event(Logged):
         """
         return self.on(self._NEW_HANDLER, handler, ttl)
 
-    def once(self, event: str | StringValue | Namespace,
-             handler: Callable = None):
+    def once(self, event: str | StringValue | Namespace, handler: Callable = None):
         """
         Registers a function to an event that is called once.
 
@@ -1009,9 +1034,9 @@ class Event(Logged):
 
         return on_any(handler) if handler else on_any
 
-    def off(self,
-            event: str | StringValue | Namespace = "",
-            handler: Callable = None) -> Callable:
+    def off(
+        self, event: str | StringValue | Namespace = "", handler: Callable = None
+    ) -> Callable:
         """
         Removes a function that is registered to an event.
 
@@ -1037,10 +1062,12 @@ class Event(Logged):
 
             # If the branch doesn't exist, ignore
             if branch is None:
-                self._warning("Cannot remove "
-                              f"'{Func(func).full_name}' "
-                              f"handler from '{str(event)}' event, "
-                              "Event doesn't exist!")
+                self._warning(
+                    "Cannot remove "
+                    f"'{Func(func).full_name}' "
+                    f"handler from '{str(event)}' event, "
+                    "Event doesn't exist!"
+                )
                 return func
 
             branch.remove_handler(func)
@@ -1094,9 +1121,7 @@ class Event(Logged):
 
         self._debug("Removed all event handlers!")
 
-    def handlers(self,
-                 event: str | StringValue | Namespace = "") \
-            -> list[Callable]:
+    def handlers(self, event: str | StringValue | Namespace = "") -> list[Callable]:
         """
         Returns all functions that are registered to an event.
         Wildcards are not applied.
@@ -1148,9 +1173,9 @@ class Event(Logged):
 
         return [handler.func for handler in handlers]
 
-    def fire(self,
-             event: str | StringValue | Namespace = "",
-             *args, **kwargs) -> NoReturn:
+    def fire(
+        self, event: str | StringValue | Namespace = "", *args, **kwargs
+    ) -> NoReturn:
         """
         Fires an *event*. All functions of events that match *event*
         are invoked with *kwargs* in the exact order of
@@ -1161,9 +1186,9 @@ class Event(Logged):
         """
         self._fire(event, False, *args, **kwargs)
 
-    def fire_reverse(self,
-                     event: str | StringValue | Namespace = "",
-                     *args, **kwargs) -> NoReturn:
+    def fire_reverse(
+        self, event: str | StringValue | Namespace = "", *args, **kwargs
+    ) -> NoReturn:
         """
         Fires an *event*. All functions of events that match *event*
         are invoked with *kwargs* in the reverse order of
@@ -1174,9 +1199,9 @@ class Event(Logged):
         """
         self._fire(event, True, *args, **kwargs)
 
-    def _fire(self,
-              event: str | StringValue | Namespace, reverse: bool,
-              *args, **kwargs) -> NoReturn:
+    def _fire(
+        self, event: str | StringValue | Namespace, reverse: bool, *args, **kwargs
+    ) -> NoReturn:
         # Grab the list of handlers in the root branch
         handlers = self._root.get_handlers()
 
@@ -1192,7 +1217,8 @@ class Event(Logged):
 
         # Grab the list of branches
         branches = self._root.get_namespace_branches(
-            namespace, self.is_wildcard_enabled())
+            namespace, self.is_wildcard_enabled()
+        )
 
         # Add all handlers from found branches to the list
         for branch in branches:
@@ -1204,9 +1230,7 @@ class Event(Logged):
             self._debug(f"Firing event '{namespace}'!")
 
         # Call handlers in the order of their registration time
-        for handler in sorted(handlers,
-                              key=lambda hdr: hdr.time,
-                              reverse=reverse):
+        for handler in sorted(handlers, key=lambda hdr: hdr.time, reverse=reverse):
             handler.handle(*args, **kwargs)
 
         # Remove handlers whose ttl value is 0

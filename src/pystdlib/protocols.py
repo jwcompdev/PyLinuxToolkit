@@ -25,8 +25,14 @@ from __future__ import annotations
 
 from abc import abstractmethod
 from typing import (
-    runtime_checkable, Protocol, NoReturn, Union, Sequence,
-    SupportsInt, SupportsFloat, SupportsIndex
+    runtime_checkable,
+    Protocol,
+    NoReturn,
+    Union,
+    Sequence,
+    SupportsInt,
+    SupportsFloat,
+    SupportsIndex,
 )
 
 SupportsIntegerFull = Union[str, bytes, bytearray, SupportsInt, SupportsIndex]

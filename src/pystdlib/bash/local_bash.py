@@ -46,13 +46,16 @@ from pystdlib.values import StringValue
 class LocalBash(BashBase, Logged):
     """A bash terminal emulator that allows running commands locally."""
 
-    def __init__(self, directory="~",
-                 output_function: Callable[[OutputData], NoReturn]
-                 = Lambdas.one_arg_no_return,
-                 use_threaded_worker=False, wait_for_locks=True,
-                 timeout: int | None = 30, print_command: bool = False,
-                 print_prompt: bool = False
-                 ) -> NoReturn:
+    def __init__(
+        self,
+        directory="~",
+        output_function: Callable[[OutputData], NoReturn] = Lambdas.one_arg_no_return,
+        use_threaded_worker=False,
+        wait_for_locks=True,
+        timeout: int | None = 30,
+        print_command: bool = False,
+        print_prompt: bool = False,
+    ) -> NoReturn:
         """
         :param directory: the directory to use as the current working
             directory
@@ -70,12 +73,16 @@ class LocalBash(BashBase, Logged):
         :param print_prompt: prints the prompt after the command output
             prints
         """
-        super().__init__(directory=directory, output_function=output_function,
-                         use_threaded_worker=use_threaded_worker,
-                         wait_for_locks=wait_for_locks,
-                         remote_ssh=False,
-                         timeout=timeout, print_command=print_command,
-                         print_prompt=print_prompt)
+        super().__init__(
+            directory=directory,
+            output_function=output_function,
+            use_threaded_worker=use_threaded_worker,
+            wait_for_locks=wait_for_locks,
+            remote_ssh=False,
+            timeout=timeout,
+            print_command=print_command,
+            print_prompt=print_prompt,
+        )
 
         self._is_context_manager = False
         self.set_log_level(logging.DEBUG)
@@ -102,7 +109,7 @@ class LocalBash(BashBase, Logged):
         :return: False if the directory doesn't exist
         """
         try:
-            self._new_dir = directory.replace('~', str(Path.home()))
+            self._new_dir = directory.replace("~", str(Path.home()))
 
             os.chdir(self._new_dir)
 
@@ -146,23 +153,22 @@ class LocalBash(BashBase, Logged):
         """
         return pwd.getpwuid(os.getuid()).pw_name
 
-    def _internal_run_local_command_string(self, command: str,
-                                           client: spawn) \
-            -> StringValue:
+    def _internal_run_local_command_string(
+        self, command: str, client: spawn
+    ) -> StringValue:
         client.sendline(command)
         client.expect_exact(self.get_prompt())
         before = client.before.replace(command, "").strip("\r\n")
-        self._commands.add_command(BashCommand(
-            command, self.current_dir, before, 0
-        ))
+        self._commands.add_command(BashCommand(command, self.current_dir, before, 0))
         self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
         return StringValue(before)
 
     def close(self) -> NoReturn:
         """Currently does nothing."""
 
-    def _handle_cd_command(self, command: str, print_command: bool = None,
-                           print_prompt: bool = None) -> NoReturn:
+    def _handle_cd_command(
+        self, command: str, print_command: bool = None, print_prompt: bool = None
+    ) -> NoReturn:
         self._bash_data.command = command
 
         if print_command is not None:
@@ -183,21 +189,26 @@ class LocalBash(BashBase, Logged):
             result_msg = f"bash: cd: {new_dir}: No such file or directory"
             self._output_writer.write_bypass(StringValue(result_msg))
 
-        self._commands.add_command(BashCommand(
-            command, self.current_dir, result_msg, 0
-        ))
+        self._commands.add_command(
+            BashCommand(command, self.current_dir, result_msg, 0)
+        )
         self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
 
         if print_prompt:
             self._output_writer.write_bypass(StringValue(self.get_prompt()))
 
-    @TaskPool.decide_class_task(pool_name="_task_pool",
-                                threaded="is_threaded_worker_enabled")
-    def run_terminal_command(self, command: str, sudo: bool = False,
-                             timeout: int | None = 30,
-                             print_command: bool = None,
-                             print_prompt: bool = None,
-                             print_exit_code: bool = False) -> NoReturn:
+    @TaskPool.decide_class_task(
+        pool_name="_task_pool", threaded="is_threaded_worker_enabled"
+    )
+    def run_terminal_command(
+        self,
+        command: str,
+        sudo: bool = False,
+        timeout: int | None = 30,
+        print_command: bool = None,
+        print_prompt: bool = None,
+        print_exit_code: bool = False,
+    ) -> NoReturn:
         """
         Runs the specified terminal command and passes output to
         class init specified on_output function.
@@ -223,10 +234,9 @@ class LocalBash(BashBase, Logged):
             if timeout == 30:
                 timeout = self._timeout
 
-            with pexpect.spawn(command="bash",
-                               encoding='utf-8',
-                               timeout=timeout,
-                               echo=False) as client:
+            with pexpect.spawn(
+                command="bash", encoding="utf-8", timeout=timeout, echo=False
+            ) as client:
                 # Assign values to the BashData object
                 # for access in on_output function
                 self._bash_data.command = command
@@ -238,10 +248,11 @@ class LocalBash(BashBase, Logged):
                 if print_prompt is not None:
                     self._bash_data.print_prompt = print_prompt
 
-                if self._bash_data.print_prompt \
-                        and self._output_writer.get_last_line() == "":
-                    self._output_writer.write_bypass(
-                        StringValue(self.get_prompt()))
+                if (
+                    self._bash_data.print_prompt
+                    and self._output_writer.get_last_line() == ""
+                ):
+                    self._output_writer.write_bypass(StringValue(self.get_prompt()))
 
                 if self._bash_data.print_command:
                     self._output_writer.write_bypass(StringValue(command))
@@ -270,14 +281,14 @@ class LocalBash(BashBase, Logged):
                 self._debug(f"Retrieving exit code from command '{command}'...")
                 exit_code = self._internal_run_local_command_string("echo $?", client)
 
-                exit_code = StringValue(exit_code)\
-                    .replace("\n", "").replace("\r", "").strip()
+                exit_code = (
+                    StringValue(exit_code).replace("\n", "").replace("\r", "").strip()
+                )
 
                 self._debug(f"Saving output of '{command}' to BashCommands...")
-                command_obj = BashCommand(command,
-                                          self.current_dir,
-                                          result,
-                                          exit_code.to_int())
+                command_obj = BashCommand(
+                    command, self.current_dir, result, exit_code.to_int()
+                )
                 self._commands.add_command(command_obj)
                 self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
                 self._debug(f"Output was:\n{self._commands.get_last().output}")
@@ -286,7 +297,7 @@ class LocalBash(BashBase, Logged):
                     self._output_writer.write(exit_code)
 
                 # Exits the bash
-                client.sendline('exit')
+                client.sendline("exit")
                 client.expect(pexpect.EOF)
 
                 self._debug(f"Running command '{command}' complete!")

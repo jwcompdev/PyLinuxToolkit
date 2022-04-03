@@ -26,8 +26,14 @@ from __future__ import annotations
 import _collections_abc
 import re
 from typing import (
-    SupportsInt, SupportsFloat, Iterator, Sequence,
-    SupportsIndex, Mapping, TYPE_CHECKING, Iterable
+    SupportsInt,
+    SupportsFloat,
+    Iterator,
+    Sequence,
+    SupportsIndex,
+    Mapping,
+    TYPE_CHECKING,
+    Iterable,
 )
 
 from pystdlib import Chars
@@ -38,9 +44,7 @@ from pystdlib.utils import check_argument_type
 from pystdlib.values.value import Value
 
 if TYPE_CHECKING:
-    from pystdlib.values import (
-        BooleanValue, IntegerValue, FloatValue
-    )
+    from pystdlib.values import BooleanValue, IntegerValue, FloatValue
 
 
 class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
@@ -105,8 +109,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
     def __getnewargs__(self) -> tuple[str]:
         return self._value.__getnewargs__()
 
-    def __eq__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __eq__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         """
         Returns True if the value is equal to the specified value,
         False otherwise.
@@ -116,13 +119,13 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise.
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(other, StringValue):
             return BooleanValue(self._value == other.get())
 
         return BooleanValue(self._value == other)
 
-    def __ne__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __ne__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         value, False otherwise.
@@ -133,53 +136,59 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         return self.__eq__(other).negate()
 
-    def __lt__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __lt__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(other, str):
             return BooleanValue(self._value < other)
         if isinstance(other, StringValue):
             return BooleanValue(self._value < other.get())
 
         type_name = type(other).__name__
-        raise TypeError("'<' not supported between "
-                        f"instances of 'StringValue' and '{type_name}'")
+        raise TypeError(
+            f"'<' not supported between instances of 'StringValue' and '{type_name}'"
+        )
 
-    def __le__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __le__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(other, str):
             return BooleanValue(self._value <= other)
         if isinstance(other, StringValue):
             return BooleanValue(self._value <= other.get())
 
         type_name = type(other).__name__
-        raise TypeError("'<=' not supported between "
-                        f"instances of 'StringValue' and '{type_name}'")
+        raise TypeError(
+            "'<=' not supported between "
+            f"instances of 'StringValue' and '{type_name}'"
+        )
 
-    def __gt__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __gt__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(other, str):
             return BooleanValue(self._value > other)
         if isinstance(other, StringValue):
             return BooleanValue(self._value > other.get())
 
         type_name = type(other).__name__
-        raise TypeError("'>' not supported between "
-                        f"instances of 'StringValue' and '{type_name}'")
+        raise TypeError(
+            f"'>' not supported between instances of 'StringValue' and '{type_name}'"
+        )
 
-    def __ge__(self, other: str | Sequence[str] | StringValue) \
-            -> BooleanValue:
+    def __ge__(self, other: str | Sequence[str] | StringValue) -> BooleanValue:
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(other, str):
             return BooleanValue(self._value >= other)
         if isinstance(other, StringValue):
             return BooleanValue(self._value >= other.get())
 
         type_name = type(other).__name__
-        raise TypeError("'>=' not supported between "
-                        f"instances of 'StringValue' and '{type_name}'")
+        raise TypeError(
+            "'>=' not supported between "
+            f"instances of 'StringValue' and '{type_name}'"
+        )
 
     # Must return bool
     def __contains__(self, other: str | StringValue) -> bool:
@@ -191,13 +200,16 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             return other.get() in self._value
 
         type_name = type(other).__name__
-        raise TypeError("'in <StringValue>' requires string or "
-                        "StringValue as left operand, not " + type_name)
+        raise TypeError(
+            "'in <StringValue>' requires string or "
+            "StringValue as left operand, not " + type_name
+        )
 
     # Must return str
     def __getitem__(self, key: int | IntegerValue | slice) -> str:
         """Return self[key]."""
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(key, IntegerValue):
             return str(self._value[key.get()])
 
@@ -208,12 +220,12 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """Return len(self)."""
         return len(self._value)
 
-    def __iadd__(self,
-                 other: (SupportsIntFloatStr | IntegerValue
-                         | FloatValue | StringValue)) \
-            -> StringValue:
+    def __iadd__(
+        self, other: (SupportsIntFloatStr | IntegerValue | FloatValue | StringValue)
+    ) -> StringValue:
         from pystdlib.values.integer_value import IntegerValue
         from pystdlib.values.float_value import FloatValue
+
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             self._value += str(other)
             return self
@@ -227,15 +239,17 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             return self
 
         type_name = type(other).__name__
-        raise TypeError("'can only concatenate str or "
-                        f"StringValue (not \"{type_name}\") to StringValue")
+        raise TypeError(
+            "'can only concatenate str or "
+            f'StringValue (not "{type_name}") to StringValue'
+        )
 
-    def __add__(self,
-                other: (SupportsIntFloatStr | IntegerValue
-                        | FloatValue | StringValue)) \
-            -> StringValue:
+    def __add__(
+        self, other: (SupportsIntFloatStr | IntegerValue | FloatValue | StringValue)
+    ) -> StringValue:
         from pystdlib.values.integer_value import IntegerValue
         from pystdlib.values.float_value import FloatValue
+
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(self._value + str(other))
 
@@ -246,15 +260,17 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             return StringValue(self._value + other.get())
 
         type_name = type(other).__name__
-        raise TypeError("'can only concatenate str or "
-                        f"StringValue (not \"{type_name}\") to StringValue")
+        raise TypeError(
+            "'can only concatenate str or "
+            f'StringValue (not "{type_name}") to StringValue'
+        )
 
-    def __radd__(self,
-                 other: (SupportsIntFloatStr | IntegerValue
-                         | FloatValue | StringValue)) \
-            -> StringValue:
+    def __radd__(
+        self, other: (SupportsIntFloatStr | IntegerValue | FloatValue | StringValue)
+    ) -> StringValue:
         from pystdlib.values.integer_value import IntegerValue
         from pystdlib.values.float_value import FloatValue
+
         if isinstance(other, (int, float, IntegerValue, FloatValue)):
             return StringValue(str(other) + self._value)
 
@@ -265,12 +281,14 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             return StringValue(other.get() + self._value)
 
         type_name = type(other).__name__
-        raise TypeError("'can only concatenate str or "
-                        f"StringValue (not \"{type_name}\") to StringValue")
+        raise TypeError(
+            "'can only concatenate str or "
+            f'StringValue (not "{type_name}") to StringValue'
+        )
 
-    def __isub__(self, other: int | str | IntegerValue | StringValue) \
-            -> StringValue:
+    def __isub__(self, other: int | str | IntegerValue | StringValue) -> StringValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, int):
             if other >= 0:
                 self._value = self._value[other:]
@@ -278,9 +296,9 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
                 self._value = self._value[:other]
         elif isinstance(other, IntegerValue):
             if other >= 0:
-                self._value = self._value[other.get():]
+                self._value = self._value[other.get() :]
             else:
-                self._value = self._value[:other.get()]
+                self._value = self._value[: other.get()]
         elif isinstance(other, str):
             self._value = self._value.replace(other, "")
         elif isinstance(other, StringValue):
@@ -289,10 +307,11 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             return NotImplemented
         return self
 
-    def __sub__(self,
-                other: int | str | IntegerValue | StringValue | re.Pattern) \
-            -> StringValue:
+    def __sub__(
+        self, other: int | str | IntegerValue | StringValue | re.Pattern
+    ) -> StringValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, int):
             if other >= 0:
                 return StringValue(self._value[other:])
@@ -301,9 +320,9 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
 
         if isinstance(other, IntegerValue):
             if other >= 0:
-                return StringValue(self._value[other.get():])
+                return StringValue(self._value[other.get() :])
 
-            return StringValue(self._value[:other.get()])
+            return StringValue(self._value[: other.get()])
 
         if isinstance(other, str):
             return StringValue(self._value.replace(other, ""))
@@ -316,8 +335,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
 
         return NotImplemented
 
-    def __rsub__(self, other: str | StringValue) \
-            -> StringValue:
+    def __rsub__(self, other: str | StringValue) -> StringValue:
         if isinstance(other, str):
             return StringValue(other.replace(self._value, ""))
 
@@ -326,33 +344,27 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
 
         return NotImplemented
 
-    def __imul__(self, other: SupportsIndex) \
-            -> StringValue:
+    def __imul__(self, other: SupportsIndex) -> StringValue:
         if isinstance(other, SupportsIndex):
             self._value *= other.__index__()
             return self
 
         type_name = type(other).__name__
-        raise TypeError("can't multiply sequence by non-int "
-                        f"of type '{type_name}'")
+        raise TypeError(f"can't multiply sequence by non-int of type '{type_name}'")
 
-    def __mul__(self, other: SupportsIndex) \
-            -> StringValue:
+    def __mul__(self, other: SupportsIndex) -> StringValue:
         if isinstance(other, SupportsIndex):
             return StringValue(self._value * other.__index__())
 
         type_name = type(other).__name__
-        raise TypeError("can't multiply sequence by non-int "
-                        f"of type '{type_name}'")
+        raise TypeError(f"can't multiply sequence by non-int of type '{type_name}'")
 
-    def __rmul__(self, other: SupportsIndex) \
-            -> StringValue:
+    def __rmul__(self, other: SupportsIndex) -> StringValue:
         if isinstance(other, SupportsIndex):
             return StringValue(self._value * other.__index__())
 
         type_name = type(other).__name__
-        raise TypeError("can't multiply sequence by non-int "
-                        f"of type '{type_name}'")
+        raise TypeError(f"can't multiply sequence by non-int of type '{type_name}'")
 
     def __mod__(self, args) -> StringValue:
         return StringValue(self._value % args)
@@ -402,8 +414,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         self._value = StringValue._verify_string(value)
         return self
 
-    def is_equal_to(
-            self, value: SupportsStringFull | StringValue) -> BooleanValue:
+    def is_equal_to(self, value: SupportsStringFull | StringValue) -> BooleanValue:
         """
         Returns True if the value is equal to the specified value,
         False otherwise.
@@ -413,13 +424,13 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise.
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(value, StringValue):
             return BooleanValue(self._value == value.get())
 
         return BooleanValue(self._value == value)
 
-    def is_not_equal_to(
-            self, value: SupportsStringFull | StringValue) -> BooleanValue:
+    def is_not_equal_to(self, value: SupportsStringFull | StringValue) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         value, False otherwise.
@@ -484,8 +495,9 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         self._value = self._value.casefold()
         return self
 
-    def center(self, width: SupportsIndex,
-               fill_char: str | StringValue = Chars.SPACE) -> StringValue:
+    def center(
+        self, width: SupportsIndex, fill_char: str | StringValue = Chars.SPACE
+    ) -> StringValue:
         """
         Make the value a centered string of length width.
 
@@ -502,9 +514,12 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             self._value = self._value.center(width, fill_char)
         return self
 
-    def count(self, sub: str | StringValue,
-              start: SupportsIndex | None = None,
-              end: SupportsIndex | None = None) -> IntegerValue:
+    def count(
+        self,
+        sub: str | StringValue,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Returns the number of non-overlapping occurrences of substring
         sub in string S[start:end].
@@ -519,13 +534,15 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             sub in string S[start:end]
         """
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(sub, StringValue):
             return IntegerValue(self._value.count(sub._value, start, end))
 
         return IntegerValue(self._value.count(sub, start, end))
 
-    def encode(self, encoding: str | StringValue = "utf-8", errors: str = "strict") \
-            -> bytes:
+    def encode(
+        self, encoding: str | StringValue = "utf-8", errors: str = "strict"
+    ) -> bytes:
         """
         Encode the string using the codec registered for encoding.
 
@@ -544,9 +561,12 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
 
         return self._value.encode(encoding, errors)
 
-    def endswith(self, suffix: str | StringValue | tuple[str],
-                 start: SupportsIndex | None = None,
-                 end: SupportsIndex | None = None) -> BooleanValue:
+    def endswith(
+        self,
+        suffix: str | StringValue | tuple[str],
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> BooleanValue:
         """
         Return True if the value ends with the specified suffix,
         False otherwise.
@@ -561,14 +581,15 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(suffix, StringValue):
             return BooleanValue(self._value.endswith(suffix.get(), start, end))
 
         return BooleanValue(self._value.endswith(suffix, start, end))
 
-    def expandtabs(self, tabsize: (str | StringValue
-                                   | SupportsIndex) = "8") \
-            -> StringValue:
+    def expandtabs(
+        self, tabsize: (str | StringValue | SupportsIndex) = "8"
+    ) -> StringValue:
         """
         Make all tab characters annotations in value expanded using
         spaces.
@@ -583,9 +604,12 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             self._value = self._value.expandtabs(tabsize)
         return self
 
-    def find(self, sub: str | StringValue,
-             start: SupportsIndex | None = None,
-             end: SupportsIndex | None = None) -> IntegerValue:
+    def find(
+        self,
+        sub: str | StringValue,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the lowest index in the value where substring sub is
         found, such that sub is contained within S[start:end].
@@ -601,6 +625,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             found
         """
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(sub, StringValue):
             return IntegerValue(self._value.find(sub.get(), start, end))
 
@@ -631,9 +656,12 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         self._value = self._value.format_map(mapping)
         return self
 
-    def index(self, sub: str | StringValue,
-              start: SupportsIndex | None = None,
-              end: SupportsIndex | None = None) -> IntegerValue:
+    def index(
+        self,
+        sub: str | StringValue,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the lowest index in value where substring sub is found,
         such that sub is contained within value[start:end].  Optional
@@ -649,6 +677,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :raises ValueError: when the substring is not found
         """
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(sub, StringValue):
             return IntegerValue(self._value.index(sub.get(), start, end))
 
@@ -666,6 +695,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isalnum())
 
     def isalpha(self) -> BooleanValue:
@@ -680,6 +710,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isalpha())
 
     def isascii(self) -> BooleanValue:
@@ -694,6 +725,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isascii())
 
     def isdecimal(self) -> BooleanValue:
@@ -708,6 +740,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isdecimal())
 
     def isdigit(self) -> BooleanValue:
@@ -722,6 +755,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isdigit())
 
     # noinspection SpellCheckingInspection
@@ -737,6 +771,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isidentifier())
 
     def islower(self) -> BooleanValue:
@@ -752,6 +787,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.islower())
 
     def isnumeric(self) -> BooleanValue:
@@ -766,6 +802,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isnumeric())
 
     # noinspection SpellCheckingInspection
@@ -780,6 +817,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isprintable())
 
     def isspace(self) -> BooleanValue:
@@ -794,6 +832,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isspace())
 
     def istitle(self) -> BooleanValue:
@@ -809,6 +848,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.istitle())
 
     def isupper(self) -> BooleanValue:
@@ -824,6 +864,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.isupper())
 
     def join(self, *args: Iterable[str]) -> StringValue:
@@ -842,8 +883,9 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         return self
 
     # noinspection SpellCheckingInspection
-    def ljust(self, width: SupportsIndex,
-              fill_char: str | StringValue = Chars.SPACE) -> StringValue:
+    def ljust(
+        self, width: SupportsIndex, fill_char: str | StringValue = Chars.SPACE
+    ) -> StringValue:
         """
         Return a left-justified string of length width.
 
@@ -945,9 +987,9 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             self._value = self._value.removesuffix(suffix)
         return self
 
-    def replace(self, old: str | StringValue,
-                new: str | StringValue,
-                count: SupportsIndex = -1) -> StringValue:
+    def replace(
+        self, old: str | StringValue, new: str | StringValue, count: SupportsIndex = -1
+    ) -> StringValue:
         """
         Return a copy with all occurrences of substring old replaced
         by new.
@@ -968,9 +1010,12 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         self._value = self._value.replace(old, new, count)
         return self
 
-    def rfind(self, sub: str | StringValue,
-              start: SupportsIndex | None = None,
-              end: SupportsIndex | None = None) -> IntegerValue:
+    def rfind(
+        self,
+        sub: str | StringValue,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the highest index in the value where substring sub is
         found, such that sub is contained within S[start:end]. Optional
@@ -985,15 +1030,19 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             found
         """
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(sub, StringValue):
             return IntegerValue(self._value.rfind(sub.get(), start, end))
 
         return IntegerValue(self._value.rfind(sub, start, end))
 
     # noinspection SpellCheckingInspection
-    def rindex(self, sub: str | StringValue,
-               start: SupportsIndex | None = None,
-               end: SupportsIndex | None = None) -> IntegerValue:
+    def rindex(
+        self,
+        sub: str | StringValue,
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> IntegerValue:
         """
         Return the highest index in the value where substring sub is
         found, such that sub is contained within S[start:end]. Optional
@@ -1009,14 +1058,16 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :raises ValueError: when the substring is not found
         """
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(sub, StringValue):
             return IntegerValue(self._value.rindex(sub.get(), start, end))
 
         return IntegerValue(self._value.rindex(sub, start, end))
 
     # noinspection SpellCheckingInspection
-    def rjust(self, width: SupportsIndex,
-              fill_char: str | StringValue = Chars.SPACE) -> StringValue:
+    def rjust(
+        self, width: SupportsIndex, fill_char: str | StringValue = Chars.SPACE
+    ) -> StringValue:
         """
         Return a right-justified string of length width.
 
@@ -1054,8 +1105,9 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
 
         return self._value.rpartition(sep)
 
-    def rsplit(self, sep: str | StringValue = None,
-               max_split: int = -1) -> list[StringValue]:
+    def rsplit(
+        self, sep: str | StringValue = None, max_split: int = -1
+    ) -> list[StringValue]:
         """
         Return a list of the words in the string, using sep as the
         delimiter string.
@@ -1102,8 +1154,9 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             self._value = self._value.rstrip(chars)
         return self
 
-    def split(self, sep: str | StringValue = None,
-              max_split: int = -1) -> list[StringValue]:
+    def split(
+        self, sep: str | StringValue = None, max_split: int = -1
+    ) -> list[StringValue]:
         """
         Return a list of the words in the string, using sep as the
         delimiter string.
@@ -1145,10 +1198,12 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         """
         return self._value.splitlines(keep_ends)
 
-    def startswith(self, prefix: str | StringValue | tuple[str],
-                   start: SupportsIndex | None = None,
-                   end: SupportsIndex | None = None) \
-            -> BooleanValue:
+    def startswith(
+        self,
+        prefix: str | StringValue | tuple[str],
+        start: SupportsIndex | None = None,
+        end: SupportsIndex | None = None,
+    ) -> BooleanValue:
         """
         Return True if S starts with the specified prefix,
         False otherwise.
@@ -1163,6 +1218,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
             False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         if isinstance(prefix, StringValue):
             return BooleanValue(self._value.startswith(prefix.get(), start, end))
 
@@ -1258,11 +1314,13 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
 
         :return: this instance for use in method chaining
         """
-        self._value = Patterns.ANSI_BASIC_ESCAPE.sub("", self._value) \
-            .replace("\x1b7", "") \
-            .replace("\x1b7r", "") \
-            .replace("\x1b8", "") \
+        self._value = (
+            Patterns.ANSI_BASIC_ESCAPE.sub("", self._value)
+            .replace("\x1b7", "")
+            .replace("\x1b7r", "")
+            .replace("\x1b8", "")
             .replace("\x1b8r", "")
+        )
 
         return self
 
@@ -1293,8 +1351,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         if isinstance(wrap_char, StringValue):
             wrap_char = wrap_char.get()
 
-        if wrap_char and self._value[0] == wrap_char \
-                and self._value[-1] == wrap_char:
+        if wrap_char and self._value[0] == wrap_char and self._value[-1] == wrap_char:
             self._value = self._value[1:-1]
 
         return self
@@ -1312,15 +1369,30 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
                     false if it does not match or is None or empty
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         if not input or input is None:
             return BooleanValue(False)
 
         val = self._value.lower().strip()
 
-        result = val in ("true", "t", "yes", "y", "1",
-                         "succeeded", "succeed", "enabled",
-                         "false", "f", "no", "n", "0",
-                         "failed", "fail", "disabled")
+        result = val in (
+            "true",
+            "t",
+            "yes",
+            "y",
+            "1",
+            "succeeded",
+            "succeed",
+            "enabled",
+            "false",
+            "f",
+            "no",
+            "n",
+            "0",
+            "failed",
+            "fail",
+            "disabled",
+        )
 
         return BooleanValue(result)
 
@@ -1340,14 +1412,31 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
                     None is returned if a match is not found
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         if self._value and self._value is not None:
             val = str(self._value).lower().strip()
 
-            is_true = val in ("true", "t", "yes", "y", "1",
-                              "succeeded", "succeed", "enabled")
+            is_true = val in (
+                "true",
+                "t",
+                "yes",
+                "y",
+                "1",
+                "succeeded",
+                "succeed",
+                "enabled",
+            )
 
-            is_false = val in ("false", "f", "no", "n", "0",
-                               "failed", "fail", "disabled")
+            is_false = val in (
+                "false",
+                "f",
+                "no",
+                "n",
+                "0",
+                "failed",
+                "fail",
+                "disabled",
+            )
 
             if is_true:
                 return BooleanValue(True)
@@ -1363,6 +1452,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return the value converted to an IntegerValue
         """
         from pystdlib.values.integer_value import IntegerValue
+
         return IntegerValue(self._value)
 
     def to_float(self) -> FloatValue:
@@ -1372,6 +1462,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return the value converted to a FloatValue
         """
         from pystdlib.values.float_value import FloatValue
+
         return FloatValue(self._value)
 
     def parse_int(self, default: int | IntegerValue = None) -> IntegerValue:
@@ -1385,6 +1476,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :raises ValueError: if parse failed and default is None
         """
         from pystdlib.values.integer_value import IntegerValue
+
         check_argument_type(default, "default", (int, IntegerValue))
 
         try:
@@ -1406,6 +1498,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :raises ValueError: if parse failed and default is None
         """
         from pystdlib.values.float_value import FloatValue
+
         check_argument_type(default, "default", (float, FloatValue))
 
         try:
@@ -1423,6 +1516,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: True if the value is empty
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue("".__eq__(self._value))
 
     def is_not_empty(self) -> BooleanValue:
@@ -1432,6 +1526,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: True if the value is not empty
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(not "".__eq__(self._value))
 
     def is_blank(self) -> BooleanValue:
@@ -1441,6 +1536,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: True if the value is whitespace or empty
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         try:
             return BooleanValue("".__eq__(self._value.strip()))
         except AttributeError:
@@ -1453,6 +1549,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: True if the value is not whitespace or empty
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         try:
             return BooleanValue(not "".__eq__(self._value.strip()))
         except AttributeError:
@@ -1465,6 +1562,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: True if the value is whitespace, empty or None
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         try:
             return BooleanValue("".__eq__(self._value.strip()))
         except AttributeError:
@@ -1477,6 +1575,7 @@ class StringValue(Value, _collections_abc.Sequence, SupportsInt, SupportsFloat):
         :return: True if the value is not whitespace, empty or None
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         try:
             return BooleanValue("".__eq__(self._value.strip()))
         except AttributeError:

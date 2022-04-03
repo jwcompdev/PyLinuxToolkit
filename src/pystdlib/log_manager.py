@@ -209,7 +209,7 @@ class LogManager:
 
         :return: the default formatter for this project
         """
-        return logging.Formatter('[%(levelname)-8s] %(name)s - %(message)s')
+        return logging.Formatter("[%(levelname)-8s] %(name)s - %(message)s")
 
     @classmethod
     def get_logger(cls, name: str = None) -> logging.Logger:

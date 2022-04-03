@@ -27,13 +27,21 @@ import builtins
 import inspect
 import typing
 from collections import (
-    deque, defaultdict, OrderedDict, UserDict, ChainMap, Counter, UserList
+    deque,
+    defaultdict,
+    OrderedDict,
+    UserDict,
+    ChainMap,
+    Counter,
+    UserList,
 )
 
 from inspect import Parameter
 
 from introspection.typing import (
-    get_generic_base_class, is_generic_base_class, is_parameterized_generic
+    get_generic_base_class,
+    is_generic_base_class,
+    is_parameterized_generic,
 )
 
 
@@ -49,8 +57,9 @@ class Final(type):
     def __new__(cls, name, bases, classdict):
         for base in bases:
             if isinstance(base, Final):
-                raise TypeError(f"type '{base.__name__}' "
-                                "is not an acceptable base type")
+                raise TypeError(
+                    f"type '{base.__name__}' is not an acceptable base type"
+                )
         return type.__new__(cls, name, bases, dict(classdict))
 
 
@@ -60,8 +69,11 @@ NoneType = type(None)
 def _get_subtypes(cls):
     subtypes = cls.__args__
 
-    if get_generic_base_class(cls) is typing.Callable \
-            and len(subtypes) != 2 or subtypes[0] is not ...:
+    if (
+        get_generic_base_class(cls) is typing.Callable
+        and len(subtypes) != 2
+        or subtypes[0] is not ...
+    ):
         subtypes = (subtypes[:-1], subtypes[-1])
 
     return subtypes
@@ -97,7 +109,7 @@ def _is_callable(value, type_):
                 return False
 
     if sig.return_annotation is Parameter.empty:
-        missing_annotations.append('return')
+        missing_annotations.append("return")
     else:
         if not is_subclass(sig.return_annotation, ret_type):
             return False
@@ -110,25 +122,50 @@ def _is_callable(value, type_):
 
 def _is_origin_type(base, value, type_):
     iterables = [
-        typing.Container, typing.Collection, typing.AbstractSet,
-        typing.MutableSet, typing.Sequence, typing.MutableSequence,
-        typing.ByteString, typing.Deque, typing.List, typing.Set,
-        typing.FrozenSet, typing.KeysView, typing.ValuesView,
-        typing.AsyncIterable, set, list, deque, UserList
+        typing.Container,
+        typing.Collection,
+        typing.AbstractSet,
+        typing.MutableSet,
+        typing.Sequence,
+        typing.MutableSequence,
+        typing.ByteString,
+        typing.Deque,
+        typing.List,
+        typing.Set,
+        typing.FrozenSet,
+        typing.KeysView,
+        typing.ValuesView,
+        typing.AsyncIterable,
+        set,
+        list,
+        deque,
+        UserList,
     ]
 
     mappings = [
-        typing.Mapping, typing.MutableMapping, typing.MappingView,
-        typing.Dict, typing.DefaultDict, typing.Counter, typing.ChainMap,
-        dict, defaultdict, OrderedDict, UserDict, ChainMap, Counter
+        typing.Mapping,
+        typing.MutableMapping,
+        typing.MappingView,
+        typing.Dict,
+        typing.DefaultDict,
+        typing.Counter,
+        typing.ChainMap,
+        dict,
+        defaultdict,
+        OrderedDict,
+        UserDict,
+        ChainMap,
+        Counter,
     ]
 
     if base in iterables:
         type_args = _get_subtypes(type_)
 
         if len(type_args) != 1:
-            raise TypeError("Generic iterables must have "
-                            f"exactly 1 type argument; found {type_args}")
+            raise TypeError(
+                "Generic iterables must have "
+                f"exactly 1 type argument; found {type_args}"
+            )
 
         type_ = type_args[0]
         return all(is_instance(val, type_) for val in value)
@@ -141,21 +178,23 @@ def _is_origin_type(base, value, type_):
 
         type_args = _get_subtypes(type_)
         if len(type_args) != 2:
-            raise TypeError("Generic mappings must have "
-                            f"exactly 2 type arguments; found {type_args}")
+            raise TypeError(
+                "Generic mappings must have "
+                f"exactly 2 type arguments; found {type_args}"
+            )
 
         key_type, value_type = type_args
-        return all(is_instance(key, key_type)
-                   and is_instance(val, value_type)
-                   for key, val in view)
+        return all(
+            is_instance(key, key_type) and is_instance(val, value_type)
+            for key, val in view
+        )
 
     if base in (typing.Tuple, tuple):
         type_args = _get_subtypes(type_)
         if len(value) != len(type_args):
             return False
 
-        return all(is_instance(val, type_)
-                   for val, type_ in zip(value, type_args))
+        return all(is_instance(val, type_) for val, type_ in zip(value, type_args))
 
     raise NotImplementedError(f"Cannot perform isinstance check for type {type_}")
 
@@ -178,8 +217,9 @@ def _is_special_instance(base, value, type_):
 
         type_args = _get_subtypes(type_)
         if len(type_args) != 1:
-            raise TypeError("Type must have exactly 1 type"
-                            f" argument; found {type_args}")
+            raise TypeError(
+                f"Type must have exactly 1 type argument; found {type_args}"
+            )
 
         # noinspection PyTypeChecker
         return is_subclass(value, type_args[0])
@@ -221,10 +261,10 @@ def to_python_type(annotation):
     if typing.Type in mro:
         return annotation.python_type
 
-    if annotation.__module__ == 'typing':
+    if annotation.__module__ == "typing":
         return annotation.__origin__
 
-    if '[' in str(annotation) and ']' in str(annotation):
+    if "[" in str(annotation) and "]" in str(annotation):
         return get_type_from_name(annotation.__name__)
 
     return annotation
@@ -277,9 +317,7 @@ def is_instance_namedtuple(obj) -> bool:
     :return: True if the object is an instance of 'namedtuple'
     """
     return (
-            isinstance(obj, tuple) and
-            hasattr(obj, '_asdict') and
-            hasattr(obj, '_fields')
+        isinstance(obj, tuple) and hasattr(obj, "_asdict") and hasattr(obj, "_fields")
     )
 
 
@@ -294,9 +332,10 @@ def is_instance(obj, type_):
     :param type_: the expected type of the object
     :return: True if the type matches
     """
-    if type_.__module__ == 'typing':
-        base_generic = get_generic_base_class(type_) \
-            if is_parameterized_generic(type_) else type_
+    if type_.__module__ == "typing":
+        base_generic = (
+            get_generic_base_class(type_) if is_parameterized_generic(type_) else type_
+        )
 
         result = _is_special_instance(base_generic, obj, type_)
         if result:
@@ -347,8 +386,7 @@ def is_subclass(sub_type, super_type):
     # At this point we know that `sub_type`'s base type is a subtype of \
     # `super_type`'s base type.
     # If `super_type` isn't qualified, then there's nothing more to do.
-    if not is_generic(super_type) \
-            or is_generic_base_class(super_type):
+    if not is_generic(super_type) or is_generic_base_class(super_type):
         return True
 
     # At this point we know that `super_type` is a qualified generic... \
@@ -360,6 +398,7 @@ def is_subclass(sub_type, super_type):
     # so we just have to compare their subtypes.
     sub_args = _get_subtypes(sub_type)
     super_args = _get_subtypes(super_type)
-    return all(is_subclass(sub_arg, super_arg)
-               for sub_arg, super_arg
-               in zip(sub_args, super_args))
+    return all(
+        is_subclass(sub_arg, super_arg)
+        for sub_arg, super_arg in zip(sub_args, super_args)
+    )

@@ -284,9 +284,14 @@ class SSHConfig(BaseConfig):
         # noinspection PyTypeChecker
         self._login_ssh_key: StrOrBytesPath = None
 
-    def set_login_info(self, hostname: str, username: str,
-                       password: str = None, port: int = 22,
-                       ssh_key: StrOrBytesPath = None):
+    def set_login_info(
+        self,
+        hostname: str,
+        username: str,
+        password: str = None,
+        port: int = 22,
+        ssh_key: StrOrBytesPath = None,
+    ):
         """
         Sets the required login info for the ssh connection.
 
@@ -302,17 +307,22 @@ class SSHConfig(BaseConfig):
         self._login_password: str = password
         self._login_port: int = port
         self._login_ssh_key: StrOrBytesPath = ssh_key
-        self.parent.bash.set_ssh_login_info(self._login_hostname,
-                                            self._login_username,
-                                            self._login_password,
-                                            self._login_port,
-                                            self._login_ssh_key)
+        self.parent.bash.set_ssh_login_info(
+            self._login_hostname,
+            self._login_username,
+            self._login_password,
+            self._login_port,
+            self._login_ssh_key,
+        )
 
-    def connect(self, ssh_login_timeout: int = 10,
-                print_prompt: bool = False,
-                print_ssh_connection_msgs: bool = False,
-                print_ssh_login_success: bool = False,
-                print_ssh_mod: bool = False):
+    def connect(
+        self,
+        ssh_login_timeout: int = 10,
+        print_prompt: bool = False,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+        print_ssh_mod: bool = False,
+    ):
         """
         Connects to the ssh client and keeps the connection open.
 
@@ -325,11 +335,13 @@ class SSHConfig(BaseConfig):
         :param print_ssh_mod: if true prints the server's
             mod(Message of the Day) on login
         """
-        self.parent.bash.ssh_connect(ssh_login_timeout,
-                                     print_prompt,
-                                     print_ssh_connection_msgs,
-                                     print_ssh_login_success,
-                                     print_ssh_mod)
+        self.parent.bash.ssh_connect(
+            ssh_login_timeout,
+            print_prompt,
+            print_ssh_connection_msgs,
+            print_ssh_login_success,
+            print_ssh_mod,
+        )
 
 
 class SystemConfig(BaseConfig):

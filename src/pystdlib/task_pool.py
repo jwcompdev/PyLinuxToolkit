@@ -57,10 +57,13 @@ class TaskPool(Logged, metaclass=Final):
     # noinspection PyMethodParameters
     @staticmethod
     @decorator
-    def decide_class_task(method=None, pool_name: str = "task_pool",
-                          threaded: bool | BooleanValue | str | StringValue = True,
-                          *args, **kwargs) \
-            -> NoReturn:
+    def decide_class_task(
+        method=None,
+        pool_name: str = "task_pool",
+        threaded: bool | BooleanValue | str | StringValue = True,
+        *args,
+        **kwargs,
+    ) -> NoReturn:
         """
         Decorator that creates a task each time
         the decorated function is called.
@@ -94,18 +97,24 @@ class TaskPool(Logged, metaclass=Final):
                 threaded_func = getattr(args[0], threaded_name.lstrip("self."))
             except AttributeError as ex:
                 if "object has no attribute '" + threaded_name + "'" in str(ex):
-                    ex.args = ("Function by the name '" + threaded_name
-                               + "' specified to return the threaded"
-                               + " value not found in the '"
-                               + type(threaded_name).__name__ + "' class!",)
+                    ex.args = (
+                        "Function by the name '"
+                        + threaded_name
+                        + "' specified to return the threaded"
+                        + " value not found in the '"
+                        + type(threaded_name).__name__
+                        + "' class!",
+                    )
                 raise
             if callable(threaded_func):
                 final_condition = bool(threaded_func())
             else:
                 raise TypeError(
-                    "Specified method by the name '" + threaded
+                    "Specified method by the name '"
+                    + threaded
                     + "' is not callable! (Type is: '"
-                    + type(threaded).__name__ + "')"
+                    + type(threaded).__name__
+                    + "')"
                 )
         else:
             final_condition = bool(threaded)
@@ -114,13 +123,13 @@ class TaskPool(Logged, metaclass=Final):
         args = args[1:]
 
         TaskPool._internal_class_method_wrapper(
-            local_self, pool_name, final_condition, method, *args, **kwargs)
+            local_self, pool_name, final_condition, method, *args, **kwargs
+        )
 
     # noinspection PyMethodParameters
     @staticmethod
     @decorator
-    def threaded_class_task(method=None, pool_name: str = "task_pool",
-                            *args, **kwargs):
+    def threaded_class_task(method=None, pool_name: str = "task_pool", *args, **kwargs):
         """
         Decorator that creates a threaded task each time
         the decorated class method is called.
@@ -135,18 +144,16 @@ class TaskPool(Logged, metaclass=Final):
         local_self = args[0]
         args = args[1:]
 
-        TaskPool._internal_class_method_wrapper(local_self,
-                                                pool_name,
-                                                True,
-                                                method,
-                                                *args,
-                                                **kwargs)
+        TaskPool._internal_class_method_wrapper(
+            local_self, pool_name, True, method, *args, **kwargs
+        )
 
     # noinspection PyMethodParameters
     @staticmethod
     @decorator
-    def non_threaded_class_task(method=None, pool_name: str = "task_pool",
-                                *args, **kwargs):
+    def non_threaded_class_task(
+        method=None, pool_name: str = "task_pool", *args, **kwargs
+    ):
         """
         Decorator that creates a non-threaded task each time
         the decorated class method is called.
@@ -161,12 +168,9 @@ class TaskPool(Logged, metaclass=Final):
         local_self = args[0]
         args = args[1:]
 
-        TaskPool._internal_class_method_wrapper(local_self,
-                                                pool_name,
-                                                False,
-                                                method,
-                                                *args,
-                                                **kwargs)
+        TaskPool._internal_class_method_wrapper(
+            local_self, pool_name, False, method, *args, **kwargs
+        )
 
     def threaded_task(self, func) -> NoReturn:
         """
@@ -240,9 +244,11 @@ class TaskPool(Logged, metaclass=Final):
         return self.running_thread == task_id
 
     def _threaded(self, func, *args, **kwargs) -> NoReturn:
-        thread = Thread(target=self._base_task, args=(
-            self._get_next_id(), func, *args
-        ), kwargs=kwargs)
+        thread = Thread(
+            target=self._base_task,
+            args=(self._get_next_id(), func, *args),
+            kwargs=kwargs,
+        )
         thread.start()
         self.current_thread_id += 1
 
@@ -251,25 +257,29 @@ class TaskPool(Logged, metaclass=Final):
         self.current_thread_id += 1
 
     def _base_task(self, task_id: int, func, *args, **kwargs) -> NoReturn:
-        self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
-                    "Starting...")
+        self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] Starting...")
 
         if not self._is_task_ready(task_id):
-            self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
-                        "Waiting In Queue...")
+            self._debug(
+                f"Task [{self.caller_class_name}:{str(task_id)}] Waiting In Queue..."
+            )
 
         while not self._is_task_ready(task_id):
             sleep(0.001)
 
         func_wpr = Func(func)
 
-        self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
-                    f"Calling '{func_wpr.full_name}'...")
+        self._debug(
+            f"Task [{self.caller_class_name}:{str(task_id)}] "
+            f"Calling '{func_wpr.full_name}'..."
+        )
 
         func(*args, **kwargs)
 
-        self._debug(f"Task [{self.caller_class_name}:{str(task_id)}] "
-                    f"Calling '{func_wpr.full_name}' Complete!")
+        self._debug(
+            f"Task [{self.caller_class_name}:{str(task_id)}] "
+            f"Calling '{func_wpr.full_name}' Complete!"
+        )
 
         sleep(0.1)
 
@@ -277,12 +287,9 @@ class TaskPool(Logged, metaclass=Final):
         self.running_thread += 1
 
     @staticmethod
-    def _internal_class_method_wrapper(local_self,
-                                       pool_name: str,
-                                       threaded: bool,
-                                       func,
-                                       *args,
-                                       **kwargs) -> NoReturn:
+    def _internal_class_method_wrapper(
+        local_self, pool_name: str, threaded: bool, func, *args, **kwargs
+    ) -> NoReturn:
         if isinstance(pool_name, str):
             try:
                 pool: TaskPool = getattr(local_self, pool_name.lstrip("self."))
@@ -292,14 +299,21 @@ class TaskPool(Logged, metaclass=Final):
                     else:
                         dec_func = pool.non_threaded_task
                 else:
-                    raise ValueError("Specified variable by the name '" + pool_name
-                                     + "' is not a TaskPool object!")
+                    raise ValueError(
+                        "Specified variable by the name '"
+                        + pool_name
+                        + "' is not a TaskPool object!"
+                    )
                 return dec_func(func)(local_self, *args, **kwargs)
             except AttributeError as ex:
                 if "object has no attribute '" + pool_name + "'" in str(ex):
-                    ex.args = ("TaskPool instance variable by the name '" + pool_name
-                               + "' not found in the '"
-                               + type(local_self).__name__ + "' class!",)
+                    ex.args = (
+                        "TaskPool instance variable by the name '"
+                        + pool_name
+                        + "' not found in the '"
+                        + type(local_self).__name__
+                        + "' class!",
+                    )
                 raise
         else:
             raise ValueError("pool_name must be a string!")

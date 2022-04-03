@@ -43,8 +43,12 @@ class PiCommandsEvent:
 
         self._on_command = None
 
-    def on_command(self, namespace: Namespace,
-                   handler: Callable[[BashCommand], Any] = None, ttl: int = -1):
+    def on_command(
+        self,
+        namespace: Namespace,
+        handler: Callable[[BashCommand], Any] = None,
+        ttl: int = -1,
+    ):
         """
         Registers a function to the 'new_handler' event.
 

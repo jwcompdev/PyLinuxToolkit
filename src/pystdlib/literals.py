@@ -182,7 +182,7 @@ class Chars:
 
         :return: the double quote character (")
         """
-        return "\""
+        return '"'
 
     @classmethod
     @property
@@ -223,7 +223,7 @@ class Chars:
 
         :return: an empty set of double quotes ("")
         """
-        return "\"\""
+        return '""'
 
     @classmethod
     @property

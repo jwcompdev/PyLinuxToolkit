@@ -23,19 +23,14 @@ mutable access to a float value.
 """
 from __future__ import annotations
 
-from typing import (
-    SupportsFloat, SupportsIndex, SupportsInt,
-    Optional, TYPE_CHECKING
-)
+from typing import SupportsFloat, SupportsIndex, SupportsInt, Optional, TYPE_CHECKING
 
 from pystdlib.protocols import SupportsFloatFull
 from pystdlib.str_utils import build_repr
 from pystdlib.values.number_value import NumberValue
 
 if TYPE_CHECKING:
-    from pystdlib.values import (
-        IntegerValue, BooleanValue, StringValue
-    )
+    from pystdlib.values import IntegerValue, BooleanValue, StringValue
 
 
 class FloatValue(NumberValue):
@@ -45,12 +40,14 @@ class FloatValue(NumberValue):
         self._value: float = self._verify_float(number)
 
     @staticmethod
-    def _verify_float(number: SupportsFloatFull | StringValue) \
-            -> float:
+    def _verify_float(number: SupportsFloatFull | StringValue) -> float:
         from pystdlib.values.string_value import StringValue
+
         if number is None:
-            raise TypeError("FloatValue() argument must be a string, "
-                            "a bytes-like object or a number, not 'NoneType'")
+            raise TypeError(
+                "FloatValue() argument must be a string, "
+                "a bytes-like object or a number, not 'NoneType'"
+            )
 
         if isinstance(number, (str, bytes, bytearray)):
             try:
@@ -77,9 +74,11 @@ class FloatValue(NumberValue):
         elif isinstance(number, SupportsInt):
             return FloatValue._verify_float(number.__int__())
         else:
-            raise TypeError("FloatValue() argument must be a string, "
-                            "a bytes-like object or a number,"
-                            f" not '{type(number).__name__}'")
+            raise TypeError(
+                "FloatValue() argument must be a string, "
+                "a bytes-like object or a number,"
+                f" not '{type(number).__name__}'"
+            )
         return value
 
     ########################################
@@ -105,12 +104,10 @@ class FloatValue(NumberValue):
     def __getnewargs__(self) -> tuple[float]:
         return self._value.__getnewargs__()
 
-    def __eq__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __eq__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_equal_to(other)
 
-    def __ne__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ne__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_not_equal_to(other)
 
     __hash__ = None
@@ -147,15 +144,17 @@ class FloatValue(NumberValue):
 
     def __floor__(self) -> IntegerValue:
         from pystdlib.values.integer_value import IntegerValue
+
         return IntegerValue(self._value.__floor__())
 
     def __ceil__(self) -> IntegerValue:
         from pystdlib.values.integer_value import IntegerValue
+
         return IntegerValue(self._value.__ceil__())
 
-    def __iadd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __iadd__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             self._value += other
             return self
@@ -166,9 +165,11 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __add__(self, other: int | float | IntegerValue | FloatValue) \
-            -> IntegerValue | FloatValue:
+    def __add__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> IntegerValue | FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value + other)
 
@@ -177,9 +178,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __radd__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __radd__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(other + self._value)
 
@@ -188,9 +189,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __isub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __isub__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             self._value -= other
             return self
@@ -201,9 +202,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __sub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __sub__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value - other)
 
@@ -212,9 +213,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rsub__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rsub__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(other - self._value)
 
@@ -223,9 +224,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __imul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __imul__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             self._value *= other
             return self
@@ -236,9 +237,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __mul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __mul__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value * other)
 
@@ -247,9 +248,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rmul__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rmul__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(other * self._value)
 
@@ -259,9 +260,11 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __itruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __itruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             self._value /= other
             return self
@@ -272,9 +275,9 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __truediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __truediv__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value / other)
 
@@ -283,9 +286,11 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rtruediv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rtruediv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(other / self._value)
 
@@ -295,9 +300,11 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __ifloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __ifloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -306,9 +313,11 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __floordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __floordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -317,9 +326,11 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rfloordiv__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __rfloordiv__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value // other)
 
@@ -329,24 +340,27 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __ipow__(self, other: int | float | IntegerValue | FloatValue) \
-            -> FloatValue:
+    def __ipow__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
-            return FloatValue(self._value ** other)
+            return FloatValue(self._value**other)
 
         if isinstance(other, (IntegerValue, FloatValue)):
             return FloatValue(self._value ** other.get())
 
         return NotImplemented
 
-    def __pow__(self, other: int | float | IntegerValue | FloatValue,
-                modulo: Optional[float | FloatValue] = None) \
-            -> FloatValue:
+    def __pow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[float | FloatValue] = None,
+    ) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if modulo is None:
             if isinstance(other, (int, float)):
-                return FloatValue(self._value ** other)
+                return FloatValue(self._value**other)
 
             if isinstance(other, (IntegerValue, FloatValue)):
                 return FloatValue(self._value ** other.get())
@@ -359,21 +373,28 @@ class FloatValue(NumberValue):
         is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
         # TODO: replace with less conditions
-        if (is_mod_int and is_other_int) \
-                or (is_mod_int and is_other_float) \
-                or (is_mod_float and is_other_int):
-            raise TypeError("TypeError: pow() 3rd argument not allowed "
-                            "unless all arguments are integers")
+        if (
+            (is_mod_int and is_other_int)
+            or (is_mod_int and is_other_float)
+            or (is_mod_float and is_other_int)
+        ):
+            raise TypeError(
+                "TypeError: pow() 3rd argument not allowed "
+                "unless all arguments are integers"
+            )
 
         return NotImplemented
 
-    def __rpow__(self, other: int | float | IntegerValue | FloatValue,
-                 modulo: Optional[float | FloatValue] = None) \
-            -> FloatValue:
+    def __rpow__(
+        self,
+        other: int | float | IntegerValue | FloatValue,
+        modulo: Optional[float | FloatValue] = None,
+    ) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if modulo is None:
             if isinstance(other, (int, float)):
-                return FloatValue(other ** self._value)
+                return FloatValue(other**self._value)
 
             if isinstance(other, (IntegerValue, FloatValue)):
                 return FloatValue(other.get() ** self._value)
@@ -386,16 +407,21 @@ class FloatValue(NumberValue):
         is_mod_float = modulo is float or isinstance(modulo, FloatValue)
 
         # TODO: replace with less conditions
-        if (is_mod_int and is_other_int) \
-                or (is_mod_int and is_other_float) \
-                or (is_mod_float and is_other_int):
-            raise TypeError("TypeError: pow() 3rd argument not allowed "
-                            "unless all arguments are integers")
+        if (
+            (is_mod_int and is_other_int)
+            or (is_mod_int and is_other_float)
+            or (is_mod_float and is_other_int)
+        ):
+            raise TypeError(
+                "TypeError: pow() 3rd argument not allowed "
+                "unless all arguments are integers"
+            )
 
         return NotImplemented
 
     def __imod__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             self._value %= other
             return self
@@ -408,6 +434,7 @@ class FloatValue(NumberValue):
 
     def __mod__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(self._value % other)
 
@@ -418,6 +445,7 @@ class FloatValue(NumberValue):
 
     def __rmod__(self, other: int | float | IntegerValue | FloatValue) -> FloatValue:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             return FloatValue(other % self._value)
 
@@ -427,9 +455,11 @@ class FloatValue(NumberValue):
         return NotImplemented
 
     # noinspection SpellCheckingInspection
-    def __divmod__(self, other: int | float | IntegerValue | FloatValue) \
-            -> tuple[FloatValue, FloatValue]:
+    def __divmod__(
+        self, other: int | float | IntegerValue | FloatValue
+    ) -> tuple[FloatValue, FloatValue]:
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(other, (int, float)):
             var1, var2 = self._value.__divmod__(other)
             return FloatValue(var1), FloatValue(var2)
@@ -440,8 +470,7 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __rdivmod__(self, other: float | FloatValue) \
-            -> tuple[FloatValue, FloatValue]:
+    def __rdivmod__(self, other: float | FloatValue) -> tuple[FloatValue, FloatValue]:
         if isinstance(other, float):
             var1, var2 = other.__divmod__(self._value)
             return FloatValue(var1), FloatValue(var2)
@@ -452,20 +481,16 @@ class FloatValue(NumberValue):
 
         return NotImplemented
 
-    def __lt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __lt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than(other)
 
-    def __le__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __le__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_less_than_or_equal_to(other)
 
-    def __gt__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __gt__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than(other)
 
-    def __ge__(self, other: int | float | IntegerValue | FloatValue) \
-            -> BooleanValue:
+    def __ge__(self, other: int | float | IntegerValue | FloatValue) -> BooleanValue:
         return self.is_greater_than_or_equal_to(other)
 
     ########################################
@@ -491,8 +516,7 @@ class FloatValue(NumberValue):
         """
         return self._value
 
-    def set(self, value: SupportsFloatFull | StringValue) \
-            -> FloatValue:
+    def set(self, value: SupportsFloatFull | StringValue) -> FloatValue:
         """
         Sets the value.
 
@@ -665,6 +689,7 @@ class FloatValue(NumberValue):
         :return: True if the value is positive, False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value > 0.0)
 
     def is_negative(self) -> BooleanValue:
@@ -674,6 +699,7 @@ class FloatValue(NumberValue):
         :return: True if the value is negative, False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value < 0.0)
 
     def is_zero(self) -> BooleanValue:
@@ -683,6 +709,7 @@ class FloatValue(NumberValue):
         :return: True if the value is zero, False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value == 0.0)
 
     def is_not_zero(self) -> BooleanValue:
@@ -692,10 +719,12 @@ class FloatValue(NumberValue):
         :return: True if the value is annotations zero, False otherwise
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value != 0.0)
 
     def is_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is equal to the specified number,
         False otherwise.
@@ -706,13 +735,15 @@ class FloatValue(NumberValue):
         """
         from pystdlib.values.boolean_value import BooleanValue
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value == number.get())
 
         return BooleanValue(self._value == number)
 
     def is_not_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is not equal to the specified
         number, False otherwise.
@@ -724,7 +755,8 @@ class FloatValue(NumberValue):
         return self.is_equal_to(number).negate()
 
     def is_less_than_or_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is less than or equal to the
         specified number, False otherwise.
@@ -735,13 +767,15 @@ class FloatValue(NumberValue):
         """
         from pystdlib.values.boolean_value import BooleanValue
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value <= number.get())
 
         return BooleanValue(self._value <= number)
 
     def is_greater_than_or_equal_to(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is greater than or equal to the
         specified number, False otherwise.
@@ -752,13 +786,15 @@ class FloatValue(NumberValue):
         """
         from pystdlib.values.boolean_value import BooleanValue
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value >= number.get())
 
         return BooleanValue(self._value >= number)
 
     def is_less_than(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is less than the
         specified number, False otherwise.
@@ -769,13 +805,15 @@ class FloatValue(NumberValue):
         """
         from pystdlib.values.boolean_value import BooleanValue
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value < number.get())
 
         return BooleanValue(self._value < number)
 
     def is_greater_than(
-            self, number: int | float | IntegerValue | FloatValue) -> BooleanValue:
+        self, number: int | float | IntegerValue | FloatValue
+    ) -> BooleanValue:
         """
         Returns True if the value is greater than the
         specified number, False otherwise.
@@ -786,6 +824,7 @@ class FloatValue(NumberValue):
         """
         from pystdlib.values.boolean_value import BooleanValue
         from pystdlib.values.integer_value import IntegerValue
+
         if isinstance(number, (IntegerValue, FloatValue)):
             return BooleanValue(self._value > number.get())
 
@@ -818,7 +857,7 @@ class FloatValue(NumberValue):
             and with a positive denominator
         :raises OverflowError: on infinities and a ValueError on NaNs
         """
-        return self.as_integer_ratio()
+        return self._value.as_integer_ratio()
 
     def is_integer(self) -> BooleanValue:
         """
@@ -827,6 +866,7 @@ class FloatValue(NumberValue):
         :return: True if the float is an integer
         """
         from pystdlib.values.boolean_value import BooleanValue
+
         return BooleanValue(self._value.is_integer())
 
     def hex(self) -> StringValue:
@@ -841,6 +881,7 @@ class FloatValue(NumberValue):
         :return: a hexadecimal representation of the value
         """
         from pystdlib.values.string_value import StringValue
+
         return StringValue(self._value.hex())
 
     # noinspection SpellCheckingInspection

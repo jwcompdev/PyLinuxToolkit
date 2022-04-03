@@ -43,15 +43,19 @@ from pystdlib.values import StringValue
 class SSHBash(BashBase, Logged):
     """A bash terminal emulator that allows running commands over ssh."""
 
-    def __init__(self, directory="~",
-                 output_function: Callable[[OutputData], NoReturn]
-                 = Lambdas.one_arg_no_return,
-                 use_threaded_worker=False, wait_for_locks=True,
-                 timeout: int | None = 30, ssh_login_timeout: int | None = 10,
-                 print_command: bool = False, print_prompt: bool = False,
-                 print_ssh_connection_msgs: bool = False,
-                 print_ssh_login_success: bool = False
-                 ) -> NoReturn:
+    def __init__(
+        self,
+        directory="~",
+        output_function: Callable[[OutputData], NoReturn] = Lambdas.one_arg_no_return,
+        use_threaded_worker=False,
+        wait_for_locks=True,
+        timeout: int | None = 30,
+        ssh_login_timeout: int | None = 10,
+        print_command: bool = False,
+        print_prompt: bool = False,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+    ) -> NoReturn:
         """
 
         :param directory: the directory to use as the current working
@@ -77,12 +81,16 @@ class SSHBash(BashBase, Logged):
             on successful ssh login
 
         """
-        super().__init__(directory=directory, output_function=output_function,
-                         use_threaded_worker=use_threaded_worker,
-                         wait_for_locks=wait_for_locks,
-                         remote_ssh=True,
-                         timeout=timeout, print_command=print_command,
-                         print_prompt=print_prompt)
+        super().__init__(
+            directory=directory,
+            output_function=output_function,
+            use_threaded_worker=use_threaded_worker,
+            wait_for_locks=wait_for_locks,
+            remote_ssh=True,
+            timeout=timeout,
+            print_command=print_command,
+            print_prompt=print_prompt,
+        )
 
         self._is_context_manager = False
         self.set_log_level(logging.DEBUG)
@@ -96,7 +104,7 @@ class SSHBash(BashBase, Logged):
         self._ssh_key: Optional[str] = None
         self._ssh_cwd: Optional[str] = None
         self._ssh_home: Optional[str] = None
-        self._ssh_client = pxssh.pxssh(encoding='utf-8', timeout=timeout)
+        self._ssh_client = pxssh.pxssh(encoding="utf-8", timeout=timeout)
         self.ssh_login_timeout: int = ssh_login_timeout
         self.print_ssh_connection_msgs: bool = print_ssh_connection_msgs
         self.print_ssh_login_success: bool = print_ssh_login_success
@@ -114,9 +122,14 @@ class SSHBash(BashBase, Logged):
         """Runs the close method."""
         self.close()
 
-    def set_ssh_login_info(self, hostname: str, username: str,
-                           password: str = None, port: int = 22,
-                           ssh_key: StrOrBytesPath = None) -> NoReturn:
+    def set_ssh_login_info(
+        self,
+        hostname: str,
+        username: str,
+        password: str = None,
+        port: int = 22,
+        ssh_key: StrOrBytesPath = None,
+    ) -> NoReturn:
         """
         Sets the required login info for the ssh connection.
 
@@ -187,14 +200,17 @@ class SSHBash(BashBase, Logged):
         return self._ssh_client.closed
 
     # noinspection PyTypeChecker
-    @TaskPool.decide_class_task(pool_name="_task_pool",
-                                threaded="is_threaded_worker_enabled")
-    def ssh_connect_and_wait(self, ssh_login_timeout: int = 10,
-                             print_prompt: bool = None,
-                             print_ssh_connection_msgs: bool = False,
-                             print_ssh_login_success: bool = False,
-                             print_ssh_mod: bool = False
-                             ) -> NoReturn:
+    @TaskPool.decide_class_task(
+        pool_name="_task_pool", threaded="is_threaded_worker_enabled"
+    )
+    def ssh_connect_and_wait(
+        self,
+        ssh_login_timeout: int = 10,
+        print_prompt: bool = None,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+        print_ssh_mod: bool = False,
+    ) -> NoReturn:
         """
         Connects to the ssh client and keeps the connection open.
 
@@ -207,17 +223,22 @@ class SSHBash(BashBase, Logged):
         :param print_ssh_mod: if true prints the server's
             mod(Message of the Day) on login
         """
-        self._ssh_connect_and_wait(ssh_login_timeout, print_prompt,
-                                   print_ssh_connection_msgs,
-                                   print_ssh_login_success,
-                                   print_ssh_mod)
+        self._ssh_connect_and_wait(
+            ssh_login_timeout,
+            print_prompt,
+            print_ssh_connection_msgs,
+            print_ssh_login_success,
+            print_ssh_mod,
+        )
 
-    def _ssh_connect_and_wait(self, ssh_login_timeout: int = 10,
-                              print_prompt: bool = None,
-                              print_ssh_connection_msgs: bool = False,
-                              print_ssh_login_success: bool = False,
-                              print_ssh_mod: bool = False
-                              ) -> NoReturn:
+    def _ssh_connect_and_wait(
+        self,
+        ssh_login_timeout: int = 10,
+        print_prompt: bool = None,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+        print_ssh_mod: bool = False,
+    ) -> NoReturn:
         """
         Connects to the ssh client and keeps the connection open.
 
@@ -243,35 +264,43 @@ class SSHBash(BashBase, Logged):
             if ssh_login_timeout == 10:
                 ssh_login_timeout = self.ssh_login_timeout
 
-            print_ssh_connection_msgs = print_ssh_connection_msgs \
-                if print_ssh_connection_msgs \
+            print_ssh_connection_msgs = (
+                print_ssh_connection_msgs
+                if print_ssh_connection_msgs
                 else self.print_ssh_connection_msgs
-            print_ssh_login_success = print_ssh_login_success \
-                if print_ssh_login_success \
+            )
+            print_ssh_login_success = (
+                print_ssh_login_success
+                if print_ssh_login_success
                 else self.print_ssh_login_success
+            )
 
             self._bash_data.command = ""
             self._bash_data.current_user = self._ssh_username
             self._bash_data.print_command = False
 
-            self._internal_connect(self._ssh_client,
-                                   ssh_login_timeout,
-                                   print_prompt,
-                                   print_ssh_connection_msgs,
-                                   print_ssh_login_success,
-                                   print_ssh_mod)
+            self._internal_connect(
+                self._ssh_client,
+                ssh_login_timeout,
+                print_prompt,
+                print_ssh_connection_msgs,
+                print_ssh_login_success,
+                print_ssh_mod,
+            )
         except pexpect.exceptions.EOF:
             # This should only happen when force quitting the program
             # while connected to the client
             pass
 
-    def _internal_connect(self, client: pxssh,
-                          ssh_login_timeout: int = 10,
-                          print_prompt: bool = None,
-                          print_ssh_connection_msgs: bool = False,
-                          print_ssh_login_success: bool = False,
-                          print_ssh_mod: bool = False
-                          ):
+    def _internal_connect(
+        self,
+        client: pxssh,
+        ssh_login_timeout: int = 10,
+        print_prompt: bool = None,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+        print_ssh_mod: bool = False,
+    ):
         self._debug(f"Connecting to {self._ssh_username}@{self._ssh_hostname}...")
         if print_ssh_connection_msgs:
             self._output_writer.write(f"SSH Connecting to {self._ssh_hostname}!")
@@ -287,7 +316,7 @@ class SSHBash(BashBase, Logged):
             password=self._ssh_password,
             port=self._ssh_port,
             ssh_key=self._ssh_key,
-            login_timeout=ssh_login_timeout
+            login_timeout=ssh_login_timeout,
         )
 
         self._debug(f"Login with {self._ssh_username}@{self._ssh_hostname} succeeded!")
@@ -298,12 +327,11 @@ class SSHBash(BashBase, Logged):
 
         # Retrieves basic setting values
         self._debug("Requesting hostname, cwd and home dir...")
-        self._ssh_internal_hostname = \
-            self._internal_run_ssh_command_string("hostname", client)
-        self._ssh_cwd = \
-            self._internal_run_ssh_command_string("pwd", client)
-        self._ssh_home = \
-            self._internal_run_ssh_command_string("echo ~", client)
+        self._ssh_internal_hostname = self._internal_run_ssh_command_string(
+            "hostname", client
+        )
+        self._ssh_cwd = self._internal_run_ssh_command_string("pwd", client)
+        self._ssh_home = self._internal_run_ssh_command_string("echo ~", client)
 
         if print_prompt is not None:
             self._bash_data.print_prompt = print_prompt
@@ -320,8 +348,9 @@ class SSHBash(BashBase, Logged):
 
         self._debug("Connection complete!")
 
-    @TaskPool.decide_class_task(pool_name="_task_pool",
-                                threaded="is_threaded_worker_enabled")
+    @TaskPool.decide_class_task(
+        pool_name="_task_pool", threaded="is_threaded_worker_enabled"
+    )
     def ssh_close(self, print_ssh_connection_msgs: bool = False):
         """
         Closes the ssh connection if still open.
@@ -330,9 +359,11 @@ class SSHBash(BashBase, Logged):
             ssh disconnect
         """
         if not self._ssh_client.closed:
-            print_ssh_connection_msgs = print_ssh_connection_msgs \
-                if print_ssh_connection_msgs \
+            print_ssh_connection_msgs = (
+                print_ssh_connection_msgs
+                if print_ssh_connection_msgs
                 else self.print_ssh_connection_msgs
+            )
 
             self._bash_data.command = ""
 
@@ -340,8 +371,9 @@ class SSHBash(BashBase, Logged):
 
     def _internal_disconnect(self, print_ssh_connection_msgs: bool = False):
         try:
-            self._debug("Disconnecting from "
-                        f"{self._ssh_username}@{self._ssh_hostname}...")
+            self._debug(
+                f"Disconnecting from {self._ssh_username}@{self._ssh_hostname}..."
+            )
             old_print_command = self._bash_data.print_command
             self._bash_data.print_command = False
 
@@ -369,16 +401,18 @@ class SSHBash(BashBase, Logged):
         client.sendline(command)
         client.prompt()
         before = client.before.replace(command, "").strip("\r\n")
-        self._commands.add_command(BashCommand(
-            command, self.current_dir, before, 0
-        ))
+        self._commands.add_command(BashCommand(command, self.current_dir, before, 0))
         self._debug(f"Created BashCommand: {str(self._commands.get_last())}")
         return before
 
-    def _internal_run_command(self, client: pxssh, command: str,
-                              print_command: bool,
-                              print_exit_code: bool,
-                              refresh_working_dir: bool):
+    def _internal_run_command(
+        self,
+        client: pxssh,
+        command: str,
+        print_command: bool,
+        print_exit_code: bool,
+        refresh_working_dir: bool,
+    ):
         # Assign values to the BashData object for access in on_output function
         self._bash_data.command = command
 
@@ -393,10 +427,12 @@ class SSHBash(BashBase, Logged):
         client.sendline(command)
         client.prompt()
 
-        result = StringValue(client.before) \
-            .strip_ansi_codes() \
-            .replace(command, "") \
+        result = (
+            StringValue(client.before)
+            .strip_ansi_codes()
+            .replace(command, "")
             .strip("\r\n")
+        )
 
         # Stops command output
         client.logfile_read = None
@@ -427,20 +463,23 @@ class SSHBash(BashBase, Logged):
         """Closes the ssh connection if still open."""
         self.ssh_close()
 
-    @TaskPool.decide_class_task(pool_name="_task_pool",
-                                threaded="is_threaded_worker_enabled")
-    def run_terminal_command(self, command: str,
-                             sudo: bool = False,
-                             timeout: int | None = 30,
-                             ssh_login_timeout: int = 10,
-                             print_command: bool = None,
-                             print_prompt: bool = None,
-                             print_exit_code: bool = False,
-                             print_ssh_connection_msgs: bool = False,
-                             print_ssh_login_success: bool = False,
-                             reconnect_ssh_if_closed: bool = True,
-                             create_temp_connection_if_closed: bool = False,
-                             ):
+    @TaskPool.decide_class_task(
+        pool_name="_task_pool", threaded="is_threaded_worker_enabled"
+    )
+    def run_terminal_command(
+        self,
+        command: str,
+        sudo: bool = False,
+        timeout: int | None = 30,
+        ssh_login_timeout: int = 10,
+        print_command: bool = None,
+        print_prompt: bool = None,
+        print_exit_code: bool = False,
+        print_ssh_connection_msgs: bool = False,
+        print_ssh_login_success: bool = False,
+        reconnect_ssh_if_closed: bool = True,
+        create_temp_connection_if_closed: bool = False,
+    ):
         """
         Runs the specified terminal command and passes output to
         specified on_output function.
@@ -478,13 +517,17 @@ class SSHBash(BashBase, Logged):
         if ssh_login_timeout == 10:
             ssh_login_timeout = self.ssh_login_timeout
 
-        print_ssh_connection_msgs = print_ssh_connection_msgs \
-            if print_ssh_connection_msgs \
+        print_ssh_connection_msgs = (
+            print_ssh_connection_msgs
+            if print_ssh_connection_msgs
             else self.print_ssh_connection_msgs
+        )
 
-        print_ssh_login_success = print_ssh_login_success \
-            if print_ssh_login_success \
+        print_ssh_login_success = (
+            print_ssh_login_success
+            if print_ssh_login_success
             else self.print_ssh_login_success
+        )
 
         bypass_connect = False
 
@@ -495,31 +538,31 @@ class SSHBash(BashBase, Logged):
                 bypass_connect = True
             elif reconnect_ssh_if_closed:
                 # If the connection is not open then reconnect and then send the command
-                self._ssh_client = pxssh.pxssh(encoding='utf-8', timeout=timeout)
+                self._ssh_client = pxssh.pxssh(encoding="utf-8", timeout=timeout)
                 self._ssh_connect_and_wait(
                     ssh_login_timeout=ssh_login_timeout,
                     print_prompt=print_prompt,
                     print_ssh_connection_msgs=print_ssh_connection_msgs,
                     print_ssh_login_success=print_ssh_login_success,
-                    print_ssh_mod=False
+                    print_ssh_mod=False,
                 )
                 bypass_connect = True
             elif create_temp_connection_if_closed:
                 # If the connection is not open then connect just for this command
                 # and then send the command
-                with pxssh.pxssh(encoding='utf-8', timeout=timeout) as client:
-                    self._internal_connect(client,
-                                           ssh_login_timeout,
-                                           print_prompt,
-                                           print_ssh_connection_msgs,
-                                           print_ssh_login_success,
-                                           False)
+                with pxssh.pxssh(encoding="utf-8", timeout=timeout) as client:
+                    self._internal_connect(
+                        client,
+                        ssh_login_timeout,
+                        print_prompt,
+                        print_ssh_connection_msgs,
+                        print_ssh_login_success,
+                        False,
+                    )
 
-                    self._internal_run_command(client,
-                                               command,
-                                               print_command,
-                                               print_exit_code,
-                                               False)
+                    self._internal_run_command(
+                        client, command, print_command, print_exit_code, False
+                    )
 
                     self._internal_disconnect(print_ssh_connection_msgs)
             else:
@@ -529,11 +572,9 @@ class SSHBash(BashBase, Logged):
                 if print_prompt is not None:
                     self._bash_data.print_prompt = print_prompt
 
-                self._internal_run_command(self._ssh_client,
-                                           command,
-                                           print_command,
-                                           print_exit_code,
-                                           True)
+                self._internal_run_command(
+                    self._ssh_client, command, print_command, print_exit_code, True
+                )
         except pexpect.exceptions.EOF:
             # This should only happen when force quitting the program
             # while connected to the client

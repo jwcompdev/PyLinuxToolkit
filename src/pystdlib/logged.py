@@ -48,14 +48,13 @@ class Logged:
     __logger: logging.Logger
 
     def __new__(cls, *args, **kwargs):
-        cls.__logger = logging.getLogger(
-            cls.__get_name(cls.__module__, cls.__name__))
+        cls.__logger = logging.getLogger(cls.__get_name(cls.__module__, cls.__name__))
 
         return super().__new__(cls)
 
     @classmethod
     def __get_name(cls, *name_parts: str) -> str:
-        return '.'.join(n.strip() for n in name_parts if n.strip())
+        return ".".join(n.strip() for n in name_parts if n.strip())
 
     @classmethod
     def get_logger(cls) -> logging.Logger:

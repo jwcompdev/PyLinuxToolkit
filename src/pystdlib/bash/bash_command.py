@@ -38,10 +38,13 @@ class BashCommand:
     running directory, output command exit code.
     """
 
-    def __init__(self, command: str | StringValue,
-                 directory: str | StringValue,
-                 output: str | StringValue,
-                 exit_code: int | str | IntegerValue | FloatValue | StringValue):
+    def __init__(
+        self,
+        command: str | StringValue,
+        directory: str | StringValue,
+        output: str | StringValue,
+        exit_code: int | str | IntegerValue | FloatValue | StringValue,
+    ):
         """
         Initializes the command object.
 
@@ -75,13 +78,16 @@ class BashCommand:
             self._command = self._command.lstrip("sudo ")
 
     def __str__(self):
-        return f"(cid={self._cid}, command={self._command}," \
-               f" directory=\"{self._directory}\", sudo={self._sudo}," \
-               f" exit_code={self._exit_code})"
+        return (
+            f"(cid={self._cid}, command={self._command},"
+            f' directory="{self._directory}", sudo={self._sudo},'
+            f" exit_code={self._exit_code})"
+        )
 
     def __repr__(self):
-        return build_repr(self, self._command, self._directory,
-                          self._output, self._exit_code)
+        return build_repr(
+            self, self._command, self._directory, self._output, self._exit_code
+        )
 
     @property
     def cid(self) -> int:
@@ -150,8 +156,9 @@ class BashCommand:
         if cid is not None and Caller().name_matches("add_command"):
             self._cid = cid
         else:
-            raise BashError("The cid attribute is read-only and "
-                            "can only be set internally!")
+            raise BashError(
+                "The cid attribute is read-only and can only be set internally!"
+            )
 
     @staticmethod
     def _process_output(current_line) -> StringValue:
@@ -160,8 +167,9 @@ class BashCommand:
         it to the QTWorker emit method that then passes it to the
         user-defined on_output function.
         """
-        output_raw: list[StringValue] = StringValue(current_line) \
-            .strip_ansi_codes().split("\r\r")
+        output_raw: list[StringValue] = (
+            StringValue(current_line).strip_ansi_codes().split("\r\r")
+        )
         output_modified: list[StringValue] = []
         output2: list[StringValue] = []
 
@@ -173,7 +181,7 @@ class BashCommand:
             line.lstrip("\r")
             op1 = line.split("\r\n")
             for line2 in op1:
-                op2 = line2.split('\r')
+                op2 = line2.split("\r")
                 for line3 in op2:
                     line3.rstrip("\n")
                     line3.rstrip("\r")
@@ -184,8 +192,9 @@ class BashCommand:
 
         for line2 in output2:
             if "%" not in line2 and line2 != "":
-                output_modified.append(line2.strip("\n").strip("\r")
-                                       .strip("\n").strip("\r"))
+                output_modified.append(
+                    line2.strip("\n").strip("\r").strip("\n").strip("\r")
+                )
 
         final_output: list[StringValue] = []
         for line in output_modified:
@@ -193,22 +202,23 @@ class BashCommand:
 
         full_output: StringValue = StringValue()
         for line in final_output:
-            full_output += line + '\n'
+            full_output += line + "\n"
 
-        return full_output.rstrip('\n')
+        return full_output.rstrip("\n")
 
     @staticmethod
     def _filter_line(current_line) -> StringValue:
-        if (current_line != ""
-                and current_line != "\r\n"
-                and not BashChecks.is_pexpect_garbage(current_line)
-                and current_line.strip() != "exit"
-                and not BashChecks.is_apt_warning(current_line)
-                and not BashChecks.is_pydev_debugger(current_line)
-                and not BashChecks.is_debconf_error(current_line)):
+        if (
+            current_line != ""
+            and current_line != "\r\n"
+            and not BashChecks.is_pexpect_garbage(current_line)
+            and current_line.strip() != "exit"
+            and not BashChecks.is_apt_warning(current_line)
+            and not BashChecks.is_pydev_debugger(current_line)
+            and not BashChecks.is_debconf_error(current_line)
+        ):
             if BashChecks.is_apt_update(current_line):
-                current_line = current_line \
-                    .replace("\r", "").strip(" ")
+                current_line = current_line.replace("\r", "").strip(" ")
 
             return current_line
         return StringValue()
