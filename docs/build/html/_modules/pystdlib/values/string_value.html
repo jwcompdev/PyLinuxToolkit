@@ -1,0 +1,1818 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pystdlib.values.string_value &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2F_modules/pystdlib/values/string_value.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for pystdlib.values.string_value</h1><div class="highlight"><pre>
+<span></span><span class="c1"># PyLinuxToolkit</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev</span>
+<span class="c1">#</span>
+<span class="c1"># string_value.py</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev &lt;jwcompdev@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the StringValue class, which provides</span>
+<span class="sd">mutable access to a str value.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">_collections_abc</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SupportsInt</span><span class="p">,</span>
+    <span class="n">SupportsFloat</span><span class="p">,</span>
+    <span class="n">Iterator</span><span class="p">,</span>
+    <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">SupportsIndex</span><span class="p">,</span>
+    <span class="n">Mapping</span><span class="p">,</span>
+    <span class="n">TYPE_CHECKING</span><span class="p">,</span>
+    <span class="n">Iterable</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">pystdlib</span> <span class="kn">import</span> <span class="n">Chars</span>
+<span class="kn">from</span> <span class="nn">pystdlib.protocols</span> <span class="kn">import</span> <span class="n">SupportsStringFull</span><span class="p">,</span> <span class="n">SupportsIntFloatStr</span>
+<span class="kn">from</span> <span class="nn">pystdlib.regex</span> <span class="kn">import</span> <span class="n">Patterns</span>
+<span class="kn">from</span> <span class="nn">pystdlib.str_utils</span> <span class="kn">import</span> <span class="n">build_repr</span>
+<span class="kn">from</span> <span class="nn">pystdlib.utils</span> <span class="kn">import</span> <span class="n">check_argument_type</span>
+<span class="kn">from</span> <span class="nn">pystdlib.values.value</span> <span class="kn">import</span> <span class="n">Value</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pystdlib.values</span> <span class="kn">import</span> <span class="n">BooleanValue</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">,</span> <span class="n">FloatValue</span>
+
+
+<div class="viewcode-block" id="StringValue"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue">[docs]</a><span class="k">class</span> <span class="nc">StringValue</span><span class="p">(</span><span class="n">Value</span><span class="p">,</span> <span class="n">_collections_abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">,</span> <span class="n">SupportsInt</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Provides mutable access to a str&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the StringValue object.</span>
+
+<span class="sd">        NOTE: if the initial value is not a valid string or another</span>
+<span class="sd">        StringValue object then the value is converted to a string</span>
+<span class="sd">        and then stored.</span>
+
+<span class="sd">        :param value: the initial string value.</span>
+<span class="sd">            The default is an empty string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">StringValue</span><span class="o">.</span><span class="n">_verify_string</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_verify_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1">########################################</span>
+    <span class="c1"># Dunder Methods                       #</span>
+    <span class="c1">########################################</span>
+
+    <span class="c1"># Must return a str</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+
+    <span class="c1"># Must return a str</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">build_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+    <span class="c1"># Must return str</span>
+    <span class="k">def</span> <span class="fm">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_spec</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="fm">__format__</span><span class="p">(</span><span class="n">format_spec</span><span class="p">)</span>
+
+    <span class="c1"># Must return int</span>
+    <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+    <span class="c1"># Must return float</span>
+    <span class="k">def</span> <span class="fm">__float__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+    <span class="c1"># Must return complex</span>
+    <span class="k">def</span> <span class="fm">__complex__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">complex</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">complex</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+    <span class="c1"># Must return Iterator[str]</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Implement iter(self).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getnewargs__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">__getnewargs__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is equal to the specified value,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        :param other: the value to check</span>
+<span class="sd">        :return: True if the value is equal to the specified value,</span>
+<span class="sd">            False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is not equal to the specified</span>
+<span class="sd">        value, False otherwise.</span>
+
+<span class="sd">        :param other: the value to check</span>
+<span class="sd">        :return: True if the value is not equal to the specified value,</span>
+<span class="sd">            False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">negate</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;&lt;&#39; not supported between &quot;</span> <span class="sa">f</span><span class="s2">&quot;instances of &#39;StringValue&#39; and &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;&lt;=&#39; not supported between &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;instances of &#39;StringValue&#39; and &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&gt;</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;&gt;&#39; not supported between &quot;</span> <span class="sa">f</span><span class="s2">&quot;instances of &#39;StringValue&#39; and &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;&gt;=&#39; not supported between &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;instances of &#39;StringValue&#39; and &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Must return bool</span>
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return key in self.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">other</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;in &lt;StringValue&gt;&#39; requires string or &quot;</span>
+            <span class="s2">&quot;StringValue as left operand, not &quot;</span> <span class="o">+</span> <span class="n">type_name</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Must return str</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="nb">slice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return self[key].&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">get</span><span class="p">()])</span>
+
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+    <span class="c1"># Must return int</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return len(self).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iadd__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="p">(</span><span class="n">SupportsIntFloatStr</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.float_value</span> <span class="kn">import</span> <span class="n">FloatValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">,</span> <span class="n">FloatValue</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+=</span> <span class="n">other</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;can only concatenate str or &quot;</span>
+            <span class="sa">f</span><span class="s1">&#39;StringValue (not &quot;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s1">&quot;) to StringValue&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="p">(</span><span class="n">SupportsIntFloatStr</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.float_value</span> <span class="kn">import</span> <span class="n">FloatValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">,</span> <span class="n">FloatValue</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+</span> <span class="n">other</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;can only concatenate str or &quot;</span>
+            <span class="sa">f</span><span class="s1">&#39;StringValue (not &quot;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s1">&quot;) to StringValue&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="p">(</span><span class="n">SupportsIntFloatStr</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.float_value</span> <span class="kn">import</span> <span class="n">FloatValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">,</span> <span class="n">FloatValue</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="n">other</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;can only concatenate str or &quot;</span>
+            <span class="sa">f</span><span class="s1">&#39;StringValue (not &quot;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s1">&quot;) to StringValue&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__isub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="n">other</span><span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[:</span><span class="n">other</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[:</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="n">other</span><span class="p">:])</span>
+
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[:</span><span class="n">other</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">other</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="p">:])</span>
+
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[:</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()])</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="fm">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SupportsIndex</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">*=</span> <span class="n">other</span><span class="o">.</span><span class="fm">__index__</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;can&#39;t multiply sequence by non-int &quot;</span> <span class="sa">f</span><span class="s2">&quot;of type &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SupportsIndex</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="fm">__index__</span><span class="p">())</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;can&#39;t multiply sequence by non-int &quot;</span> <span class="sa">f</span><span class="s2">&quot;of type &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SupportsIndex</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="fm">__index__</span><span class="p">())</span>
+
+        <span class="n">type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;can&#39;t multiply sequence by non-int &quot;</span> <span class="sa">f</span><span class="s2">&quot;of type &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">%</span> <span class="n">args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">template</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+
+    <span class="c1">########################################</span>
+    <span class="c1"># Built-in Instance Methods            #</span>
+    <span class="c1">########################################</span>
+
+    <span class="c1"># noinspection PyPropertyDefinition,PyPep8Naming</span>
+<div class="viewcode-block" id="StringValue.EMPTY"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.EMPTY">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EMPTY</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns an empty string as a StringValue.</span>
+
+<span class="sd">        :return: an empty string as a StringValue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">StringValue</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value.</span>
+
+<span class="sd">        :return: the value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+
+<div class="viewcode-block" id="StringValue.get"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value.</span>
+
+<span class="sd">        :return: the value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span></div>
+
+<div class="viewcode-block" id="StringValue.set"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the value.</span>
+
+<span class="sd">        :param value: the value to set</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">StringValue</span><span class="o">.</span><span class="n">_verify_string</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.is_equal_to"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_equal_to">[docs]</a>    <span class="k">def</span> <span class="nf">is_equal_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is equal to the specified value,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        :param value: the value to check</span>
+<span class="sd">        :return: True if the value is equal to the specified value,</span>
+<span class="sd">            False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.is_not_equal_to"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_not_equal_to">[docs]</a>    <span class="k">def</span> <span class="nf">is_not_equal_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is not equal to the specified</span>
+<span class="sd">        value, False otherwise.</span>
+
+<span class="sd">        :param value: the value to check</span>
+<span class="sd">        :return: True if the value is not equal to the specified value,</span>
+<span class="sd">            False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_equal_to</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">negate</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="StringValue.append"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.append">[docs]</a>    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends the specified string to the end of the value.</span>
+
+<span class="sd">        :param text: the value to append</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+=</span> <span class="n">text</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.appendprefix"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.appendprefix">[docs]</a>    <span class="k">def</span> <span class="nf">appendprefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends the specified prefix to the beginning of the value.</span>
+
+<span class="sd">        :param prefix: the value to append</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+=</span> <span class="n">prefix</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.appendsuffix"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.appendsuffix">[docs]</a>    <span class="k">def</span> <span class="nf">appendsuffix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="n">SupportsStringFull</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Appends the specified string to the end of the value.</span>
+
+<span class="sd">        :param suffix: the value to append</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">+=</span> <span class="n">suffix</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.capitalize"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.capitalize">[docs]</a>    <span class="k">def</span> <span class="nf">capitalize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Capitalize the value.</span>
+
+<span class="sd">        More specifically, make the first character have uppercase and</span>
+<span class="sd">        the rest lowercase.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.casefold"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.casefold">[docs]</a>    <span class="k">def</span> <span class="nf">casefold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make the value a version suitable for case-less comparisons.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.center"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">,</span> <span class="n">fill_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="n">Chars</span><span class="o">.</span><span class="n">SPACE</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make the value a centered string of length width.</span>
+
+<span class="sd">        Padding is done using the specified fill character</span>
+<span class="sd">        (default is a space).</span>
+
+<span class="sd">        :param width: the width of the new string</span>
+<span class="sd">        :param fill_char: the character to pad the string with</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fill_char</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">fill_char</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">fill_char</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.count"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.count">[docs]</a>    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sub</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of non-overlapping occurrences of substring</span>
+<span class="sd">        sub in string S[start:end].</span>
+
+<span class="sd">        Optional arguments start and end are interpreted as in slice</span>
+<span class="sd">        notation.</span>
+
+<span class="sd">        :param sub: the substring to check for</span>
+<span class="sd">        :param start: the beginning of the slice</span>
+<span class="sd">        :param end: the end of the slice</span>
+<span class="sd">        :return: the number of non-overlapping occurrences of substring</span>
+<span class="sd">            sub in string S[start:end]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StringValue.encode"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.encode">[docs]</a>    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;strict&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encode the string using the codec registered for encoding.</span>
+
+<span class="sd">        :param encoding: The encoding in which to encode the string.</span>
+<span class="sd">        :param errors:</span>
+<span class="sd">            The error handling scheme to use for encoding errors.</span>
+<span class="sd">            The default is &#39;strict&#39; meaning that encoding errors raise</span>
+<span class="sd">            a UnicodeEncodeError.  Other possible values are &#39;ignore&#39;,</span>
+<span class="sd">            &#39;replace&#39; and &#39;xmlcharrefreplace&#39; as well as any other name</span>
+<span class="sd">            registered with codecs.register_error that can handle</span>
+<span class="sd">            UnicodeEncodeErrors.</span>
+<span class="sd">        :return: the encoded string in bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">encoding</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">errors</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.endswith"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.endswith">[docs]</a>    <span class="k">def</span> <span class="nf">endswith</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the value ends with the specified suffix,</span>
+<span class="sd">        False otherwise.</span>
+<span class="sd">        With optional start, test the value beginning at that position.</span>
+<span class="sd">        With optional end, stop comparing S at that position.</span>
+<span class="sd">        Parameter &#39;suffix&#39; can also be a tuple of strings to try.</span>
+
+<span class="sd">        :param suffix: the suffix to check for</span>
+<span class="sd">        :param start: the beginning of the slice</span>
+<span class="sd">        :param end: the end of the slice</span>
+<span class="sd">        :return: true if the value ends with the specified suffix,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">suffix</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">suffix</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StringValue.expandtabs"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.expandtabs">[docs]</a>    <span class="k">def</span> <span class="nf">expandtabs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">tabsize</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">|</span> <span class="n">SupportsIndex</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;8&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make all tab characters annotations in value expanded using</span>
+<span class="sd">        spaces.</span>
+
+<span class="sd">        If tabsize is not given, a tab size of 8 characters is assumed.</span>
+<span class="sd">        :param tabsize: the number of spaces to expand the tabs to</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tabsize</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">expandtabs</span><span class="p">(</span><span class="n">tabsize</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">expandtabs</span><span class="p">(</span><span class="n">tabsize</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.find"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sub</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the lowest index in the value where substring sub is</span>
+<span class="sd">        found, such that sub is contained within S[start:end].</span>
+<span class="sd">        Optional arguments start and end are interpreted as in slice</span>
+<span class="sd">        notation.</span>
+
+<span class="sd">        Return -1 on failure.</span>
+
+<span class="sd">        :param sub: the substring to check for</span>
+<span class="sd">        :param start: the beginning of the slice</span>
+<span class="sd">        :param end: the end of the slice</span>
+<span class="sd">        :return: the lowest index in the value where the substring is</span>
+<span class="sd">            found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StringValue.format"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a formatted version of the value</span>
+<span class="sd">        using substitutions from args and kwargs.</span>
+<span class="sd">        The substitutions are identified by braces (&#39;{&#39; and &#39;}&#39;).</span>
+
+<span class="sd">        :param args: the args</span>
+<span class="sd">        :param kwargs: the keyword args</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.format_map"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.format_map">[docs]</a>    <span class="k">def</span> <span class="nf">format_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a formatted version of the value,</span>
+<span class="sd">        using substitutions from mapping.</span>
+<span class="sd">        The substitutions are identified by braces (&#39;{&#39; and &#39;}&#39;).</span>
+
+<span class="sd">        :param mapping: the mapping of substitutions</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">format_map</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.index"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.index">[docs]</a>    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sub</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the lowest index in value where substring sub is found,</span>
+<span class="sd">        such that sub is contained within value[start:end].  Optional</span>
+<span class="sd">        arguments start and end are interpreted as in slice notation.</span>
+
+<span class="sd">        Raises ValueError when the substring is not found.</span>
+
+<span class="sd">        :param sub: the substring to check</span>
+<span class="sd">        :param start: the beginning of the slice</span>
+<span class="sd">        :param end: the end of the slice</span>
+<span class="sd">        :return: the lowest index in the value where the substring</span>
+<span class="sd">            is found</span>
+<span class="sd">        :raises ValueError: when the substring is not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StringValue.isalnum"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isalnum">[docs]</a>    <span class="k">def</span> <span class="nf">isalnum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is an alphanumeric string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is alphanumeric if all characters in the string are</span>
+<span class="sd">        alphanumeric and there is at least one character in the string.</span>
+
+<span class="sd">        :return: True if the string is an alphanumeric string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.isalpha"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isalpha">[docs]</a>    <span class="k">def</span> <span class="nf">isalpha</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is an alphabetic string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is alphabetic if all characters in the string are</span>
+<span class="sd">        alphabetic and there is at least one character in the string.</span>
+
+<span class="sd">        :return: True if the string is an alphabetic string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.isascii"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isascii">[docs]</a>    <span class="k">def</span> <span class="nf">isascii</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if all characters in the string are ASCII,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        ASCII characters have code points in the range U+0000-U+007F.</span>
+<span class="sd">        Empty string is ASCII too.</span>
+
+<span class="sd">        :return: True if all characters in the string are ASCII,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isascii</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.isdecimal"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isdecimal">[docs]</a>    <span class="k">def</span> <span class="nf">isdecimal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is a decimal string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is a decimal string if all characters in the string</span>
+<span class="sd">        are decimal and there is at least one character in the string.</span>
+
+<span class="sd">        :return: True if the string is a decimal string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.isdigit"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isdigit">[docs]</a>    <span class="k">def</span> <span class="nf">isdigit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is a digit string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is a digit string if all characters in the string are</span>
+<span class="sd">        digits and there is at least one character in the string.</span>
+
+<span class="sd">        :return: True if the string is a digit string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.isidentifier"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isidentifier">[docs]</a>    <span class="k">def</span> <span class="nf">isidentifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is a valid Python identifier,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        Call keyword.iskeyword(s) to test whether string s is a</span>
+<span class="sd">        reserved identifier, such as &quot;def&quot; or &quot;class&quot;.</span>
+
+<span class="sd">        :return: True if the string is a valid Python identifier,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isidentifier</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.islower"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.islower">[docs]</a>    <span class="k">def</span> <span class="nf">islower</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is a lowercase string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is lowercase if all cased characters in the string</span>
+<span class="sd">        are lowercase and there is at least one cased character in</span>
+<span class="sd">        the string.</span>
+
+<span class="sd">        :return: True if the string is a lowercase string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">islower</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.isnumeric"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isnumeric">[docs]</a>    <span class="k">def</span> <span class="nf">isnumeric</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is a numeric string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is numeric if all characters in the string are numeric</span>
+<span class="sd">        and there is at least one character in the string.</span>
+
+<span class="sd">        :return: True if the string is a numeric string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">())</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.isprintable"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isprintable">[docs]</a>    <span class="k">def</span> <span class="nf">isprintable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is printable, False otherwise.</span>
+
+<span class="sd">        A string is printable if all of its characters are considered</span>
+<span class="sd">        printable in repr() or if it is empty.</span>
+
+<span class="sd">        :return: True if the string is printable,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isprintable</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.isspace"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isspace">[docs]</a>    <span class="k">def</span> <span class="nf">isspace</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is a whitespace string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is whitespace if all characters in the string are</span>
+<span class="sd">        whitespace and there is at least one character in the string.</span>
+
+<span class="sd">        :return: True if the string is a whitespace string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isspace</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.istitle"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.istitle">[docs]</a>    <span class="k">def</span> <span class="nf">istitle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is a title-cased string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        In a title-cased string, upper- and title-case characters may</span>
+<span class="sd">        only follow uncased characters and lowercase characters only</span>
+<span class="sd">        cased ones.</span>
+
+<span class="sd">        :return: True if the string is a title-cased string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">istitle</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.isupper"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.isupper">[docs]</a>    <span class="k">def</span> <span class="nf">isupper</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if the string is an uppercase string,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        A string is uppercase if all cased characters in the string are</span>
+<span class="sd">        uppercase and there is at least one cased character in the</span>
+<span class="sd">        string.</span>
+
+<span class="sd">        :return: True if the string is an uppercase string,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="StringValue.join"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.join">[docs]</a>    <span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Concatenate the value with any number of strings.</span>
+
+<span class="sd">        The value is inserted in between each given string.</span>
+<span class="sd">        The result is returned as a new string.</span>
+
+<span class="sd">        Example: &#39;.&#39;.join([&#39;ab&#39;, &#39;pq&#39;, &#39;rs&#39;]) -&gt; &#39;ab.pq.rs&#39;</span>
+
+<span class="sd">        :param args: the values to join</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.ljust"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.ljust">[docs]</a>    <span class="k">def</span> <span class="nf">ljust</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">,</span> <span class="n">fill_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="n">Chars</span><span class="o">.</span><span class="n">SPACE</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a left-justified string of length width.</span>
+
+<span class="sd">        Padding is done using the specified fill character</span>
+<span class="sd">        (default is a space).</span>
+
+<span class="sd">        :param width: the width of the new string</span>
+<span class="sd">        :param fill_char: the character to pad the string with</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fill_char</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">fill_char</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">fill_char</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.lower"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.lower">[docs]</a>    <span class="k">def</span> <span class="nf">lower</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a copy of the string converted to lowercase.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.lstrip"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.lstrip">[docs]</a>    <span class="k">def</span> <span class="nf">lstrip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a copy of the string with leading whitespace removed.</span>
+
+<span class="sd">        If chars is given and not None, remove characters in chars</span>
+<span class="sd">        instead.</span>
+
+<span class="sd">        :param chars: if not none, remove these characters instead</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">chars</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="n">maketrans</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span>
+
+<div class="viewcode-block" id="StringValue.partition"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.partition">[docs]</a>    <span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Partition the string into three parts using the given</span>
+<span class="sd">        separator.</span>
+
+<span class="sd">        This will search for the separator in the string.</span>
+<span class="sd">        If the separator is found, returns a 3-tuple containing the</span>
+<span class="sd">        part before the separator, the separator itself, and the part</span>
+<span class="sd">        after it.</span>
+
+<span class="sd">        If the separator is not found, returns a 3-tuple containing the</span>
+<span class="sd">        original string and two empty strings.</span>
+
+<span class="sd">        :param sep: the seperator to partition the string with</span>
+<span class="sd">        :return: the partitioned string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">sep</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.removeprefix"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.removeprefix">[docs]</a>    <span class="k">def</span> <span class="nf">removeprefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a str with the given prefix string removed if present.</span>
+
+<span class="sd">        If the string starts with the prefix string, return</span>
+<span class="sd">        string[len(prefix):].</span>
+<span class="sd">        Otherwise, return a copy of the original string.</span>
+
+<span class="sd">        :param prefix: the prefix to remove</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="n">prefix</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.removesuffix"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.removesuffix">[docs]</a>    <span class="k">def</span> <span class="nf">removesuffix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a str with the given suffix string removed if present.</span>
+
+<span class="sd">        If the string ends with the suffix string and that suffix is</span>
+<span class="sd">        not empty, return string[:-len(suffix)]. Otherwise, return a</span>
+<span class="sd">        copy of the original string.</span>
+
+<span class="sd">        :param suffix: the suffix to remove</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">suffix</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="n">suffix</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.replace"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a copy with all occurrences of substring old replaced</span>
+<span class="sd">        by new.</span>
+
+<span class="sd">        If the optional argument count is given, only the first count</span>
+<span class="sd">        occurrences are replaced.</span>
+
+<span class="sd">        :param old: the string to replace</span>
+<span class="sd">        :param new: the string to replace the old text with</span>
+<span class="sd">        :param count: the maximum number of occurrences to replace.</span>
+<span class="sd">            -1 (the default value) means replace all occurrences.</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="n">old</span> <span class="o">=</span> <span class="n">old</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.rfind"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.rfind">[docs]</a>    <span class="k">def</span> <span class="nf">rfind</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sub</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the highest index in the value where substring sub is</span>
+<span class="sd">        found, such that sub is contained within S[start:end]. Optional</span>
+<span class="sd">        arguments start and end are interpreted as in slice notation.</span>
+
+<span class="sd">        Return -1 on failure.</span>
+
+<span class="sd">        :param sub: the substring to check</span>
+<span class="sd">        :param start: the beginning of the slice</span>
+<span class="sd">        :param end: the end of the slice</span>
+<span class="sd">        :return: the highest index in the value where the substring is</span>
+<span class="sd">            found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.rindex"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.rindex">[docs]</a>    <span class="k">def</span> <span class="nf">rindex</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sub</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the highest index in the value where substring sub is</span>
+<span class="sd">        found, such that sub is contained within S[start:end]. Optional</span>
+<span class="sd">        arguments start and end are interpreted as in slice notation.</span>
+
+<span class="sd">        Raises ValueError when the substring is not found.</span>
+
+<span class="sd">        :param sub: the substring to check</span>
+<span class="sd">        :param start: the beginning of the slice</span>
+<span class="sd">        :param end: the end of the slice</span>
+<span class="sd">        :return: the highest index in the value where the substring is</span>
+<span class="sd">            found</span>
+<span class="sd">        :raises ValueError: when the substring is not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rindex</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.rjust"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.rjust">[docs]</a>    <span class="k">def</span> <span class="nf">rjust</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">,</span> <span class="n">fill_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="n">Chars</span><span class="o">.</span><span class="n">SPACE</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a right-justified string of length width.</span>
+
+<span class="sd">        Padding is done using the specified fill character</span>
+<span class="sd">        (default is a space).</span>
+
+<span class="sd">        :param width: the width of the new string</span>
+<span class="sd">        :param fill_char: the character to pad the string with</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fill_char</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">fill_char</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">fill_char</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.rpartition"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.rpartition">[docs]</a>    <span class="k">def</span> <span class="nf">rpartition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Partition the string into three parts using the given separator.</span>
+
+<span class="sd">        This will search for the separator in the string, starting at</span>
+<span class="sd">        the end. If the separator is found, returns a 3-tuple</span>
+<span class="sd">        containing the part before the separator, the separator</span>
+<span class="sd">        itself, and the part after it.</span>
+
+<span class="sd">        If the separator is not found, returns a 3-tuple containing</span>
+<span class="sd">        two empty strings and the original string.</span>
+
+<span class="sd">        :param sep: the seperator to partition the string with</span>
+<span class="sd">        :return: the partitioned string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="n">sep</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.rsplit"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.rsplit">[docs]</a>    <span class="k">def</span> <span class="nf">rsplit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_split</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">StringValue</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of the words in the string, using sep as the</span>
+<span class="sd">        delimiter string.</span>
+
+<span class="sd">        Splits are done starting at the end of the string and working</span>
+<span class="sd">        to the front.</span>
+
+<span class="sd">        :param sep:</span>
+<span class="sd">            The delimiter according which to split the string.</span>
+<span class="sd">            None (the default value) means split according to any</span>
+<span class="sd">            whitespace, and discard empty strings from the result.</span>
+<span class="sd">        :param max_split:</span>
+<span class="sd">            Maximum number of splits to do.</span>
+<span class="sd">            -1 (the default value) means no limit.</span>
+<span class="sd">        :return: a list of the words in the string, using sep as the</span>
+<span class="sd">            delimiter string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="n">sep</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">max_split</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">max_split</span><span class="p">)</span>
+
+        <span class="n">new_words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StringValue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">new_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">StringValue</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">new_words</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.rstrip"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.rstrip">[docs]</a>    <span class="k">def</span> <span class="nf">rstrip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a copy of the string with trailing whitespace removed.</span>
+
+<span class="sd">        If chars is given and not None, remove characters in chars</span>
+<span class="sd">        instead.</span>
+
+<span class="sd">        :param chars: if not none, remove these characters instead</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">chars</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.split"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.split">[docs]</a>    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_split</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">StringValue</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of the words in the string, using sep as the</span>
+<span class="sd">        delimiter string.</span>
+
+<span class="sd">        :param sep:</span>
+<span class="sd">            The delimiter according which to split the string.</span>
+<span class="sd">            None (the default value) means split according to any</span>
+<span class="sd">            whitespace, and discard empty strings from the result.</span>
+<span class="sd">        :param max_split:</span>
+<span class="sd">            Maximum number of splits to do.</span>
+<span class="sd">            -1 (the default value) means no limit.</span>
+<span class="sd">        :return: a list of the words in the string, using sep as the</span>
+<span class="sd">            delimiter string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">max_split</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">max_split</span><span class="p">)</span>
+
+        <span class="n">new_words</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StringValue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">new_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">StringValue</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">new_words</span></div>
+
+<div class="viewcode-block" id="StringValue.splitlines"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.splitlines">[docs]</a>    <span class="k">def</span> <span class="nf">splitlines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_ends</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of the lines in the string, breaking at line</span>
+<span class="sd">        boundaries.</span>
+
+<span class="sd">        Line breaks are not included in the resulting list unless</span>
+<span class="sd">        keep_ends is given and true.</span>
+
+<span class="sd">        :param keep_ends: if True includes linebreaks in the resulting</span>
+<span class="sd">            list</span>
+<span class="sd">        :return: a list of the lines in the string, breaking at line</span>
+<span class="sd">            boundaries</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="n">keep_ends</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.startswith"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.startswith">[docs]</a>    <span class="k">def</span> <span class="nf">startswith</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return True if S starts with the specified prefix,</span>
+<span class="sd">        False otherwise.</span>
+<span class="sd">        With optional start, test S beginning at that position.</span>
+<span class="sd">        With optional end, stop comparing S at that position.</span>
+<span class="sd">        Parameter &#39;prefix&#39; can also be a tuple of strings to try.</span>
+
+<span class="sd">        :param prefix: the prefix to check for</span>
+<span class="sd">        :param start: the beginning of the slice</span>
+<span class="sd">        :param end: the end of the slice</span>
+<span class="sd">        :return: true if the value begins with the specified prefix,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StringValue.strip"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.strip">[docs]</a>    <span class="k">def</span> <span class="nf">strip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a copy of the string with leading and trailing</span>
+<span class="sd">        whitespace removed.</span>
+
+<span class="sd">        If chars is given and not None, remove characters in chars</span>
+<span class="sd">        instead.</span>
+
+<span class="sd">        :param chars: if not none, remove these characters instead</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">chars</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="StringValue.swapcase"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.swapcase">[docs]</a>    <span class="k">def</span> <span class="nf">swapcase</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert uppercase characters to lowercase and lowercase</span>
+<span class="sd">        characters to uppercase.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.title"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.title">[docs]</a>    <span class="k">def</span> <span class="nf">title</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a version of the string where each word is title cased.</span>
+
+<span class="sd">        More specifically, words start with upper-cased characters and</span>
+<span class="sd">        all remaining cased characters have lower case.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.translate"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replace each character in the string using the given</span>
+<span class="sd">        translation table.</span>
+
+<span class="sd">        The table must implement lookup/indexing via __getitem__, for</span>
+<span class="sd">        instance a dictionary or list.  If this operation raises</span>
+<span class="sd">        LookupError, the character is left untouched. Characters mapped</span>
+<span class="sd">        to None are deleted.</span>
+
+<span class="sd">        :param table:</span>
+<span class="sd">            Translation table, which must be a mapping of Unicode</span>
+<span class="sd">            ordinals to Unicode ordinals, strings, or None.</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.upper"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.upper">[docs]</a>    <span class="k">def</span> <span class="nf">upper</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a copy of the string converted to uppercase.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.zfill"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.zfill">[docs]</a>    <span class="k">def</span> <span class="nf">zfill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pad the value with zeros on the left, to fill a &#39;field&#39; of the</span>
+<span class="sd">        given width.</span>
+
+<span class="sd">        The string is never truncated.</span>
+
+<span class="sd">        :param width: the with of the new string</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1">########################################</span>
+    <span class="c1"># Custom Instance Methods              #</span>
+    <span class="c1">########################################</span>
+
+<div class="viewcode-block" id="StringValue.strip_ansi_codes"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.strip_ansi_codes">[docs]</a>    <span class="k">def</span> <span class="nf">strip_ansi_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Strips all ansi codes from the value.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Patterns</span><span class="o">.</span><span class="n">ANSI_BASIC_ESCAPE</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\x1b</span><span class="s2">7&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\x1b</span><span class="s2">7r&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\x1b</span><span class="s2">8&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\x1b</span><span class="s2">8r&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.wrap"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.wrap">[docs]</a>    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wraps a character around the value.</span>
+
+<span class="sd">        :param wrap_char: the character used to wrap</span>
+<span class="sd">        :return: wrapped string or the original string</span>
+<span class="sd">                    if wrap_char is empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">wrap_char</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wrap_char</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wrap_char</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="si">}{</span><span class="n">wrap_char</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">wrap_char</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="si">}{</span><span class="n">wrap_char</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.unwrap"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.unwrap">[docs]</a>    <span class="k">def</span> <span class="nf">unwrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrap_char</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unwraps the value from a character.</span>
+
+<span class="sd">        :param wrap_char: the character used to unwrap</span>
+<span class="sd">        :return: unwrapped string or the original string if it is not</span>
+<span class="sd">                    quoted properly with the wrap character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wrap_char</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">):</span>
+            <span class="n">wrap_char</span> <span class="o">=</span> <span class="n">wrap_char</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">wrap_char</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">wrap_char</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">wrap_char</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="StringValue.is_boolean"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_boolean">[docs]</a>    <span class="k">def</span> <span class="nf">is_boolean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the value can be converted to a Boolean.</span>
+
+<span class="sd">        The following strings are considered true boolean values:</span>
+<span class="sd">        &quot;true&quot;, &quot;t&quot;, &quot;yes&quot;, &quot;y&quot;, &quot;1&quot;, &quot;succeeded&quot;, &quot;succeed&quot;, &quot;enabled&quot;</span>
+<span class="sd">        The following strings are considered false boolean values:</span>
+<span class="sd">        &quot;false&quot;, &quot;f&quot;, &quot;no&quot;, &quot;n&quot;, &quot;0&quot;, &quot;failed&quot;, &quot;fail&quot;, &quot;disabled&quot;</span>
+
+<span class="sd">        :return: true if string matches a boolean,</span>
+<span class="sd">                    false if it does not match or is None or empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">input</span> <span class="ow">or</span> <span class="nb">input</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;t&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;yes&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;succeeded&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;succeed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;enabled&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;false&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;f&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;no&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;n&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;failed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;fail&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;disabled&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.to_boolean"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.to_boolean">[docs]</a>    <span class="k">def</span> <span class="nf">to_boolean</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the value to a Boolean.</span>
+
+<span class="sd">        The following strings are considered true boolean values:</span>
+<span class="sd">        &quot;true&quot;, &quot;t&quot;, &quot;yes&quot;, &quot;y&quot;, &quot;1&quot;, &quot;succeeded&quot;, &quot;succeed&quot;, &quot;enabled&quot;</span>
+<span class="sd">        The following strings are considered false boolean values:</span>
+<span class="sd">        &quot;false&quot;, &quot;f&quot;, &quot;no&quot;, &quot;n&quot;, &quot;0&quot;, &quot;failed&quot;, &quot;fail&quot;, &quot;disabled&quot;</span>
+
+<span class="sd">        None is returned if the string does not match a boolean value,</span>
+<span class="sd">        an empty string or having the value None</span>
+
+<span class="sd">        :return: the converted boolean,</span>
+<span class="sd">                    None is returned if a match is not found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+            <span class="n">is_true</span> <span class="o">=</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">(</span>
+                <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;t&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;yes&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;y&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;succeeded&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;succeed&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">is_false</span> <span class="o">=</span> <span class="n">val</span> <span class="ow">in</span> <span class="p">(</span>
+                <span class="s2">&quot;false&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;f&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;no&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;n&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;failed&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;fail&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;disabled&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">is_true</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">is_false</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="StringValue.to_int"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.to_int">[docs]</a>    <span class="k">def</span> <span class="nf">to_int</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the value to an IntegerValue and returns it.</span>
+
+<span class="sd">        :return the value converted to an IntegerValue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.to_float"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.to_float">[docs]</a>    <span class="k">def</span> <span class="nf">to_float</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the value to a FloatValue and returns it.</span>
+
+<span class="sd">        :return the value converted to a FloatValue</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.float_value</span> <span class="kn">import</span> <span class="n">FloatValue</span>
+
+        <span class="k">return</span> <span class="n">FloatValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.parse_int"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.parse_int">[docs]</a>    <span class="k">def</span> <span class="nf">parse_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attempts to parse the value to an int.</span>
+<span class="sd">        If it fails, returns the default.</span>
+<span class="sd">        If default is None then ValueError is raised.</span>
+
+<span class="sd">        :param default: the value to return if parsing fails</span>
+<span class="sd">        :return: the parsed int, or the default if parsing failed</span>
+<span class="sd">        :raises ValueError: if parse failed and default is None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.integer_value</span> <span class="kn">import</span> <span class="n">IntegerValue</span>
+
+        <span class="n">check_argument_type</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">IntegerValue</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
+
+            <span class="k">raise</span></div>
+
+<div class="viewcode-block" id="StringValue.parse_float"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.parse_float">[docs]</a>    <span class="k">def</span> <span class="nf">parse_float</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">FloatValue</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attempts to parse the value to a float.</span>
+<span class="sd">        If it fails, returns the default.</span>
+<span class="sd">        If default is None then ValueError is raised.</span>
+
+<span class="sd">        :param default: the value to return if parsing fails</span>
+<span class="sd">        :return: the parsed float, or the default if parsing failed</span>
+<span class="sd">        :raises ValueError: if parse failed and default is None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.float_value</span> <span class="kn">import</span> <span class="n">FloatValue</span>
+
+        <span class="n">check_argument_type</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">FloatValue</span><span class="p">))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">FloatValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FloatValue</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
+
+            <span class="k">raise</span></div>
+
+<div class="viewcode-block" id="StringValue.is_empty"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_empty">[docs]</a>    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is empty.</span>
+
+<span class="sd">        :return: True if the value is empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StringValue.is_not_empty"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_not_empty">[docs]</a>    <span class="k">def</span> <span class="nf">is_not_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is not empty.</span>
+
+<span class="sd">        :return: True if the value is not empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="ow">not</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="StringValue.is_blank"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_blank">[docs]</a>    <span class="k">def</span> <span class="nf">is_blank</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is whitespace or empty.</span>
+
+<span class="sd">        :return: True if the value is whitespace or empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.is_not_blank"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_not_blank">[docs]</a>    <span class="k">def</span> <span class="nf">is_not_blank</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is not whitespace or empty.</span>
+
+<span class="sd">        :return: True if the value is not whitespace or empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="ow">not</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.is_blank_or_none"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_blank_or_none">[docs]</a>    <span class="k">def</span> <span class="nf">is_blank_or_none</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is whitespace, empty or None.</span>
+
+<span class="sd">        :return: True if the value is whitespace, empty or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StringValue.is_not_blank_or_none"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.string_value.StringValue.is_not_blank_or_none">[docs]</a>    <span class="k">def</span> <span class="nf">is_not_blank_or_none</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is not whitespace, empty or None.</span>
+
+<span class="sd">        :return: True if the value is not whitespace, empty or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pystdlib.values.boolean_value</span> <span class="kn">import</span> <span class="n">BooleanValue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">BooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span></div></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

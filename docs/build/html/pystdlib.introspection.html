@@ -1,0 +1,2186 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pystdlib.introspection package &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pystdlib.values package" href="pystdlib.values.html" />
+    <link rel="prev" title="pystdlib.bash package" href="pystdlib.bash.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="pystdlib.html">
+   pystdlib package
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/pystdlib.introspection.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2Fpystdlib.introspection.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/jwcompdev/PyLinuxToolkit/edit/master/docs/pystdlib.introspection.rst"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.call_frame">
+   pystdlib.introspection.call_frame module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.caller">
+   pystdlib.introspection.caller module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.exceptions">
+   pystdlib.introspection.exceptions module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.func">
+   pystdlib.introspection.func module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.object_info">
+   pystdlib.introspection.object_info module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.signature">
+   pystdlib.introspection.signature module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.utils">
+   pystdlib.introspection.utils module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection">
+   Module contents
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>pystdlib.introspection package</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.call_frame">
+   pystdlib.introspection.call_frame module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.caller">
+   pystdlib.introspection.caller module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.exceptions">
+   pystdlib.introspection.exceptions module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.func">
+   pystdlib.introspection.func module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.object_info">
+   pystdlib.introspection.object_info module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.signature">
+   pystdlib.introspection.signature module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection.utils">
+   pystdlib.introspection.utils module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pystdlib.introspection">
+   Module contents
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="pystdlib-introspection-package">
+<h1>pystdlib.introspection package<a class="headerlink" href="#pystdlib-introspection-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pystdlib.introspection.call_frame">
+<span id="pystdlib-introspection-call-frame-module"></span><h2>pystdlib.introspection.call_frame module<a class="headerlink" href="#module-pystdlib.introspection.call_frame" title="Permalink to this headline">¶</a></h2>
+<p>Contains the CallFrame class,
+that represents a call frame.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.call_frame.</span></span><span class="sig-name descname"><span class="pre">CallFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a call frame - an element of the call stack.
+It keeps track of local and closure variables.</p>
+<p>Although <code class="docutils literal notranslate"><span class="pre">CallFrame</span></code> does not inherit from <code class="xref py py-data docutils literal notranslate"><span class="pre">types.FrameType</span></code>,
+they can be used just like regular frame objects.</p>
+<p>Note that storing CallFrames in variables can create reference
+cycles where a frame contains a reference to itself. To avoid
+this, CallFrames can be used as context managers - upon exit,
+the reference to the underlying frame object is released:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">CallFrame</span><span class="o">.</span><span class="n">current</span><span class="p">()</span> <span class="k">as</span> <span class="n">frame</span><span class="p">:</span>
+    <span class="o">...</span>  <span class="c1"># do stuff with the frame</span>
+<span class="c1"># at this point, the frame has become unusable</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.builtins">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">builtins</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.builtins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the builtins seen by this frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the builtins seen by this frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.cls_name_matches">
+<span class="sig-name descname"><span class="pre">cls_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.cls_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.cls_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the current class matches
+the specified name, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the current class matches
+the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.code_object">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">code_object</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">code</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.code_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the code object being executed in this frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the code object being executed in this frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.call_frame.CallFrame" title="pystdlib.introspection.call_frame.CallFrame"><span class="pre">pystdlib.introspection.call_frame.CallFrame</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the current call frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the current call frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_cls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_cls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the class from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the class from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_cls_instance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_cls_instance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_cls_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the class instance from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the class instance from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_cls_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_cls_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_cls_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the class name from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_full_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_full_name</span></span><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_full_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the full name with the class included.
+If the class name is <em>None</em> then just the method name
+is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_full_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_full_path</span></span><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_full_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the full path with class and package name.
+If the class name is <em>None</em> then just the module and
+method name is returned (“module.object”).
+If the module name is <em>None</em> then just the class and
+method name is returned (“class.object”).
+If both are <em>None</em> then just the method name is
+returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_line_num">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_line_num</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_line_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current line number of the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the current line number of the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_method_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_method_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_method_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the method name from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the method name from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_module">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_module</span></span><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the module from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the module from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_module_filename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_module_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_module_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the module filename from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the module filename from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_module_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_module_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_module_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the module name from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the module name from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the package name from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the package name from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.current_root_package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">current_root_package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.current_root_package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the root package name from the frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the root package name from the frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.file_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of the file in which this frame’s
+code was defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name of the file in which this frame’s
+code was defined</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.frame">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frame</span></span><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the wrapped frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the wrapped frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.from_frame">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.from_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.from_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new <code class="docutils literal notranslate"><span class="pre">CallFrame</span></code> from a <code class="docutils literal notranslate"><span class="pre">CallFrame</span></code>
+or <code class="xref py py-data docutils literal notranslate"><span class="pre">types.FrameType</span></code> object.</p>
+<p>This is equivalent to calling <code class="docutils literal notranslate"><span class="pre">CallFrame(frame)</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.get_surrounding_function">
+<span class="sig-name descname"><span class="pre">get_surrounding_function</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.get_surrounding_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.get_surrounding_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds and returns the function in which the code of this
+frame was defined.</p>
+<p>If the function can’t be found, <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The calling function object or <code class="docutils literal notranslate"><span class="pre">None</span></code>
+if it can’t be found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.globals">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">globals</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.globals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the global scope seen by this frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the global scope seen by this frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.locals">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">locals</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.locals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the frame’s local variable scope.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the frame’s local variable scope</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.module_filename_matches">
+<span class="sig-name descname"><span class="pre">module_filename_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.module_filename_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.module_filename_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the current module
+filename matches the specified module filename,
+False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the current module
+filename matches the specified module filename,
+False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.module_name_matches">
+<span class="sig-name descname"><span class="pre">module_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.module_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.module_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the current module
+matches the specified module, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the current module
+matches the specified module, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.name_matches">
+<span class="sig-name descname"><span class="pre">name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the current method matches
+the specified name or names, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name or names to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the current method matches
+the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.parent">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pystdlib.introspection.call_frame.CallFrame" title="pystdlib.introspection.call_frame.CallFrame"><span class="pre">CallFrame</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the next frame one level higher on the call stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the next frame one level higher on the call stack</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.path_matches">
+<span class="sig-name descname"><span class="pre">path_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.path_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.path_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the current full path
+matches the specified path, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the path to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the current full path
+matches the specified path, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.resolve_name">
+<span class="sig-name descname"><span class="pre">resolve_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/call_frame.html#CallFrame.resolve_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.resolve_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a variable name, returning the variable’s value.</p>
+<p>NOTE: Closure variables don’t have a named associated with them,
+which means they cannot be looked up with this function.
+This includes variables marked as <code class="docutils literal notranslate"><span class="pre">nonlocal</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – The name of the variable you want to look up</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value mapped to the given name</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>NameError</strong> – If no matching variable is found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.scope_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scope_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.scope_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of the scope in which this frame’s
+code was defined.
+In case of a function, the function’s name.
+In case of a class, the class’s name.
+In any other case, whichever name the interpreter
+assigned to that scope.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the name of the scope in which this frame’s</p>
+</dd>
+</dl>
+<p>code was defined</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.call_frame.CallFrame.traceback">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">traceback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">inspect.Traceback</span></em><a class="headerlink" href="#pystdlib.introspection.call_frame.CallFrame.traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about a frame object.</p>
+<p>A tuple of five things is returned: the filename, the line number of
+the current line, the function name, a list of lines of context from
+the source code, and the index of the current line within that list.
+The optional second argument specifies the number of lines of context
+to return, which are centered around the current line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>information about a frame object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pystdlib.introspection.caller">
+<span id="pystdlib-introspection-caller-module"></span><h2>pystdlib.introspection.caller module<a class="headerlink" href="#module-pystdlib.introspection.caller" title="Permalink to this headline">¶</a></h2>
+<p>Contains the Caller class, that
+wraps the caller of the current method
+to provide basic info about it.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.caller.</span></span><span class="sig-name descname"><span class="pre">Caller</span></span><a class="reference internal" href="_modules/pystdlib/introspection/caller.html#Caller"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.caller.Caller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wraps the caller of the current method
+to provide basic info about it.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.cls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s class</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.cls_instance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cls_instance</span></span><a class="headerlink" href="#pystdlib.introspection.caller.Caller.cls_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s class instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s class instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.cls_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cls_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.cls_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s class name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s class name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.cls_name_matches">
+<span class="sig-name descname"><span class="pre">cls_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/caller.html#Caller.cls_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.caller.Caller.cls_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the caller class matches
+the specified name, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the caller class matches
+the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.full_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.full_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s full name with the class included.
+If the class name is <em>None</em> then just the caller name
+is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.full_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.full_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s full path with class and package name.
+If the class name is <em>None</em> then just the module and
+caller name is returned (“module.caller”).
+If the module name is <em>None</em> then just the class and
+caller name is returned (“class.caller”).
+If both are <em>None</em> then just the caller name is
+returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.module">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ModuleType</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s module</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.module_filename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.module_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s module filename.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s module filename</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.module_filename_matches">
+<span class="sig-name descname"><span class="pre">module_filename_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/caller.html#Caller.module_filename_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.caller.Caller.module_filename_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the caller module
+filename matches the specified module filename, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the caller module
+filename matches the specified module filename,
+False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.module_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.module_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s module name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s module name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.module_name_matches">
+<span class="sig-name descname"><span class="pre">module_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/caller.html#Caller.module_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.caller.Caller.module_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the caller module
+matches the specified module, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the caller module
+matches the specified module, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s name.</p>
+<p>This is equivalent to “obj.__name__”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.name_matches">
+<span class="sig-name descname"><span class="pre">name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/caller.html#Caller.name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.caller.Caller.name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the caller method matches
+the specified name or names, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name or names to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the caller method matches
+the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s package name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s package name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.path_matches">
+<span class="sig-name descname"><span class="pre">path_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/caller.html#Caller.path_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.caller.Caller.path_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the caller’s full path
+matches the specified path, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the path to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the caller’s full path
+matches the specified path, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.caller.Caller.root_package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">root_package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.caller.Caller.root_package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the caller’s root package name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the caller’s root package name</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pystdlib.introspection.exceptions">
+<span id="pystdlib-introspection-exceptions-module"></span><h2>pystdlib.introspection.exceptions module<a class="headerlink" href="#module-pystdlib.introspection.exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Contains the introspection Exceptions.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="pystdlib.introspection.exceptions.FuncArgsMismatchError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.exceptions.</span></span><span class="sig-name descname"><span class="pre">FuncArgsMismatchError</span></span><a class="reference internal" href="_modules/pystdlib/introspection/exceptions.html#FuncArgsMismatchError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.exceptions.FuncArgsMismatchError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pystdlib.introspection.exceptions.FuncError" title="pystdlib.introspection.exceptions.FuncError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystdlib.introspection.exceptions.FuncError</span></code></a></p>
+<p>The FuncArgsMismatchError.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pystdlib.introspection.exceptions.FuncError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.exceptions.</span></span><span class="sig-name descname"><span class="pre">FuncError</span></span><a class="reference internal" href="_modules/pystdlib/introspection/exceptions.html#FuncError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.exceptions.FuncError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>The base FuncError.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pystdlib.introspection.exceptions.FuncReturnMismatchError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.exceptions.</span></span><span class="sig-name descname"><span class="pre">FuncReturnMismatchError</span></span><a class="reference internal" href="_modules/pystdlib/introspection/exceptions.html#FuncReturnMismatchError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.exceptions.FuncReturnMismatchError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pystdlib.introspection.exceptions.FuncError" title="pystdlib.introspection.exceptions.FuncError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystdlib.introspection.exceptions.FuncError</span></code></a></p>
+<p>The FuncReturnMismatchError.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pystdlib.introspection.exceptions.FuncSignatureError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.exceptions.</span></span><span class="sig-name descname"><span class="pre">FuncSignatureError</span></span><a class="reference internal" href="_modules/pystdlib/introspection/exceptions.html#FuncSignatureError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.exceptions.FuncSignatureError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pystdlib.introspection.exceptions.FuncError" title="pystdlib.introspection.exceptions.FuncError"><code class="xref py py-class docutils literal notranslate"><span class="pre">pystdlib.introspection.exceptions.FuncError</span></code></a></p>
+<p>The FuncSignatureError.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pystdlib.introspection.func">
+<span id="pystdlib-introspection-func-module"></span><h2>pystdlib.introspection.func module<a class="headerlink" href="#module-pystdlib.introspection.func" title="Permalink to this headline">¶</a></h2>
+<p>Contains the Func class, that
+wraps a function
+to provide basic info about it.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.func.</span></span><span class="sig-name descname"><span class="pre">Func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_return</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_after</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_before</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wraps a function to provide basic info about it.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.annotations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">annotations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict containing annotations of parameters. The keys
+of the dict are the parameter names, and ‘return’ for the
+return annotation, if provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a dict containing annotations of parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.attributes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attributes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all attributes as (name, value) pairs sorted by name.</p>
+<p>This is equivalent to calling
+“inspect.getmembers(func)”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>all attributes as (name, value) pairs sorted by name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.cls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s parent class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent class</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.cls_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cls_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.cls_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s parent class name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent class name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.cls_name_matches">
+<span class="sig-name descname"><span class="pre">cls_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.cls_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.cls_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the function’s parent class
+matches the specified name, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the function’s parent class
+matches the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.code">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">code</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the code object representing the
+compiled function body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the code object representing the</p>
+</dd>
+</dl>
+<p>compiled function body</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.debug">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">debug</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if debug printing is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if debug printing is enabled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.defaults">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple containing default argument values for those
+arguments that have defaults, or None if no arguments have a
+default value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a tuple containing default argument values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.disable_after_event">
+<span class="sig-name descname"><span class="pre">disable_after_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.disable_after_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.disable_after_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disables the after event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.disable_before_event">
+<span class="sig-name descname"><span class="pre">disable_before_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.disable_before_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.disable_before_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disables the before event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.disable_debug">
+<span class="sig-name descname"><span class="pre">disable_debug</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.disable_debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.disable_debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disables debug printing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.disable_strict_checking">
+<span class="sig-name descname"><span class="pre">disable_strict_checking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.disable_strict_checking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.disable_strict_checking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disables both strict arg type checking and strict return
+value type checking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.doc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">doc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the documentation string for an object.</p>
+<p>All tabs are expanded to spaces. To clean up docstrings that are
+indented to line up with blocks of code, any whitespace that can be
+uniformly removed from the second line onwards is removed.</p>
+<p>This is equivalent to calling “inspect.getdoc(func)”</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.enable_after_event">
+<span class="sig-name descname"><span class="pre">enable_after_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.enable_after_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.enable_after_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables the after event if already setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.enable_before_event">
+<span class="sig-name descname"><span class="pre">enable_before_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.enable_before_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.enable_before_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables the before event if already setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.enable_debug">
+<span class="sig-name descname"><span class="pre">enable_debug</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.enable_debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.enable_debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables debug printing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.enable_strict_checking">
+<span class="sig-name descname"><span class="pre">enable_strict_checking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">pystdlib.introspection.func.Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.enable_strict_checking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.enable_strict_checking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables both strict arg type checking and strict return
+value type checking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.fire_event_after">
+<span class="sig-name descname"><span class="pre">fire_event_after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pystdlib.html#pystdlib.event.Event" title="pystdlib.event.Event"><span class="pre">Event</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pystdlib.values.html#pystdlib.values.string_value.StringValue" title="pystdlib.values.string_value.StringValue"><span class="pre">StringValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pystdlib.html#pystdlib.event.Namespace" title="pystdlib.event.Namespace"><span class="pre">Namespace</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.fire_event_after"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.fire_event_after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fires the specified event at the specified namespace right
+after the function is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – the event to fire</p></li>
+<li><p><strong>namespace</strong> – the namespace to use when firing
+the event</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.fire_event_before">
+<span class="sig-name descname"><span class="pre">fire_event_before</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pystdlib.html#pystdlib.event.Event" title="pystdlib.event.Event"><span class="pre">Event</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pystdlib.values.html#pystdlib.values.string_value.StringValue" title="pystdlib.values.string_value.StringValue"><span class="pre">StringValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pystdlib.html#pystdlib.event.Namespace" title="pystdlib.event.Namespace"><span class="pre">Namespace</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.func.Func" title="pystdlib.introspection.func.Func"><span class="pre">Func</span></a></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.fire_event_before"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.fire_event_before" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fires the specified event at the specified namespace right
+before the function is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> – the event to fire</p></li>
+<li><p><strong>namespace</strong> – the namespace to use when firing
+the event</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>this instance for use in method chaining</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.full_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.full_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s full name with the class included.
+If the class name is <em>None</em> then just the function name
+is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.full_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.full_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s full path with class and package name.
+If the class name is <em>None</em> then just the module and
+function name is returned (“module.function”).
+If the module name is <em>None</em> then just the class and
+function name is returned (“class.function”).
+If both are <em>None</em> then just the function name is
+returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.kwdefaults">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kwdefaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.kwdefaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict containing defaults for keyword-only parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a dict containing defaults for keyword-only parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_args">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last args passed to the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the last args passed to the function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_caller">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_caller</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pystdlib.introspection.caller.Caller" title="pystdlib.introspection.caller.Caller"><span class="pre">pystdlib.introspection.caller.Caller</span></a></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_caller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns info about the caller that called the function
+last.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the last caller</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_kwargs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last kwargs passed to the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the last kwargs passed to the function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_result">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_result</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value returned the last time the function
+was called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the value returned the last time the function</p>
+</dd>
+</dl>
+<p>was called</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_result_type">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_result_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_result_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object type of the value returned the last
+time the function was called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the object type of the value returned the last</p>
+</dd>
+</dl>
+<p>time the function was called</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_run_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_run_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_run_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the execution time of the last time the function
+was called.</p>
+<p>NOTE: if you pass this to the “print()” function it will
+print inspect scientific notation. To avoid that use
+call “last_run_time_string” instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the execution time of the last time the function</p>
+</dd>
+</dl>
+<p>was called</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_run_time_string">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_run_time_string</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_run_time_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the execution time of the last time the function
+was called, as a formatted string, so it doesn’t print in
+scientific notation when using the “print()” function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the execution time of the last time the function</p>
+</dd>
+</dl>
+<p>was called, as a string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.last_trace">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_trace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.last_trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string with some basic info about the last time
+the function was called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a string with some basic info about the last time</p>
+</dd>
+</dl>
+<p>the function was called</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.module">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ModuleType</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s parent module.</p>
+<p>This is equivalent to calling “inspect.getmodule(func)”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent module</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.module_filename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.module_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s module filename.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the module filename</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.module_filename_matches">
+<span class="sig-name descname"><span class="pre">module_filename_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.module_filename_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.module_filename_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the function’s parent module
+filename matches the specified module filename, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the function’s parent module
+filename matches the specified module filename,
+False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.module_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.module_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s parent module name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent module name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.module_name_matches">
+<span class="sig-name descname"><span class="pre">module_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.module_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.module_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the function’s parent module
+matches the specified module, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the function’s parent module
+matches the specified module, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s name.</p>
+<p>This is equivalent to “func.__name__”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the function’s name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.name_matches">
+<span class="sig-name descname"><span class="pre">name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the function matches
+the specified name, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the function matches
+the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.number_of_calls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">number_of_calls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.number_of_calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of times the function has been called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the number of times the function has been called</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s package name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the package name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.path_matches">
+<span class="sig-name descname"><span class="pre">path_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/func.html#Func.path_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.func.Func.path_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the function’s full path
+matches the specified path, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the path to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the function’s full path
+matches the specified path, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.root_package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">root_package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.root_package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the function’s root package name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the root package name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.signature">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">signature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pystdlib.introspection.signature.Signature" title="pystdlib.introspection.signature.Signature"><span class="pre">pystdlib.introspection.signature.Signature</span></a></em><a class="headerlink" href="#pystdlib.introspection.func.Func.signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the signature of the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the signature of the function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.sleep_after">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sleep_after</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.sleep_after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the amount of seconds to sleep after
+the function is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the amount of seconds to sleep after</p>
+</dd>
+</dl>
+<p>the function is called</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.sleep_before">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sleep_before</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.sleep_before" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the amount of seconds to sleep before
+the function is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the amount of seconds to sleep before</p>
+</dd>
+</dl>
+<p>the function is called</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.strict_arg_checking">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strict_arg_checking</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.strict_arg_checking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if strict arg type checking is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if strict arg type checking is enabled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.func.Func.strict_return_checking">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strict_return_checking</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pystdlib.introspection.func.Func.strict_return_checking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if strict return type checking is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if strict return type checking is enabled</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pystdlib.introspection.object_info">
+<span id="pystdlib-introspection-object-info-module"></span><h2>pystdlib.introspection.object_info module<a class="headerlink" href="#module-pystdlib.introspection.object_info" title="Permalink to this headline">¶</a></h2>
+<p>Contains the ObjectInfo class, an object that
+contains basic info about another object.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.object_info.</span></span><span class="sig-name descname"><span class="pre">ObjectInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_cls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">module</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains basic info about an object.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.cls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.cls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s parent class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent class</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.cls_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cls_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.cls_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s parent class name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent class name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.cls_name_matches">
+<span class="sig-name descname"><span class="pre">cls_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo.cls_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.cls_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the object’s class matches
+the specified name, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the object’s class matches
+the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.from_frame">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stack_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pystdlib.introspection.call_frame.CallFrame" title="pystdlib.introspection.call_frame.CallFrame"><span class="pre">CallFrame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.object_info.ObjectInfo" title="pystdlib.introspection.object_info.ObjectInfo"><span class="pre">ObjectInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo.from_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.from_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new instance from a CallFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>stack_frame</strong> – the call frame</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a new instance of ObjectInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.from_func">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pystdlib.introspection.object_info.ObjectInfo" title="pystdlib.introspection.object_info.ObjectInfo"><span class="pre">ObjectInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo.from_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.from_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new instance from a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> – the function</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a new instance of ObjectInfo</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.full_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.full_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s full name with the class included.
+If the class name is <em>None</em> then just the object name
+is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.full_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.full_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s full path with class and package name.
+If the class name is <em>None</em> then just the module and
+object name is returned (“module.object”).
+If the module name is <em>None</em> then just the class and
+object name is returned (“class.object”).
+If both are <em>None</em> then just the object name is
+returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the full path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.module">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ModuleType</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s parent module.</p>
+<p>This is equivalent to calling “inspect.getmodule(obj)”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent module</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.module_filename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.module_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s module filename.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the module filename</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.module_filename_matches">
+<span class="sig-name descname"><span class="pre">module_filename_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo.module_filename_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.module_filename_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the object’s module
+filename matches the specified module filename, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the object’s module
+filename matches the specified module filename,
+False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.module_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">module_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.module_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s parent module name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parent module name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.module_name_matches">
+<span class="sig-name descname"><span class="pre">module_name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo.module_name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.module_name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the object module
+matches the specified module, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the object module
+matches the specified module, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s name.</p>
+<p>This is equivalent to “obj.__name__”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the object’s name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.name_matches">
+<span class="sig-name descname"><span class="pre">name_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo.name_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.name_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the object matches
+the specified name or names, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the name or names to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the object matches
+the specified name, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s package name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the package name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.path_matches">
+<span class="sig-name descname"><span class="pre">path_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">comparison</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/object_info.html#ObjectInfo.path_matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.path_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the name of the object’s full path
+matches the specified path, False otherwise.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comparison</strong> – the path to check against</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the name of the object’s full path
+matches the specified path, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.object_info.ObjectInfo.root_package_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">root_package_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pystdlib.introspection.object_info.ObjectInfo.root_package_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the object’s root package name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the root package name</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pystdlib.introspection.signature">
+<span id="pystdlib-introspection-signature-module"></span><h2>pystdlib.introspection.signature module<a class="headerlink" href="#module-pystdlib.introspection.signature" title="Permalink to this headline">¶</a></h2>
+<p>Contains the Signature class, a data object that represents
+a function parameter signature.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.signature.</span></span><span class="sig-name descname"><span class="pre">Signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_signature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">inspect.Signature</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#pystdlib.introspection.signature.Signature" title="pystdlib.introspection.signature.Signature"><span class="pre">Signature</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_return_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_make_keyword_only</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Parameter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">inspect.Signature</span></code></p>
+<p>Represents a function parameter signature.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.all">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">inspect.Parameter</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the parameters as a dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the parameters as a dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.expected_arg_count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">expected_arg_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.expected_arg_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of required arguments.</p>
+<p>If a parameter is either ‘<a href="#id1"><span class="problematic" id="id2">*</span></a>args’, ‘<a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs’,
+has the ‘KEYWORD_ONLY’ kind or has a default
+value then the count is reduced by 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the number of required arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.from_callable">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_callable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_wrapped</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature.from_callable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature.from_callable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs Signature for the given callable object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.from_function">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature.from_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature.from_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs Signature for the given python function.</p>
+<p>Deprecated since Python 3.5, use <cite>Signature.from_callable()</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.get_param">
+<span class="sig-name descname"><span class="pre">get_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature.get_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature.get_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the parameter matching the specified name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the key to match</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the parameter matching the specified name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.get_param_default">
+<span class="sig-name descname"><span class="pre">get_param_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature.get_param_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature.get_param_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the default value of the parameter matching the
+specified name. If the parameter has no annotation then
+this attribute is set to ‘Parameter.empty’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the key to match</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the default value of the parameter matching the
+specified name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.get_param_kind">
+<span class="sig-name descname"><span class="pre">get_param_kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature.get_param_kind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature.get_param_kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the kind of the parameter matching the specified name.</p>
+<dl class="simple">
+<dt>There are five kinds:</dt><dd><ul class="simple">
+<li><p>POSITIONAL_ONLY - args before a ‘/’ in the list</p></li>
+<li><p>KEYWORD_ONLY - args after a ‘*’ in the list</p></li>
+<li><p>POSITIONAL_OR_KEYWORD - any normal arg or kwarg</p></li>
+<li><p>VAR_POSITIONAL - any <a href="#id5"><span class="problematic" id="id6">*</span></a>args</p></li>
+<li><p>VAR_KEYWORD - any <a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs</p></li>
+</ul>
+</dd>
+</dl>
+<p>More info can be found here:
+<a class="reference external" href="https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python">https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python</a>
+and
+<a class="reference external" href="https://docs.python.org/3/library/inspect.html#inspect.Parameter.kind">https://docs.python.org/3/library/inspect.html#inspect.Parameter.kind</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the key to match</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the parameter kind matching the specified name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.get_param_type">
+<span class="sig-name descname"><span class="pre">get_param_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">type</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature.get_param_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature.get_param_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type of the parameter matching the specified name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the key to match</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the type of the parameter matching the specified name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.has_return_annotation">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_return_annotation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.has_return_annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the signature’s return annotation is
+not <code class="xref py py-attr docutils literal notranslate"><span class="pre">Signature.empty</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the signature has a return annotation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.has_var_args">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_var_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.has_var_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the signature includes a ‘<a href="#id9"><span class="problematic" id="id10">*</span></a>args’ parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the signature includes a ‘<a href="#id11"><span class="problematic" id="id12">*</span></a>args’ parameter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.has_var_kwargs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_var_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.has_var_kwargs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the signature includes a ‘<a href="#id13"><span class="problematic" id="id14">*</span></a>kwargs’ parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the signature includes a ‘<a href="#id15"><span class="problematic" id="id16">*</span></a>kwargs’ parameter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.length">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the signature length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the signature length</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.names">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a surface copy list of all parameter names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a surface copy list of all parameter names</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.params">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">inspect.Parameter</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a surface copy list of all parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a surface copy list of all parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.types">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pystdlib.introspection.signature.Signature.types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a surface copy list of all types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a surface copy list of all types</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pystdlib.introspection.signature.Signature.verify_args">
+<span class="sig-name descname"><span class="pre">verify_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/signature.html#Signature.verify_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.signature.Signature.verify_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies that the supplied args and kwargs match the signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – the args to check</p></li>
+<li><p><strong>kwargs</strong> – the kwargs to check</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True of the args and kwargs match the signature</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pystdlib.introspection.utils">
+<span id="pystdlib-introspection-utils-module"></span><h2>pystdlib.introspection.utils module<a class="headerlink" href="#module-pystdlib.introspection.utils" title="Permalink to this headline">¶</a></h2>
+<p>Contains basic introspection utilities.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pystdlib.introspection.utils.get_class_from_frame">
+<span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.utils.</span></span><span class="sig-name descname"><span class="pre">get_class_from_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/utils.html#get_class_from_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.utils.get_class_from_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the class object from the specified frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame</strong> – the frame to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the class object from the specified frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pystdlib.introspection.utils.get_class_instance_from_frame">
+<span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.utils.</span></span><span class="sig-name descname"><span class="pre">get_class_instance_from_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pystdlib/introspection/utils.html#get_class_instance_from_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.utils.get_class_instance_from_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the class instance from the specified frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame</strong> – the frame to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the class instance from the specified frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pystdlib.introspection.utils.get_method_name_from_frame">
+<span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.utils.</span></span><span class="sig-name descname"><span class="pre">get_method_name_from_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/utils.html#get_method_name_from_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.utils.get_method_name_from_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the method name from the specified frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame</strong> – the frame to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the method name from the specified frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pystdlib.introspection.utils.get_method_parent">
+<span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.utils.</span></span><span class="sig-name descname"><span class="pre">get_method_parent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meth</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/utils.html#get_method_parent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.utils.get_method_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class of the parent of the specified method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>meth</strong> – the method to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the class of the parent of the specified method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pystdlib.introspection.utils.get_module_from_frame">
+<span class="sig-prename descclassname"><span class="pre">pystdlib.introspection.utils.</span></span><span class="sig-name descname"><span class="pre">get_module_from_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ModuleType</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pystdlib/introspection/utils.html#get_module_from_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pystdlib.introspection.utils.get_module_from_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves the module from the specified frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame</strong> – the frame to check</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the module from the specified frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pystdlib.introspection">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pystdlib.introspection" title="Permalink to this headline">¶</a></h2>
+<p>Contains the pystdlib.introspection package.</p>
+</div>
+</div>
+
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="pystdlib.bash.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">pystdlib.bash package</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="pystdlib.values.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pystdlib.values package</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

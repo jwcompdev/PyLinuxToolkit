@@ -69,7 +69,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+#docs/_build/
 
 # PyBuilder
 .pybuilder/
@@ -164,3 +164,4 @@ atlassian-ide-plugin.xml
 /src/demo.py
 /pylinuxtoolkit/
 /pystdlib/
+!/docs/build/

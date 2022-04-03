@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pystdlib.task_pool &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2F_modules/pystdlib/task_pool.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for pystdlib.task_pool</h1><div class="highlight"><pre>
+<span></span><span class="c1"># PyLinuxToolkit</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev</span>
+<span class="c1">#</span>
+<span class="c1"># task_pool.py</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev &lt;jwcompdev@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the TaskPool class, a pool of any combination of</span>
+<span class="sd">threaded or un-threaded tasks that run in the order they are created.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">final</span><span class="p">,</span> <span class="n">NoReturn</span>
+
+<span class="kn">from</span> <span class="nn">pystdlib.logged</span> <span class="kn">import</span> <span class="n">Logged</span>
+<span class="kn">from</span> <span class="nn">pystdlib.decorators</span> <span class="kn">import</span> <span class="n">decorator</span>
+<span class="kn">from</span> <span class="nn">pystdlib.introspection</span> <span class="kn">import</span> <span class="n">Func</span><span class="p">,</span> <span class="n">Caller</span>
+<span class="kn">from</span> <span class="nn">pystdlib.types</span> <span class="kn">import</span> <span class="n">Final</span>
+<span class="kn">from</span> <span class="nn">pystdlib.values</span> <span class="kn">import</span> <span class="n">BooleanValue</span><span class="p">,</span> <span class="n">StringValue</span>
+
+
+<div class="viewcode-block" id="TaskPool"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.task_pool.TaskPool">[docs]</a><span class="nd">@final</span>
+<span class="k">class</span> <span class="nc">TaskPool</span><span class="p">(</span><span class="n">Logged</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">Final</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a pool of any combination of threaded or un-threaded tasks</span>
+<span class="sd">    that run in the order they are created.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running_thread</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_thread_id</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">caller</span> <span class="o">=</span> <span class="n">Caller</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">caller_class_name</span> <span class="o">=</span> <span class="n">caller</span><span class="o">.</span><span class="n">cls_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">caller_name</span> <span class="o">=</span> <span class="n">caller</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_log_level</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+    <span class="c1"># noinspection PyMethodParameters</span>
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">decide_class_task</span><span class="p">(</span>
+        <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">pool_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;task_pool&quot;</span><span class="p">,</span>
+        <span class="n">threaded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">BooleanValue</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">StringValue</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator that creates a task each time</span>
+<span class="sd">        the decorated function is called.</span>
+
+<span class="sd">        If threaded is True the task is run threaded,</span>
+<span class="sd">        otherwise it is run non-threaded. (Default is True)</span>
+
+<span class="sd">        NOTE: If you want to decorate a function you</span>
+<span class="sd">        need to use instance.decide_task instead.</span>
+
+<span class="sd">        :param method: the decorated method</span>
+<span class="sd">        :param pool_name: the string name of the task pool instance</span>
+<span class="sd">        :param threaded: if True the task is run threaded,</span>
+<span class="sd">            otherwise it is run non-threaded. This may also be the name</span>
+<span class="sd">            of a method inside the class to be called to retrieve</span>
+<span class="sd">            the value.</span>
+<span class="sd">        :return: the new decorated class method</span>
+<span class="sd">        :raises AttributeError: if a variable with the name matching</span>
+<span class="sd">            the pool_name argument is not found in the class or if the</span>
+<span class="sd">            name of a method as a string is supplied to the threaded</span>
+<span class="sd">            argument, and a matching method is not found in the class</span>
+<span class="sd">        :raises TypeError: if the name of a method as a string is</span>
+<span class="sd">            supplied to the threaded argument, and it isn&#39;t callable</span>
+<span class="sd">        :raises ValueError: if the variable with the name matching</span>
+<span class="sd">            the pool_name argument is found in the class but is</span>
+<span class="sd">            not an instance of the type TaskPool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">threaded</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">StringValue</span><span class="p">)):</span>
+            <span class="n">threaded_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">threaded</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">threaded_func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">threaded_name</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;self.&quot;</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;object has no attribute &#39;&quot;</span> <span class="o">+</span> <span class="n">threaded_name</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">):</span>
+                    <span class="n">ex</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="s2">&quot;Function by the name &#39;&quot;</span>
+                        <span class="o">+</span> <span class="n">threaded_name</span>
+                        <span class="o">+</span> <span class="s2">&quot;&#39; specified to return the threaded&quot;</span>
+                        <span class="o">+</span> <span class="s2">&quot; value not found in the &#39;&quot;</span>
+                        <span class="o">+</span> <span class="nb">type</span><span class="p">(</span><span class="n">threaded_name</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                        <span class="o">+</span> <span class="s2">&quot;&#39; class!&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">raise</span>
+            <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">threaded_func</span><span class="p">):</span>
+                <span class="n">final_condition</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">threaded_func</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s2">&quot;Specified method by the name &#39;&quot;</span>
+                    <span class="o">+</span> <span class="n">threaded</span>
+                    <span class="o">+</span> <span class="s2">&quot;&#39; is not callable! (Type is: &#39;&quot;</span>
+                    <span class="o">+</span> <span class="nb">type</span><span class="p">(</span><span class="n">threaded</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                    <span class="o">+</span> <span class="s2">&quot;&#39;)&quot;</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">final_condition</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">threaded</span><span class="p">)</span>
+
+        <span class="n">local_self</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="n">TaskPool</span><span class="o">.</span><span class="n">_internal_class_method_wrapper</span><span class="p">(</span>
+            <span class="n">local_self</span><span class="p">,</span> <span class="n">pool_name</span><span class="p">,</span> <span class="n">final_condition</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+    <span class="c1"># noinspection PyMethodParameters</span>
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">threaded_class_task</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pool_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;task_pool&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator that creates a threaded task each time</span>
+<span class="sd">        the decorated class method is called.</span>
+
+<span class="sd">        NOTE: If you want to decorate a function you</span>
+<span class="sd">        need to use instance.threaded_task instead.</span>
+
+<span class="sd">        :param method: the decorated method</span>
+<span class="sd">        :param pool_name: the string name of the task pool instance</span>
+<span class="sd">        :return: the new decorated class method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">local_self</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="n">TaskPool</span><span class="o">.</span><span class="n">_internal_class_method_wrapper</span><span class="p">(</span>
+            <span class="n">local_self</span><span class="p">,</span> <span class="n">pool_name</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+    <span class="c1"># noinspection PyMethodParameters</span>
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">non_threaded_class_task</span><span class="p">(</span>
+        <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pool_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;task_pool&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator that creates a non-threaded task each time</span>
+<span class="sd">        the decorated class method is called.</span>
+
+<span class="sd">        NOTE: If you want to decorate a function you</span>
+<span class="sd">        need to use instance.non_threaded_task instead.</span>
+
+<span class="sd">        :param method: the decorated method</span>
+<span class="sd">        :param pool_name: the string name of the task pool instance</span>
+<span class="sd">        :return: the new decorated class method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">local_self</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="n">TaskPool</span><span class="o">.</span><span class="n">_internal_class_method_wrapper</span><span class="p">(</span>
+            <span class="n">local_self</span><span class="p">,</span> <span class="n">pool_name</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="TaskPool.threaded_task"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.task_pool.TaskPool.threaded_task">[docs]</a>    <span class="k">def</span> <span class="nf">threaded_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator that creates a threaded task each time</span>
+<span class="sd">        the decorated function is called.</span>
+
+<span class="sd">        NOTE: If you want to decorate a class method you</span>
+<span class="sd">        need to use instance.threaded_class_task instead.</span>
+
+<span class="sd">        :param func: the function that is decorated</span>
+<span class="sd">        :return: the new decorated function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_threaded</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span></div>
+
+<div class="viewcode-block" id="TaskPool.non_threaded_task"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.task_pool.TaskPool.non_threaded_task">[docs]</a>    <span class="k">def</span> <span class="nf">non_threaded_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator that creates a non-threaded task each time</span>
+<span class="sd">        the decorated function is called.</span>
+
+<span class="sd">        NOTE: If you want to decorate a class method you</span>
+<span class="sd">        need to use instance.non_threaded_class_task instead.</span>
+
+<span class="sd">        :param func: the function that is decorated</span>
+<span class="sd">        :return: the new decorated function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_non_threaded</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span></div>
+
+<div class="viewcode-block" id="TaskPool.decide_task"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.task_pool.TaskPool.decide_task">[docs]</a>    <span class="k">def</span> <span class="nf">decide_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threaded</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decorator that creates a task each time</span>
+<span class="sd">        the decorated function is called.</span>
+
+<span class="sd">        If threaded is True the task is run threaded,</span>
+<span class="sd">        otherwise it is run non-threaded.</span>
+
+<span class="sd">        NOTE: If you want to decorate a class method you</span>
+<span class="sd">        need to use instance.decide_class_task instead.</span>
+
+<span class="sd">        :param threaded: if True the task is run threaded,</span>
+<span class="sd">            otherwise it is run non-threaded</span>
+<span class="sd">        :return: the new decorated function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+        <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+            <span class="c1"># noinspection PyMissingOrEmptyDocstring</span>
+            <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">threaded</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_threaded</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_non_threaded</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">wrapper</span>
+
+        <span class="k">return</span> <span class="n">validate</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_next_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_thread_id</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_is_task_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">running_thread</span> <span class="o">==</span> <span class="n">task_id</span>
+
+    <span class="k">def</span> <span class="nf">_threaded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span>
+            <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_task</span><span class="p">,</span>
+            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_next_id</span><span class="p">(),</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">),</span>
+            <span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_thread_id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_non_threaded</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_next_id</span><span class="p">(),</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_thread_id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_base_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">caller_class_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="si">}</span><span class="s2">] &quot;</span> <span class="s2">&quot;Starting...&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_task_ready</span><span class="p">(</span><span class="n">task_id</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Task [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">caller_class_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="si">}</span><span class="s2">] &quot;</span> <span class="s2">&quot;Waiting In Queue...&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_task_ready</span><span class="p">(</span><span class="n">task_id</span><span class="p">):</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+
+        <span class="n">func_wpr</span> <span class="o">=</span> <span class="n">Func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Task [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">caller_class_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="si">}</span><span class="s2">] &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Calling &#39;</span><span class="si">{</span><span class="n">func_wpr</span><span class="o">.</span><span class="n">full_name</span><span class="si">}</span><span class="s2">&#39;...&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Task [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">caller_class_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="si">}</span><span class="s2">] &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Calling &#39;</span><span class="si">{</span><span class="n">func_wpr</span><span class="o">.</span><span class="n">full_name</span><span class="si">}</span><span class="s2">&#39; Complete!&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+        <span class="c1"># Makes the next thread run</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running_thread</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_internal_class_method_wrapper</span><span class="p">(</span>
+        <span class="n">local_self</span><span class="p">,</span> <span class="n">pool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">threaded</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pool_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">pool</span><span class="p">:</span> <span class="n">TaskPool</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">local_self</span><span class="p">,</span> <span class="n">pool_name</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;self.&quot;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pool</span><span class="p">,</span> <span class="n">TaskPool</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">threaded</span><span class="p">:</span>
+                        <span class="n">dec_func</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">threaded_task</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">dec_func</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">non_threaded_task</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;Specified variable by the name &#39;&quot;</span>
+                        <span class="o">+</span> <span class="n">pool_name</span>
+                        <span class="o">+</span> <span class="s2">&quot;&#39; is not a TaskPool object!&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">return</span> <span class="n">dec_func</span><span class="p">(</span><span class="n">func</span><span class="p">)(</span><span class="n">local_self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;object has no attribute &#39;&quot;</span> <span class="o">+</span> <span class="n">pool_name</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">):</span>
+                    <span class="n">ex</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="s2">&quot;TaskPool instance variable by the name &#39;&quot;</span>
+                        <span class="o">+</span> <span class="n">pool_name</span>
+                        <span class="o">+</span> <span class="s2">&quot;&#39; not found in the &#39;&quot;</span>
+                        <span class="o">+</span> <span class="nb">type</span><span class="p">(</span><span class="n">local_self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                        <span class="o">+</span> <span class="s2">&quot;&#39; class!&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">raise</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pool_name must be a string!&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

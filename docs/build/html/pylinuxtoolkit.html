@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pylinuxtoolkit package &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pylinuxtoolkit.rpi package" href="pylinuxtoolkit.rpi.html" />
+    <link rel="prev" title="PyLinuxToolkit" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   pylinuxtoolkit package
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/pylinuxtoolkit.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2Fpylinuxtoolkit.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/jwcompdev/PyLinuxToolkit/edit/master/docs/pylinuxtoolkit.rst"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subpackages">
+   Subpackages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pylinuxtoolkit.main">
+   pylinuxtoolkit.main module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pylinuxtoolkit.main_window">
+   pylinuxtoolkit.main_window module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pylinuxtoolkit">
+   Module contents
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>pylinuxtoolkit package</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#subpackages">
+   Subpackages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pylinuxtoolkit.main">
+   pylinuxtoolkit.main module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pylinuxtoolkit.main_window">
+   pylinuxtoolkit.main_window module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-pylinuxtoolkit">
+   Module contents
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="pylinuxtoolkit-package">
+<h1>pylinuxtoolkit package<a class="headerlink" href="#pylinuxtoolkit-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pylinuxtoolkit.rpi.html">pylinuxtoolkit.rpi package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pylinuxtoolkit.rpi.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pylinuxtoolkit.rpi.html#module-pylinuxtoolkit.rpi.enums">pylinuxtoolkit.rpi.enums module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pylinuxtoolkit.rpi.html#module-pylinuxtoolkit.rpi.pi_commands_event">pylinuxtoolkit.rpi.pi_commands_event module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pylinuxtoolkit.rpi.html#module-pylinuxtoolkit.rpi.raspberry_pi">pylinuxtoolkit.rpi.raspberry_pi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pylinuxtoolkit.rpi.html#module-pylinuxtoolkit.rpi.settings">pylinuxtoolkit.rpi.settings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pylinuxtoolkit.rpi.html#module-pylinuxtoolkit.rpi">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pylinuxtoolkit.main">
+<span id="pylinuxtoolkit-main-module"></span><h2>pylinuxtoolkit.main module<a class="headerlink" href="#module-pylinuxtoolkit.main" title="Permalink to this headline">¶</a></h2>
+<p>Contains the Window class and the main entrypoint
+of the GUI program.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pylinuxtoolkit.main.</span></span><span class="sig-name descname"><span class="pre">Window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QMainWindow</span></code>, <a class="reference internal" href="#pylinuxtoolkit.main_window.Ui_MainWindow" title="pylinuxtoolkit.main_window.Ui_MainWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">pylinuxtoolkit.main_window.Ui_MainWindow</span></code></a></p>
+<p>This is the main GUI window class for this application.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window.btnSubmit_clicked">
+<span class="sig-name descname"><span class="pre">btnSubmit_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window.btnSubmit_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window.btnSubmit_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>This runs when the btnSubmit button is clicked.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window.connect_signal_slots">
+<span class="sig-name descname"><span class="pre">connect_signal_slots</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window.connect_signal_slots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window.connect_signal_slots" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method connects all the GUI items to their
+signal triggers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window.exit_handler">
+<span class="sig-name descname"><span class="pre">exit_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window.exit_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window.exit_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>This runs when the program exits.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window.mnuAbout_clicked">
+<span class="sig-name descname"><span class="pre">mnuAbout_clicked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window.mnuAbout_clicked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window.mnuAbout_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the ‘about’ dialog.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window.on_output">
+<span class="sig-name descname"><span class="pre">on_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pystdlib.bash.html#pystdlib.bash.output.OutputData" title="pystdlib.bash.output.OutputData"><span class="pre">pystdlib.bash.output.OutputData</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window.on_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window.on_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is run each time the output writer is written to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>output_data</strong> – the output data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window.print_to_lst">
+<span class="sig-name descname"><span class="pre">print_to_lst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window.print_to_lst"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window.print_to_lst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the specified text to the GUI terminal and stdout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> – the text to print</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.Window.txtCommand_return_pressed">
+<span class="sig-name descname"><span class="pre">txtCommand_return_pressed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#Window.txtCommand_return_pressed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.Window.txtCommand_return_pressed" title="Permalink to this definition">¶</a></dt>
+<dd><p>This runs when the enter key is pressed inside the
+txtCommand text box.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main.main">
+<span class="sig-prename descclassname"><span class="pre">pylinuxtoolkit.main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the main entry point for this program.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pylinuxtoolkit.main_window">
+<span id="pylinuxtoolkit-main-window-module"></span><h2>pylinuxtoolkit.main_window module<a class="headerlink" href="#module-pylinuxtoolkit.main_window" title="Permalink to this headline">¶</a></h2>
+<p>Contains the Ui_MainWindow class and defines all the GUI
+base objects.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main_window.Ui_MainWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pylinuxtoolkit.main_window.</span></span><span class="sig-name descname"><span class="pre">Ui_MainWindow</span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main_window.html#Ui_MainWindow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main_window.Ui_MainWindow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines all the GUI base objects.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main_window.Ui_MainWindow.retranslateUi">
+<span class="sig-name descname"><span class="pre">retranslateUi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MainWindow</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pylinuxtoolkit/main_window.html#Ui_MainWindow.retranslateUi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main_window.Ui_MainWindow.retranslateUi" title="Permalink to this definition">¶</a></dt>
+<dd><p>This re-translates all text on the GUI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>MainWindow</strong> – the main window</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pylinuxtoolkit.main_window.Ui_MainWindow.setupUi">
+<span class="sig-name descname"><span class="pre">setupUi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="reference internal" href="_modules/pylinuxtoolkit/main_window.html#Ui_MainWindow.setupUi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pylinuxtoolkit.main_window.Ui_MainWindow.setupUi" title="Permalink to this definition">¶</a></dt>
+<dd><p>This defines all the GUI base objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>window</strong> – the main window</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pylinuxtoolkit">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pylinuxtoolkit" title="Permalink to this headline">¶</a></h2>
+<p>Contains the pylinuxtoolkit package.</p>
+</div>
+</div>
+
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">PyLinuxToolkit    </p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="pylinuxtoolkit.rpi.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pylinuxtoolkit.rpi package</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

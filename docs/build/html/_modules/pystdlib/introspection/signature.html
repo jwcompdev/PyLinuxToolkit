@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pystdlib.introspection.signature &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2F_modules/pystdlib/introspection/signature.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for pystdlib.introspection.signature</h1><div class="highlight"><pre>
+<span></span><span class="c1"># PyLinuxToolkit</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev</span>
+<span class="c1">#</span>
+<span class="c1"># signature.py</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev &lt;jwcompdev@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the Signature class, a data object that represents</span>
+<span class="sd">a function parameter signature.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">Parameter</span>
+
+<span class="kn">from</span> <span class="nn">pystdlib.condition</span> <span class="kn">import</span> <span class="n">Condition</span>
+<span class="kn">from</span> <span class="nn">pystdlib.introspection.exceptions</span> <span class="kn">import</span> <span class="n">FuncSignatureError</span><span class="p">,</span> <span class="n">FuncArgsMismatchError</span>
+<span class="kn">from</span> <span class="nn">pystdlib.types</span> <span class="kn">import</span> <span class="n">is_instance</span><span class="p">,</span> <span class="n">is_subclass</span><span class="p">,</span> <span class="n">get_type_from_name</span>
+
+
+<div class="viewcode-block" id="Signature"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature">[docs]</a><span class="k">class</span> <span class="nc">Signature</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">Signature</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a function parameter signature.&quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_annotation</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span> <span class="n">base_module</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span> <span class="s2">&quot;__module__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;typing&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;typing.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">annotation</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">annotation</span><span class="o">.</span><span class="vm">__module__</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;builtins&quot;</span><span class="p">,</span> <span class="n">base_module</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">annotation</span><span class="o">.</span><span class="vm">__qualname__</span>
+            <span class="k">return</span> <span class="n">annotation</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">annotation</span><span class="o">.</span><span class="vm">__qualname__</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">annotation</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parse_name_for_error</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;class&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="vm">__name__</span>
+
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Signature.from_function"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature.from_function">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_function</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructs Signature for the given python function.</span>
+
+<span class="sd">        Deprecated since Python 3.5, use `Signature.from_callable()`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># noinspection PyUnresolvedReferences</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Signature</span><span class="o">.</span><span class="n">from_function</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Signature</span><span class="p">(</span><span class="n">_signature</span><span class="o">=</span><span class="n">sig</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Signature.from_callable"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature.from_callable">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_callable</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">follow_wrapped</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructs Signature for the given callable object.&quot;&quot;&quot;</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Signature</span><span class="o">.</span><span class="n">from_callable</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">follow_wrapped</span><span class="o">=</span><span class="n">follow_wrapped</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Signature</span><span class="p">(</span><span class="n">_signature</span><span class="o">=</span><span class="n">sig</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_validate_type</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">type_</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="n">is_instance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">type_</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_subclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">type_</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">_signature</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Signature</span> <span class="o">|</span> <span class="n">Signature</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">_return_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">_make_keyword_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">type</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the Signature object.</span>
+
+<span class="sd">        NOTE: all parameter names start with an &#39;_&#39; to prevent the</span>
+<span class="sd">        signature names from clashing if the signature needs to</span>
+<span class="sd">        use the same names.</span>
+
+<span class="sd">        NOTE: if &quot;_func&quot; is not None then all other arguments are</span>
+<span class="sd">        ignored.</span>
+
+<span class="sd">        :param _func: the function to retrieve the signature of,</span>
+<span class="sd">            if None then &quot;_signature&quot; and &quot;__return_type&quot; are used</span>
+<span class="sd">            instead</span>
+<span class="sd">        :param _signature: if &quot;_func&quot; is None then this is used to</span>
+<span class="sd">            create the signature instead. This must be of type</span>
+<span class="sd">            inspect.Signature or an instance of this class.</span>
+<span class="sd">        :param _return_type: if &quot;_func&quot; is None, sets the return type</span>
+<span class="sd">        :param _make_keyword_only: if True then all custom parameters</span>
+<span class="sd">            will be set as &quot;KEYWORD_ONLY&quot; instead of the default</span>
+<span class="sd">            &quot;POSITIONAL_OR_KEYWORD&quot;</span>
+<span class="sd">        :param kwargs: if &quot;_func&quot; is None, the keyword signature to</span>
+<span class="sd">            set, the name is the name of the parameter and the value</span>
+<span class="sd">            is the type hint. You can also specify inspect.Parameter</span>
+<span class="sd">            instances instead of the type hint.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_new_signature</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Parameter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_new_return_annotation</span> <span class="o">=</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span>
+
+        <span class="k">if</span> <span class="n">_func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="n">follow_wrapped</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">_new_signature</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">_new_return_annotation</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">return_annotation</span>
+        <span class="k">elif</span> <span class="n">_signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">_signature</span><span class="p">,</span> <span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">Signature</span><span class="p">,</span> <span class="n">Signature</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">_new_signature</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_signature</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">_new_return_annotation</span> <span class="o">=</span> <span class="n">_signature</span><span class="o">.</span><span class="n">return_annotation</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="s2">&quot;typing.&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="p">):</span>
+                    <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+
+            <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">):</span>
+                        <span class="n">_new_parameter</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">kind</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="n">Parameter</span><span class="o">.</span><span class="n">KEYWORD_ONLY</span>
+                            <span class="k">if</span> <span class="n">_make_keyword_only</span>
+                            <span class="k">else</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">POSITIONAL_OR_KEYWORD</span>
+                        <span class="p">)</span>
+
+                        <span class="n">_new_parameter</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">annotation</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+
+                    <span class="n">_new_signature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_new_parameter</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FuncSignatureError</span><span class="p">(</span>
+                    <span class="s2">&quot;&#39;kwargs&#39; has the wrong value types! They must be&quot;</span>
+                    <span class="s2">&quot; any combination of &#39;typing.Parameter&#39;,&quot;</span>
+                    <span class="s2">&quot; &#39;type&#39; or any type hint from the &#39;typing&#39;&quot;</span>
+                    <span class="s2">&quot; module.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="n">_new_return_annotation</span> <span class="o">=</span> <span class="n">_return_type</span>
+
+        <span class="c1"># Check if any of the type annotations are a string and</span>
+        <span class="c1"># replace them with their respective types</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_new_signature</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">annotation</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">annotation</span> <span class="o">=</span> <span class="n">get_type_from_name</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">annotation</span><span class="p">)</span>
+                <span class="n">kind</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span>
+                <span class="n">default</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span>
+                <span class="n">values</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+                    <span class="n">name</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span> <span class="n">annotation</span><span class="o">=</span><span class="n">annotation</span>
+                <span class="p">)</span>
+
+        <span class="n">_new_signature</span> <span class="o">=</span> <span class="n">values</span>
+
+        <span class="c1"># Check if the return annotation is a string and</span>
+        <span class="c1"># replace it with its respective types</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_new_return_annotation</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">_new_return_annotation</span> <span class="o">=</span> <span class="n">get_type_from_name</span><span class="p">(</span><span class="n">_new_return_annotation</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">_new_signature</span><span class="p">,</span>
+            <span class="n">return_annotation</span><span class="o">=</span><span class="n">_new_return_annotation</span><span class="p">,</span>
+            <span class="n">__validate_parameters__</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">par</span><span class="o">.</span><span class="n">annotation</span> <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+
+        <span class="n">func_error</span> <span class="o">=</span> <span class="s2">&quot;Function signature parameters cannot be of type &#39;</span><span class="si">%s</span><span class="s2">&#39;!&quot;</span>
+
+        <span class="c1"># Check for &#39;None&#39; type</span>
+        <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FuncSignatureError</span><span class="p">(</span><span class="n">func_error</span> <span class="o">%</span> <span class="s2">&quot;None&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check for &#39;NoReturn&#39; type</span>
+        <span class="k">if</span> <span class="n">typing</span><span class="o">.</span><span class="n">NoReturn</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">FuncSignatureError</span><span class="p">(</span><span class="n">func_error</span> <span class="o">%</span> <span class="s2">&quot;typing.NoReturn&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check for &#39;Final&#39; type</span>
+        <span class="c1"># This has to check by string because</span>
+        <span class="c1"># Final might be parameterized</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="s2">&quot;typing.Final&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span> <span class="k">for</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">types</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">FuncSignatureError</span><span class="p">(</span><span class="n">func_error</span> <span class="o">%</span> <span class="s2">&quot;typing.Final&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="c1"># Check if the type is actually a type or a type hint</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="n">Condition</span><span class="p">(</span>
+                <span class="n">type_</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span><span class="p">,</span>
+                <span class="p">(</span>
+                    <span class="nb">type</span> <span class="o">==</span> <span class="n">type_</span><span class="o">.</span><span class="vm">__class__</span>
+                    <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">get_origin</span><span class="p">(</span><span class="n">type_</span><span class="p">))</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;typing.&quot;</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">type_</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;typing.&quot;</span><span class="p">)</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FuncSignatureError</span><span class="p">(</span>
+                    <span class="s2">&quot;Function signature parameters must be a valid type!&quot;</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the item is in the signature.</span>
+
+<span class="sd">        If item is a string, it will be checked against</span>
+<span class="sd">        the parameter names list.</span>
+
+<span class="sd">        If item is a parameter, it will be checked against</span>
+<span class="sd">        the parameter list.</span>
+
+<span class="sd">        :param item: the item to check</span>
+<span class="sd">        :return: True if the item is in the signature</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of parameters inspect the signature.</span>
+
+<span class="sd">        :return: the number of parameters inspect the signature</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the signature length.</span>
+
+<span class="sd">        :return: the signature length</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a surface copy list of all parameter names.</span>
+
+<span class="sd">        :return: a surface copy list of all parameter names</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">params</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Parameter</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a surface copy list of all parameters.</span>
+
+<span class="sd">        :return: a surface copy list of all parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a surface copy list of all types.</span>
+
+<span class="sd">        :return: a surface copy list of all types</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">par</span><span class="o">.</span><span class="n">annotation</span> <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">all</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the parameters as a dict.</span>
+
+<span class="sd">        :return: the parameters as a dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">has_var_args</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the signature includes a &#39;*args&#39; parameter.</span>
+
+<span class="sd">        :return: True if the signature includes a &#39;*args&#39; parameter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">has_args</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">VAR_POSITIONAL</span><span class="p">:</span>
+                <span class="n">has_args</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">has_args</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">has_var_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the signature includes a &#39;*kwargs&#39; parameter.</span>
+
+<span class="sd">        :return: True if the signature includes a &#39;*kwargs&#39; parameter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">has_kwargs</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">VAR_KEYWORD</span><span class="p">:</span>
+                <span class="n">has_kwargs</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">has_kwargs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">has_return_annotation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether the signature&#39;s return annotation is</span>
+<span class="sd">        not :attr:`Signature.empty`.</span>
+
+<span class="sd">        :return: True if the signature has a return annotation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_annotation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Signature</span><span class="o">.</span><span class="n">empty</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">expected_arg_count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of required arguments.</span>
+
+<span class="sd">        If a parameter is either &#39;*args&#39;, &#39;**kwargs&#39;,</span>
+<span class="sd">        has the &#39;KEYWORD_ONLY&#39; kind or has a default</span>
+<span class="sd">        value then the count is reduced by 1.</span>
+
+<span class="sd">        :return: the number of required arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">num_args</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">param</span><span class="o">.</span><span class="n">VAR_POSITIONAL</span>
+                <span class="ow">or</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">param</span><span class="o">.</span><span class="n">VAR_KEYWORD</span>
+                <span class="ow">or</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">param</span><span class="o">.</span><span class="n">KEYWORD_ONLY</span>
+                <span class="ow">or</span> <span class="n">param</span><span class="o">.</span><span class="n">default</span> <span class="o">!=</span> <span class="n">param</span><span class="o">.</span><span class="n">empty</span>
+            <span class="p">):</span>
+                <span class="k">break</span>
+
+            <span class="n">num_args</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">num_args</span>
+
+<div class="viewcode-block" id="Signature.get_param"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature.get_param">[docs]</a>    <span class="k">def</span> <span class="nf">get_param</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the parameter matching the specified name.</span>
+
+<span class="sd">        :param name: the key to match</span>
+<span class="sd">        :return: the parameter matching the specified name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Signature.get_param_type"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature.get_param_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_param_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the type of the parameter matching the specified name.</span>
+
+<span class="sd">        :param name: the key to match</span>
+<span class="sd">        :return: the type of the parameter matching the specified name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">annotation</span></div>
+
+<div class="viewcode-block" id="Signature.get_param_default"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature.get_param_default">[docs]</a>    <span class="k">def</span> <span class="nf">get_param_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the default value of the parameter matching the</span>
+<span class="sd">        specified name. If the parameter has no annotation then</span>
+<span class="sd">        this attribute is set to &#39;Parameter.empty&#39;.</span>
+
+<span class="sd">        :param name: the key to match</span>
+<span class="sd">        :return: the default value of the parameter matching the</span>
+<span class="sd">            specified name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">default</span></div>
+
+<div class="viewcode-block" id="Signature.get_param_kind"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature.get_param_kind">[docs]</a>    <span class="k">def</span> <span class="nf">get_param_kind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the kind of the parameter matching the specified name.</span>
+
+<span class="sd">        There are five kinds:</span>
+<span class="sd">            - POSITIONAL_ONLY - args before a &#39;/&#39; in the list</span>
+<span class="sd">            - KEYWORD_ONLY - args after a &#39;*&#39; in the list</span>
+<span class="sd">            - POSITIONAL_OR_KEYWORD - any normal arg or kwarg</span>
+<span class="sd">            - VAR_POSITIONAL - any *args</span>
+<span class="sd">            - VAR_KEYWORD - any **kwargs</span>
+
+<span class="sd">        More info can be found here:</span>
+<span class="sd">        https://www.educative.io/edpresso/what-are-positional-only-arguments-in-python</span>
+<span class="sd">        and</span>
+<span class="sd">        https://docs.python.org/3/library/inspect.html#inspect.Parameter.kind</span>
+
+<span class="sd">        :param name: the key to match</span>
+<span class="sd">        :return: the parameter kind matching the specified name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">kind</span></div>
+
+    <span class="k">def</span> <span class="nf">_check_args_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">actual_arg_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">actual_kwarg_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">is_valid</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_arg_count</span> <span class="o">==</span> <span class="n">actual_arg_count</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">expected_arg_count</span> <span class="o">&lt;=</span> <span class="n">actual_kwarg_count</span>
+        <span class="p">):</span>
+            <span class="n">has_positional_only</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">Parameter</span><span class="o">.</span><span class="n">POSITIONAL_ONLY</span><span class="p">:</span>
+                    <span class="n">has_positional_only</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+
+            <span class="k">if</span> <span class="n">has_positional_only</span><span class="p">:</span>
+                <span class="n">is_valid</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+            <span class="n">_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">_length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">arg_error_text</span> <span class="o">=</span> <span class="s2">&quot;&#39;args&#39; must have at least 1 argument:&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">arg_error_text</span> <span class="o">=</span> <span class="s2">&quot;&#39;args&#39; must have at least &quot;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_length</span><span class="si">}</span><span class="s2"> arguments:&quot;</span>
+
+            <span class="k">if</span> <span class="n">actual_arg_count</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">actual_kwarg_count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">arg_text</span> <span class="o">=</span> <span class="s2">&quot;and instead has &quot;</span> <span class="s2">&quot;1 argument &quot;</span> <span class="s2">&quot;and has 1 kwarg.&quot;</span>
+            <span class="k">elif</span> <span class="n">actual_arg_count</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">actual_kwarg_count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">arg_text</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;and instead has &quot;</span>
+                    <span class="s2">&quot;1 argument &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;and has </span><span class="si">{</span><span class="n">actual_kwarg_count</span><span class="si">}</span><span class="s2"> kwargs.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">actual_arg_count</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">actual_kwarg_count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">arg_text</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;and instead has &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">actual_arg_count</span><span class="si">}</span><span class="s2"> arguments &quot;</span>
+                    <span class="s2">&quot;and has 1 kwarg.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">arg_text</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;and instead has &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">actual_arg_count</span><span class="si">}</span><span class="s2"> arguments &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;and has </span><span class="si">{</span><span class="n">actual_kwarg_count</span><span class="si">}</span><span class="s2"> kwargs.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">raise</span> <span class="n">FuncArgsMismatchError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">arg_error_text</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">arg_text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_arg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="n">arg_error_text</span> <span class="o">=</span> <span class="s2">&quot;Signature Mismatch &quot;</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">) &quot;</span> <span class="sa">f</span><span class="s2">&quot;[Parameter &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;]: &quot;</span>
+
+        <span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># Verify that the kwarg name exists in the signature</span>
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">p_type</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">annotation</span>
+
+            <span class="c1"># If the param type/kwarg is a class then the base</span>
+            <span class="c1"># name needs to be retrieved otherwise it&#39;s probably</span>
+            <span class="c1"># an object from the typing module or a generic</span>
+            <span class="n">p_type_name</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="n">_parse_name_for_error</span><span class="p">(</span><span class="n">p_type</span><span class="p">)</span>
+            <span class="n">a_type_name</span> <span class="o">=</span> <span class="n">Signature</span><span class="o">.</span><span class="n">_parse_name_for_error</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
+
+            <span class="c1"># Verify the kwarg is the right type</span>
+            <span class="n">kwargs_valid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_type</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">p_type</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs_valid</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FuncArgsMismatchError</span><span class="p">(</span>
+                    <span class="n">arg_error_text</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt; Expected: &#39;</span><span class="si">{</span><span class="n">p_type_name</span><span class="si">}</span><span class="s2">&#39;,&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot; Found: &#39;</span><span class="si">{</span><span class="n">a_type_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot; with value &#39;</span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+                <span class="p">)</span>
+
+<div class="viewcode-block" id="Signature.verify_args"><a class="viewcode-back" href="../../../pystdlib.introspection.html#pystdlib.introspection.signature.Signature.verify_args">[docs]</a>    <span class="k">def</span> <span class="nf">verify_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifies that the supplied args and kwargs match the signature.</span>
+
+<span class="sd">        :param args: the args to check</span>
+<span class="sd">        :param kwargs: the kwargs to check</span>
+<span class="sd">        :return: True of the args and kwargs match the signature</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_args_length</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">args</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_arg</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">kwarg</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_arg</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">kwarg</span><span class="p">)</span></div></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

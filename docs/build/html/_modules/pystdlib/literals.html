@@ -1,0 +1,915 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pystdlib.literals &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2F_modules/pystdlib/literals.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for pystdlib.literals</h1><div class="highlight"><pre>
+<span></span><span class="c1"># PyLinuxToolkit</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev</span>
+<span class="c1">#</span>
+<span class="c1"># literals.py</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev &lt;jwcompdev@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;Contains string literals.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="n">NEW_LINE</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
+<span class="n">FILE_SEPARATOR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">extsep</span>
+<span class="n">PATH_SEPARATOR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+
+<span class="n">StrOrBytesPath</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]]</span>
+
+
+<span class="c1"># noinspection PyPep8Naming,PyPropertyDefinition,GrazieInspection</span>
+<div class="viewcode-block" id="Chars"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.literals.Chars">[docs]</a><span class="k">class</span> <span class="nc">Chars</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Contains some basic unicode characters.&quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ACCENT</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The accent character (^).</span>
+
+<span class="sd">        :return: the accent character (^)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;^&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">AMPERSAND</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The ampersand character (&amp;).</span>
+
+<span class="sd">        :return: the ampersand character (&amp;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&amp;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ARROWS_LEFT</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The left double arrow character («).</span>
+
+<span class="sd">        :return: the left double arrow character («)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00AB</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ARROWS_RIGHT</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The right double arrow character (»).</span>
+
+<span class="sd">        :return: the right double arrow character (»)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00BB</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ASTERISK</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The asterisk character (*).</span>
+
+<span class="sd">        :return: the asterisk character (*)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;*&quot;</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ATSIGN</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The at sign character (@).</span>
+
+<span class="sd">        :return: the at sign character (@)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;@&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">BACKSLASH</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The backslash character.</span>
+
+<span class="sd">        :return: the backslash character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">BITCOIN</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The bitcoin character (₿).</span>
+
+<span class="sd">        :return: the bitcoin character (₿)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u20BF</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">CENTS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The cent sign character (¢).</span>
+
+<span class="sd">        :return: the cent sign character (¢)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00A2</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">COLON</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The colon character (:).</span>
+
+<span class="sd">        :return: the colon character (:)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;:&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">COMMA</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The comma character (,).</span>
+
+<span class="sd">        :return: the comma character (,)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;,&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">COPYRIGHT</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The copyright character (©).</span>
+
+<span class="sd">        :return: the copyright character (©)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00A9</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">DOLLAR</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The dollar currency character ($).</span>
+
+<span class="sd">        :return: the dollar currency character ($)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;$&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">DOT</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The dot character (.).</span>
+
+<span class="sd">        :return: the dot character (.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;.&quot;</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">DQUOTE</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The double quote character (&quot;).</span>
+
+<span class="sd">        :return: the double quote character (&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&quot;&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ELLIPSIS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The ellipsis character (…).</span>
+
+<span class="sd">        :return: the ellipsis character (…)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u2026</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EMPTY_BRACES</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An empty set of braces &#39;{}&#39;.</span>
+
+<span class="sd">        :return: an empty set of braces &#39;{}&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EMPTY_BRACKETS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An empty set of brackets &#39;[]&#39;.</span>
+
+<span class="sd">        :return: an empty set of brackets &#39;[]&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;[]&quot;</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EMPTY_DQUOTES</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An empty set of double quotes (&quot;&quot;).</span>
+
+<span class="sd">        :return: an empty set of double quotes (&quot;&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&quot;&quot;&#39;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EMPTY_PARENS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An empty set of parenthesis. &#39;()&#39;</span>
+
+<span class="sd">        :return: an empty set of parenthesis &#39;()&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;()&quot;</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EMPTY_SQUOTES</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An empty set of double quotes (&#39;&#39;).</span>
+
+<span class="sd">        :return: an empty set of double quotes (&#39;&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&#39;&#39;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EQUALS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The equals character (=).</span>
+
+<span class="sd">        :return: the equals character (=)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;=&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EURO</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The euro currency character (€).</span>
+
+<span class="sd">        :return: the euro currency character (€)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u20AC</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">EXCLAMATION</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The exclamation mark character (!).</span>
+
+<span class="sd">        :return: the exclamation mark character (!)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;!&quot;</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">FORWARDSLASH</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The forward slash character (/).</span>
+
+<span class="sd">        :return: the forward slash character (/)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;/&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">FRAC_HLF</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The 1/2 fraction character (½).</span>
+
+<span class="sd">        :return: the 1/2 fraction character (½)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00BD</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">FRAC_QTR</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The 1/4 fraction character (¼).</span>
+
+<span class="sd">        :return: the 1/4 fraction character (¼)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00BC</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">FRAC_3QTR</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The 3/4 fraction character (¾).</span>
+
+<span class="sd">        :return: the 3/4 fraction character (¾)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00BE</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">GREATER_THAN</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The greater than character (&gt;).</span>
+
+<span class="sd">        :return: the greater than character (&gt;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&gt;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">GREATER_THAN_EQUAL</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The greater than equal character (≥).</span>
+
+<span class="sd">        :return: the greater than equal character (≥)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u2265</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">HASH</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The hash character (#).</span>
+
+<span class="sd">        :return: the hash character (#)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;#&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">HYPHEN</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The hyphen character (-).</span>
+
+<span class="sd">        :return: the hyphen character (-)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;-&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">LESS_THAN</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The less than character (&lt;).</span>
+
+<span class="sd">        :return: the less than character (&lt;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">LESS_THAN_EQUAL</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The less than equal character (≤).</span>
+
+<span class="sd">        :return: the less than equal character (≤)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u2264</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">MICRO</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The micro character (μ).</span>
+
+<span class="sd">        :return: the micro character (μ)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u03BC</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">MINUS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The minus character (-).</span>
+
+<span class="sd">        :return: the minus character (-)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Chars</span><span class="o">.</span><span class="n">HYPHEN</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">NEGATIVE_ONE</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The &#39;-1&#39; character.</span>
+
+<span class="sd">        :return: the &#39;-1&#39; character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;-1&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">NOT_EQUAL</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The not equal character (≠).</span>
+
+<span class="sd">        :return: the not equal character (≠)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u2260</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ONE</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The &#39;1&#39; character.</span>
+
+<span class="sd">        :return: the &#39;1&#39; character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;1&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">PARAGRAPH</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The paragraph symbol character (¶).</span>
+
+<span class="sd">        :return: the paragraph symbol character (¶)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00B6</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">PERCENT</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The percent character (%).</span>
+
+<span class="sd">        :return: the percent character (%)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;%&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">PLUS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The plus character (+).</span>
+
+<span class="sd">        :return: the plus character (+)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;+&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">PLUS_MINUS</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The plus minus character (±).</span>
+
+<span class="sd">        :return: the plus minus character (±)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00B1</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">POUND</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The pound currency character (£).</span>
+
+<span class="sd">        :return: the pound currency character (£)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00A3</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">POWER</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The power character (⏻).</span>
+
+<span class="sd">        :return: the power character (⏻)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u23FB</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">QUESTION</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The question mark character (?).</span>
+
+<span class="sd">        :return: the question mark character (?)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;?&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">REGISTERED</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The registered character (®).</span>
+
+<span class="sd">        :return: the registered character (®)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00AE</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">SEMICOLON</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The semicolon character (;).</span>
+
+<span class="sd">        :return: the semicolon character (;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">SPACE</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The single space character ( ).</span>
+
+<span class="sd">        :return: the single space character ( )</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot; &quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">SQUOTE</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The single quote character (&#39;).</span>
+
+<span class="sd">        :return: the single quote character (&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;&#39;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">TAB</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The tab character.</span>
+
+<span class="sd">        :return: the tab character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">TILDE</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The tilde character (~).</span>
+
+<span class="sd">        :return: the tilde character (~)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;~&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">TRADEMARK</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The trademark character (™).</span>
+
+<span class="sd">        :return: the trademark character (™)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u2122</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">UNDERSCORE</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The underscore character (_).</span>
+
+<span class="sd">        :return: the underscore character (_)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;_&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">VERTICAL</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The vertical bar character (|).</span>
+
+<span class="sd">        :return: the vertical bar character (|)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;|&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">YEN</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The yen currency character (¥).</span>
+
+<span class="sd">        :return: the yen currency character (¥)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\u00A5</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ZERO</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The &#39;0&#39; character.</span>
+
+<span class="sd">        :return: the &#39;0&#39; character</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;0&quot;</span></div>
+
+
+<span class="c1"># A string to be used in exception messages</span>
+<span class="c1"># that contains &quot;Value cannot be null!&quot;.</span>
+<span class="n">VALUE_CANNOT_BE_NONE</span> <span class="o">=</span> <span class="s2">&quot;Value cannot be None!&quot;</span>
+<span class="c1"># A string to be used in exception messages</span>
+<span class="c1"># that contains &quot;Value cannot be null or empty!&quot;.</span>
+<span class="n">VALUE_CANNOT_BE_NONE_OR_EMPTY</span> <span class="o">=</span> <span class="s2">&quot;Value cannot be None or empty!&quot;</span>
+<span class="c1"># A string to be used in exception messages</span>
+<span class="c1"># that contains &quot;Object cannot be null!&quot;.</span>
+<span class="n">OBJECT_CANNOT_BE_NONE</span> <span class="o">=</span> <span class="s2">&quot;Object cannot be None!&quot;</span>
+<span class="c1"># A string to be used in exception messages</span>
+<span class="c1"># that contains &quot;Input cannot be null!&quot;.</span>
+<span class="n">INPUT_CANNOT_BE_NONE</span> <span class="o">=</span> <span class="s2">&quot;Input cannot be None!&quot;</span>
+<span class="c1"># A string to be used in exception messages</span>
+<span class="c1"># that contains &quot;Input cannot be null or empty!&quot;.</span>
+<span class="n">INPUT_CANNOT_BE_NONE_OR_EMPTY</span> <span class="o">=</span> <span class="s2">&quot;Input cannot be None or empty!&quot;</span>
+<span class="c1"># A string to be used as part of an exception message</span>
+<span class="c1"># that contains &quot; cannot be null!&quot;.</span>
+<span class="n">CANNOT_BE_NONE</span> <span class="o">=</span> <span class="s2">&quot; cannot be None!&quot;</span>
+<span class="c1"># A string to be used as part of an exception message</span>
+<span class="c1"># that contains &quot; cannot be null or empty!&quot;.</span>
+<span class="n">CANNOT_BE_NONE_OR_EMPTY</span> <span class="o">=</span> <span class="s2">&quot; cannot be None or empty!&quot;</span>
+
+
+<div class="viewcode-block" id="cannot_be_none"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.literals.cannot_be_none">[docs]</a><span class="k">def</span> <span class="nf">cannot_be_none</span><span class="p">(</span><span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Creates a string to be used for exception messages with the</span>
+<span class="sd">    specified field name.</span>
+
+<span class="sd">    This method capitalizes the first letter of the specified</span>
+<span class="sd">    field name and returns a string in the following format:</span>
+<span class="sd">    &quot;%Parameter% cannot be None!&quot;.</span>
+
+<span class="sd">    :param field_name: the name of the field to add to the message</span>
+<span class="sd">    :return: a new string in the format of</span>
+<span class="sd">                &quot;%Parameter% cannot be None!&quot;</span>
+<span class="sd">    :raises IllegalArgumentError: if field_name is None or empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">field_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">field_name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;field_name&#39; cannot be None or empty!&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">field_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">VALUE_CANNOT_BE_NONE</span>
+    <span class="k">if</span> <span class="n">field_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;object&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">OBJECT_CANNOT_BE_NONE</span>
+    <span class="k">if</span> <span class="n">field_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;input&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">INPUT_CANNOT_BE_NONE</span>
+    <span class="k">return</span> <span class="n">field_name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span> <span class="o">+</span> <span class="n">CANNOT_BE_NONE</span></div>
+
+
+<div class="viewcode-block" id="cannot_be_none_or_empty"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.literals.cannot_be_none_or_empty">[docs]</a><span class="k">def</span> <span class="nf">cannot_be_none_or_empty</span><span class="p">(</span><span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Creates a string to be used for exception messages with the</span>
+<span class="sd">    specified field name.</span>
+
+<span class="sd">    This method capitalizes the first letter of the specified</span>
+<span class="sd">    field name and returns a string in the following format:</span>
+<span class="sd">    &quot;%Parameter% cannot be None or empty!&quot;.</span>
+
+<span class="sd">    :param field_name: the name of the field to add to the message</span>
+<span class="sd">    :return: a new string in the format of</span>
+<span class="sd">                &quot;%Parameter% cannot be None or empty!&quot;</span>
+<span class="sd">    :raises IllegalArgumentError: if field_name is None or empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">field_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">field_name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;field_name&#39; cannot be None or empty!&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">field_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">VALUE_CANNOT_BE_NONE</span>
+    <span class="k">if</span> <span class="n">field_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;input&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">INPUT_CANNOT_BE_NONE</span>
+    <span class="k">return</span> <span class="n">field_name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span> <span class="o">+</span> <span class="n">CANNOT_BE_NONE_OR_EMPTY</span></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

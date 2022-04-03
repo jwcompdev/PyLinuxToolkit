@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pystdlib.values.number_value &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2F_modules/pystdlib/values/number_value.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for pystdlib.values.number_value</h1><div class="highlight"><pre>
+<span></span><span class="c1"># PyLinuxToolkit</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev</span>
+<span class="c1">#</span>
+<span class="c1"># number_value.py</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev &lt;jwcompdev@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the NumberValue class, which provides</span>
+<span class="sd">mutable access to a number value.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Number</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SupportsInt</span><span class="p">,</span>
+    <span class="n">SupportsFloat</span><span class="p">,</span>
+    <span class="n">SupportsIndex</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Tuple</span><span class="p">,</span>
+    <span class="n">TYPE_CHECKING</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">pystdlib.protocols</span> <span class="kn">import</span> <span class="n">SupportsIntFloatStr</span>
+<span class="kn">from</span> <span class="nn">pystdlib.values.value</span> <span class="kn">import</span> <span class="n">Value</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pystdlib.values</span> <span class="kn">import</span> <span class="n">IntegerValue</span><span class="p">,</span> <span class="n">FloatValue</span><span class="p">,</span> <span class="n">BooleanValue</span><span class="p">,</span> <span class="n">StringValue</span>
+
+
+<div class="viewcode-block" id="NumberValue"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue">[docs]</a><span class="k">class</span> <span class="nc">NumberValue</span><span class="p">(</span><span class="n">Value</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">SupportsInt</span><span class="p">,</span> <span class="n">SupportsFloat</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Provides mutable access to a number&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_equal_to</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_not_equal_to</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__float__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="c1"># Has to return int to satisfy SupportsRound</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__round__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ndigits</span><span class="p">:</span> <span class="n">SupportsIndex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># Has to return int to satisfy SupportsTrunc</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__trunc__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__floor__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">__ceil__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__iadd__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__isub__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">SupportsIntFloatStr</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span> <span class="o">|</span> <span class="n">StringValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span> <span class="o">|</span> <span class="n">StringValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__imul__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__itruediv__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__rtruediv__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__ifloordiv__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__floordiv__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__rfloordiv__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__ipow__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">,</span>
+        <span class="n">modulo</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="n">IntegerValue</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__rpow__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">,</span>
+        <span class="n">modulo</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="n">IntegerValue</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__imod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">IntegerValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__rmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">IntegerValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntegerValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__divmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">IntegerValue</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__rdivmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">SupportsIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">IntegerValue</span><span class="p">,</span> <span class="n">IntegerValue</span><span class="p">]:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="NumberValue.get"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.get">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value.</span>
+
+<span class="sd">        :return the value</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.set"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.set">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">IntegerValue</span> <span class="o">|</span> <span class="n">FloatValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the value.</span>
+
+<span class="sd">        :param value: the value to set</span>
+<span class="sd">        :return this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.to_int"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.to_int">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">to_int</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the value to an int and returns it.</span>
+
+<span class="sd">        :return the value converted to an int</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.to_float"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.to_float">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">to_float</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the value to a float and returns it.</span>
+
+<span class="sd">        :return the value converted to a float</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.increment"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.increment">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Increments the value.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.increment_and_get"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.increment_and_get">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">increment_and_get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Increments this instance&#39;s value by 1 then</span>
+<span class="sd">        returns the value associated with the instance.</span>
+
+<span class="sd">        :return: the value associated with the instance after it was</span>
+<span class="sd">            incremented</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.get_and_increment"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.get_and_increment">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_and_increment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Increments this instance&#39;s value by 1 then</span>
+<span class="sd">        returns the value associated with the instance.</span>
+
+<span class="sd">        :return: the value associated with the instance before it was</span>
+<span class="sd">            incremented</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.decrement"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.decrement">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">decrement</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrements the value.</span>
+
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.decrement_and_get"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.decrement_and_get">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">decrement_and_get</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrements this instance&#39;s value by 1 then</span>
+<span class="sd">        returns the value associated with the instance.</span>
+
+<span class="sd">        :return: the value associated with the instance after it was</span>
+<span class="sd">            decremented</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.get_and_decrement"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.get_and_decrement">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_and_decrement</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrements this instance&#39;s value by 1 then</span>
+<span class="sd">        returns the value associated with the instance.</span>
+
+<span class="sd">        :return: the value associated with the instance before it was</span>
+<span class="sd">            decremented</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.add"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.add">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a value to the value of this instance.</span>
+
+<span class="sd">        :param other: the value to add</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.add_and_get"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.add_and_get">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">add_and_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Increments this instance&#39;s value by &#39;other&#39;, then</span>
+<span class="sd">        returns the value associated with the instance immediately</span>
+<span class="sd">        after the addition operation.</span>
+
+<span class="sd">        :param other: the quantity to add</span>
+<span class="sd">        :return: the value associated with this instance after</span>
+<span class="sd">            adding the other</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.get_and_add"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.get_and_add">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_and_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Increments this instance&#39;s value by &#39;other&#39;, then</span>
+<span class="sd">        returns the value associated with the instance immediately</span>
+<span class="sd">        before to the addition operation.</span>
+
+<span class="sd">        :param other: the quantity to add</span>
+<span class="sd">        :return: the value associated with this instance before</span>
+<span class="sd">            adding the other</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.subtract"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.subtract">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NumberValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Subtracts a value to the value of this instance.</span>
+
+<span class="sd">        :param other: the value to subtract</span>
+<span class="sd">        :return: this instance for use in method chaining</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.subtract_and_get"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.subtract_and_get">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">subtract_and_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrements this instance&#39;s value by &#39;other&#39;, then</span>
+<span class="sd">        returns the value associated with the instance immediately</span>
+<span class="sd">        after the subtraction operation.</span>
+
+<span class="sd">        :param other: the quantity to subtract</span>
+<span class="sd">        :return: the value associated with this instance after</span>
+<span class="sd">            subtracting the other</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.get_and_subtract"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.get_and_subtract">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_and_subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decrements this instance&#39;s value by &#39;other&#39;, then</span>
+<span class="sd">        returns the value associated with the instance immediately</span>
+<span class="sd">        before to the subtraction operation.</span>
+
+<span class="sd">        :param other: the quantity to subtract</span>
+<span class="sd">        :return: the value associated with this instance before</span>
+<span class="sd">            subtracting the other</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_positive"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_positive">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_positive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is positive,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        :return: True if the value is positive,</span>
+<span class="sd">        False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_negative"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_negative">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is negative,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        :return: True if the value is negative,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_zero"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_zero">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is zero,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        :return: True if the value is zero,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_not_zero"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_not_zero">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_not_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is not zero,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        :return: True if the value is annotations zero,</span>
+<span class="sd">            False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_equal_to"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_equal_to">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_equal_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is equal to the specified number,</span>
+<span class="sd">        False otherwise.</span>
+
+<span class="sd">        :param number: the number to check</span>
+<span class="sd">        :return: True if the value is equal to the specified number,</span>
+<span class="sd">            False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_not_equal_to"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_not_equal_to">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_not_equal_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is not equal to the specified</span>
+<span class="sd">        number, False otherwise.</span>
+
+<span class="sd">        :param number: the number to check</span>
+<span class="sd">        :return: True if the value is not equal to the specified number,</span>
+<span class="sd">            False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_less_than_or_equal_to"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_less_than_or_equal_to">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_less_than_or_equal_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is less than or equal to the</span>
+<span class="sd">        specified number, False otherwise.</span>
+
+<span class="sd">        :param number: the number to check</span>
+<span class="sd">        :return: True if the value is less than or equal to the</span>
+<span class="sd">            specified number, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_greater_than_or_equal_to"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_greater_than_or_equal_to">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_greater_than_or_equal_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is greater than or equal to the</span>
+<span class="sd">        specified number, False otherwise.</span>
+
+<span class="sd">        :param number: the number to check</span>
+<span class="sd">        :return: True if the value is greater than or equal to the</span>
+<span class="sd">            specified number, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_less_than"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_less_than">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_less_than</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is less than the</span>
+<span class="sd">        specified number, False otherwise.</span>
+
+<span class="sd">        :param number: the number to check</span>
+<span class="sd">        :return: True if the value is less than the</span>
+<span class="sd">            specified number, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="NumberValue.is_greater_than"><a class="viewcode-back" href="../../../pystdlib.values.html#pystdlib.values.number_value.NumberValue.is_greater_than">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">is_greater_than</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BooleanValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if the value is greater than the</span>
+<span class="sd">        specified number, False otherwise.</span>
+
+<span class="sd">        :param number: the number to check</span>
+<span class="sd">        :return: True if the value is greater than the</span>
+<span class="sd">            specified number, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

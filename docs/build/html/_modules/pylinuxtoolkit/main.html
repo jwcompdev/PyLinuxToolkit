@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pylinuxtoolkit.main &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2F_modules/pylinuxtoolkit/main.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for pylinuxtoolkit.main</h1><div class="highlight"><pre>
+<span></span><span class="c1"># PyLinuxToolkit</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev</span>
+<span class="c1">#</span>
+<span class="c1"># main.py</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev &lt;jwcompdev@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the Window class and the main entrypoint</span>
+<span class="sd">of the GUI program.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">atexit</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NoReturn</span>
+
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="n">QApplication</span><span class="p">,</span> <span class="n">QMainWindow</span><span class="p">,</span> <span class="n">QMessageBox</span><span class="p">,</span> <span class="n">QAbstractItemView</span>
+
+<span class="kn">from</span> <span class="nn">pystdlib.bash.linux_bash</span> <span class="kn">import</span> <span class="n">LinuxBash</span>
+<span class="kn">from</span> <span class="nn">pystdlib.bash.output</span> <span class="kn">import</span> <span class="n">OutputData</span>
+<span class="kn">from</span> <span class="nn">pystdlib.log_manager</span> <span class="kn">import</span> <span class="n">LogManager</span>
+<span class="kn">from</span> <span class="nn">pylinuxtoolkit.main_window</span> <span class="kn">import</span> <span class="n">Ui_MainWindow</span>
+<span class="kn">from</span> <span class="nn">pylinuxtoolkit.rpi.settings</span> <span class="kn">import</span> <span class="n">SettingMonitor</span>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;This is the main entry point for this program.&quot;&quot;&quot;</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">win</span> <span class="o">=</span> <span class="n">Window</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">())</span></div>
+
+
+<span class="c1"># noinspection PyPep8Naming</span>
+<div class="viewcode-block" id="Window"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window">[docs]</a><span class="k">class</span> <span class="nc">Window</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">,</span> <span class="n">Ui_MainWindow</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the main GUI window class for this application.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the window object.</span>
+
+<span class="sd">        :param parent: the QWidget parent object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WA_DeleteOnClose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_signal_slots</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstOutput_model</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItemModel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstOutput</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstOutput_model</span><span class="p">)</span>
+
+        <span class="n">LogManager</span><span class="o">.</span><span class="n">enable_logging</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span> <span class="o">=</span> <span class="n">LinuxBash</span><span class="p">(</span>
+            <span class="n">directory</span><span class="o">=</span><span class="s2">&quot;~&quot;</span><span class="p">,</span>
+            <span class="n">output_function</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">on_output</span><span class="p">,</span>
+            <span class="n">remote_ssh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">print_ssh_connection_msgs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">print_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">set_ssh_login_info</span><span class="p">(</span>
+            <span class="n">hostname</span><span class="o">=</span><span class="s2">&quot;raspberrypi.local&quot;</span><span class="p">,</span>
+            <span class="n">username</span><span class="o">=</span><span class="s2">&quot;pi&quot;</span><span class="p">,</span>
+            <span class="n">password</span><span class="o">=</span><span class="s2">&quot;jwcompdev&quot;</span><span class="p">,</span>
+            <span class="n">port</span><span class="o">=</span><span class="mi">22</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">enable_threaded_worker</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">enable_wait_for_locks</span><span class="p">()</span>
+        <span class="c1"># self.bash.enable_raise_error_on_lock_wait()</span>
+
+        <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exit_handler</span><span class="p">)</span>
+
+        <span class="n">commands</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_past_commands</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span> <span class="o">=</span> <span class="n">SettingMonitor</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">start_monitoring</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">is_remote</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">ssh_connect</span><span class="p">(</span><span class="n">print_ssh_login_success</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">print_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">is_print_prompt_enabled</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">print_prompt</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Window.connect_signal_slots"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window.connect_signal_slots">[docs]</a>    <span class="k">def</span> <span class="nf">connect_signal_slots</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method connects all the GUI items to their</span>
+<span class="sd">        signal triggers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mnuQuit</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mnuAbout</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mnuAbout_clicked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">btnSubmit</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btnSubmit_clicked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txtCommand</span><span class="o">.</span><span class="n">returnPressed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">txtCommand_return_pressed</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Window.mnuAbout_clicked"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window.mnuAbout_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">mnuAbout_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Opens the &#39;about&#39; dialog.&quot;&quot;&quot;</span>
+        <span class="n">QMessageBox</span><span class="o">.</span><span class="n">about</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="s2">&quot;About Ultimate Linux Toolkit&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;A program to make tasks in linux administration easier.&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Window.print_to_lst"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window.print_to_lst">[docs]</a>    <span class="k">def</span> <span class="nf">print_to_lst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prints the specified text to the GUI terminal and stdout.</span>
+
+<span class="sd">        :param text: the text to print</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstOutput_model</span><span class="o">.</span><span class="n">appendRow</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+        <span class="c1"># Scrolls the listview to the bottom</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstOutput_model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lstOutput_model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstOutput</span><span class="o">.</span><span class="n">scrollTo</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">PositionAtBottom</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Window.exit_handler"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window.exit_handler">[docs]</a>    <span class="k">def</span> <span class="nf">exit_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;This runs when the program exits.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">ssh_close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Window.on_output"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window.on_output">[docs]</a>    <span class="k">def</span> <span class="nf">on_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_data</span><span class="p">:</span> <span class="n">OutputData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function is run each time the output writer is written to.</span>
+
+<span class="sd">        :param output_data: the output data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">output_data</span><span class="o">.</span><span class="n">current_line</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_to_lst</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+            <span class="k">if</span> <span class="s2">&quot;[Y/n]&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="p">(</span>
+                <span class="s2">&quot;apt upgrade&quot;</span> <span class="ow">in</span> <span class="n">output_data</span><span class="o">.</span><span class="n">current_command</span>
+                <span class="ow">or</span> <span class="s2">&quot;apt-get upgrade&quot;</span> <span class="ow">in</span> <span class="n">output_data</span><span class="o">.</span><span class="n">current_command</span>
+            <span class="p">):</span>
+                <span class="n">output_data</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; Canceled upgrade!&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ex</span></div>
+
+<div class="viewcode-block" id="Window.txtCommand_return_pressed"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window.txtCommand_return_pressed">[docs]</a>    <span class="k">def</span> <span class="nf">txtCommand_return_pressed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This runs when the enter key is pressed inside the</span>
+<span class="sd">        txtCommand text box.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">btnSubmit_clicked</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Window.btnSubmit_clicked"><a class="viewcode-back" href="../../pylinuxtoolkit.html#pylinuxtoolkit.main.Window.btnSubmit_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">btnSubmit_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoReturn</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;This runs when the btnSubmit button is clicked.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">txtCommand</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">txtCommand</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">txtCommand</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;exit&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">ssh_close</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;mon &quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;mon -print&quot;</span><span class="p">,</span> <span class="s2">&quot;mon -p&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;mon -p&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;mon -p&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;mon -print&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">request_processed_list</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;Printed to console!&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">())</span>
+                <span class="k">elif</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;mon -start&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;mon -start&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">start_monitoring</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;Monitoring Started!&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">())</span>
+                <span class="k">elif</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;mon -stop&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;mon -stop&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">request_termination</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;Monitoring Stopped!&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">())</span>
+                <span class="k">elif</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;mon -restart&quot;</span><span class="p">,</span> <span class="s2">&quot;mon -r&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;mon -r&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;mon -r&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;mon -restart&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;Monitoring Restarting!&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">request_termination</span><span class="p">()</span>
+                    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">is_running</span><span class="p">():</span>
+                        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.09</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">start_monitoring</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;Monitoring Restarted!&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">())</span>
+                <span class="k">elif</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;mon -help&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;mon -help&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;Usage: mon [OPTION]&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;Monitor the PyLinuxToolkit past &quot;</span>
+                        <span class="s2">&quot;commands to update the GUI.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;This is not a real program on the system &quot;</span>
+                        <span class="s2">&quot;and will not run on&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;the command line. &quot;</span>
+                        <span class="s2">&quot;This is a simulated command.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;  -p, -print                 &quot;</span>
+                        <span class="s2">&quot;Prints the processed list.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;  -start                     &quot;</span>
+                        <span class="s2">&quot;Starts the monitor.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;  -r, -restart               &quot;</span>
+                        <span class="s2">&quot;Restarts the monitor.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;  -help                     &quot;</span>
+                        <span class="s2">&quot;Prints this info screen.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;This MON has Super Cow Powers.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">())</span>
+
+                    <span class="c1"># &quot;&quot;&quot;</span>
+                    <span class="c1"># Usage: mon [OPTION]</span>
+                    <span class="c1"># Monitor the PyLinuxToolkit past commands to update the GUI.</span>
+                    <span class="c1"># This is not a real program on the system and will not run on the</span>
+                    <span class="c1"># command line. This is a simulated command.</span>
+                    <span class="c1">#</span>
+                    <span class="c1">#     -p, -print                Prints the processed list.</span>
+                    <span class="c1">#     -start                    Starts the monitor.</span>
+                    <span class="c1">#     -stop                     Stops the monitor.</span>
+                    <span class="c1">#     -r, -restart              Restarts the monitor.</span>
+                    <span class="c1">#     --help                    Prints this info screen.</span>
+                    <span class="c1">#</span>
+                    <span class="c1">#                             This MON has Super Cow Powers.</span>
+                    <span class="c1"># &quot;&quot;&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;mon: invalid option &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;-- &#39;</span><span class="si">{</span><span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">removeprefix</span><span class="p">(</span><span class="s1">&#39;mon -&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span>
+                        <span class="s2">&quot;Try &#39;mon -help&#39; for more information.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_output_writer</span><span class="p">()</span><span class="o">.</span><span class="n">write_bypass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">get_prompt</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bash</span><span class="o">.</span><span class="n">run_terminal_command</span><span class="p">(</span>
+                    <span class="n">command</span><span class="o">=</span><span class="n">command</span><span class="p">,</span>
+                    <span class="n">print_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">print_command</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">print_exit_code</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="p">)</span></div></div>
+
+                <span class="c1"># bash.run_terminal_command(command=&quot;sudo apt upgrade&quot;,</span>
+                <span class="c1">#                           print_prompt=True,</span>
+                <span class="c1">#                           print_command=True,</span>
+                <span class="c1">#                           reconnect_ssh_if_closed=True,</span>
+                <span class="c1">#                           create_temp_connection_if_closed=False</span>
+                <span class="c1">#                           )</span>
+
+                <span class="c1"># bash.run_terminal_command(command=&quot;sudo apt-get --just-print upgrade&quot;,</span>
+                <span class="c1">#                           print_prompt=True,</span>
+                <span class="c1">#                           print_command=True,</span>
+                <span class="c1">#                           reconnect_ssh_if_closed=True,</span>
+                <span class="c1">#                           create_temp_connection_if_closed=False</span>
+                <span class="c1">#                           )</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

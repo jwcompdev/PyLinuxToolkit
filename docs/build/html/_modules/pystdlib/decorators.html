@@ -1,0 +1,1397 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pystdlib.decorators &#8212; PyLinuxToolkit &amp; PyStdLib Documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">PyLinuxToolkit & PyStdLib Documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pylinuxtoolkit.html">
+   pylinuxtoolkit package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pylinuxtoolkit.rpi.html">
+     pylinuxtoolkit.rpi package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../pystdlib.html">
+   pystdlib package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.bash.html">
+     pystdlib.bash package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.introspection.html">
+     pystdlib.introspection package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pystdlib.values.html">
+     pystdlib.values package
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  <p>By JWCompDev<br />© Copyright 2022.</p>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/jwcompdev/PyLinuxToolkit/issues/new?title=Issue%20on%20page%20%2F_modules/pystdlib/decorators.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for pystdlib.decorators</h1><div class="highlight"><pre>
+<span></span><span class="c1"># PyLinuxToolkit</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev</span>
+<span class="c1">#</span>
+<span class="c1"># decorators.py</span>
+<span class="c1"># Copyright (C) 2022 JWCompDev &lt;jwcompdev@gmail.com&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</span>
+
+<span class="sd">&quot;&quot;&quot;Contains common use decorator functions.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">cProfile</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">Future</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">iscoroutinefunction</span><span class="p">,</span> <span class="n">isgeneratorfunction</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
+
+<span class="kn">from</span> <span class="nn">pystdlib.introspection</span> <span class="kn">import</span> <span class="n">Func</span><span class="p">,</span> <span class="n">Signature</span>
+
+<span class="n">logging_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">DEF</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*def\s*([_\w][_\w\d]*)\s*\(&quot;</span><span class="p">)</span>
+<span class="n">POS</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">POSITIONAL_OR_KEYWORD</span>
+<span class="n">EMPTY</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Parameter</span><span class="o">.</span><span class="n">empty</span>
+
+<span class="n">_DEFAULT_POOL</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="ClassPropertyContainer"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.ClassPropertyContainer">[docs]</a><span class="k">class</span> <span class="nc">ClassPropertyContainer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Allows creating a class level property (functionality for</span>
+<span class="sd">    decorator).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop_get</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">prop_set</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Container that allows having a class property decorator.</span>
+<span class="sd">        :param prop_get: Class property getter.</span>
+<span class="sd">        :param prop_set: Class property setter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prop_get</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">prop_get</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prop_set</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">prop_set</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="bp">cls</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the property getter.</span>
+<span class="sd">        :param obj: Instance of the class.</span>
+<span class="sd">        :param cls: Type of the class.</span>
+<span class="sd">        :return: Class property getter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_get</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)()</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the property setter.</span>
+<span class="sd">        :param obj: Instance of the class.</span>
+<span class="sd">        :param value: A value to be set.</span>
+<span class="sd">        :return: Class property setter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_set</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;cannot set attribute&quot;</span><span class="p">)</span>
+        <span class="n">_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_type</span> <span class="o">==</span> <span class="n">ClassPropertyMetaClass</span><span class="p">:</span>
+            <span class="n">_type</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prop_set</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">_type</span><span class="p">)(</span><span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ClassPropertyContainer.setter"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.ClassPropertyContainer.setter">[docs]</a>    <span class="k">def</span> <span class="nf">setter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClassPropertyContainer</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Allows creating setter in a property like way.</span>
+<span class="sd">        :param func: Getter function.</span>
+<span class="sd">        :return: Setter object for the decorator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">(</span><span class="nb">classmethod</span><span class="p">,</span> <span class="nb">staticmethod</span><span class="p">)):</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prop_set</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
+
+
+<div class="viewcode-block" id="ClassPropertyMetaClass"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.ClassPropertyMetaClass">[docs]</a><span class="k">class</span> <span class="nc">ClassPropertyMetaClass</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Metaclass that allows creating a standard setter.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Overloads setter for class&quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ClassPropertyContainer</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="fm">__set__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ClassPropertiesMixin"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.ClassPropertiesMixin">[docs]</a><span class="k">class</span> <span class="nc">ClassPropertiesMixin</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ClassPropertyMetaClass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This mixin allows using class property setters (getters work</span>
+<span class="sd">    correctly even without this mixin)</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="ConfigClassMeta"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.ConfigClassMeta">[docs]</a><span class="k">class</span> <span class="nc">ConfigClassMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Metaclass that validates class variables in configuration class.</span>
+<span class="sd">    Requirements for class members are:</span>
+<span class="sd">        &quot;All members have to be upper case (if they do not start</span>
+<span class="sd">        with an underscore).&quot;</span>
+
+<span class="sd">        &quot;There is no constructor in the class.&quot;</span>
+
+<span class="sd">        &quot;There is no standard (instance) method in the class.</span>
+<span class="sd">        Only class methods and static methods are allowed.&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="c1"># Filter all class attributes (variables, methods, etc.)</span>
+        <span class="c1">#   and check if match conditions:</span>
+        <span class="k">for</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr_value</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">attr_value</span><span class="p">):</span>
+                <span class="c1"># Test standard (instance) methods</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="s2">&quot;no &#39;standard&#39; methods (instance-level methods) are &quot;</span>
+                    <span class="s2">&quot;allowed in the config class. Only classmethods and &quot;</span>
+                    <span class="s2">&quot;staticmethods are allowed &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;(&#39;</span><span class="si">{</span><span class="n">attr_name</span><span class="si">}</span><span class="s2">&#39; is a &#39;standard&#39; method).&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="ow">not</span> <span class="n">attr_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr_value</span><span class="p">,</span> <span class="p">(</span><span class="nb">classmethod</span><span class="p">,</span> <span class="nb">staticmethod</span><span class="p">))</span>
+                <span class="ow">and</span> <span class="n">attr_name</span> <span class="o">!=</span> <span class="n">attr_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;all class variable names in class </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;must be upper case (&#39;</span><span class="si">{</span><span class="n">attr_name</span><span class="si">}</span><span class="s2">&#39; value is not)&quot;</span>
+                <span class="p">)</span>
+        <span class="c1"># Create the new type</span>
+        <span class="n">new_config_class</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+        <span class="c1"># Disable class constructor (raises an error if called)</span>
+        <span class="k">def</span> <span class="nf">_raise_runtime_error</span><span class="p">(</span><span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="o">**</span><span class="n">__</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;configuration class cannot be instantiated&quot;</span><span class="p">)</span>
+
+        <span class="n">new_config_class</span><span class="o">.</span><span class="fm">__init__</span> <span class="o">=</span> <span class="n">_raise_runtime_error</span>
+
+        <span class="k">return</span> <span class="n">new_config_class</span></div>
+
+
+<div class="viewcode-block" id="ConfigClassMixin"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.ConfigClassMixin">[docs]</a><span class="k">class</span> <span class="nc">ConfigClassMixin</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ConfigClassMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mixin for configuration classes.</span>
+<span class="sd">    Requirements for class members are:</span>
+<span class="sd">        - All members have to be upper case (if they do not start</span>
+<span class="sd">        with an underscore).</span>
+<span class="sd">        - There is no constructor in the class.</span>
+<span class="sd">        - There is no standard (instance) method in the class. Only</span>
+<span class="sd">        class methods and static methods are allowed.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<span class="k">def</span> <span class="nf">_fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fix args and kwargs to be consistent</span>
+<span class="sd">    with the signature</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bound_args</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">bound_args</span><span class="o">.</span><span class="n">apply_defaults</span><span class="p">()</span>  <span class="c1"># needed for test_dan_schult</span>
+    <span class="k">return</span> <span class="n">bound_args</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">bound_args</span><span class="o">.</span><span class="n">kwargs</span>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Basic Decorators                     #</span>
+<span class="c1">########################################</span>
+<div class="viewcode-block" id="classproperty"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.classproperty">[docs]</a><span class="k">def</span> <span class="nf">classproperty</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a decorator for a class level property.</span>
+<span class="sd">    :param func: This class method is decorated.</span>
+<span class="sd">    :return: Modified class method behaving like a class property.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">(</span><span class="nb">classmethod</span><span class="p">,</span> <span class="nb">staticmethod</span><span class="p">)):</span>
+        <span class="c1"># The method must be a classmethod (or staticmethod)</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ClassPropertyContainer</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="decorate"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.decorate">[docs]</a><span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">caller</span><span class="p">,</span> <span class="n">extras</span><span class="o">=</span><span class="p">(),</span> <span class="n">kwsyntax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorates a function/generator/coroutine using a caller.</span>
+<span class="sd">    If kwsyntax is True calling the decorated functions with keyword</span>
+<span class="sd">    syntax will pass the named arguments inside the ``kw`` dictionary,</span>
+<span class="sd">    even if such argument are positional, similarly to what &#39;functools.wraps&#39;</span>
+<span class="sd">    does. By default, kwsyntax is False and the arguments are untouched.</span>
+
+<span class="sd">    This function is distributed under the &quot;BSD 2-Clause &quot;Simplified&quot; License&quot;</span>
+<span class="sd">    and was origionally written by &#39;Michele Simionato&#39; and can be found</span>
+<span class="sd">    here: (https://github.com/micheles/decorator) v4.4.2</span>
+
+<span class="sd">    See</span>
+<span class="sd">    https://github.com/micheles/decorator/blob/master/docs/documentation.md</span>
+<span class="sd">    for documentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">iscoroutinefunction</span><span class="p">(</span><span class="n">caller</span><span class="p">):</span>
+
+        <span class="k">async</span> <span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            The coroutine decorator.</span>
+
+<span class="sd">            :param args: the positional args</span>
+<span class="sd">            :param kwargs: the keyword args</span>
+<span class="sd">            :return: the decorator</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+                <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+            <span class="k">return</span> <span class="k">await</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">isgeneratorfunction</span><span class="p">(</span><span class="n">caller</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            The generator decorator.</span>
+
+<span class="sd">            :param args: the positional args</span>
+<span class="sd">            :param kwargs: the keyword args</span>
+<span class="sd">            :return: the decorator</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+                <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">res</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            The function decorator.</span>
+
+<span class="sd">            :param args: the positional args</span>
+<span class="sd">            :param kwargs: the keyword args</span>
+<span class="sd">            :return: the decorator</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+                <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">_fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">fun</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">fun</span><span class="o">.</span><span class="n">__wrapped__</span> <span class="o">=</span> <span class="n">func</span>
+    <span class="n">fun</span><span class="o">.</span><span class="n">__signature__</span> <span class="o">=</span> <span class="n">sig</span>
+    <span class="n">fun</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span>
+    <span class="c1"># builtin functions like default dict.__setitem__ lack many attributes</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fun</span><span class="o">.</span><span class="vm">__defaults__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__defaults__</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fun</span><span class="o">.</span><span class="vm">__kwdefaults__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__kwdefaults__</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fun</span><span class="o">.</span><span class="vm">__annotations__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__annotations__</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fun</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__module__</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fun</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">fun</span></div>
+
+
+<span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="decorator"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.decorator">[docs]</a><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">caller</span><span class="p">,</span> <span class="n">kwsyntax</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a caller function into a decorator.</span>
+
+<span class="sd">    If kwsyntax is True calling the decorated functions with keyword</span>
+<span class="sd">    syntax will pass the named arguments inside the &#39;kw&#39; dictionary,</span>
+<span class="sd">    even if such argument are positional, similarly to what</span>
+<span class="sd">    &#39;functools.wraps&#39; does. By default, kwsyntax is False and the</span>
+<span class="sd">    arguments are untouched.</span>
+
+<span class="sd">    This function is distributed under the &quot;BSD 2-Clause &quot;Simplified&quot; License&quot;</span>
+<span class="sd">    and was origionally written by &#39;Michele Simionato&#39; and can be found</span>
+<span class="sd">    here: (https://github.com/micheles/decorator) v4.4.2</span>
+
+<span class="sd">    See</span>
+<span class="sd">    https://github.com/micheles/decorator/blob/master/docs/documentation.md</span>
+<span class="sd">    for documentation.</span>
+
+<span class="sd">    :param caller: the caller function</span>
+<span class="sd">    :param kwsyntax: if True arguments decorate passed inside</span>
+<span class="sd">        the &#39;kw&#39; dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">caller</span><span class="p">)</span>
+    <span class="n">dec_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">kind</span> <span class="ow">is</span> <span class="n">POS</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">dec</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The decorator.</span>
+
+<span class="sd">        :param func: the function</span>
+<span class="sd">        :param args: the positional args</span>
+<span class="sd">        :param kwargs: the keyword args</span>
+<span class="sd">        :return: the decorator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">num_args</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">extras</span> <span class="o">=</span> <span class="n">args</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">default</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">dec_params</span><span class="p">[</span><span class="n">num_args</span><span class="p">:]</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">EMPTY</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">l_func</span><span class="p">:</span> <span class="n">decorate</span><span class="p">(</span><span class="n">l_func</span><span class="p">,</span> <span class="n">caller</span><span class="p">,</span> <span class="n">extras</span><span class="p">,</span> <span class="n">kwsyntax</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">decorate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">caller</span><span class="p">,</span> <span class="n">extras</span><span class="p">,</span> <span class="n">kwsyntax</span><span class="p">)</span>
+
+    <span class="n">dec</span><span class="o">.</span><span class="n">__signature__</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">parameters</span><span class="o">=</span><span class="n">dec_params</span><span class="p">)</span>
+    <span class="n">dec</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">caller</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">dec</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">caller</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="n">dec</span><span class="o">.</span><span class="n">__wrapped__</span> <span class="o">=</span> <span class="n">caller</span>
+    <span class="n">dec</span><span class="o">.</span><span class="vm">__qualname__</span> <span class="o">=</span> <span class="n">caller</span><span class="o">.</span><span class="vm">__qualname__</span>
+    <span class="n">dec</span><span class="o">.</span><span class="vm">__kwdefaults__</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">caller</span><span class="p">,</span> <span class="s2">&quot;__kwdefaults__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">dec</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">caller</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dec</span></div>
+
+
+<div class="viewcode-block" id="do_nothing"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.do_nothing">[docs]</a><span class="k">def</span> <span class="nf">do_nothing</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Used in decorator if conditions.</span>
+
+<span class="sd">    &gt;&gt;&gt; PROD = False</span>
+<span class="sd">    &gt;&gt;&gt; @(do_nothing if PROD else show_time)</span>
+
+<span class="sd">    :param func: the function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">func</span></div>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Performance Decorators               #</span>
+<span class="c1">########################################</span>
+<div class="viewcode-block" id="warn_slow"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.warn_slow">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">warn_slow</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">timelimit</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># noinspection SpellCheckingInspection</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator that prints a log message if the function execution</span>
+<span class="sd">    took longer then specified.</span>
+
+<span class="sd">    &gt;&gt;&gt; @warn_slow  # warn if it takes more than 1 minute</span>
+<span class="sd">    &gt;&gt;&gt; def preprocess_input_files(inputdir, tempdir):</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; @warn_slow(timelimit=600)  # warn if it takes more than 10 minutes</span>
+<span class="sd">    &gt;&gt;&gt; def run_calculation(tempdir, outdir):</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param timelimit: the time limit before warning</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">run_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="k">if</span> <span class="n">run_time</span> <span class="o">&gt;</span> <span class="n">timelimit</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">run_time</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">run_time</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="show_cputime"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.show_cputime">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">show_cputime</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display CPU Time statistics of given function.</span>
+
+<span class="sd">    &gt;&gt;&gt; @show_cputime</span>
+<span class="sd">    &gt;&gt;&gt; def complex_function(a, b, c):</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; complex_function()</span>
+<span class="sd">    CPU time for __main__.complex_function:</span>
+<span class="sd">    3 function calls in 0.013 CPU seconds</span>
+
+<span class="sd">    &gt;&gt;&gt; &quot;ncalls  tottime  percall  cumtime  percall filename:lineno(function)&quot;</span>
+<span class="sd">    &gt;&gt;&gt; &quot;     1    0.013    0.013    0.013    0.013 test_time.py:6(test)&quot;</span>
+<span class="sd">    &gt;&gt;&gt; &quot;     1    0.000    0.000    0.000    0.000&quot; \</span>
+<span class="sd">    &quot;{method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}&quot;</span>
+<span class="sd">    &gt;&gt;&gt; &quot;     1    0.000    0.000    0.000    0.000 {range}&quot;</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CPU time for </span><span class="si">{</span><span class="n">Func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">full_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+
+    <span class="n">timer</span> <span class="o">=</span> <span class="n">cProfile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">timer</span><span class="o">.</span><span class="n">runcall</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">timer</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="show_docs"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.show_docs">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">show_docs</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display Docstrings of given function.</span>
+
+<span class="sd">    &gt;&gt;&gt; @show_docs</span>
+<span class="sd">    &gt;&gt;&gt; def complex_function():</span>
+<span class="sd">    &gt;&gt;&gt;     &quot;Example Documentation for complex_function.&quot;</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; complex_function()</span>
+<span class="sd">    Documentation for __main__.complex_function:</span>
+<span class="sd">    Example Documentation for complex_function.</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">Func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Documentation for </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="n">full_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">doc</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="show_time"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.show_time">[docs]</a><span class="k">def</span> <span class="nf">show_time</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display Runtime statistics of given function.</span>
+
+<span class="sd">    A custom handler can be passed as a parameter. If no</span>
+<span class="sd">    handler is supplied, the info is printed as a debug log.</span>
+<span class="sd">    If provided, a custom exception</span>
+<span class="sd">    handler must be of type Callable[Exception, Generic[T]]. In other</span>
+<span class="sd">    words, its signature must take one parameter of type Exception.</span>
+
+<span class="sd">    &gt;&gt;&gt; @show_time</span>
+<span class="sd">    &gt;&gt;&gt; def some_function(a):</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; some_function()</span>
+<span class="sd">    __main__.some_function executed in</span>
+<span class="sd">    0.000688076019287 seconds</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    :param func: the function, if None decorator</span>
+<span class="sd">        usage is assumed</span>
+<span class="sd">    :param handler: a change_function that will be called</span>
+<span class="sd">        when func is done execution</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_func</span> <span class="o">=</span> <span class="n">Func</span><span class="p">(</span><span class="n">_func</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">handler</span><span class="p">:</span>
+            <span class="n">handler</span><span class="p">(</span><span class="n">_func</span><span class="o">.</span><span class="n">full_name</span><span class="p">,</span> <span class="n">_func</span><span class="o">.</span><span class="n">last_run_time_string</span><span class="p">)</span>
+        <span class="n">logging_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_func</span><span class="o">.</span><span class="n">full_name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="sa">f</span><span class="s2">&quot; executed in </span><span class="si">{</span><span class="n">_func</span><span class="o">.</span><span class="n">last_run_time_string</span><span class="si">}</span><span class="s2"> seconds&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">_wrapper</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="show_trace"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.show_trace">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">show_trace</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># noinspection PyShadowingNames</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display epic argument and context call information of given function.</span>
+
+<span class="sd">    &gt;&gt;&gt; @show_trace</span>
+<span class="sd">    &gt;&gt;&gt; def complex_function(a, b, c, **kwargs):</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; complex_function(&#39;alpha&#39;, &#39;beta&#39;, False, debug=True)</span>
+<span class="sd">    calling haystack.submodule.complex_function with</span>
+<span class="sd">    args: ({&#39;a&#39;: &#39;alpha&#39;, &#39;b&#39;: &#39;beta&#39;, &#39;c&#39;: False},)</span>
+<span class="sd">    kwargs: {&#39;debug&#39;: True}</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">Func</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Calling </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="n">full_name</span><span class="si">}</span><span class="s2"> with: </span><span class="se">\n</span><span class="s2">   &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;args: </span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">   &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;kwargs: </span><span class="si">{</span><span class="n">kwargs</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="show_num_calls"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.show_num_calls">[docs]</a><span class="k">def</span> <span class="nf">show_num_calls</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count the number of calls to a function.</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_wrapper</span><span class="o">.</span><span class="n">num_calls</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">_wrapper</span><span class="o">.</span><span class="n">num_calls</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">_wrapper</span></div>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Class Helper Decorators              #</span>
+<span class="c1">########################################</span>
+<div class="viewcode-block" id="auto_args"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.auto_args">[docs]</a><span class="k">def</span> <span class="nf">auto_args</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A decorator for automatically copying constructor arguments to `self`.</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get a signature object for the target method:</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Parse the provided arguments using the target&#39;s signature:</span>
+        <span class="n">bound_args</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Save away the arguments on `self`:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">bound_args</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">&quot;self&quot;</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="c1"># Call the actual constructor for anything else:</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_wrapper</span></div>
+
+
+<div class="viewcode-block" id="singleton"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.singleton">[docs]</a><span class="k">def</span> <span class="nf">singleton</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Makes the decorated class a singleton.</span>
+
+<span class="sd">    :param cls: the decorated class</span>
+<span class="sd">    :return: the singleton class instance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">_wrapper</span><span class="o">.</span><span class="n">instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_wrapper</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_wrapper</span><span class="o">.</span><span class="n">instance</span>
+
+    <span class="n">_wrapper</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">_wrapper</span></div>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Function Helper Decorators           #</span>
+<span class="c1">########################################</span>
+<div class="viewcode-block" id="sleep_after"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.sleep_after">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">sleep_after</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sleeps for the specified number of seconds after</span>
+<span class="sd">    running the function.</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param duration: the number of seconds to sleep</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="sleep_before"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.sleep_before">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">sleep_before</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sleeps for the specified number of seconds before</span>
+<span class="sd">    running the function.</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param duration: the number of seconds to sleep</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="c1"># noinspection PyUnusedLocal</span>
+<div class="viewcode-block" id="todo"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.todo">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">todo</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This function is not yet implemented.&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Mark a function as to-do so that it throws an error when called.</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param message: the error message to display</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :returns: No Value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="trycatch"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.trycatch">[docs]</a><span class="k">def</span> <span class="nf">trycatch</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wraps the function in a try-catch block.</span>
+
+<span class="sd">    At least one exception init the &#39;exception&#39; argument will be</span>
+<span class="sd">    expected to be caught. This may be one exception, a list or</span>
+<span class="sd">    a tuple of multiple exceptions.</span>
+
+<span class="sd">    If no exception is provided, by default all exceptions will be</span>
+<span class="sd">    caught excluding SystemExit, KeyboardInterrupt and GeneratorExit</span>
+<span class="sd">    since they do not subclass the generic Exception class.</span>
+
+<span class="sd">    A custom exception handler can be passed as a parameter. If no</span>
+<span class="sd">    handler is supplied, a stack trace is logged to stderr and the</span>
+<span class="sd">    program will continue executing. If provided, a custom exception</span>
+<span class="sd">    handler must be of type Callable[Exception, Generic[T]]. In other</span>
+<span class="sd">    words, its signature must take one parameter of type Exception.</span>
+
+<span class="sd">    NOTE: If an exception is thrown the function will return None.</span>
+
+<span class="sd">    &gt;&gt;&gt; @trycatch</span>
+<span class="sd">    &gt;&gt;&gt; def function():</span>
+<span class="sd">    &gt;&gt;&gt;     print(0/0) # Division by 0 must raise exception</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; function()</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the function, if None decorator usage is</span>
+<span class="sd">        assumed</span>
+<span class="sd">    :param exception: the exception, list or tuple of</span>
+<span class="sd">        exceptions to check</span>
+<span class="sd">    :param handler: a function that will be called when an</span>
+<span class="sd">        exception occurs</span>
+<span class="sd">    :param silent: if True ignores any exception that occurs</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exception</span><span class="p">:</span>
+        <span class="n">exception</span> <span class="o">=</span> <span class="ne">Exception</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exception</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">exception</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>
+
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">handler</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span>
+                        <span class="s2">&quot;Exception occurred during execution&quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot; of &#39;</span><span class="si">{</span><span class="n">_func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;: [</span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">]&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">handler</span><span class="p">(</span><span class="n">_func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">_wrapper</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<span class="c1"># noinspection SpellCheckingInspection</span>
+<div class="viewcode-block" id="silent_trycatch"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.silent_trycatch">[docs]</a><span class="k">def</span> <span class="nf">silent_trycatch</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wraps the change_function init a try-catch block that</span>
+<span class="sd">    ignores any exceptions that occur.</span>
+
+<span class="sd">    This is equivalent to running &quot;@trycatch(silent=True)&quot;</span>
+
+<span class="sd">    &gt;&gt;&gt; @silent_trycatch</span>
+<span class="sd">    ... def function():</span>
+<span class="sd">    ...     print(0/0) # Division by 0 must raise exception</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; function()</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the decorated function, if None decorator usage</span>
+<span class="sd">        is assumed</span>
+<span class="sd">    :param exception: the exception, list or tuple of exceptions</span>
+<span class="sd">        to check. If empty all exceptions will be caught</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">trycatch</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="n">exception</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="throttle"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.throttle">[docs]</a><span class="k">def</span> <span class="nf">throttle</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">every</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># noinspection GrazieInspection</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Throttle the rate the function can be invoked.</span>
+
+<span class="sd">    The rate is `limit` over `every`, where limit is the number of</span>
+<span class="sd">    invocation allowed every `every` seconds.</span>
+<span class="sd">    &quot;throttle(4, 60)&quot; creates a decorator that limits the function calls</span>
+<span class="sd">    to 4 per minute. If not specified, &quot;every&quot; defaults to 1 second.</span>
+
+<span class="sd">    :param func: the function, if None decorator</span>
+<span class="sd">        usage is assumed</span>
+<span class="sd">    :param limit: the limit</span>
+<span class="sd">    :param every: the number of seconds frequency</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">semaphore</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="n">limit</span><span class="p">)</span>
+
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">semaphore</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">finally</span><span class="p">:</span>  <span class="c1"># ensure semaphore release</span>
+            <span class="n">timer</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">every</span><span class="p">,</span> <span class="n">semaphore</span><span class="o">.</span><span class="n">release</span><span class="p">)</span>
+            <span class="n">timer</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># allows the timer to be canceled on exit</span>
+            <span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">_wrapper</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="require_root"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.require_root">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">require_root</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the decorated function only if user has root/sudo permission.</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="n">logging_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span>
+        <span class="s2">&quot;[PERMISSION REQUIRED!] You need to be a root user &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;to execute function [</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()]&quot;</span>
+    <span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Validation Decorators                #</span>
+<span class="c1">########################################</span>
+
+
+<div class="viewcode-block" id="accepts"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.accepts">[docs]</a><span class="k">def</span> <span class="nf">accepts</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">signature</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verifies that the specified signature matches the arguments</span>
+<span class="sd">    when the function is called.</span>
+
+<span class="sd">    If the signature is None then the type hints on the function</span>
+<span class="sd">    are checked instead.</span>
+
+<span class="sd">    :param func: the function to check, if None decorator usage is</span>
+<span class="sd">        assumed</span>
+<span class="sd">    :param signature: the signature to check, if empty the type</span>
+<span class="sd">        hints on the function decorate checked instead</span>
+<span class="sd">    :return: The result of the function if verification didn&#39;t fail</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapped</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sig</span> <span class="o">=</span> <span class="n">Signature</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_func</span> <span class="o">=</span> <span class="n">Func</span><span class="p">(</span><span class="n">_func</span><span class="p">)</span>
+            <span class="n">sig</span> <span class="o">=</span> <span class="n">_func</span><span class="o">.</span><span class="n">signature</span>
+
+        <span class="n">sig</span><span class="o">.</span><span class="n">verify_args</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_wrapped</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapped</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="returns"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.returns">[docs]</a><span class="k">def</span> <span class="nf">returns</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verifies that the specified type is returned by the function</span>
+
+<span class="sd">    :param func: the change_function to check, if</span>
+<span class="sd">        None decorator usage is assumed</span>
+<span class="sd">    :param return_type: the expected return type</span>
+<span class="sd">    :return: the function return value if the type matches</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapped</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">func_instance</span> <span class="o">=</span> <span class="n">Func</span><span class="p">(</span><span class="n">_func</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">match</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">return_type</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">issubclass</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="n">return_type</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Return value Mismatch:&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&gt;&gt;&gt; Expected: &#39;</span><span class="si">{</span><span class="n">return_type</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;,&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; Found: &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; with value &#39;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">return</span> <span class="n">_wrapped</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapped</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Threading Decorators                 #</span>
+<span class="c1">########################################</span>
+<div class="viewcode-block" id="threaded"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.threaded">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">threaded</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># noinspection GrazieInspection,PyShadowingNames</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the function in a thread.</span>
+
+<span class="sd">    Description:</span>
+<span class="sd">        - Using standard threading.Thread for creating thread</span>
+<span class="sd">        - Can pass args and kwargs to the function</span>
+<span class="sd">        - Will start a thread but will give no control over it</span>
+
+<span class="sd">    &gt;&gt;&gt; @threaded</span>
+<span class="sd">    &gt;&gt;&gt; def display(name, *args, **kwargs):</span>
+<span class="sd">    &gt;&gt;&gt;     for i in range(5):</span>
+<span class="sd">    &gt;&gt;&gt;             print(&#39;Printing {} from thread&#39;.format(name))</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; display(&#39;Siddhesh&#39;)</span>
+<span class="sd">    Printing (&#39;Siddhesh&#39;,) from thread</span>
+<span class="sd">    Thread started for function &lt;function display at 0x7f1d60f7cb90&gt;</span>
+<span class="sd">    Printing (&#39;Siddhesh&#39;,) from thread</span>
+<span class="sd">    Printing (&#39;Siddhesh&#39;,) from thread</span>
+<span class="sd">    Printing (&#39;Siddhesh&#39;,) from thread</span>
+<span class="sd">    Printing (&#39;Siddhesh&#39;,) from thread</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: No Return</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">logging_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread started for function </span><span class="si">{</span><span class="n">func</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="thread_pool"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.thread_pool">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">thread_pool</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">executor</span><span class="p">:</span> <span class="n">ThreadPoolExecutor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Future</span><span class="p">:</span>
+    <span class="c1"># noinspection PyProtectedMember</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the function in a thread pool.</span>
+
+<span class="sd">    Description:</span>
+<span class="sd">        - Using ThreadPoolExecutor for creating thread</span>
+<span class="sd">        - Can pass args and kwargs to the function</span>
+<span class="sd">        - Will start a thread but will give no control over it,</span>
+<span class="sd">            but you can call &#39;.result()&#39; on the returned future</span>
+<span class="sd">            to get the result.</span>
+
+<span class="sd">    &gt;&gt;&gt; @threaded</span>
+<span class="sd">    &gt;&gt;&gt; def waste_time(sleep_time):</span>
+<span class="sd">    &gt;&gt;&gt;     thread_name = threading.current_thread().name</span>
+<span class="sd">    &gt;&gt;&gt;     time.sleep(sleep_time)</span>
+<span class="sd">    &gt;&gt;&gt;     print(f&quot;{thread_name} woke up after {sleep_time}s!&quot;)</span>
+<span class="sd">    &gt;&gt;&gt;     return 42</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; t1 = waste_time(5)</span>
+<span class="sd">    &gt;&gt;&gt; t2 = waste_time(2)</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; print(t1)           # &lt;Future at 0x104130a90 state=running&gt;</span>
+<span class="sd">    &gt;&gt;&gt; print(t1._result())  # 42</span>
+<span class="sd">    ThreadPoolExecutor-0_1 woke up after 2s!</span>
+<span class="sd">    ThreadPoolExecutor-0_0 woke up after 5s!</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param executor: the executor pool to use,</span>
+<span class="sd">        &#39;None&#39; creates a new instance</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: a future object that can be used to obtain the</span>
+<span class="sd">        result by calling &#39;.result()&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">executor</span> <span class="ow">or</span> <span class="n">_DEFAULT_POOL</span><span class="p">)</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="create_threads"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.create_threads">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">create_threads</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">thread_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># noinspection PyShadowingNames</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates multiple threads of a single function.</span>
+
+<span class="sd">    Description:</span>
+<span class="sd">        - Using standard threading.Thread for thread creation</span>
+<span class="sd">        - Can pass args and kwargs to the function</span>
+<span class="sd">        - Will start number of threads based on the count specified while decorating</span>
+
+<span class="sd">    &gt;&gt;&gt; @create_threads(thread_count=2)</span>
+<span class="sd">    &gt;&gt;&gt; def p(*args, **kwargs):</span>
+<span class="sd">    &gt;&gt;&gt;     pass</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; p()</span>
+<span class="sd">    Thread started for function &lt;function p at 0x7f6725ecccf8&gt;</span>
+<span class="sd">    Thread started for function &lt;function p at 0x7f6725ecccf8&gt;</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param thread_count: the number of threads to create</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: No Return</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">thread_count</span><span class="p">):</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thread started for function </span><span class="si">{</span><span class="n">func</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Manipulation Decorators              #</span>
+<span class="c1">########################################</span>
+<div class="viewcode-block" id="change_args"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.change_args">[docs]</a><span class="k">def</span> <span class="nf">change_args</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Injects the specified arguments into the function.</span>
+
+<span class="sd">    :param func: the function to run, if None</span>
+<span class="sd">        decorator usage is assumed</span>
+<span class="sd">    :param args: the positional arguments to inject</span>
+<span class="sd">    :param kwargs: run_in_thread keyword arguments to inject</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># noinspection PyUnusedLocal</span>
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">unneeded_args</span><span class="p">,</span> <span class="o">**</span><span class="n">unneeded_kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_wrapper</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="change_function"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.change_function">[docs]</a><span class="k">def</span> <span class="nf">change_function</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hijacks the function call and runs the specified function instead.</span>
+
+<span class="sd">    :param func: the function to run, if None</span>
+<span class="sd">        decorator usage is assumed</span>
+<span class="sd">    :return: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># noinspection PyUnusedLocal</span>
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="n">unneeded_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Hijacks the function call and runs the</span>
+<span class="sd">        specified function instead.</span>
+
+<span class="sd">        :param unneeded_func: the function to ignore</span>
+<span class="sd">        :param args: the positional arguments</span>
+<span class="sd">        :param kwargs: the keyword arguments</span>
+<span class="sd">        :return: the decorated function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_wrapper</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<span class="c1">########################################</span>
+<span class="c1"># Repeat/Retry Decorators              #</span>
+<span class="c1">########################################</span>
+<div class="viewcode-block" id="repeat"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.repeat">[docs]</a><span class="nd">@decorator</span>
+<span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Repeats execution of the function consecutively,</span>
+<span class="sd">    as many times as specified and returns the result</span>
+<span class="sd">    of the last run.</span>
+
+<span class="sd">    :param func: the decorated function</span>
+<span class="sd">    :param num: the number of times to run the function</span>
+<span class="sd">    :param args: the positional args of the function</span>
+<span class="sd">    :param kwargs: the keyword args of the function</span>
+<span class="sd">    :return: the function return value of the last time the</span>
+<span class="sd">        function was run</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<span class="k">def</span> <span class="nf">__retry_internal</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">,</span>
+    <span class="n">exceptions</span><span class="o">=</span><span class="ne">Exception</span><span class="p">,</span>
+    <span class="n">tries</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">delay</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_delay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">backoff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">jitter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">=</span><span class="n">logging_logger</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Executes a function and retries it if it failed.</span>
+
+<span class="sd">    :param func: the function to execute</span>
+<span class="sd">    :param exceptions: an exception or a tuple of exceptions to catch</span>
+<span class="sd">    :param tries: the maximum number of attempts</span>
+<span class="sd">    :param delay: initial delay between attempts</span>
+<span class="sd">    :param max_delay: the maximum value of delay</span>
+<span class="sd">    :param backoff: multiplier applied to delay between attempts</span>
+<span class="sd">        (1 = no backoff)</span>
+<span class="sd">    :param jitter: extra seconds added to delay between attempts.</span>
+<span class="sd">        (fixed if a number, random if a range tuple (min, max))</span>
+<span class="sd">    :param logger: logger.warning(fmt, error, delay) will be called on</span>
+<span class="sd">        failed attempts. If None, logging is disabled.</span>
+<span class="sd">    :returns: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_tries</span><span class="p">,</span> <span class="n">_delay</span> <span class="o">=</span> <span class="n">tries</span><span class="p">,</span> <span class="n">delay</span>
+    <span class="k">while</span> <span class="n">_tries</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">_tries</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_tries</span><span class="p">:</span>
+                <span class="k">raise</span>
+
+            <span class="k">if</span> <span class="n">logger</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">, retrying in </span><span class="si">{</span><span class="n">_delay</span><span class="si">}</span><span class="s2"> seconds...&quot;</span><span class="p">)</span>
+
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">_delay</span><span class="p">)</span>
+            <span class="n">_delay</span> <span class="o">*=</span> <span class="n">backoff</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">jitter</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                <span class="n">_delay</span> <span class="o">+=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">jitter</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_delay</span> <span class="o">+=</span> <span class="n">jitter</span>
+
+            <span class="k">if</span> <span class="n">max_delay</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">_delay</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">_delay</span><span class="p">,</span> <span class="n">max_delay</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="retry"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.retry">[docs]</a><span class="k">def</span> <span class="nf">retry</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">exceptions</span><span class="o">=</span><span class="ne">Exception</span><span class="p">,</span>
+    <span class="n">tries</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">delay</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_delay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">backoff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">jitter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">=</span><span class="n">logging_logger</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a retry decorator.</span>
+
+<span class="sd">    :param func: the function, if None decorator usage is assumed</span>
+<span class="sd">    :param exceptions: catch all exceptions, a specific exception,</span>
+<span class="sd">        or an iterable of exceptions.</span>
+<span class="sd">    :param tries: the maximum number of attempts.</span>
+<span class="sd">    :param delay: initial delay between attempts.</span>
+<span class="sd">    :param max_delay: the maximum value of delay. (None = no limit).</span>
+<span class="sd">    :param backoff: multiplier applied to delay between attempts.</span>
+<span class="sd">        (1 = no backoff).</span>
+<span class="sd">    :param jitter: extra seconds added to delay between attempts.</span>
+<span class="sd">        (fixed if a number, random if a range tuple (min, max))</span>
+<span class="sd">    :param logger: logger.warning(fmt, error, delay) will be called on</span>
+<span class="sd">        failed attempts. If None, logging is disabled.</span>
+<span class="sd">    :returns: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="n">__retry_internal</span><span class="p">(</span>
+            <span class="n">partial</span><span class="p">(</span><span class="n">_func</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">),</span>
+            <span class="n">exceptions</span><span class="p">,</span>
+            <span class="n">tries</span><span class="p">,</span>
+            <span class="n">delay</span><span class="p">,</span>
+            <span class="n">max_delay</span><span class="p">,</span>
+            <span class="n">backoff</span><span class="p">,</span>
+            <span class="n">jitter</span><span class="p">,</span>
+            <span class="n">logger</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_wrapper</span> <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="retry_call"><a class="viewcode-back" href="../../pystdlib.html#pystdlib.decorators.retry_call">[docs]</a><span class="k">def</span> <span class="nf">retry_call</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">exceptions</span><span class="o">=</span><span class="ne">Exception</span><span class="p">,</span>
+    <span class="n">tries</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">delay</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_delay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">backoff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">jitter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">=</span><span class="n">logging_logger</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calls a function and re-executes it if it failed.</span>
+
+<span class="sd">    :param func: the function to execute.</span>
+<span class="sd">    :param args: the positional arguments of the function to execute.</span>
+<span class="sd">    :param kwargs: the named arguments of the function to execute.</span>
+<span class="sd">    :param exceptions: an exception or a tuple of exceptions to catch.</span>
+<span class="sd">    :param tries: the maximum number of attempts.</span>
+<span class="sd">    :param delay: initial delay between attempts.</span>
+<span class="sd">    :param max_delay: the maximum value of delay. (None = no limit).</span>
+<span class="sd">    :param backoff: multiplier applied to delay between attempts.</span>
+<span class="sd">        (1 = no backoff).</span>
+<span class="sd">    :param jitter: extra seconds added to delay between attempts.</span>
+<span class="sd">        (fixed if a number, random if a range tuple (min, max))</span>
+<span class="sd">    :param logger: logger.warning(fmt, error, delay) will be called on</span>
+<span class="sd">        failed attempts. If None, logging is disabled.</span>
+<span class="sd">    :returns: the function return value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="n">_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="k">return</span> <span class="n">__retry_internal</span><span class="p">(</span>
+        <span class="n">partial</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">),</span>
+        <span class="n">exceptions</span><span class="p">,</span>
+        <span class="n">tries</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">,</span>
+        <span class="n">max_delay</span><span class="p">,</span>
+        <span class="n">backoff</span><span class="p">,</span>
+        <span class="n">jitter</span><span class="p">,</span>
+        <span class="n">logger</span><span class="p">,</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By JWCompDev<br/>
+    
+        &copy; Copyright 2022, JWCompDev.<br/>
+      Last updated on Mar 12, 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
