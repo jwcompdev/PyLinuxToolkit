@@ -2,7 +2,7 @@
 name = "PyLinuxToolkit"
 version = "0.0.1"
 description = "A gui application for linux administration."
-license = "GPL-3.0-or-later"
+license = "Apache-2.0"
 authors = ["JWCompDev <jwcompdev@gmail.com>"]
 readme = "README.md"
 repository = "https://github.com/jwcompdev/PyLinuxToolkit"
@@ -11,7 +11,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: System Administrators",
     "Intended Audience :: Education",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "License :: OSI Approved :: Apache Software License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
